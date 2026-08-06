@@ -1,0 +1,13 @@
+node_modules/
+dist/
+
+# Never bake real credentials into an image layer. VITE_API_BASE_URL is passed
+# to the build as a build arg instead (see Dockerfile).
+.env
+
+.git/
+.gitignore
+.netlify/
+.idea/
+.DS_Store
+*.log
