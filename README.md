@@ -1,10 +1,13 @@
 # SR-WIKI Frontend
 
 React + Vite + TypeScript frontend for SR-WIKI's auth CRUD starter: register, login,
-a Dashboard behind a right-side nav, and a Profile page (edit info, verify phone via
-OTP, delete account). Talks to the [SR-WIKI backend](https://github.com/khoapabhsoft/srwiki-be)
-over REST — axios with a refresh-token interceptor, Jotai for auth state, React Query
-for data fetching, Tailwind CSS v4.
+a Dashboard, Profile, and Settings page behind a left sidebar + header app shell
+(shadcn/ui) — Profile handles editing info, phone verification via OTP, and avatar
+upload; Settings covers general/appearance/notifications preferences plus account
+actions (change password stub, delete account). Talks to the
+[SR-WIKI backend](https://github.com/khoapabhsoft/srwiki-be) over REST — axios with a
+refresh-token interceptor, Jotai for auth state, React Query for data fetching,
+Tailwind CSS v4. The API contract is camelCase end to end.
 
 Live deployment: https://srwiki-fe.netlify.app (auto-deploys from `main`).
 
