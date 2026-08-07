@@ -2,6 +2,7 @@ import { useSetAtom } from 'jotai';
 import { httpClient } from '~root/lib/http-client';
 import { Endpoints } from '~root/constants';
 import { authAtom } from '~root/screens/auth/login/stores';
+import { queryClient } from '~root/lib/query-client';
 
 export const useLogout = () => {
   const setAuth = useSetAtom(authAtom);
@@ -14,6 +15,9 @@ export const useLogout = () => {
         localStorage.removeItem('auth');
         localStorage.removeItem('refreshToken');
         setAuth(null);
+        // Prevents the next user to log in on this tab from briefly seeing
+        // this user's cached profile/settings (client-side nav, no reload).
+        queryClient.clear();
       });
   };
 };

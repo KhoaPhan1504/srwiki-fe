@@ -19,6 +19,7 @@ import {
   AlertDialogTrigger,
 } from '~root/components/ui/alert-dialog';
 import { useDeleteAccount } from '~root/apis/useDeleteAccount';
+import { queryClient } from '~root/lib/query-client';
 import { authAtom } from '~root/screens/auth/login/stores';
 import { changePasswordSchema } from '~root/schemas/settings';
 import type { ChangePasswordValues } from '~root/schemas/settings';
@@ -46,6 +47,9 @@ export const AccountTab = () => {
         localStorage.removeItem('auth');
         localStorage.removeItem('refreshToken');
         setAuth(null);
+        // Prevents the next user to log in on this tab from briefly seeing
+        // this (now-deleted) account's cached profile/settings.
+        queryClient.clear();
         navigate('/auth/login', { replace: true });
       },
       onError: () => toast.error('Xoá tài khoản thất bại.', { position: 'bottom-center' }),
