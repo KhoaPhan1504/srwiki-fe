@@ -21,6 +21,14 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    // shadcn/ui generated primitives intentionally co-export variant helpers
+    // (e.g. buttonVariants) alongside their component from the same file.
+    files: ['src/components/ui/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
   // Must be last: disables stylistic rules that would conflict with Prettier.
   prettier,
 ]);
