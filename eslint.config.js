@@ -29,6 +29,13 @@ export default defineConfig([
       'react-refresh/only-export-components': 'off',
     },
   },
+  {
+    // ThemeProvider exports both the component and the useTheme hook
+    files: ['src/providers/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
   // Must be last: disables stylistic rules that would conflict with Prettier.
   prettier,
 ]);
