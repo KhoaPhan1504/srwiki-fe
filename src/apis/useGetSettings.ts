@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { httpClient } from '~root/lib/http-client';
-import { Endpoints } from '~root/constants';
+import { Endpoints, Theme } from '~root/constants';
 
 export type Settings = {
   language: string;
   timezone: string;
-  theme: 'light' | 'dark' | 'system';
+  theme: Theme;
   emailNotifications: boolean;
 };
 

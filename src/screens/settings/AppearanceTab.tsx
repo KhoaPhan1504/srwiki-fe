@@ -2,12 +2,12 @@ import { Card, CardContent } from '~root/components/ui/card';
 import { Label } from '~root/components/ui/label';
 import { Button } from '~root/components/ui/button';
 import { useThemePreference } from '~root/providers/useThemePreference';
-import type { Theme } from '~root/providers/ThemeProvider';
+import { Theme } from '~root/constants';
 
 const THEME_OPTIONS: { value: Theme; label: string }[] = [
-  { value: 'light', label: 'Sáng' },
-  { value: 'dark', label: 'Tối' },
-  { value: 'system', label: 'Theo hệ thống' },
+  { value: Theme.LIGHT, label: 'Sáng' },
+  { value: Theme.DARK, label: 'Tối' },
+  { value: Theme.SYSTEM, label: 'Theo hệ thống' },
 ];
 
 export const AppearanceTab = () => {

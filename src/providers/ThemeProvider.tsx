@@ -1,9 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
+import { Theme } from '~root/constants';
 import { applyTheme, readStoredTheme, storeTheme } from '~root/providers/theme';
-import type { Theme } from '~root/providers/theme';
-
-export type { Theme };
 
 type ThemeContextValue = {
   theme: Theme;
@@ -20,9 +18,9 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   }, [theme]);
 
   useEffect(() => {
-    if (theme !== 'system') return;
+    if (theme !== Theme.SYSTEM) return;
     const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const listener = () => applyTheme('system');
+    const listener = () => applyTheme(Theme.SYSTEM);
     media.addEventListener('change', listener);
     return () => media.removeEventListener('change', listener);
   }, [theme]);

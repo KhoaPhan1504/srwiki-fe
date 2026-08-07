@@ -7,6 +7,7 @@ import {
 } from '~root/components/ui/dropdown-menu';
 import { Button } from '~root/components/ui/button';
 import { useThemePreference } from '~root/providers/useThemePreference';
+import { Theme } from '~root/constants';
 
 const icons = { light: Sun, dark: Moon, system: Monitor };
 
@@ -22,9 +23,9 @@ export const ThemeToggle = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setThemePreference('light')}>Sáng</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setThemePreference('dark')}>Tối</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setThemePreference('system')}>
+        <DropdownMenuItem onClick={() => setThemePreference(Theme.LIGHT)}>Sáng</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setThemePreference(Theme.DARK)}>Tối</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setThemePreference(Theme.SYSTEM)}>
           Theo hệ thống
         </DropdownMenuItem>
       </DropdownMenuContent>
