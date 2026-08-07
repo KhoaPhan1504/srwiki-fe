@@ -1,44 +1,66 @@
-import { useEffect, useState } from 'react';
-import type { FormEvent } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { ChangeEvent } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
-import { useSetAtom } from 'jotai';
+import { Camera } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '~root/components/ui/avatar';
+import { Button } from '~root/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '~root/components/ui/card';
+import { Input } from '~root/components/ui/input';
+import { Label } from '~root/components/ui/label';
+import { Textarea } from '~root/components/ui/textarea';
+import { Badge } from '~root/components/ui/badge';
+import { Skeleton } from '~root/components/ui/skeleton';
 import { PhoneInput } from '~root/components/PhoneInput';
 import { OtpModal } from '~root/components/OtpModal';
 import { useGetProfile } from '~root/apis/useGetProfile';
 import { useUpdateProfile } from '~root/apis/useUpdateProfile';
-import { authAtom } from '~root/screens/auth/login/stores';
-import { useDeleteAccount } from '~root/apis/useDeleteAccount';
+import { useUploadAvatar } from '~root/apis/useUploadAvatar';
+import { profileFormSchema } from '~root/schemas/profile';
+import type { ProfileFormValues } from '~root/schemas/profile';
 
 export const ProfilePage = () => {
   const { profile, isLoading } = useGetProfile();
   const { mutate: updateProfile, isPending } = useUpdateProfile();
-  const navigate = useNavigate();
-  const setAuth = useSetAtom(authAtom);
-  const { mutate: deleteAccount, isPending: isDeleting } = useDeleteAccount();
-  const [fullName, setFullName] = useState('');
-  const [address, setAddress] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
+  const { mutate: uploadAvatar, isPending: isUploadingAvatar } = useUploadAvatar();
   const [phone, setPhone] = useState('');
   const [showOtpModal, setShowOtpModal] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ProfileFormValues>({
+    resolver: zodResolver(profileFormSchema),
+    defaultValues: { fullName: '', address: '', dateOfBirth: '', bio: '' },
+  });
 
   useEffect(() => {
-    // Re-seed local form state whenever the fetched profile changes (initial
-    // load and refetch after a save), so edits always start from the latest
-    // server values without overwriting the fields on every keystroke.
     if (profile) {
+      reset({
+        fullName: profile.fullName ?? '',
+        address: profile.address ?? '',
+        dateOfBirth: profile.dateOfBirth ?? '',
+        bio: profile.bio ?? '',
+      });
+      // Mirrors PhoneInput's editable local state from the fetched profile; same
+      // pattern the previous implementation used for this component's form fields.
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setFullName(profile.fullName ?? '');
-      setAddress(profile.address ?? '');
-      setDateOfBirth(profile.dateOfBirth ?? '');
       setPhone(profile.phone ?? '');
     }
-  }, [profile]);
+  }, [profile, reset]);
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
+  const onSubmit = (values: ProfileFormValues) => {
     updateProfile(
-      { fullName, address, dateOfBirth: dateOfBirth || null },
+      {
+        fullName: values.fullName,
+        address: values.address || null,
+        dateOfBirth: values.dateOfBirth || null,
+        bio: values.bio || null,
+      },
       {
         onSuccess: () => toast.success('Đã lưu hồ sơ.', { position: 'bottom-center' }),
         onError: () => toast.error('Lưu hồ sơ thất bại.', { position: 'bottom-center' }),
@@ -46,104 +68,112 @@ export const ProfilePage = () => {
     );
   };
 
-  const handleDelete = () => {
-    if (!window.confirm('Bạn chắc chắn muốn xoá tài khoản? Hành động này không thể hoàn tác.')) {
-      return;
-    }
-    deleteAccount(undefined, {
-      onSuccess: () => {
-        localStorage.removeItem('auth');
-        localStorage.removeItem('refreshToken');
-        setAuth(null);
-        navigate('/auth/login', { replace: true });
-      },
-      onError: () => toast.error('Xoá tài khoản thất bại.', { position: 'bottom-center' }),
+  const handleAvatarChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    uploadAvatar(file, {
+      onSuccess: () => toast.success('Đã cập nhật ảnh đại diện.', { position: 'bottom-center' }),
+      onError: () => toast.error('Tải ảnh lên thất bại.', { position: 'bottom-center' }),
     });
+    event.target.value = '';
   };
 
-  if (isLoading) {
-    return <div className="p-8">Đang tải...</div>;
+  if (isLoading || !profile) {
+    return (
+      <div className="max-w-2xl space-y-4">
+        <Skeleton className="h-8 w-48" />
+        <Skeleton className="h-64" />
+      </div>
+    );
   }
 
+  const initials = (profile.fullName || profile.email).slice(0, 1).toUpperCase();
+
   return (
-    <main className="p-8">
-      <h1 className="mb-6 text-2xl font-semibold text-slate-900">Hồ sơ cá nhân</h1>
-      <form onSubmit={handleSubmit} className="max-w-md space-y-4 rounded-lg bg-white p-6 shadow">
-        <div>
-          <label htmlFor="fullName" className="mb-1 block text-sm font-medium text-slate-700">
-            Họ và tên
-          </label>
-          <input
-            id="fullName"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            className="w-full rounded border border-slate-300 px-3 py-2"
-          />
-        </div>
-        <div>
-          <label htmlFor="address" className="mb-1 block text-sm font-medium text-slate-700">
-            Địa chỉ
-          </label>
-          <input
-            id="address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            className="w-full rounded border border-slate-300 px-3 py-2"
-          />
-        </div>
-        <div>
-          <label htmlFor="dateOfBirth" className="mb-1 block text-sm font-medium text-slate-700">
-            Ngày sinh
-          </label>
-          <input
-            id="dateOfBirth"
-            type="date"
-            value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
-            className="w-full rounded border border-slate-300 px-3 py-2"
-          />
-        </div>
-        <div>
-          <label className="mb-1 block text-sm font-medium text-slate-700">Số điện thoại</label>
-          <div className="flex items-center gap-2">
-            <PhoneInput value={phone} onChange={setPhone} />
-            {profile?.phoneVerified && profile.phone === phone ? (
-              <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
-                Đã xác thực
-              </span>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setShowOtpModal(true)}
-                disabled={!phone}
-                className="rounded border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 disabled:opacity-40"
-              >
-                Xác thực
-              </button>
-            )}
+    <div className="max-w-2xl space-y-6">
+      <h1 className="text-2xl font-semibold">Hồ sơ cá nhân</h1>
+
+      <Card>
+        <CardContent className="flex items-center gap-4 pt-6">
+          <Avatar className="h-16 w-16">
+            <AvatarImage src={profile.avatarUrl ?? undefined} alt={profile.fullName ?? ''} />
+            <AvatarFallback>{initials}</AvatarFallback>
+          </Avatar>
+          <div>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              className="hidden"
+              onChange={handleAvatarChange}
+            />
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              disabled={isUploadingAvatar}
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <Camera className="mr-2 h-4 w-4" />
+              {isUploadingAvatar ? 'Đang tải lên...' : 'Đổi ảnh đại diện'}
+            </Button>
+            <p className="mt-1 text-xs text-muted-foreground">PNG, JPEG hoặc WEBP, tối đa 2MB.</p>
           </div>
-        </div>
-        <button
-          type="submit"
-          disabled={isPending}
-          className="rounded bg-slate-900 px-4 py-2 text-white disabled:opacity-50"
-        >
-          {isPending ? 'Đang lưu...' : 'Lưu'}
-        </button>
-      </form>
-      <div className="mt-6 max-w-md rounded-lg border border-red-200 bg-red-50 p-4">
-        <p className="mb-2 text-sm text-red-700">
-          Xoá tài khoản sẽ xoá vĩnh viễn toàn bộ dữ liệu của bạn.
-        </p>
-        <button
-          type="button"
-          onClick={handleDelete}
-          disabled={isDeleting}
-          className="rounded bg-red-600 px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
-        >
-          {isDeleting ? 'Đang xoá...' : 'Xoá tài khoản'}
-        </button>
-      </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Thông tin cá nhân</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="fullName">Họ và tên</Label>
+              <Input id="fullName" {...register('fullName')} />
+              {errors.fullName && (
+                <p className="text-sm text-destructive">{errors.fullName.message}</p>
+              )}
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="bio">Tiểu sử</Label>
+              <Textarea id="bio" rows={3} {...register('bio')} />
+              {errors.bio && <p className="text-sm text-destructive">{errors.bio.message}</p>}
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="address">Địa chỉ</Label>
+              <Input id="address" {...register('address')} />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="dateOfBirth">Ngày sinh</Label>
+              <Input id="dateOfBirth" type="date" {...register('dateOfBirth')} />
+            </div>
+            <div className="space-y-2">
+              <Label>Số điện thoại</Label>
+              <div className="flex items-center gap-2">
+                <PhoneInput value={phone} onChange={setPhone} />
+                {profile.phoneVerified && profile.phone === phone ? (
+                  <Badge>Đã xác thực</Badge>
+                ) : (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setShowOtpModal(true)}
+                    disabled={!phone}
+                  >
+                    Xác thực
+                  </Button>
+                )}
+              </div>
+            </div>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? 'Đang lưu...' : 'Lưu'}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+
       {showOtpModal && (
         <OtpModal
           phone={phone}
@@ -151,6 +181,6 @@ export const ProfilePage = () => {
           onVerified={() => setShowOtpModal(false)}
         />
       )}
-    </main>
+    </div>
   );
 };
