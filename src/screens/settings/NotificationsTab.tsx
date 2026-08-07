@@ -4,11 +4,12 @@ import { Card, CardContent } from '~root/components/ui/card';
 import { Label } from '~root/components/ui/label';
 import { Switch } from '~root/components/ui/switch';
 import { Skeleton } from '~root/components/ui/skeleton';
+import { QueryErrorCard } from '~root/components/QueryErrorCard';
 import { useGetSettings } from '~root/apis/useGetSettings';
 import { useUpdateSettings } from '~root/apis/useUpdateSettings';
 
 export const NotificationsTab = () => {
-  const { settings, isLoading } = useGetSettings();
+  const { settings, isLoading, isError, refetch } = useGetSettings();
   const { mutate: updateSettings } = useUpdateSettings();
   const [emailNotifications, setEmailNotifications] = useState(true);
 
@@ -35,7 +36,13 @@ export const NotificationsTab = () => {
     );
   };
 
-  if (isLoading) {
+  if (isError) {
+    return (
+      <QueryErrorCard message="Không thể tải cài đặt thông báo." onRetry={() => refetch()} />
+    );
+  }
+
+  if (isLoading || !settings) {
     return <Skeleton className="h-24" />;
   }
 

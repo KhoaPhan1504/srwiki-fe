@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from '~root/components/ui/select';
 import { Skeleton } from '~root/components/ui/skeleton';
+import { QueryErrorCard } from '~root/components/QueryErrorCard';
 import { useGetSettings } from '~root/apis/useGetSettings';
 import { useUpdateSettings } from '~root/apis/useUpdateSettings';
 import { generalSettingsSchema } from '~root/schemas/settings';
@@ -30,7 +31,7 @@ const TIMEZONES = [
 ];
 
 export const GeneralTab = () => {
-  const { settings, isLoading } = useGetSettings();
+  const { settings, isLoading, isError, refetch } = useGetSettings();
   const { mutate: updateSettings, isPending } = useUpdateSettings();
 
   const { control, handleSubmit, reset } = useForm<GeneralSettingsValues>({
@@ -50,6 +51,10 @@ export const GeneralTab = () => {
       onError: () => toast.error('Lưu cài đặt thất bại.', { position: 'bottom-center' }),
     });
   };
+
+  if (isError) {
+    return <QueryErrorCard message="Không thể tải cài đặt chung." onRetry={() => refetch()} />;
+  }
 
   if (isLoading || !settings) {
     return <Skeleton className="h-48" />;

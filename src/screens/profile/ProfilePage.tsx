@@ -12,8 +12,10 @@ import { Label } from '~root/components/ui/label';
 import { Textarea } from '~root/components/ui/textarea';
 import { Badge } from '~root/components/ui/badge';
 import { Skeleton } from '~root/components/ui/skeleton';
+import { withCacheBust } from '~root/lib/utils';
 import { PhoneInput } from '~root/components/PhoneInput';
 import { OtpModal } from '~root/components/OtpModal';
+import { QueryErrorCard } from '~root/components/QueryErrorCard';
 import { useGetProfile } from '~root/apis/useGetProfile';
 import { useUpdateProfile } from '~root/apis/useUpdateProfile';
 import { useUploadAvatar } from '~root/apis/useUploadAvatar';
@@ -21,7 +23,7 @@ import { profileFormSchema } from '~root/schemas/profile';
 import type { ProfileFormValues } from '~root/schemas/profile';
 
 export const ProfilePage = () => {
-  const { profile, isLoading } = useGetProfile();
+  const { profile, isLoading, isError, refetch } = useGetProfile();
   const { mutate: updateProfile, isPending } = useUpdateProfile();
   const { mutate: uploadAvatar, isPending: isUploadingAvatar } = useUploadAvatar();
   const [phone, setPhone] = useState('');
@@ -78,6 +80,14 @@ export const ProfilePage = () => {
     event.target.value = '';
   };
 
+  if (isError) {
+    return (
+      <div className="max-w-2xl">
+        <QueryErrorCard message="Không thể tải hồ sơ cá nhân." onRetry={() => refetch()} />
+      </div>
+    );
+  }
+
   if (isLoading || !profile) {
     return (
       <div className="max-w-2xl space-y-4">
@@ -96,7 +106,10 @@ export const ProfilePage = () => {
       <Card>
         <CardContent className="flex items-center gap-4 pt-6">
           <Avatar className="h-16 w-16">
-            <AvatarImage src={profile.avatarUrl ?? undefined} alt={profile.fullName ?? ''} />
+            <AvatarImage
+              src={withCacheBust(profile.avatarUrl, profile.updatedAt)}
+              alt={profile.fullName ?? ''}
+            />
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
           <div>

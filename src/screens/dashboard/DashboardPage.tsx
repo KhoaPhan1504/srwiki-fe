@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '~root/components/ui/ca
 import { Badge } from '~root/components/ui/badge';
 import { Button } from '~root/components/ui/button';
 import { Skeleton } from '~root/components/ui/skeleton';
+import { QueryErrorCard } from '~root/components/QueryErrorCard';
 import { useGetProfile } from '~root/apis/useGetProfile';
 import type { Profile } from '~root/apis/useGetProfile';
 
@@ -19,13 +20,22 @@ const formatDate = (value: Date | string) =>
   );
 
 export const DashboardPage = () => {
-  const { profile, isLoading } = useGetProfile();
+  const { profile, isLoading, isError, refetch } = useGetProfile();
 
   const completionPercent = useMemo(() => {
     if (!profile) return 0;
     const filled = COMPLETION_FIELDS.filter((field) => Boolean(profile[field])).length;
     return Math.round((filled / COMPLETION_FIELDS.length) * 100);
   }, [profile]);
+
+  if (isError) {
+    return (
+      <QueryErrorCard
+        message="Không thể tải dữ liệu bảng điều khiển."
+        onRetry={() => refetch()}
+      />
+    );
+  }
 
   if (isLoading || !profile) {
     return (

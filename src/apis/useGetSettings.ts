@@ -15,10 +15,10 @@ export const useGetSettings = () => {
     return res.data;
   };
 
-  const { data, isLoading, isError } = useQuery<Settings>({
+  const { data, isLoading, isError, refetch } = useQuery<Settings>({
     queryKey: [Endpoints.SETTINGS],
     queryFn: getSettings,
   });
 
-  return { settings: data, isLoading, isError };
+  return { settings: data, isLoading, isError, refetch };
 };
