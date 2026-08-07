@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '~root/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '~root/components/ui/avatar';
+import { withCacheBust } from '~root/lib/utils';
 import { useGetProfile } from '~root/apis/useGetProfile';
 import { useLogout } from '~root/apis/useLogout';
 
@@ -24,7 +25,10 @@ export const UserMenu = () => {
       <DropdownMenuTrigger asChild>
         <button className="flex items-center gap-2 rounded-full">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={profile?.avatarUrl ?? undefined} alt={profile?.fullName ?? ''} />
+            <AvatarImage
+              src={withCacheBust(profile?.avatarUrl, profile?.updatedAt)}
+              alt={profile?.fullName ?? ''}
+            />
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
         </button>
