@@ -1,7 +1,6 @@
-import { toast } from 'react-toastify';
 import { useTheme } from '~root/providers/ThemeProvider';
-import type { Theme } from '~root/providers/ThemeProvider';
 import { useUpdateSettings } from '~root/apis/useUpdateSettings';
+import { Theme } from '~root/constants';
 
 /**
  * Changes the theme locally (via ThemeProvider's context + localStorage) AND
@@ -19,10 +18,7 @@ export const useThemePreference = () => {
 
   const setThemePreference = (next: Theme) => {
     setTheme(next);
-    updateSettings(
-      { theme: next },
-      { onError: () => toast.error('Lưu giao diện thất bại.', { position: 'bottom-center' }) },
-    );
+    updateSettings({ theme: next });
   };
 
   return { theme, setThemePreference };

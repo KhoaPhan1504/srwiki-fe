@@ -1,18 +1,18 @@
-export type Theme = 'light' | 'dark' | 'system';
+import { Theme } from "~root/constants";
 
 const THEME_STORAGE_KEY = 'theme';
 
-export const getSystemTheme = (): 'light' | 'dark' =>
-  window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+export const getSystemTheme = (): Theme =>
+  window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.DARK : Theme.LIGHT;
 
 export const applyTheme = (theme: Theme) => {
-  const resolved = theme === 'system' ? getSystemTheme() : theme;
-  document.documentElement.classList.toggle('dark', resolved === 'dark');
+  const resolved = theme === Theme.SYSTEM ? getSystemTheme() : theme;
+  document.documentElement.classList.toggle('dark', resolved === Theme.DARK);
 };
 
 export const readStoredTheme = (): Theme => {
   const stored = localStorage.getItem(THEME_STORAGE_KEY);
-  return stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system';
+  return stored === Theme.LIGHT || stored === Theme.DARK || stored === Theme.SYSTEM ? stored : Theme.SYSTEM;
 };
 
 export const storeTheme = (theme: Theme) => {

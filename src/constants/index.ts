@@ -22,3 +22,9 @@ export const Endpoints = {
   PROFILE_PHONE_VERIFY_OTP: '/profile/phone/verify-otp',
   SETTINGS: '/settings',
 } as const;
+
+export enum Theme {
+  LIGHT = 'light',
+  DARK = 'dark',
+  SYSTEM = 'system',
+}
