@@ -21,8 +21,8 @@ export const OtpModal = ({ phone, onClose, onVerified }: Props) => {
   const requestOtp = () => {
     sendOtp(phone, {
       onSuccess: (data) => {
-        if (data.debug_otp) {
-          toast.info(`Mã OTP (dev mode): ${data.debug_otp}`, {
+        if (data.debugOtp) {
+          toast.info(`Mã OTP (dev mode): ${data.debugOtp}`, {
             position: 'bottom-center',
             autoClose: false,
           });

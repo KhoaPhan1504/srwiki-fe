@@ -3,7 +3,7 @@ import { httpClient } from '~root/lib/http-client';
 import { Endpoints } from '~root/constants';
 import type { Profile } from '~root/apis/useGetProfile';
 
-type UpdatePayload = Partial<Pick<Profile, 'full_name' | 'address' | 'date_of_birth'>>;
+type UpdatePayload = Partial<Pick<Profile, 'fullName' | 'address' | 'dateOfBirth' | 'bio'>>;
 
 export const useUpdateProfile = () => {
   const queryClient = useQueryClient();

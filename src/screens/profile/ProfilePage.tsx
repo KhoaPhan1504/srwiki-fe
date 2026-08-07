@@ -29,9 +29,9 @@ export const ProfilePage = () => {
     // server values without overwriting the fields on every keystroke.
     if (profile) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setFullName(profile.full_name ?? '');
+      setFullName(profile.fullName ?? '');
       setAddress(profile.address ?? '');
-      setDateOfBirth(profile.date_of_birth ?? '');
+      setDateOfBirth(profile.dateOfBirth ?? '');
       setPhone(profile.phone ?? '');
     }
   }, [profile]);
@@ -39,7 +39,7 @@ export const ProfilePage = () => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     updateProfile(
-      { full_name: fullName, address, date_of_birth: dateOfBirth || null },
+      { fullName, address, dateOfBirth: dateOfBirth || null },
       {
         onSuccess: () => toast.success('Đã lưu hồ sơ.', { position: 'bottom-center' }),
         onError: () => toast.error('Lưu hồ sơ thất bại.', { position: 'bottom-center' }),
@@ -109,7 +109,7 @@ export const ProfilePage = () => {
             <label className="mb-1 block text-sm font-medium text-slate-700">Số điện thoại</label>
             <div className="flex items-center gap-2">
               <PhoneInput value={phone} onChange={setPhone} />
-              {profile?.phone_verified && profile.phone === phone ? (
+              {profile?.phoneVerified && profile.phone === phone ? (
                 <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
                   Đã xác thực
                 </span>
