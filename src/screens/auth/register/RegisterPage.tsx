@@ -13,7 +13,7 @@ export const RegisterPage = () => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     mutate(
-      { email, password, full_name: fullName },
+      { email, password, fullName },
       {
         onSuccess: () => {
           toast.success('Đăng ký thành công! Vui lòng đăng nhập.', { position: 'bottom-center' });

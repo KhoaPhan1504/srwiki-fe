@@ -3,13 +3,15 @@ import { httpClient } from '~root/lib/http-client';
 import { Endpoints } from '~root/constants';
 import type { Profile } from '~root/apis/useGetProfile';
 
-type UpdatePayload = Partial<Pick<Profile, 'fullName' | 'address' | 'dateOfBirth' | 'bio'>>;
-
-export const useUpdateProfile = () => {
+export const useUploadAvatar = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (payload: UpdatePayload) => {
-      const res = await httpClient.put<Profile>(Endpoints.PROFILE, payload);
+    mutationFn: async (file: File) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await httpClient.post<Profile>(Endpoints.PROFILE_AVATAR, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
       return res.data;
     },
     onSuccess: (data) => {

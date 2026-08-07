@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { httpClient } from '~root/lib/http-client';
 import { Endpoints } from '~root/constants';
 
-type SendOtpResponse = { message: string; debug_otp?: string };
+type SendOtpResponse = { message: string; debugOtp?: string };
 
 export const useSendOtp = () =>
   useMutation({

@@ -17,6 +17,8 @@ export const Endpoints = {
   AUTH_REFRESH: '/auth/refresh',
   AUTH_LOGOUT: '/auth/logout',
   PROFILE: '/profile',
+  PROFILE_AVATAR: '/profile/avatar',
   PROFILE_PHONE_SEND_OTP: '/profile/phone/send-otp',
   PROFILE_PHONE_VERIFY_OTP: '/profile/phone/verify-otp',
+  SETTINGS: '/settings',
 } as const;

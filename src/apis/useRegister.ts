@@ -5,7 +5,7 @@ import { Endpoints } from '~root/constants';
 type RegisterPayload = {
   email: string;
   password: string;
-  full_name: string;
+  fullName: string;
 };
 
 const register = async (payload: RegisterPayload): Promise<{ id: string; email: string }> => {

@@ -5,13 +5,15 @@ import { Endpoints } from '~root/constants';
 export type Profile = {
   id: string;
   email: string;
-  full_name: string | null;
+  fullName: string | null;
   phone: string | null;
-  phone_verified: boolean;
+  phoneVerified: boolean;
   address: string | null;
-  date_of_birth: string | null;
-  created_at: string;
-  updated_at: string;
+  dateOfBirth: string | null;
+  avatarUrl: string | null;
+  bio: string | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export const useGetProfile = () => {
