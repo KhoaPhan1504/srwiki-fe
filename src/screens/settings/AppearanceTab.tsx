@@ -1,10 +1,8 @@
-import { toast } from 'react-toastify';
 import { Card, CardContent } from '~root/components/ui/card';
 import { Label } from '~root/components/ui/label';
 import { Button } from '~root/components/ui/button';
-import { useTheme } from '~root/providers/ThemeProvider';
+import { useThemePreference } from '~root/providers/useThemePreference';
 import type { Theme } from '~root/providers/ThemeProvider';
-import { useUpdateSettings } from '~root/apis/useUpdateSettings';
 
 const THEME_OPTIONS: { value: Theme; label: string }[] = [
   { value: 'light', label: 'Sáng' },
@@ -13,16 +11,7 @@ const THEME_OPTIONS: { value: Theme; label: string }[] = [
 ];
 
 export const AppearanceTab = () => {
-  const { theme, setTheme } = useTheme();
-  const { mutate: updateSettings } = useUpdateSettings();
-
-  const handleSelect = (value: Theme) => {
-    setTheme(value);
-    updateSettings(
-      { theme: value },
-      { onError: () => toast.error('Lưu giao diện thất bại.', { position: 'bottom-center' }) },
-    );
-  };
+  const { theme, setThemePreference } = useThemePreference();
 
   return (
     <Card>
@@ -34,7 +23,7 @@ export const AppearanceTab = () => {
               key={option.value}
               type="button"
               variant={theme === option.value ? 'default' : 'outline'}
-              onClick={() => handleSelect(option.value)}
+              onClick={() => setThemePreference(option.value)}
             >
               {option.label}
             </Button>

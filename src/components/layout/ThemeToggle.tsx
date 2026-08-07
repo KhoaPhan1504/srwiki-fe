@@ -6,12 +6,12 @@ import {
   DropdownMenuTrigger,
 } from '~root/components/ui/dropdown-menu';
 import { Button } from '~root/components/ui/button';
-import { useTheme } from '~root/providers/ThemeProvider';
+import { useThemePreference } from '~root/providers/useThemePreference';
 
 const icons = { light: Sun, dark: Moon, system: Monitor };
 
 export const ThemeToggle = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme, setThemePreference } = useThemePreference();
   const Icon = icons[theme];
 
   return (
@@ -22,9 +22,11 @@ export const ThemeToggle = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>Sáng</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>Tối</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>Theo hệ thống</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setThemePreference('light')}>Sáng</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setThemePreference('dark')}>Tối</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setThemePreference('system')}>
+          Theo hệ thống
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
