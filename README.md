@@ -55,6 +55,10 @@ npm run lint
 npm run format
 ```
 
+Both run automatically on `git commit` (Husky + lint-staged block the commit on
+unresolved errors) — no manual step needed after `npm install`. Commit messages must
+follow `type: short description` (Conventional Commits, enforced by commitlint).
+
 ## Docker
 
 ```bash
