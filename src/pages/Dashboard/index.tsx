@@ -1,5 +1,5 @@
 import { DashboardLayout } from '~root/components/layout';
-import { DashboardPage as Dashboard } from '~root/screens/dashboard/DashboardPage';
+import { DashboardPage as Dashboard } from '~root/screens/dashboard';
 
 const DashboardPage = () => (
   <DashboardLayout>

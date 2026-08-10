@@ -40,3 +40,14 @@ export enum PhoneVerificationStatus {
   VERIFIED = 'Đã xác thực',
   UNVERIFIED = 'Chưa xác thực',
 }
+
+export const TIMEZONES = [
+  'Asia/Ho_Chi_Minh',
+  'Asia/Bangkok',
+  'Asia/Singapore',
+  'Asia/Tokyo',
+  'UTC',
+  'Europe/London',
+  'Europe/Paris',
+  'America/New_York',
+];

@@ -2,10 +2,10 @@ import type { ReactElement } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
-import { authAtom } from '~root/screens/auth/login/stores';
 import DashboardPage from '~root/pages/Dashboard';
 import ProfilePage from '~root/pages/Profile';
 import SettingsPage from '~root/pages/Settings';
+import { authAtom } from '~root/stores';
 
 interface PrivateRouteProps {
   element: ReactElement;

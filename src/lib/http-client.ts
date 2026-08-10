@@ -2,8 +2,7 @@ import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios';
 import { toast } from 'react-toastify';
 import { API_URL, Endpoints } from '~root/constants';
 import { isJsonString } from '~root/utils';
-import { localStore } from '~root/stores';
-import { authAtom } from '~root/screens/auth/login/stores';
+import { authAtom, localStore } from '~root/stores';
 
 export const httpClient = axios.create({
   baseURL: API_URL,

@@ -1,84 +1,42 @@
-import { useEffect, useRef, useState } from 'react';
-import type { ChangeEvent } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'react-toastify';
-import { Camera } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from '~root/components/ui/avatar';
-import { Button } from '~root/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '~root/components/ui/card';
-import { Input } from '~root/components/ui/input';
-import { Label } from '~root/components/ui/label';
-import { Textarea } from '~root/components/ui/textarea';
-import { Badge } from '~root/components/ui/badge';
-import { Skeleton } from '~root/components/ui/skeleton';
+import { Badge, Camera } from 'lucide-react';
+import { useProfileHooks } from './hooks';
+import { OtpModal, PhoneInput, QueryErrorCard } from '~root/components/common';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Input,
+  Label,
+  Skeleton,
+  Textarea,
+} from '~root/components/ui';
 import { withCacheBust } from '~root/lib/utils';
-import { PhoneInput } from '~root/components/PhoneInput';
-import { OtpModal } from '~root/components/OtpModal';
-import { QueryErrorCard } from '~root/components/QueryErrorCard';
-import { useGetProfile } from '~root/apis/useGetProfile';
-import { useUpdateProfile } from '~root/apis/useUpdateProfile';
-import { useUploadAvatar } from '~root/apis/useUploadAvatar';
-import { profileFormSchema } from '~root/schemas/profile';
-import type { ProfileFormValues } from '~root/schemas/profile';
 
 export const ProfilePage = () => {
-  const { profile, isLoading, isError, refetch } = useGetProfile();
-  const { mutate: updateProfile, isPending } = useUpdateProfile();
-  const { mutate: uploadAvatar, isPending: isUploadingAvatar } = useUploadAvatar();
-  const [phone, setPhone] = useState('');
-  const [showOtpModal, setShowOtpModal] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
   const {
+    profile,
+    isLoading,
+    isError,
+    refetch,
     register,
     handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<ProfileFormValues>({
-    resolver: zodResolver(profileFormSchema),
-    defaultValues: { fullName: '', address: '', dateOfBirth: '', bio: '' },
-  });
-
-  useEffect(() => {
-    if (profile) {
-      reset({
-        fullName: profile.fullName ?? '',
-        address: profile.address ?? '',
-        dateOfBirth: profile.dateOfBirth ?? '',
-        bio: profile.bio ?? '',
-      });
-      // Mirrors PhoneInput's editable local state from the fetched profile; same
-      // pattern the previous implementation used for this component's form fields.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setPhone(profile.phone ?? '');
-    }
-  }, [profile, reset]);
-
-  const onSubmit = (values: ProfileFormValues) => {
-    updateProfile(
-      {
-        fullName: values.fullName,
-        address: values.address || null,
-        dateOfBirth: values.dateOfBirth || null,
-        bio: values.bio || null,
-      },
-      {
-        onSuccess: () => toast.success('Đã lưu hồ sơ.', { position: 'bottom-center' }),
-        onError: () => toast.error('Lưu hồ sơ thất bại.', { position: 'bottom-center' }),
-      },
-    );
-  };
-
-  const handleAvatarChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    uploadAvatar(file, {
-      onSuccess: () => toast.success('Đã cập nhật ảnh đại diện.', { position: 'bottom-center' }),
-      onError: () => toast.error('Tải ảnh lên thất bại.', { position: 'bottom-center' }),
-    });
-    event.target.value = '';
-  };
+    errors,
+    onSubmit,
+    phone,
+    setPhone,
+    showOtpModal,
+    setShowOtpModal,
+    fileInputRef,
+    handleAvatarChange,
+    isPending,
+    isUploadingAvatar,
+    initials,
+  } = useProfileHooks();
 
   if (isError) {
     return (
@@ -96,8 +54,6 @@ export const ProfilePage = () => {
       </div>
     );
   }
-
-  const initials = (profile.fullName || profile.email).slice(0, 1).toUpperCase();
 
   return (
     <div className="max-w-2xl space-y-6">

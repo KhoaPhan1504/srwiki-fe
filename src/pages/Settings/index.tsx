@@ -1,5 +1,5 @@
 import { DashboardLayout } from '~root/components/layout';
-import { SettingsPage as Settings } from '~root/screens/settings/SettingsPage';
+import { SettingsPage as Settings } from '~root/screens/settings';
 
 const SettingsPage = () => (
   <DashboardLayout>

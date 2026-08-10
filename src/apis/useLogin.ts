@@ -1,9 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { httpClient } from '~root/lib/http-client';
 import { Endpoints } from '~root/constants';
-import { localStore } from '~root/stores';
-import { authAtom } from '~root/screens/auth/login/stores';
-import type { AuthUser } from '~root/screens/auth/login/stores';
+import { authAtom, localStore, type AuthUser } from '~root/stores';
 
 type LoginPayload = { email: string; password: string };
 type LoginResponse = { token: string; refreshToken: string; user: AuthUser };

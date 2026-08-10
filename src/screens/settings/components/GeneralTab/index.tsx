@@ -1,56 +1,23 @@
-import { useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'react-toastify';
-import { Card, CardContent } from '~root/components/ui/card';
-import { Label } from '~root/components/ui/label';
-import { Button } from '~root/components/ui/button';
+import { Controller } from 'react-hook-form';
+import { TIMEZONES } from '~root/constants';
+import { useGeneralTabHooks } from './hooks';
+import { QueryErrorCard } from '~root/components/common';
 import {
+  Button,
+  Card,
+  CardContent,
+  Label,
+  Skeleton,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '~root/components/ui/select';
-import { Skeleton } from '~root/components/ui/skeleton';
-import { QueryErrorCard } from '~root/components/QueryErrorCard';
-import { useGetSettings } from '~root/apis/useGetSettings';
-import { useUpdateSettings } from '~root/apis/useUpdateSettings';
-import { generalSettingsSchema } from '~root/schemas/settings';
-import type { GeneralSettingsValues } from '~root/schemas/settings';
-
-const TIMEZONES = [
-  'Asia/Ho_Chi_Minh',
-  'Asia/Bangkok',
-  'Asia/Singapore',
-  'Asia/Tokyo',
-  'UTC',
-  'Europe/London',
-  'Europe/Paris',
-  'America/New_York',
-];
+} from '~root/components/ui';
 
 export const GeneralTab = () => {
-  const { settings, isLoading, isError, refetch } = useGetSettings();
-  const { mutate: updateSettings, isPending } = useUpdateSettings();
-
-  const { control, handleSubmit, reset } = useForm<GeneralSettingsValues>({
-    resolver: zodResolver(generalSettingsSchema),
-    defaultValues: { language: 'vi', timezone: 'Asia/Ho_Chi_Minh' },
-  });
-
-  useEffect(() => {
-    if (settings) {
-      reset({ language: settings.language === 'en' ? 'en' : 'vi', timezone: settings.timezone });
-    }
-  }, [settings, reset]);
-
-  const onSubmit = (values: GeneralSettingsValues) => {
-    updateSettings(values, {
-      onSuccess: () => toast.success('Đã lưu cài đặt.', { position: 'bottom-center' }),
-      onError: () => toast.error('Lưu cài đặt thất bại.', { position: 'bottom-center' }),
-    });
-  };
+  const { control, onSubmit, isLoading, handleSubmit, isError, refetch, settings, isPending } =
+    useGeneralTabHooks();
 
   if (isError) {
     return <QueryErrorCard message="Không thể tải cài đặt chung." onRetry={() => refetch()} />;

@@ -1,12 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-import { useSetAtom } from 'jotai';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'react-toastify';
-import { Card, CardContent, CardHeader, CardTitle } from '~root/components/ui/card';
-import { Input } from '~root/components/ui/input';
-import { Label } from '~root/components/ui/label';
-import { Button } from '~root/components/ui/button';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,44 +8,19 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '~root/components/ui/alert-dialog';
-import { useDeleteAccount } from '~root/apis/useDeleteAccount';
-import { queryClient } from '~root/lib/query-client';
-import { authAtom } from '~root/screens/auth/login/stores';
-import { changePasswordSchema } from '~root/schemas/settings';
-import type { ChangePasswordValues } from '~root/schemas/settings';
+  Input,
+  Label,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '~root/components/ui';
+import { useSettingHooks } from './hooks';
 
 export const AccountTab = () => {
-  const navigate = useNavigate();
-  const setAuth = useSetAtom(authAtom);
-  const { mutate: deleteAccount, isPending: isDeleting } = useDeleteAccount();
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<ChangePasswordValues>({ resolver: zodResolver(changePasswordSchema) });
-
-  const onChangePassword = () => {
-    toast.info('Tính năng đổi mật khẩu sẽ sớm ra mắt.', { position: 'bottom-center' });
-    reset();
-  };
-
-  const handleDelete = () => {
-    deleteAccount(undefined, {
-      onSuccess: () => {
-        localStorage.removeItem('auth');
-        localStorage.removeItem('refreshToken');
-        setAuth(null);
-        // Prevents the next user to log in on this tab from briefly seeing
-        // this (now-deleted) account's cached profile/settings.
-        queryClient.clear();
-        navigate('/auth/login', { replace: true });
-      },
-      onError: () => toast.error('Xoá tài khoản thất bại.', { position: 'bottom-center' }),
-    });
-  };
+  const { register, handleSubmit, errors, onChangePassword, handleDelete, isDeleting } =
+    useSettingHooks();
 
   return (
     <div className="space-y-4">

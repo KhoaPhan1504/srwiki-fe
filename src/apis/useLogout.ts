@@ -1,8 +1,8 @@
 import { useSetAtom } from 'jotai';
 import { httpClient } from '~root/lib/http-client';
 import { Endpoints } from '~root/constants';
-import { authAtom } from '~root/screens/auth/login/stores';
 import { queryClient } from '~root/lib/query-client';
+import { authAtom } from '~root/stores';
 
 export const useLogout = () => {
   const setAuth = useSetAtom(authAtom);
