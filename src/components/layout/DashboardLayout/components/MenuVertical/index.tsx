@@ -50,7 +50,7 @@ const SidebarContent = ({ onNavigate }: { onNavigate?: () => void }) => {
   );
 };
 
-export const AppSidebar = ({ mobileOpen, onMobileOpenChange }: Props) => (
+export const MenuVertical = ({ mobileOpen, onMobileOpenChange }: Props) => (
   <>
     <aside className="hidden w-64 flex-shrink-0 border-r bg-card md:block">
       <SidebarContent />

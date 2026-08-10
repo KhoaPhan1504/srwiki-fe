@@ -36,6 +36,14 @@ export default defineConfig([
       'react-refresh/only-export-components': 'off',
     },
   },
+  {
+    // protected.tsx exports both the PrivateRoute component and the
+    // protectedRoutes route table from the same file
+    files: ['src/routes/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
   // Must be last: disables stylistic rules that would conflict with Prettier.
   prettier,
 ]);
