@@ -1,4 +1,4 @@
-import { AccessRemovedPage as AccessRemoved } from '~root/screens/auth/access-removed/AccessRemovedPage';
+import { AccessRemovedPage as AccessRemoved } from '~root/screens/auth/access-removed';
 
 const AccessRemovedPage = () => <AccessRemoved />;
 

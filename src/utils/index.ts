@@ -6,3 +6,8 @@ export const isJsonString = (value: string): boolean => {
     return false;
   }
 };
+
+export const formatDate = (value: Date | string) =>
+  new Intl.DateTimeFormat('vi-VN', { dateStyle: 'long' }).format(
+    typeof value === 'string' ? new Date(value) : value,
+  );

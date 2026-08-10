@@ -1,8 +1,5 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '~root/components/ui/tabs';
-import { GeneralTab } from '~root/screens/settings/GeneralTab';
-import { AppearanceTab } from '~root/screens/settings/AppearanceTab';
-import { NotificationsTab } from '~root/screens/settings/NotificationsTab';
-import { AccountTab } from '~root/screens/settings/AccountTab';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '~root/components/ui';
+import { AccountTab, AppearanceTab, GeneralTab, NotificationsTab } from './components';
 
 export const SettingsPage = () => (
   <div className="max-w-2xl space-y-6">
@@ -15,6 +12,7 @@ export const SettingsPage = () => (
         <TabsTrigger value="account">Tài khoản</TabsTrigger>
       </TabsList>
       <TabsContent value="general">
+        s
         <GeneralTab />
       </TabsContent>
       <TabsContent value="appearance">

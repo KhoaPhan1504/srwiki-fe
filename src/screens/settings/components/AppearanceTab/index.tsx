@@ -1,6 +1,4 @@
-import { Card, CardContent } from '~root/components/ui/card';
-import { Label } from '~root/components/ui/label';
-import { Button } from '~root/components/ui/button';
+import { Card, CardContent, Label, Button } from '~root/components/ui';
 import { useThemePreference } from '~root/providers/useThemePreference';
 import { Theme } from '~root/constants';
 

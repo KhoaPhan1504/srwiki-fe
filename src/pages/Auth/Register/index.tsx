@@ -1,4 +1,4 @@
-import { RegisterPage as Register } from '~root/screens/auth/register/RegisterPage';
+import { RegisterPage as Register } from '~root/screens/auth/register';
 
 const RegisterPage = () => <Register />;
 
