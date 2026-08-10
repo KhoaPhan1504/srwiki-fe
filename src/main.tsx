@@ -5,7 +5,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { Provider as JotaiProvider } from 'jotai';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import App from './App';
+import { AppRoutes } from '~root/routes';
 import { localStore } from '~root/stores';
 import { ThemeProvider } from '~root/providers/ThemeProvider';
 import { applyTheme, readStoredTheme } from '~root/providers/theme';
@@ -20,7 +20,7 @@ createRoot(document.getElementById('root')!).render(
       <JotaiProvider store={localStore}>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
-            <App />
+            <AppRoutes />
             <ToastContainer />
           </BrowserRouter>
         </QueryClientProvider>

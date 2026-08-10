@@ -28,3 +28,15 @@ export enum Theme {
   DARK = 'dark',
   SYSTEM = 'system',
 }
+
+export enum DashboardTab {
+  MEMBER_SINCE = 'Thành viên từ',
+  PROFILE_COMPLETION = 'Hồ sơ hoàn thiện',
+  PHONE_NUMBER = 'Số điện thoại',
+  EMAIL = 'Email',
+}
+
+export enum PhoneVerificationStatus {
+  VERIFIED = 'Đã xác thực',
+  UNVERIFIED = 'Chưa xác thực',
+}

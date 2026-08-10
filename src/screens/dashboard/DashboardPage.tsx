@@ -8,6 +8,7 @@ import { Skeleton } from '~root/components/ui/skeleton';
 import { QueryErrorCard } from '~root/components/QueryErrorCard';
 import { useGetProfile } from '~root/apis/useGetProfile';
 import type { Profile } from '~root/apis/useGetProfile';
+import { PhoneVerificationStatus } from '~root/constants';
 
 const COMPLETION_FIELDS: (keyof Pick<
   Profile,
@@ -92,7 +93,7 @@ export const DashboardPage = () => {
           </CardHeader>
           <CardContent>
             <Badge variant={profile.phoneVerified ? 'default' : 'secondary'}>
-              {profile.phoneVerified ? 'Đã xác thực' : 'Chưa xác thực'}
+              {profile.phoneVerified ? PhoneVerificationStatus.VERIFIED : PhoneVerificationStatus.UNVERIFIED}
             </Badge>
           </CardContent>
         </Card>
