@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, type ChangeEvent, useRef, useState } from 'react';
+import { type ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useGetProfile, useUpdateProfile, useUploadAvatar } from '~root/apis';
@@ -9,20 +9,16 @@ export const useProfileHooks = () => {
   const { profile, isLoading, isError, refetch } = useGetProfile();
   const { mutate: updateProfile, isPending } = useUpdateProfile();
   const { mutate: uploadAvatar, isPending: isUploadingAvatar } = useUploadAvatar();
-  const [phone, setPhone] = useState('');
   const [showOtpModal, setShowOtpModal] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const initials = (profile?.fullName || profile?.email)?.slice(0, 1).toUpperCase();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<ProfileFormValues>({
+  const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
-    defaultValues: { fullName: '', address: '', dateOfBirth: '', bio: '' },
+    defaultValues: { fullName: '', address: '', dateOfBirth: '', bio: '', phone: '' },
   });
+  const { reset, watch } = form;
+  const phone = watch('phone');
 
   useEffect(() => {
     if (profile) {
@@ -31,11 +27,8 @@ export const useProfileHooks = () => {
         address: profile.address ?? '',
         dateOfBirth: profile.dateOfBirth ?? '',
         bio: profile.bio ?? '',
+        phone: profile.phone ?? '',
       });
-      // Mirrors PhoneInput's editable local state from the fetched profile; same
-      // pattern the previous implementation used for this component's form fields.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setPhone(profile.phone ?? '');
     }
   }, [profile, reset]);
 
@@ -69,12 +62,9 @@ export const useProfileHooks = () => {
     isLoading,
     isError,
     refetch,
-    register,
-    handleSubmit,
-    errors,
+    form,
     onSubmit,
     phone,
-    setPhone,
     showOtpModal,
     setShowOtpModal,
     fileInputRef,

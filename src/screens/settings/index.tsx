@@ -12,7 +12,6 @@ export const SettingsPage = () => (
         <TabsTrigger value="account">Tài khoản</TabsTrigger>
       </TabsList>
       <TabsContent value="general">
-        s
         <GeneralTab />
       </TabsContent>
       <TabsContent value="appearance">

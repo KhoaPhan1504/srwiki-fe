@@ -8,19 +8,38 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-  Input,
-  Label,
   Button,
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from '~root/components/ui';
+import { SrInputGroup, type SrFormFieldConfig } from '~root/components/ui/form/index';
 import { useSettingHooks } from './hooks';
 
+const formStructure: SrFormFieldConfig[] = [
+  {
+    inputType: 'PasswordField',
+    name: 'currentPassword',
+    label: 'Mật khẩu hiện tại',
+    colSpan: 'col-span-12',
+  },
+  {
+    inputType: 'PasswordField',
+    name: 'newPassword',
+    label: 'Mật khẩu mới',
+    colSpan: 'col-span-12',
+  },
+  {
+    inputType: 'PasswordField',
+    name: 'confirmPassword',
+    label: 'Xác nhận mật khẩu mới',
+    colSpan: 'col-span-12',
+  },
+];
+
 export const AccountTab = () => {
-  const { register, handleSubmit, errors, onChangePassword, handleDelete, isDeleting } =
-    useSettingHooks();
+  const { form, onChangePassword, handleDelete, isDeleting } = useSettingHooks();
 
   return (
     <div className="space-y-4">
@@ -29,28 +48,8 @@ export const AccountTab = () => {
           <CardTitle>Đổi mật khẩu</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit(onChangePassword)} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="currentPassword">Mật khẩu hiện tại</Label>
-              <Input id="currentPassword" type="password" {...register('currentPassword')} />
-              {errors.currentPassword && (
-                <p className="text-sm text-destructive">{errors.currentPassword.message}</p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="newPassword">Mật khẩu mới</Label>
-              <Input id="newPassword" type="password" {...register('newPassword')} />
-              {errors.newPassword && (
-                <p className="text-sm text-destructive">{errors.newPassword.message}</p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Xác nhận mật khẩu mới</Label>
-              <Input id="confirmPassword" type="password" {...register('confirmPassword')} />
-              {errors.confirmPassword && (
-                <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>
-              )}
-            </div>
+          <form onSubmit={form.handleSubmit(onChangePassword)} className="space-y-4">
+            <SrInputGroup formHandler={form} formStructure={formStructure} />
             <Button type="submit">Đổi mật khẩu</Button>
           </form>
         </CardContent>
