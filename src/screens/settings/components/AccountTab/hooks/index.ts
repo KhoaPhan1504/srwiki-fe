@@ -13,12 +13,8 @@ export const useSettingHooks = () => {
   const setAuth = useSetAtom(authAtom);
   const { mutate: deleteAccount, isPending: isDeleting } = useDeleteAccount();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<ChangePasswordValues>({ resolver: zodResolver(changePasswordSchema) });
+  const form = useForm<ChangePasswordValues>({ resolver: zodResolver(changePasswordSchema) });
+  const { reset } = form;
 
   const onChangePassword = () => {
     toast.info('Tính năng đổi mật khẩu sẽ sớm ra mắt.', { position: 'bottom-center' });
@@ -40,12 +36,5 @@ export const useSettingHooks = () => {
     });
   };
 
-  return {
-    register,
-    handleSubmit,
-    errors,
-    onChangePassword,
-    handleDelete,
-    isDeleting,
-  };
+  return { form, onChangePassword, handleDelete, isDeleting };
 };

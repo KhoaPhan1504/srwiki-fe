@@ -1,21 +1,28 @@
-import { Badge, Camera } from 'lucide-react';
+import { Camera } from 'lucide-react';
 import { useProfileHooks } from './hooks';
-import { OtpModal, PhoneInput, QueryErrorCard } from '~root/components/common';
+import { OtpModal, QueryErrorCard } from '~root/components/common';
+import { SrInputGroup, type SrFormFieldConfig } from '~root/components/ui/form/index';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
+  Badge,
   Button,
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-  Input,
-  Label,
   Skeleton,
-  Textarea,
 } from '~root/components/ui';
 import { withCacheBust } from '~root/lib/utils';
+
+const formStructure: SrFormFieldConfig[] = [
+  { inputType: 'TextField', name: 'fullName', label: 'Họ và tên', colSpan: 'col-span-12' },
+  { inputType: 'TextAreaField', name: 'bio', label: 'Tiểu sử', rows: 3, colSpan: 'col-span-12' },
+  { inputType: 'TextField', name: 'address', label: 'Địa chỉ', colSpan: 'col-span-12' },
+  { inputType: 'DatePickerField', name: 'dateOfBirth', label: 'Ngày sinh', colSpan: 'col-span-12' },
+  { inputType: 'PhoneNumberField', name: 'phone', label: 'Số điện thoại', colSpan: 'col-span-12' },
+];
 
 export const ProfilePage = () => {
   const {
@@ -23,12 +30,9 @@ export const ProfilePage = () => {
     isLoading,
     isError,
     refetch,
-    register,
-    handleSubmit,
-    errors,
+    form,
     onSubmit,
     phone,
-    setPhone,
     showOtpModal,
     setShowOtpModal,
     fileInputRef,
@@ -96,45 +100,22 @@ export const ProfilePage = () => {
           <CardTitle>Thông tin cá nhân</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="fullName">Họ và tên</Label>
-              <Input id="fullName" {...register('fullName')} />
-              {errors.fullName && (
-                <p className="text-sm text-destructive">{errors.fullName.message}</p>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <SrInputGroup formHandler={form} formStructure={formStructure} />
+            <div className="flex items-center gap-2">
+              {profile.phoneVerified && profile.phone === phone ? (
+                <Badge>Đã xác thực</Badge>
+              ) : (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowOtpModal(true)}
+                  disabled={!phone}
+                >
+                  Xác thực
+                </Button>
               )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="bio">Tiểu sử</Label>
-              <Textarea id="bio" rows={3} {...register('bio')} />
-              {errors.bio && <p className="text-sm text-destructive">{errors.bio.message}</p>}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="address">Địa chỉ</Label>
-              <Input id="address" {...register('address')} />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="dateOfBirth">Ngày sinh</Label>
-              <Input id="dateOfBirth" type="date" {...register('dateOfBirth')} />
-            </div>
-            <div className="space-y-2">
-              <Label>Số điện thoại</Label>
-              <div className="flex items-center gap-2">
-                <PhoneInput value={phone} onChange={setPhone} />
-                {profile.phoneVerified && profile.phone === phone ? (
-                  <Badge>Đã xác thực</Badge>
-                ) : (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setShowOtpModal(true)}
-                    disabled={!phone}
-                  >
-                    Xác thực
-                  </Button>
-                )}
-              </div>
             </div>
             <Button type="submit" disabled={isPending}>
               {isPending ? 'Đang lưu...' : 'Lưu'}
@@ -145,7 +126,7 @@ export const ProfilePage = () => {
 
       {showOtpModal && (
         <OtpModal
-          phone={phone}
+          phone={phone ?? ''}
           onClose={() => setShowOtpModal(false)}
           onVerified={() => setShowOtpModal(false)}
         />

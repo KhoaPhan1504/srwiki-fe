@@ -5,6 +5,7 @@ export const profileFormSchema = z.object({
   address: z.string().optional(),
   dateOfBirth: z.string().optional(),
   bio: z.string().max(280, 'Tiểu sử tối đa 280 ký tự').optional(),
+  phone: z.string().optional(),
 });
 
 export type ProfileFormValues = z.infer<typeof profileFormSchema>;

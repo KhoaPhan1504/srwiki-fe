@@ -1,24 +1,32 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { useGetSettings, useUpdateSettings } from '~root/apis';
+import { useGetSettings, useUpdateSettings, type Settings } from '~root/apis';
 import { generalSettingsSchema, type GeneralSettingsValues } from '~root/schemas';
 
-export const useGeneralTabHooks = () => {
-  const { settings, isLoading, isError, refetch } = useGetSettings();
+// Query-only hook: safe to call unconditionally at the top of GeneralTab,
+// before `settings` exists.
+export const useGeneralTabQuery = () => useGetSettings();
+
+// Form hook: only ever called once `settings` has already loaded (see
+// GeneralTabForm in ../index.tsx), so `defaultValues` is seeded with the
+// real fetched values from the very first render. This deliberately avoids
+// initializing with placeholder values and then calling reset()/using the
+// `values` option to sync later -- Radix Select's SelectValue does not
+// reliably re-render when a Controller-bound value changes post-mount, so a
+// value transition after the Select has already mounted can leave it
+// visually blank even though the underlying form state is correct. Seeding
+// the correct value at mount time (no later transition) sidesteps that.
+export const useGeneralTabForm = (settings: Settings) => {
   const { mutate: updateSettings, isPending } = useUpdateSettings();
 
-  const { control, handleSubmit, reset } = useForm<GeneralSettingsValues>({
+  const form = useForm<GeneralSettingsValues>({
     resolver: zodResolver(generalSettingsSchema),
-    defaultValues: { language: 'vi', timezone: 'Asia/Ho_Chi_Minh' },
+    defaultValues: {
+      language: settings.language === 'en' ? 'en' : 'vi',
+      timezone: settings.timezone,
+    },
   });
-
-  useEffect(() => {
-    if (settings) {
-      reset({ language: settings.language === 'en' ? 'en' : 'vi', timezone: settings.timezone });
-    }
-  }, [settings, reset]);
 
   const onSubmit = (values: GeneralSettingsValues) => {
     updateSettings(values, {
@@ -27,14 +35,5 @@ export const useGeneralTabHooks = () => {
     });
   };
 
-  return {
-    control,
-    handleSubmit,
-    onSubmit,
-    isLoading,
-    isError,
-    refetch,
-    isPending,
-    settings,
-  };
+  return { form, onSubmit, isPending };
 };
