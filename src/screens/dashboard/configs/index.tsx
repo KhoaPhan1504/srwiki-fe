@@ -11,6 +11,7 @@ export type StatCardConfig = {
   icon: LucideIcon;
   renderContent: (ctx: { profile: Profile; completionPercent: number }) => React.ReactNode;
   contentClassName?: string;
+  badgeColorVar: string;
 };
 
 export const STAT_CARDS: StatCardConfig[] = [
@@ -19,12 +20,14 @@ export const STAT_CARDS: StatCardConfig[] = [
     title: 'Thành viên từ',
     icon: CalendarCheck,
     renderContent: ({ profile }) => formatDate(profile.createdAt),
+    badgeColorVar: '--chart-1',
   },
   {
     key: 'profileCompletion',
     title: 'Hồ sơ hoàn thiện',
     icon: UserRound,
     renderContent: ({ completionPercent }) => `${completionPercent}%`,
+    badgeColorVar: '--chart-2',
   },
   {
     key: 'phone',
@@ -37,13 +40,15 @@ export const STAT_CARDS: StatCardConfig[] = [
           : PhoneVerificationStatus.UNVERIFIED}
       </Badge>
     ),
+    badgeColorVar: '--chart-3',
   },
   {
     key: 'email',
     title: 'Email',
     icon: Mail,
     renderContent: ({ profile }) => profile.email,
-    contentClassName: 'truncate',
+    contentClassName: 'truncate text-2xl font-bold',
+    badgeColorVar: '--chart-4',
   },
 ];
 

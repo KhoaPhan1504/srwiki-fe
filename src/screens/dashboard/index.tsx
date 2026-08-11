@@ -40,17 +40,26 @@ export const DashboardPage = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {STAT_CARDS.map(({ key, title, icon: Icon, renderContent, contentClassName }) => (
-          <Card key={key}>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
-              <Icon className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent className={contentClassName ?? 'text-lg font-semibold'}>
-              {renderContent({ profile, completionPercent })}
-            </CardContent>
-          </Card>
-        ))}
+        {STAT_CARDS.map(
+          ({ key, title, icon: Icon, renderContent, contentClassName, badgeColorVar }) => (
+            <Card key={key} className="rounded-2xl shadow-[var(--dashboard-card-shadow)]">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
+                <span
+                  className="flex h-12 w-12 items-center justify-center rounded-full"
+                  style={{
+                    backgroundColor: `color-mix(in oklch, var(${badgeColorVar}) 15%, transparent)`,
+                  }}
+                >
+                  <Icon className="h-5 w-5" style={{ color: `var(${badgeColorVar})` }} />
+                </span>
+              </CardHeader>
+              <CardContent className={contentClassName ?? 'text-2xl font-bold'}>
+                {renderContent({ profile, completionPercent })}
+              </CardContent>
+            </Card>
+          ),
+        )}
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
