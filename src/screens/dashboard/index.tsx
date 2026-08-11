@@ -20,7 +20,7 @@ export const DashboardPage = () => {
         <Skeleton className="h-8 w-64" />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {Array.from({ length: 4 }).map((_, i) => (
-            <Skeleton key={i} className="h-28" />
+            <Skeleton key={i} className="h-36" />
           ))}
         </div>
       </div>
