@@ -11,6 +11,7 @@ import { ThemeProvider } from '~root/providers/ThemeProvider';
 import { applyTheme, readStoredTheme } from '~root/providers/theme';
 import { queryClient } from '~root/lib/query-client';
 import './index.css';
+import '@fontsource-variable/nunito-sans';
 
 applyTheme(readStoredTheme());
 
