@@ -34,7 +34,7 @@ export const STAT_CARDS: StatCardConfig[] = [
     title: 'Số điện thoại',
     icon: Phone,
     renderContent: ({ profile }) => (
-      <Badge variant={profile.phoneVerified ? 'default' : 'secondary'}>
+      <Badge variant={profile.phoneVerified ? 'verify-primary' : 'destructive'}>
         {profile.phoneVerified
           ? PhoneVerificationStatus.VERIFIED
           : PhoneVerificationStatus.UNVERIFIED}
