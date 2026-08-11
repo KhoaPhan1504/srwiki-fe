@@ -31,7 +31,7 @@ export const DashboardPage = () => {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
-          <h1 className="text-2xl font-semibold">Dashboard 👋</h1>
+          <h1 className="text-3xl font-semibold">Dashboard 👋</h1>
           <p className="text-muted-foreground">
             Chào mừng trở lại, {profile.fullName || profile.email}!
           </p>
@@ -63,7 +63,7 @@ export const DashboardPage = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <Card>
+        <Card className="rounded-2xl shadow-[var(--dashboard-card-shadow)]">
           <CardHeader>
             <CardTitle>Thông tin tài khoản</CardTitle>
           </CardHeader>
@@ -76,7 +76,7 @@ export const DashboardPage = () => {
             ))}
           </CardContent>
         </Card>
-        <Card>
+        <Card className="rounded-2xl shadow-[var(--dashboard-card-shadow)]">
           <CardHeader>
             <CardTitle>Liên kết nhanh</CardTitle>
           </CardHeader>
