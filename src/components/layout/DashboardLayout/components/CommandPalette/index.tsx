@@ -69,13 +69,24 @@ export const CommandPalette = ({ open, onOpenChange }: Props) => {
         <Command
           label="Tìm kiếm trang hoặc lệnh"
           filter={filterItems}
-          className="**:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]]:px-2 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5"
+          className="**:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]]:px-2 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-input]]:pr-24 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5"
         >
-          <CommandInput
-            value={search}
-            onValueChange={setSearch}
-            placeholder={isCommandMode ? 'Gõ lệnh...' : 'Tìm kiếm trang... (gõ / để chạy lệnh)'}
-          />
+          <div className="relative">
+            <CommandInput
+              value={search}
+              onValueChange={setSearch}
+              placeholder={isCommandMode ? 'Gõ lệnh...' : 'Tìm kiếm trang...'}
+            />
+            {!search && (
+              <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center gap-1.5 text-sm text-muted-foreground">
+                <span className="hidden sm:inline">Gõ</span>
+                <kbd className="shrink-0 rounded border bg-muted px-1.5 py-0.5 font-medium text-foreground">
+                  /
+                </kbd>
+                <span className="hidden sm:inline">để chạy lệnh</span>
+              </div>
+            )}
+          </div>
           <CommandList>
             <CommandEmpty>Không tìm thấy kết quả.</CommandEmpty>
             {isCommandMode ? (
