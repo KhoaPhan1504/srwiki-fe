@@ -31,6 +31,7 @@ export const Endpoints = {
   PROFILE_PHONE_SEND_OTP: '/profile/phone/send-otp',
   PROFILE_PHONE_VERIFY_OTP: '/profile/phone/verify-otp',
   SETTINGS: '/settings',
+  NOTIFICATIONS: '/notifications',
 } as const;
 
 export enum Theme {
