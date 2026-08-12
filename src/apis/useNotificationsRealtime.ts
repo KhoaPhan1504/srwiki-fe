@@ -12,9 +12,15 @@ export const useNotificationsRealtime = () => {
   useEffect(() => {
     if (!auth?.token || !auth.user?.id) return;
 
-    supabaseRealtimeClient.realtime.setAuth(auth.token);
+    const client = supabaseRealtimeClient;
+    if (!client) {
+      console.warn(
+        'Supabase Realtime client is unavailable (missing env vars) — notifications will only update on refetch/reload.',
+      );
+      return;
+    }
 
-    const channel = supabaseRealtimeClient
+    const channel = client
       .channel(`notifications:${auth.user.id}`)
       .on(
         'postgres_changes',
@@ -28,10 +34,14 @@ export const useNotificationsRealtime = () => {
           queryClient.invalidateQueries({ queryKey: [Endpoints.NOTIFICATIONS] });
         },
       )
-      .subscribe();
+      .subscribe((status, err) => {
+        if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
+          console.error('Notifications realtime subscription failed:', status, err);
+        }
+      });
 
     return () => {
-      supabaseRealtimeClient.removeChannel(channel);
+      client.removeChannel(channel);
     };
   }, [auth?.token, auth?.user?.id, queryClient]);
 };
