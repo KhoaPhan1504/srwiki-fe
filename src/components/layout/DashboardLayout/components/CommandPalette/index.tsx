@@ -63,7 +63,7 @@ export const CommandPalette = ({ open, onOpenChange }: Props) => {
     >
       <DialogContent className="overflow-hidden p-0">
         <DialogHeader className="sr-only">
-          <DialogTitle>Command Palette</DialogTitle>
+          <DialogTitle>Bảng lệnh</DialogTitle>
           <DialogDescription>Tìm trang hoặc gõ / để chạy lệnh</DialogDescription>
         </DialogHeader>
         <Command
