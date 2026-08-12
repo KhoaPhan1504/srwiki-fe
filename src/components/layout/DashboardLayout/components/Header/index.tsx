@@ -15,6 +15,7 @@ export const Header = ({ onMenuClick, onOpenPalette }: Props) => (
       <button
         type="button"
         onClick={onOpenPalette}
+        aria-label="Tìm kiếm"
         className="flex h-9 items-center gap-2 rounded-full border bg-muted/50 px-3 text-muted-foreground transition-colors hover:bg-muted sm:w-full sm:max-w-[400px]"
       >
         <Search className="h-4 w-4 shrink-0" />

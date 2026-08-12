@@ -10,7 +10,7 @@ const normalize = (value: string): string =>
 // higher score means a better match — consecutive runs and matches at the
 // start of a word score higher than scattered ones.
 export const fuzzyScore = (query: string, target: string): number | null => {
-  const normalizedQuery = normalize(query);
+  const normalizedQuery = normalize(query).replace(/\s+/g, '');
   const normalizedTarget = normalize(target);
 
   if (normalizedQuery.length === 0) return 1;
@@ -33,5 +33,5 @@ export const fuzzyScore = (query: string, target: string): number | null => {
     searchFrom = foundIndex + 1;
   }
 
-  return score;
+  return Math.max(score, 1);
 };

@@ -61,12 +61,13 @@ export const CommandPalette = ({ open, onOpenChange }: Props) => {
         if (!next) close();
       }}
     >
-      <DialogContent className="overflow-hidden p-0">
+      <DialogContent className="overflow-hidden p-0" showCloseButton={false}>
         <DialogHeader className="sr-only">
           <DialogTitle>Bảng lệnh</DialogTitle>
           <DialogDescription>Tìm trang hoặc gõ / để chạy lệnh</DialogDescription>
         </DialogHeader>
         <Command
+          label="Tìm kiếm trang hoặc lệnh"
           filter={filterItems}
           className="**:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]]:px-2 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5"
         >
