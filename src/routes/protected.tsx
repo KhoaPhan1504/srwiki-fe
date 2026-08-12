@@ -24,6 +24,7 @@ export const PrivateRoute = ({ element }: PrivateRouteProps) => {
 };
 
 export const protectedRoutes: RouteObject[] = [
+  { path: '/', element: <Navigate to="/dashboard" replace /> },
   { path: '/dashboard', element: <PrivateRoute element={<DashboardPage />} /> },
   { path: '/profile', element: <PrivateRoute element={<ProfilePage />} /> },
   { path: '/settings', element: <PrivateRoute element={<SettingsPage />} /> },

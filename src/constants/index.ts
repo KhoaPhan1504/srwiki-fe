@@ -11,6 +11,25 @@ if (!apiBaseUrl) {
 
 export const API_URL: string = apiBaseUrl;
 
+// Unlike API_URL, Supabase Realtime is a nice-to-have layered on top of a
+// notification list that already loads fine over httpClient/axios. Since this
+// module is imported almost everywhere (transitively via http-client.ts),
+// throwing here would white-screen the entire app — including the login page
+// — over a missing "live badge update" nicety. Degrade gracefully instead:
+// warn once and let consumers (supabase-realtime-client.ts) treat these as
+// optional.
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn(
+    'VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY is not set — see .env.template. Realtime notifications will be disabled.',
+  );
+}
+
+export const SUPABASE_URL: string | null = supabaseUrl || null;
+export const SUPABASE_ANON_KEY: string | null = supabaseAnonKey || null;
+
 export const Endpoints = {
   AUTH_REGISTER: '/auth/register',
   AUTH_LOGIN: '/auth/login',
@@ -21,6 +40,7 @@ export const Endpoints = {
   PROFILE_PHONE_SEND_OTP: '/profile/phone/send-otp',
   PROFILE_PHONE_VERIFY_OTP: '/profile/phone/verify-otp',
   SETTINGS: '/settings',
+  NOTIFICATIONS: '/notifications',
 } as const;
 
 export enum Theme {

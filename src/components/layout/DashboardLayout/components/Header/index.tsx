@@ -1,5 +1,6 @@
 import { Menu } from 'lucide-react';
 import { Button } from '~root/components/ui/button';
+import { NotificationBell } from '~root/components/layout/DashboardLayout/components/NotificationBell';
 import { ThemeToggle } from '~root/components/layout/DashboardLayout/components/ThemeToggle';
 import { UserMenu } from '~root/components/layout/DashboardLayout/components/UserMenu';
 
@@ -12,6 +13,7 @@ export const Header = ({ onMenuClick }: Props) => (
     </Button>
     <div className="flex-1" />
     <div className="flex items-center gap-3">
+      <NotificationBell />
       <ThemeToggle />
       <UserMenu />
     </div>
