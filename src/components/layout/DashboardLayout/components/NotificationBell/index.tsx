@@ -4,6 +4,7 @@ import { vi } from 'date-fns/locale';
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from '~root/components/ui/dropdown-menu';
 import { Button } from '~root/components/ui/button';
@@ -38,13 +39,12 @@ export const NotificationBell = () => {
         <div className="flex items-center justify-between px-2 py-1.5">
           <span className="text-sm font-medium">Thông báo</span>
           {unreadCount > 0 && (
-            <button
-              type="button"
+            <DropdownMenuItem
               onClick={() => markAllRead()}
-              className="text-xs text-muted-foreground hover:text-foreground"
+              className="w-auto px-2 py-1 text-xs text-muted-foreground"
             >
               Đánh dấu tất cả đã đọc
-            </button>
+            </DropdownMenuItem>
           )}
         </div>
         <div className="max-h-80 overflow-y-auto">
@@ -58,11 +58,13 @@ export const NotificationBell = () => {
               NOTIFICATION_TYPE_CONFIG[notification.type] ?? DEFAULT_NOTIFICATION_TYPE_CONFIG;
             const Icon = config.icon;
             return (
-              <button
+              <DropdownMenuItem
                 key={notification.id}
-                type="button"
-                onClick={() => !notification.readAt && markRead(notification.id)}
-                className="flex w-full items-start gap-3 rounded-md px-2 py-2 text-left hover:bg-muted"
+                onSelect={(e) => {
+                  e.preventDefault();
+                  if (!notification.readAt) markRead(notification.id);
+                }}
+                className="items-start gap-3 rounded-md px-2 py-2"
               >
                 <span
                   className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
@@ -91,7 +93,7 @@ export const NotificationBell = () => {
                 {!notification.readAt && (
                   <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary" />
                 )}
-              </button>
+              </DropdownMenuItem>
             );
           })}
         </div>
