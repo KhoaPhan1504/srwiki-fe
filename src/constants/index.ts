@@ -11,6 +11,16 @@ if (!apiBaseUrl) {
 
 export const API_URL: string = apiBaseUrl;
 
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error('VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY is not set — see .env.template');
+}
+
+export const SUPABASE_URL: string = supabaseUrl;
+export const SUPABASE_ANON_KEY: string = supabaseAnonKey;
+
 export const Endpoints = {
   AUTH_REGISTER: '/auth/register',
   AUTH_LOGIN: '/auth/login',
