@@ -3,6 +3,7 @@ import { MenuOptions } from './configs';
 import { NavLink } from 'react-router-dom';
 import { cn } from '~root/lib/utils';
 import { LogOut } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export const SidebarContent = ({
   onNavigate,
@@ -11,6 +12,7 @@ export const SidebarContent = ({
   onNavigate?: () => void;
   logoSrc: string;
 }) => {
+  const { t } = useTranslation('header');
   const logout = useLogout();
 
   return (
@@ -19,7 +21,7 @@ export const SidebarContent = ({
         <img src={logoSrc} alt="SR-WIKI Logo" className="inline-block" />
       </div>
       <div className="flex flex-1 flex-col gap-3">
-        {MenuOptions.map(({ to, label, icon: Icon }) => (
+        {MenuOptions.map(({ to, labelKey, icon: Icon }) => (
           <NavLink
             key={to}
             to={to}
@@ -34,7 +36,7 @@ export const SidebarContent = ({
             }
           >
             <Icon className="h-4 w-4" />
-            {label}
+            {t(labelKey)}
           </NavLink>
         ))}
         <button
@@ -42,7 +44,7 @@ export const SidebarContent = ({
           className="mt-auto flex items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-medium text-destructive hover:bg-destructive/10"
         >
           <LogOut className="h-4 w-4" />
-          Đăng xuất
+          {t('nav.logout')}
         </button>
       </div>
     </div>

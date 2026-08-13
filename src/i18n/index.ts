@@ -5,12 +5,14 @@ import { readStoredLanguage } from '~root/providers/language';
 
 import viCommon from './vi/common.json';
 import enCommon from './en/common.json';
+import viHeader from './vi/header.json';
+import enHeader from './en/header.json';
 
-export const NAMESPACES = ['common'] as const;
+export const NAMESPACES = ['common', 'header'] as const;
 
 const resources = {
-  [Language.VI]: { common: viCommon },
-  [Language.EN]: { common: enCommon },
+  [Language.VI]: { common: viCommon, header: viHeader },
+  [Language.EN]: { common: enCommon, header: enHeader },
 };
 
 i18n.use(initReactI18next).init({

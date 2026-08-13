@@ -1,0 +1,6 @@
+{
+  "search": { "ariaLabel": "Tìm kiếm", "placeholder": "Tìm kiếm..." },
+  "nav": { "dashboard": "Dashboard", "profile": "Hồ sơ", "settings": "Cài đặt", "logout": "Đăng xuất" },
+  "theme": { "light": "Sáng", "dark": "Tối", "system": "Theo hệ thống" },
+  "languageSwitch": { "ariaLabel": "Đổi ngôn ngữ" }
+}

@@ -1,4 +1,5 @@
 import { Monitor, Moon, Sun } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,6 +13,7 @@ import { Theme } from '~root/constants';
 const icons = { light: Sun, dark: Moon, system: Monitor };
 
 export const ThemeToggle = () => {
+  const { t } = useTranslation('header');
   const { theme, setThemePreference } = useThemePreference();
   const Icon = icons[theme];
 
@@ -23,10 +25,14 @@ export const ThemeToggle = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setThemePreference(Theme.LIGHT)}>Sáng</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setThemePreference(Theme.DARK)}>Tối</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setThemePreference(Theme.LIGHT)}>
+          {t('theme.light')}
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setThemePreference(Theme.DARK)}>
+          {t('theme.dark')}
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setThemePreference(Theme.SYSTEM)}>
-          Theo hệ thống
+          {t('theme.system')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
