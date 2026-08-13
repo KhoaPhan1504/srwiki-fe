@@ -1,0 +1,10 @@
+{
+  "buttons": {
+    "save": "Lưu",
+    "saving": "Đang lưu...",
+    "cancel": "Huỷ",
+    "retry": "Thử lại"
+  },
+  "sessionExpired": "Phiên đăng nhập đã hết hạn! Vui lòng đăng nhập lại.",
+  "forbidden": "Bạn không có quyền truy cập tài nguyên này!"
+}

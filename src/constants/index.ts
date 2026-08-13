@@ -49,6 +49,11 @@ export enum Theme {
   SYSTEM = 'system',
 }
 
+export enum Language {
+  VI = 'vi',
+  EN = 'en',
+}
+
 export enum DashboardTab {
   MEMBER_SINCE = 'Thành viên từ',
   PROFILE_COMPLETION = 'Hồ sơ hoàn thiện',
