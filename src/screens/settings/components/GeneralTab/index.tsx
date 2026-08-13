@@ -59,5 +59,5 @@ export const GeneralTab = () => {
     return <Skeleton className="h-48" />;
   }
 
-  return <GeneralTabForm settings={settings} />;
+  return <GeneralTabForm key={`${settings.language}-${settings.timezone}`} settings={settings} />;
 };

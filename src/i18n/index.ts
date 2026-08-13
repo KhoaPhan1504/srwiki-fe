@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { Language } from '~root/constants';
-import { readStoredLanguage } from '~root/providers/language';
+import { readStoredLanguage, storeLanguage } from '~root/providers/language';
 
 import viCommon from './vi/common.json';
 import enCommon from './en/common.json';
@@ -86,6 +86,7 @@ i18n.use(initReactI18next).init({
 document.documentElement.lang = i18n.language;
 i18n.on('languageChanged', (lng) => {
   document.documentElement.lang = lng;
+  storeLanguage(lng as Language);
 });
 
 export default i18n;
