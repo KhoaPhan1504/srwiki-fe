@@ -1,0 +1,27 @@
+{
+  "dialog": { "title": "Command palette", "description": "Search pages or type / to run a command" },
+  "searchInput": {
+    "placeholderNav": "Search pages...",
+    "placeholderCommand": "Type a command...",
+    "hintPrefix": "Type",
+    "hintSuffix": "to run a command"
+  },
+  "empty": "No results found.",
+  "groups": { "commands": "Commands", "navigation": "Navigation" },
+  "nav": {
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "settingsGeneral": "Settings · General",
+    "settingsAppearance": "Settings · Appearance",
+    "settingsNotifications": "Settings · Notifications",
+    "settingsAccount": "Settings · Account"
+  },
+  "commands": {
+    "themeLight": "Switch to Light theme",
+    "themeDark": "Switch to Dark theme",
+    "themeSystem": "Switch to System theme",
+    "languageVi": "Switch to Tiếng Việt",
+    "languageEn": "Switch to English"
+  }
+}

@@ -7,12 +7,14 @@ import viCommon from './vi/common.json';
 import enCommon from './en/common.json';
 import viHeader from './vi/header.json';
 import enHeader from './en/header.json';
+import viCommandPalette from './vi/command-palette.json';
+import enCommandPalette from './en/command-palette.json';
 
-export const NAMESPACES = ['common', 'header'] as const;
+export const NAMESPACES = ['common', 'header', 'command-palette'] as const;
 
 const resources = {
-  [Language.VI]: { common: viCommon, header: viHeader },
-  [Language.EN]: { common: enCommon, header: enHeader },
+  [Language.VI]: { common: viCommon, header: viHeader, 'command-palette': viCommandPalette },
+  [Language.EN]: { common: enCommon, header: enHeader, 'command-palette': enCommandPalette },
 };
 
 i18n.use(initReactI18next).init({

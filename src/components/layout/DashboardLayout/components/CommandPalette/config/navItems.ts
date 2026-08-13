@@ -3,37 +3,36 @@ import type { LucideIcon } from 'lucide-react';
 
 export type NavItem = {
   id: string;
-  label: string;
+  labelKey: string;
   to: string;
   icon: LucideIcon;
-  keywords?: string[];
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { id: 'dashboard', label: 'Dashboard', to: '/dashboard', icon: LayoutDashboard },
-  { id: 'profile', label: 'Hồ sơ', to: '/profile', icon: User },
-  { id: 'settings', label: 'Cài đặt', to: '/settings', icon: SettingsIcon },
+  { id: 'dashboard', labelKey: 'nav.dashboard', to: '/dashboard', icon: LayoutDashboard },
+  { id: 'profile', labelKey: 'nav.profile', to: '/profile', icon: User },
+  { id: 'settings', labelKey: 'nav.settings', to: '/settings', icon: SettingsIcon },
   {
     id: 'settings-general',
-    label: 'Cài đặt · Chung',
+    labelKey: 'nav.settingsGeneral',
     to: '/settings?tab=general',
     icon: SettingsIcon,
   },
   {
     id: 'settings-appearance',
-    label: 'Cài đặt · Giao diện',
+    labelKey: 'nav.settingsAppearance',
     to: '/settings?tab=appearance',
     icon: SettingsIcon,
   },
   {
     id: 'settings-notifications',
-    label: 'Cài đặt · Thông báo',
+    labelKey: 'nav.settingsNotifications',
     to: '/settings?tab=notifications',
     icon: SettingsIcon,
   },
   {
     id: 'settings-account',
-    label: 'Cài đặt · Tài khoản',
+    labelKey: 'nav.settingsAccount',
     to: '/settings?tab=account',
     icon: SettingsIcon,
   },

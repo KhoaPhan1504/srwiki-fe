@@ -1,0 +1,27 @@
+{
+  "dialog": { "title": "Bảng lệnh", "description": "Tìm trang hoặc gõ / để chạy lệnh" },
+  "searchInput": {
+    "placeholderNav": "Tìm kiếm trang...",
+    "placeholderCommand": "Gõ lệnh...",
+    "hintPrefix": "Gõ",
+    "hintSuffix": "để chạy lệnh"
+  },
+  "empty": "Không tìm thấy kết quả.",
+  "groups": { "commands": "Lệnh", "navigation": "Điều hướng" },
+  "nav": {
+    "dashboard": "Dashboard",
+    "profile": "Hồ sơ",
+    "settings": "Cài đặt",
+    "settingsGeneral": "Cài đặt · Chung",
+    "settingsAppearance": "Cài đặt · Giao diện",
+    "settingsNotifications": "Cài đặt · Thông báo",
+    "settingsAccount": "Cài đặt · Tài khoản"
+  },
+  "commands": {
+    "themeLight": "Chuyển sang giao diện Sáng",
+    "themeDark": "Chuyển sang giao diện Tối",
+    "themeSystem": "Chuyển theo hệ thống",
+    "languageVi": "Chuyển sang Tiếng Việt",
+    "languageEn": "Chuyển sang English"
+  }
+}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   Command,
   CommandEmpty,
@@ -16,9 +17,10 @@ import {
   DialogTitle,
 } from '~root/components/ui/dialog';
 import { useThemePreference } from '~root/providers/useThemePreference';
+import { useLanguagePreference } from '~root/providers/useLanguagePreference';
 import { NAV_ITEMS } from './config/navItems';
 import type { NavItem } from './config/navItems';
-import { getThemeCommands } from './config/commands';
+import { getLanguageCommands, getThemeCommands } from './config/commands';
 import type { PaletteCommand } from './config/commands';
 import { fuzzyScore } from './fuzzyMatch';
 
@@ -33,11 +35,16 @@ const filterItems = (value: string, search: string) => {
 };
 
 export const CommandPalette = ({ open, onOpenChange }: Props) => {
+  const { t } = useTranslation('command-palette');
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
   const { setThemePreference } = useThemePreference();
+  const { setLanguagePreference } = useLanguagePreference();
   const isCommandMode = search.startsWith('/');
-  const commands = getThemeCommands(setThemePreference);
+  const commands = [
+    ...getThemeCommands(t, setThemePreference),
+    ...getLanguageCommands(t, setLanguagePreference),
+  ];
 
   const close = () => {
     onOpenChange(false);
@@ -63,11 +70,11 @@ export const CommandPalette = ({ open, onOpenChange }: Props) => {
     >
       <DialogContent className="overflow-hidden p-0" showCloseButton={false}>
         <DialogHeader className="sr-only">
-          <DialogTitle>Bảng lệnh</DialogTitle>
-          <DialogDescription>Tìm trang hoặc gõ / để chạy lệnh</DialogDescription>
+          <DialogTitle>{t('dialog.title')}</DialogTitle>
+          <DialogDescription>{t('dialog.description')}</DialogDescription>
         </DialogHeader>
         <Command
-          label="Tìm kiếm trang hoặc lệnh"
+          label={t('dialog.description')}
           filter={filterItems}
           className="**:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]]:px-2 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-input]]:pr-24 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5"
         >
@@ -75,22 +82,26 @@ export const CommandPalette = ({ open, onOpenChange }: Props) => {
             <CommandInput
               value={search}
               onValueChange={setSearch}
-              placeholder={isCommandMode ? 'Gõ lệnh...' : 'Tìm kiếm trang...'}
+              placeholder={
+                isCommandMode
+                  ? t('searchInput.placeholderCommand')
+                  : t('searchInput.placeholderNav')
+              }
             />
             {!search && (
               <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center gap-1.5 text-sm text-muted-foreground">
-                <span className="hidden sm:inline">Gõ</span>
+                <span className="hidden sm:inline">{t('searchInput.hintPrefix')}</span>
                 <kbd className="shrink-0 rounded border bg-muted px-1.5 py-0.5 font-medium text-foreground">
                   /
                 </kbd>
-                <span className="hidden sm:inline">để chạy lệnh</span>
+                <span className="hidden sm:inline">{t('searchInput.hintSuffix')}</span>
               </div>
             )}
           </div>
           <CommandList>
-            <CommandEmpty>Không tìm thấy kết quả.</CommandEmpty>
+            <CommandEmpty>{t('empty')}</CommandEmpty>
             {isCommandMode ? (
-              <CommandGroup heading="Lệnh">
+              <CommandGroup heading={t('groups.commands')}>
                 {commands.map((item) => (
                   <CommandListItem
                     key={item.id}
@@ -103,15 +114,15 @@ export const CommandPalette = ({ open, onOpenChange }: Props) => {
                 ))}
               </CommandGroup>
             ) : (
-              <CommandGroup heading="Điều hướng">
+              <CommandGroup heading={t('groups.navigation')}>
                 {NAV_ITEMS.map((item) => (
                   <CommandListItem
                     key={item.id}
-                    value={[item.label, ...(item.keywords ?? [])].join(' ')}
+                    value={t(item.labelKey)}
                     onSelect={() => runNavItem(item)}
                   >
                     <item.icon />
-                    {item.label}
+                    {t(item.labelKey)}
                   </CommandListItem>
                 ))}
               </CommandGroup>
