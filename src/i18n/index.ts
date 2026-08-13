@@ -11,8 +11,10 @@ import viCommandPalette from './vi/command-palette.json';
 import enCommandPalette from './en/command-palette.json';
 import viAuth from './vi/auth.json';
 import enAuth from './en/auth.json';
+import viDashboard from './vi/dashboard.json';
+import enDashboard from './en/dashboard.json';
 
-export const NAMESPACES = ['common', 'header', 'command-palette', 'auth'] as const;
+export const NAMESPACES = ['common', 'header', 'command-palette', 'auth', 'dashboard'] as const;
 
 const resources = {
   [Language.VI]: {
@@ -20,12 +22,14 @@ const resources = {
     header: viHeader,
     'command-palette': viCommandPalette,
     auth: viAuth,
+    dashboard: viDashboard,
   },
   [Language.EN]: {
     common: enCommon,
     header: enHeader,
     'command-palette': enCommandPalette,
     auth: enAuth,
+    dashboard: enDashboard,
   },
 };
 
