@@ -9,12 +9,24 @@ import viHeader from './vi/header.json';
 import enHeader from './en/header.json';
 import viCommandPalette from './vi/command-palette.json';
 import enCommandPalette from './en/command-palette.json';
+import viAuth from './vi/auth.json';
+import enAuth from './en/auth.json';
 
-export const NAMESPACES = ['common', 'header', 'command-palette'] as const;
+export const NAMESPACES = ['common', 'header', 'command-palette', 'auth'] as const;
 
 const resources = {
-  [Language.VI]: { common: viCommon, header: viHeader, 'command-palette': viCommandPalette },
-  [Language.EN]: { common: enCommon, header: enHeader, 'command-palette': enCommandPalette },
+  [Language.VI]: {
+    common: viCommon,
+    header: viHeader,
+    'command-palette': viCommandPalette,
+    auth: viAuth,
+  },
+  [Language.EN]: {
+    common: enCommon,
+    header: enHeader,
+    'command-palette': enCommandPalette,
+    auth: enAuth,
+  },
 };
 
 i18n.use(initReactI18next).init({

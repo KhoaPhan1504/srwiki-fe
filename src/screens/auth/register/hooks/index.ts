@@ -1,9 +1,11 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { useRegister } from '~root/apis';
 
 export const useRegisterHooks = () => {
+  const { t } = useTranslation('auth');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
@@ -16,13 +18,11 @@ export const useRegisterHooks = () => {
       { email, password, fullName },
       {
         onSuccess: () => {
-          toast.success('Đăng ký thành công! Vui lòng đăng nhập.', { position: 'bottom-center' });
+          toast.success(t('register.success'), { position: 'bottom-center' });
           navigate('/auth/login', { replace: true });
         },
         onError: () => {
-          toast.error('Đăng ký thất bại. Email có thể đã được sử dụng.', {
-            position: 'bottom-center',
-          });
+          toast.error(t('register.error'), { position: 'bottom-center' });
         },
       },
     );
