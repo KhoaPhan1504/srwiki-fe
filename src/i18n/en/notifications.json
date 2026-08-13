@@ -1,0 +1,7 @@
+{
+  "title": "Notifications",
+  "markAllRead": "Mark all as read",
+  "empty": "No notifications yet.",
+  "markReadError": "Failed to mark as read.",
+  "markAllReadError": "Failed to mark all as read."
+}

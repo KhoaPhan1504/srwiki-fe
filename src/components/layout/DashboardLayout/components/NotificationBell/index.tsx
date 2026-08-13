@@ -1,6 +1,6 @@
 import { Bell } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
-import { vi } from 'date-fns/locale';
+import { useTranslation } from 'react-i18next';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,9 +12,12 @@ import { useGetNotifications } from '~root/apis/useGetNotifications';
 import { useMarkNotificationRead } from '~root/apis/useMarkNotificationRead';
 import { useMarkAllNotificationsRead } from '~root/apis/useMarkAllNotificationsRead';
 import { useNotificationsRealtime } from '~root/apis/useNotificationsRealtime';
+import { getDateFnsLocale } from '~root/i18n/dateLocale';
+import type { Language } from '~root/constants';
 import { DEFAULT_NOTIFICATION_TYPE_CONFIG, NOTIFICATION_TYPE_CONFIG } from './configs';
 
 export const NotificationBell = () => {
+  const { t, i18n } = useTranslation('notifications');
   useNotificationsRealtime();
   const { notifications } = useGetNotifications();
   const { mutate: markRead } = useMarkNotificationRead();
@@ -37,21 +40,19 @@ export const NotificationBell = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-80">
         <div className="flex items-center justify-between px-2 py-1.5">
-          <span className="text-sm font-medium">Thông báo</span>
+          <span className="text-sm font-medium">{t('title')}</span>
           {unreadCount > 0 && (
             <DropdownMenuItem
               onClick={() => markAllRead()}
               className="w-auto px-2 py-1 text-xs text-muted-foreground"
             >
-              Đánh dấu tất cả đã đọc
+              {t('markAllRead')}
             </DropdownMenuItem>
           )}
         </div>
         <div className="max-h-80 overflow-y-auto">
           {notifications.length === 0 && (
-            <p className="px-2 py-6 text-center text-sm text-muted-foreground">
-              Không có thông báo nào.
-            </p>
+            <p className="px-2 py-6 text-center text-sm text-muted-foreground">{t('empty')}</p>
           )}
           {notifications.map((notification) => {
             const config =
@@ -86,7 +87,7 @@ export const NotificationBell = () => {
                   <span className="block text-[11px] text-muted-foreground">
                     {formatDistanceToNow(new Date(notification.createdAt), {
                       addSuffix: true,
-                      locale: vi,
+                      locale: getDateFnsLocale(i18n.language as Language),
                     })}
                   </span>
                 </span>
