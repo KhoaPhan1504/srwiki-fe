@@ -6,5 +6,7 @@
     "retry": "Thử lại"
   },
   "sessionExpired": "Phiên đăng nhập đã hết hạn! Vui lòng đăng nhập lại.",
-  "forbidden": "Bạn không có quyền truy cập tài nguyên này!"
+  "forbidden": "Bạn không có quyền truy cập tài nguyên này!",
+  "settingsSaved": "Giao diện đã được lưu.",
+  "settingsSaveError": "Lưu giao diện thất bại."
 }
