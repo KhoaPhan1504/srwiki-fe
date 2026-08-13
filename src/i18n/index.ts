@@ -15,6 +15,8 @@ import viDashboard from './vi/dashboard.json';
 import enDashboard from './en/dashboard.json';
 import viProfile from './vi/profile.json';
 import enProfile from './en/profile.json';
+import viSettingsGeneral from './vi/settings-general.json';
+import enSettingsGeneral from './en/settings-general.json';
 
 export const NAMESPACES = [
   'common',
@@ -23,6 +25,7 @@ export const NAMESPACES = [
   'auth',
   'dashboard',
   'profile',
+  'settings-general',
 ] as const;
 
 const resources = {
@@ -33,6 +36,7 @@ const resources = {
     auth: viAuth,
     dashboard: viDashboard,
     profile: viProfile,
+    'settings-general': viSettingsGeneral,
   },
   [Language.EN]: {
     common: enCommon,
@@ -41,6 +45,7 @@ const resources = {
     auth: enAuth,
     dashboard: enDashboard,
     profile: enProfile,
+    'settings-general': enSettingsGeneral,
   },
 };
 

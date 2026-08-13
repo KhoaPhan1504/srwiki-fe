@@ -1,8 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { useGetSettings, useUpdateSettings, type Settings } from '~root/apis';
-import { generalSettingsSchema, type GeneralSettingsValues } from '~root/schemas';
+import { useGeneralSettingsSchema, type GeneralSettingsValues } from '~root/schemas';
 
 // Query-only hook: safe to call unconditionally at the top of GeneralTab,
 // before `settings` exists.
@@ -18,10 +19,11 @@ export const useGeneralTabQuery = () => useGetSettings();
 // visually blank even though the underlying form state is correct. Seeding
 // the correct value at mount time (no later transition) sidesteps that.
 export const useGeneralTabForm = (settings: Settings) => {
+  const { t, i18n } = useTranslation('settings-general');
   const { mutate: updateSettings, isPending } = useUpdateSettings();
 
   const form = useForm<GeneralSettingsValues>({
-    resolver: zodResolver(generalSettingsSchema),
+    resolver: zodResolver(useGeneralSettingsSchema()),
     defaultValues: {
       language: settings.language === 'en' ? 'en' : 'vi',
       timezone: settings.timezone,
@@ -30,8 +32,11 @@ export const useGeneralTabForm = (settings: Settings) => {
 
   const onSubmit = (values: GeneralSettingsValues) => {
     updateSettings(values, {
-      onSuccess: () => toast.success('Đã lưu cài đặt.', { position: 'bottom-center' }),
-      onError: () => toast.error('Lưu cài đặt thất bại.', { position: 'bottom-center' }),
+      onSuccess: () => {
+        i18n.changeLanguage(values.language);
+        toast.success(t('saveSuccess'), { position: 'bottom-center' });
+      },
+      onError: () => toast.error(t('saveError'), { position: 'bottom-center' }),
     });
   };
 

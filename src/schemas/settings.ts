@@ -1,11 +1,15 @@
 import { z } from 'zod';
+import { useTranslation } from 'react-i18next';
 
-export const generalSettingsSchema = z.object({
-  language: z.enum(['vi', 'en']),
-  timezone: z.string().min(1),
-});
+export const useGeneralSettingsSchema = () => {
+  const { t } = useTranslation('settings-general');
+  return z.object({
+    language: z.enum(['vi', 'en']),
+    timezone: z.string().min(1, t('validation.timezoneRequired')),
+  });
+};
 
-export type GeneralSettingsValues = z.infer<typeof generalSettingsSchema>;
+export type GeneralSettingsValues = z.infer<ReturnType<typeof useGeneralSettingsSchema>>;
 
 export const changePasswordSchema = z
   .object({
