@@ -13,8 +13,17 @@ import viAuth from './vi/auth.json';
 import enAuth from './en/auth.json';
 import viDashboard from './vi/dashboard.json';
 import enDashboard from './en/dashboard.json';
+import viProfile from './vi/profile.json';
+import enProfile from './en/profile.json';
 
-export const NAMESPACES = ['common', 'header', 'command-palette', 'auth', 'dashboard'] as const;
+export const NAMESPACES = [
+  'common',
+  'header',
+  'command-palette',
+  'auth',
+  'dashboard',
+  'profile',
+] as const;
 
 const resources = {
   [Language.VI]: {
@@ -23,6 +32,7 @@ const resources = {
     'command-palette': viCommandPalette,
     auth: viAuth,
     dashboard: viDashboard,
+    profile: viProfile,
   },
   [Language.EN]: {
     common: enCommon,
@@ -30,6 +40,7 @@ const resources = {
     'command-palette': enCommandPalette,
     auth: enAuth,
     dashboard: enDashboard,
+    profile: enProfile,
   },
 };
 

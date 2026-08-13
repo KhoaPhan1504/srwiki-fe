@@ -1,0 +1,38 @@
+{
+  "title": "Profile",
+  "error": "Couldn't load your profile.",
+  "avatar": {
+    "changeButton": "Change avatar",
+    "uploading": "Uploading...",
+    "hint": "PNG, JPEG or WEBP, up to 2MB.",
+    "uploadSuccess": "Avatar updated.",
+    "uploadError": "Failed to upload the avatar."
+  },
+  "form": {
+    "sectionTitle": "Personal information",
+    "fullName": "Full name",
+    "bio": "Bio",
+    "address": "Address",
+    "dateOfBirth": "Date of birth",
+    "phone": "Phone number"
+  },
+  "phone": { "verified": "Verified", "verifyButton": "Verify" },
+  "saveSuccess": "Profile saved.",
+  "saveError": "Failed to save the profile.",
+  "validation": {
+    "fullNameRequired": "Full name is required",
+    "bioMaxLength": "Bio must be at most 280 characters"
+  },
+  "otp": {
+    "title": "Verify phone number",
+    "description": "Enter the 6-digit code sent to {{phone}}.",
+    "expiresIn": "Code expires in {{time}}",
+    "confirm": "Confirm",
+    "close": "Close",
+    "resend": "Resend code",
+    "devCode": "OTP code (dev mode): {{code}}",
+    "sendError": "Couldn't send the OTP code.",
+    "verifySuccess": "Phone number verified successfully.",
+    "verifyError": "Incorrect or expired OTP code."
+  }
+}

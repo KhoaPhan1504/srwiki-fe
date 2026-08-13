@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { FormEvent } from 'react';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { useSendOtp } from '~root/apis/useSendOtp';
 import { useVerifyOtp } from '~root/apis/useVerifyOtp';
 
@@ -13,6 +14,7 @@ type Props = {
 };
 
 export const OtpModal = ({ phone, onClose, onVerified }: Props) => {
+  const { t } = useTranslation('profile');
   const [code, setCode] = useState('');
   const [secondsLeft, setSecondsLeft] = useState(OTP_TTL_SECONDS);
   const { mutate: sendOtp, isPending: isSending } = useSendOtp();
@@ -22,13 +24,13 @@ export const OtpModal = ({ phone, onClose, onVerified }: Props) => {
     sendOtp(phone, {
       onSuccess: (data) => {
         if (data.debugOtp) {
-          toast.info(`Mã OTP (dev mode): ${data.debugOtp}`, {
+          toast.info(t('otp.devCode', { code: data.debugOtp }), {
             position: 'bottom-center',
             autoClose: false,
           });
         }
       },
-      onError: () => toast.error('Không gửi được mã OTP.', { position: 'bottom-center' }),
+      onError: () => toast.error(t('otp.sendError'), { position: 'bottom-center' }),
     });
   };
 
@@ -54,11 +56,10 @@ export const OtpModal = ({ phone, onClose, onVerified }: Props) => {
       { phone, code },
       {
         onSuccess: () => {
-          toast.success('Xác thực số điện thoại thành công.', { position: 'bottom-center' });
+          toast.success(t('otp.verifySuccess'), { position: 'bottom-center' });
           onVerified();
         },
-        onError: () =>
-          toast.error('Mã OTP không đúng hoặc đã hết hạn.', { position: 'bottom-center' }),
+        onError: () => toast.error(t('otp.verifyError'), { position: 'bottom-center' }),
       },
     );
   };
@@ -69,8 +70,8 @@ export const OtpModal = ({ phone, onClose, onVerified }: Props) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/40">
       <div className="w-full max-w-sm rounded-lg bg-white p-6 shadow-xl">
-        <h2 className="mb-2 text-lg font-semibold text-slate-900">Xác thực số điện thoại</h2>
-        <p className="mb-4 text-sm text-slate-600">Nhập mã 6 số đã gửi tới {phone}.</p>
+        <h2 className="mb-2 text-lg font-semibold text-slate-900">{t('otp.title')}</h2>
+        <p className="mb-4 text-sm text-slate-600">{t('otp.description', { phone })}</p>
         <form onSubmit={handleSubmit}>
           <input
             value={code}
@@ -80,7 +81,7 @@ export const OtpModal = ({ phone, onClose, onVerified }: Props) => {
             className="mb-2 w-full rounded border border-slate-300 px-3 py-2 tracking-widest"
           />
           <p className="mb-4 text-xs text-slate-500">
-            Mã hết hạn sau {minutes}:{seconds}
+            {t('otp.expiresIn', { time: `${minutes}:${seconds}` })}
           </p>
           <div className="flex gap-2">
             <button
@@ -88,14 +89,14 @@ export const OtpModal = ({ phone, onClose, onVerified }: Props) => {
               disabled={isVerifying}
               className="flex-1 rounded bg-slate-900 py-2 text-white disabled:opacity-50"
             >
-              Xác nhận
+              {t('otp.confirm')}
             </button>
             <button
               type="button"
               onClick={onClose}
               className="rounded border border-slate-300 px-4 py-2 text-slate-700"
             >
-              Đóng
+              {t('otp.close')}
             </button>
           </div>
           <button
@@ -104,7 +105,7 @@ export const OtpModal = ({ phone, onClose, onVerified }: Props) => {
             disabled={isSending || secondsLeft > 0}
             className="mt-3 text-sm font-medium text-slate-700 underline disabled:opacity-40"
           >
-            Gửi lại mã
+            {t('otp.resend')}
           </button>
         </form>
       </div>
