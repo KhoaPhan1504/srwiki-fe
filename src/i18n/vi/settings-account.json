@@ -1,0 +1,25 @@
+{
+  "changePassword": {
+    "title": "Đổi mật khẩu",
+    "currentPassword": "Mật khẩu hiện tại",
+    "newPassword": "Mật khẩu mới",
+    "confirmPassword": "Xác nhận mật khẩu mới",
+    "submit": "Đổi mật khẩu",
+    "comingSoon": "Tính năng đổi mật khẩu sẽ sớm ra mắt."
+  },
+  "deleteAccount": {
+    "title": "Xoá tài khoản",
+    "description": "Xoá tài khoản sẽ xoá vĩnh viễn toàn bộ dữ liệu của bạn. Hành động này không thể hoàn tác.",
+    "button": "Xoá tài khoản",
+    "deleting": "Đang xoá...",
+    "confirmTitle": "Bạn chắc chắn muốn xoá tài khoản?",
+    "confirmDescription": "Hành động này không thể hoàn tác. Toàn bộ dữ liệu hồ sơ của bạn sẽ bị xoá vĩnh viễn.",
+    "error": "Xoá tài khoản thất bại."
+  },
+  "validation": {
+    "currentPasswordRequired": "Vui lòng nhập mật khẩu hiện tại",
+    "newPasswordMinLength": "Mật khẩu mới tối thiểu 8 ký tự",
+    "confirmPasswordRequired": "Vui lòng xác nhận mật khẩu mới",
+    "passwordMismatch": "Mật khẩu xác nhận không khớp"
+  }
+}
