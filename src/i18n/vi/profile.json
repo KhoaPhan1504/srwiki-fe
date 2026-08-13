@@ -1,0 +1,38 @@
+{
+  "title": "Hồ sơ cá nhân",
+  "error": "Không thể tải hồ sơ cá nhân.",
+  "avatar": {
+    "changeButton": "Đổi ảnh đại diện",
+    "uploading": "Đang tải lên...",
+    "hint": "PNG, JPEG hoặc WEBP, tối đa 2MB.",
+    "uploadSuccess": "Đã cập nhật ảnh đại diện.",
+    "uploadError": "Tải ảnh lên thất bại."
+  },
+  "form": {
+    "sectionTitle": "Thông tin cá nhân",
+    "fullName": "Họ và tên",
+    "bio": "Tiểu sử",
+    "address": "Địa chỉ",
+    "dateOfBirth": "Ngày sinh",
+    "phone": "Số điện thoại"
+  },
+  "phone": { "verified": "Đã xác thực", "verifyButton": "Xác thực" },
+  "saveSuccess": "Đã lưu hồ sơ.",
+  "saveError": "Lưu hồ sơ thất bại.",
+  "validation": {
+    "fullNameRequired": "Họ và tên không được để trống",
+    "bioMaxLength": "Tiểu sử tối đa 280 ký tự"
+  },
+  "otp": {
+    "title": "Xác thực số điện thoại",
+    "description": "Nhập mã 6 số đã gửi tới {{phone}}.",
+    "expiresIn": "Mã hết hạn sau {{time}}",
+    "confirm": "Xác nhận",
+    "close": "Đóng",
+    "resend": "Gửi lại mã",
+    "devCode": "Mã OTP (dev mode): {{code}}",
+    "sendError": "Không gửi được mã OTP.",
+    "verifySuccess": "Xác thực số điện thoại thành công.",
+    "verifyError": "Mã OTP không đúng hoặc đã hết hạn."
+  }
+}

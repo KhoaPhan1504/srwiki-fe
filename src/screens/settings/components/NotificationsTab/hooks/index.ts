@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { useGetSettings, useUpdateSettings } from '~root/apis';
 
 export const useNotificationsTabHooks = () => {
+  const { t } = useTranslation('settings-notifications');
   const { settings, isLoading, isError, refetch } = useGetSettings();
   const { mutate: updateSettings } = useUpdateSettings();
   const [emailNotifications, setEmailNotifications] = useState(true);
@@ -21,10 +23,10 @@ export const useNotificationsTabHooks = () => {
     updateSettings(
       { emailNotifications: checked },
       {
-        onSuccess: () => toast.success('Đã lưu cài đặt.', { position: 'bottom-center' }),
+        onSuccess: () => toast.success(t('saveSuccess'), { position: 'bottom-center' }),
         onError: () => {
           setEmailNotifications(!checked);
-          toast.error('Lưu cài đặt thất bại.', { position: 'bottom-center' });
+          toast.error(t('saveError'), { position: 'bottom-center' });
         },
       },
     );

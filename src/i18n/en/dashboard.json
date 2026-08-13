@@ -1,0 +1,24 @@
+{
+  "title": "Dashboard 👋",
+  "welcome": "Welcome back, {{name}}!",
+  "error": "Couldn't load the dashboard data.",
+  "stats": {
+    "memberSince": "Member since",
+    "profileCompletion": "Profile completion",
+    "phone": "Phone number",
+    "email": "Email"
+  },
+  "phoneStatus": { "verified": "Verified", "unverified": "Unverified" },
+  "accountInfo": {
+    "title": "Account information",
+    "fullName": "Full name",
+    "email": "Email",
+    "phone": "Phone number",
+    "address": "Address"
+  },
+  "quickLinks": {
+    "title": "Quick links",
+    "editProfile": "Edit profile",
+    "settings": "Account settings"
+  }
+}

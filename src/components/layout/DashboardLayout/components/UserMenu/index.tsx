@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { LogOut, Settings as SettingsIcon, User } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +15,7 @@ import { useGetProfile } from '~root/apis/useGetProfile';
 import { useLogout } from '~root/apis/useLogout';
 
 export const UserMenu = () => {
+  const { t } = useTranslation('header');
   const { profile } = useGetProfile();
   const navigate = useNavigate();
   const logout = useLogout();
@@ -39,14 +41,14 @@ export const UserMenu = () => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => navigate('/profile')}>
-          <User className="mr-2 h-4 w-4" /> Hồ sơ
+          <User className="mr-2 h-4 w-4" /> {t('nav.profile')}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => navigate('/settings')}>
-          <SettingsIcon className="mr-2 h-4 w-4" /> Cài đặt
+          <SettingsIcon className="mr-2 h-4 w-4" /> {t('nav.settings')}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={logout} className="text-destructive">
-          <LogOut className="mr-2 h-4 w-4" /> Đăng xuất
+          <LogOut className="mr-2 h-4 w-4" /> {t('nav.logout')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

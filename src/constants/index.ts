@@ -49,6 +49,11 @@ export enum Theme {
   SYSTEM = 'system',
 }
 
+export enum Language {
+  VI = 'vi',
+  EN = 'en',
+}
+
 export enum DashboardTab {
   MEMBER_SINCE = 'Thành viên từ',
   PROFILE_COMPLETION = 'Hồ sơ hoàn thiện',
@@ -57,8 +62,8 @@ export enum DashboardTab {
 }
 
 export enum PhoneVerificationStatus {
-  VERIFIED = 'Đã xác thực',
-  UNVERIFIED = 'Chưa xác thực',
+  VERIFIED = 'verified',
+  UNVERIFIED = 'unverified',
 }
 
 export const TIMEZONES = [

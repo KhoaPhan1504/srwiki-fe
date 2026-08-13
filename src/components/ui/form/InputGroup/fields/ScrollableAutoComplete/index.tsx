@@ -1,6 +1,7 @@
 import { useState, type UIEvent } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Check, ChevronsUpDown, Loader2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import {
   FormField,
   Popover,
@@ -30,6 +31,7 @@ export const SrScrollableAutoComplete = ({
 }: SrScrollableAutoCompleteProps) => {
   const { control } = useFormContext();
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation('forms');
 
   const handleScroll = (event: UIEvent<HTMLDivElement>) => {
     const el = event.currentTarget;
@@ -66,7 +68,7 @@ export const SrScrollableAutoComplete = ({
               <PopoverContent className="w-(--radix-popover-trigger-width) p-0">
                 <Command shouldFilter={false}>
                   <CommandList onScroll={handleScroll} className="max-h-64">
-                    <CommandEmpty>Không có kết quả.</CommandEmpty>
+                    <CommandEmpty>{t('noResults')}</CommandEmpty>
                     <CommandGroup>
                       {items.map((item) => (
                         <CommandItem
@@ -89,7 +91,7 @@ export const SrScrollableAutoComplete = ({
                       ))}
                       {isLoading && (
                         <div className="flex items-center justify-center p-2 text-sm text-muted-foreground">
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Đang tải...
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> {t('loading')}
                         </div>
                       )}
                     </CommandGroup>

@@ -1,0 +1,10 @@
+{
+  "pageTitle": "Cài đặt",
+  "title": "Chung",
+  "error": "Không thể tải cài đặt chung.",
+  "language": "Ngôn ngữ",
+  "timezone": "Múi giờ",
+  "saveSuccess": "Đã lưu cài đặt.",
+  "saveError": "Lưu cài đặt thất bại.",
+  "validation": { "timezoneRequired": "Vui lòng chọn múi giờ" }
+}

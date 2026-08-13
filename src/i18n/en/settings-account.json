@@ -1,0 +1,26 @@
+{
+  "title": "Account",
+  "changePassword": {
+    "title": "Change password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "submit": "Change password",
+    "comingSoon": "Password change is coming soon."
+  },
+  "deleteAccount": {
+    "title": "Delete account",
+    "description": "Deleting your account permanently removes all of your data. This action cannot be undone.",
+    "button": "Delete account",
+    "deleting": "Deleting...",
+    "confirmTitle": "Are you sure you want to delete your account?",
+    "confirmDescription": "This action cannot be undone. All of your profile data will be permanently deleted.",
+    "error": "Failed to delete the account."
+  },
+  "validation": {
+    "currentPasswordRequired": "Please enter your current password",
+    "newPasswordMinLength": "The new password must be at least 8 characters",
+    "confirmPasswordRequired": "Please confirm the new password",
+    "passwordMismatch": "The confirmation password doesn't match"
+  }
+}

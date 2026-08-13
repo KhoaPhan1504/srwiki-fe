@@ -1,0 +1,9 @@
+{
+  "search": "Tìm kiếm...",
+  "noResults": "Không có kết quả.",
+  "searching": "Đang tìm...",
+  "loading": "Đang tải...",
+  "datePickerPlaceholder": "Chọn ngày",
+  "selectedCount": "{{count}} đã chọn",
+  "unlimitedTime": "Không giới hạn thời gian"
+}

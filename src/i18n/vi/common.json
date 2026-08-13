@@ -1,0 +1,13 @@
+{
+  "buttons": {
+    "save": "Lưu",
+    "saving": "Đang lưu...",
+    "cancel": "Huỷ",
+    "retry": "Thử lại"
+  },
+  "notFound": "Không tìm thấy trang.",
+  "sessionExpired": "Phiên đăng nhập đã hết hạn! Vui lòng đăng nhập lại.",
+  "forbidden": "Bạn không có quyền truy cập tài nguyên này!",
+  "settingsSaved": "Đã lưu tuỳ chọn.",
+  "settingsSaveError": "Lưu tuỳ chọn thất bại."
+}

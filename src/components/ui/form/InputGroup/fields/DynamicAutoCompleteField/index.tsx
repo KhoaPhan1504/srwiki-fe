@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Check, ChevronsUpDown, Loader2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import {
   FormField,
   Popover,
@@ -31,6 +32,7 @@ export const SrDynamicAutoCompleteField = ({
 }: SrDynamicAutoCompleteFieldProps) => {
   const { control } = useFormContext();
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation('forms');
 
   return (
     <FormField
@@ -72,7 +74,7 @@ export const SrDynamicAutoCompleteField = ({
                     {selectedValues.length === 0 ? (
                       <span className="text-muted-foreground">{placeholder}</span>
                     ) : multiple ? (
-                      `${selectedValues.length} đã chọn`
+                      t('selectedCount', { count: selectedValues.length })
                     ) : (
                       selectedLabel
                     )}
@@ -82,15 +84,15 @@ export const SrDynamicAutoCompleteField = ({
               </PopoverTrigger>
               <PopoverContent className="w-(--radix-popover-trigger-width) p-0">
                 <Command shouldFilter={false}>
-                  <CommandInput placeholder="Tìm kiếm..." onValueChange={handleSearch} />
+                  <CommandInput placeholder={t('search')} onValueChange={handleSearch} />
                   <CommandList>
                     {isLoading ? (
                       <div className="flex items-center justify-center p-4 text-sm text-muted-foreground">
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Đang tìm...
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> {t('searching')}
                       </div>
                     ) : (
                       <>
-                        <CommandEmpty>Không có kết quả.</CommandEmpty>
+                        <CommandEmpty>{t('noResults')}</CommandEmpty>
                         <CommandGroup>
                           {items.map((item) => (
                             <CommandItem

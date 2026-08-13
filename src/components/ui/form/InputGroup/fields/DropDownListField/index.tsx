@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import { Check, ChevronsUpDown, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import {
   FormField,
   Popover,
@@ -27,6 +28,7 @@ export const SrDropDownListField = ({
   items,
 }: SrDropDownListFieldProps) => {
   const { control } = useFormContext();
+  const { t } = useTranslation('forms');
 
   return (
     <FormField
@@ -74,9 +76,9 @@ export const SrDropDownListField = ({
               </PopoverTrigger>
               <PopoverContent className="w-(--radix-popover-trigger-width) p-0">
                 <Command>
-                  <CommandInput placeholder="Tìm kiếm..." />
+                  <CommandInput placeholder={t('search')} />
                   <CommandList>
-                    <CommandEmpty>Không có kết quả.</CommandEmpty>
+                    <CommandEmpty>{t('noResults')}</CommandEmpty>
                     <CommandGroup>
                       {items.map((item) => (
                         <CommandItem

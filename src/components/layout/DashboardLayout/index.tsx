@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Header } from './components/Header';
 import { MenuVertical } from './components/MenuVertical';
 import { CommandPalette } from './components/CommandPalette';
@@ -15,6 +16,7 @@ export const DashboardLayout = ({ children }: Props) => {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const { settings } = useGetSettings();
   const { theme, setTheme } = useTheme();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     if (settings && settings.theme !== theme) {
@@ -22,6 +24,14 @@ export const DashboardLayout = ({ children }: Props) => {
     }
     // Only re-run when the server value changes — a local toggle shouldn't get
     // immediately overwritten by this effect re-firing.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings]);
+
+  useEffect(() => {
+    if (settings && settings.language !== i18n.language) {
+      i18n.changeLanguage(settings.language);
+    }
+    // Same reasoning as the theme effect above.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings]);
 

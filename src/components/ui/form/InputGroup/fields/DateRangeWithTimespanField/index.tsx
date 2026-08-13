@@ -1,4 +1,5 @@
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { FormField, Checkbox, Label } from '~root/components/ui';
 import { SrDatePickerField } from '../DatePickerField';
 import type { SrDateRangeWithTimespanFieldProps } from '../../types';
@@ -16,6 +17,7 @@ export const SrDateRangeWithTimespanField = ({
 }: SrDateRangeWithTimespanFieldProps) => {
   const { control, watch } = useFormContext();
   const isEmpty = watch(isEmptyName) === true;
+  const { t } = useTranslation('forms');
 
   return (
     <div className="flex flex-col gap-3">
@@ -47,7 +49,7 @@ export const SrDateRangeWithTimespanField = ({
               onCheckedChange={field.onChange}
             />
             <Label htmlFor={isEmptyName} className="font-normal">
-              {emptyLabel ?? 'Không giới hạn thời gian'}
+              {emptyLabel ?? t('unlimitedTime')}
             </Label>
           </div>
         )}

@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { API_URL, Endpoints } from '~root/constants';
 import { isJsonString } from '~root/utils';
 import { authAtom, localStore } from '~root/stores';
+import i18n from '~root/i18n';
 
 export const httpClient = axios.create({
   baseURL: API_URL,
@@ -42,7 +43,7 @@ const processQueue = (error: unknown, token: string | null = null) => {
 const redirectToLogin = () => {
   if (!isRedirecting) {
     isRedirecting = true;
-    toast.error('Phiên đăng nhập đã hết hạn! Vui lòng đăng nhập lại.', {
+    toast.error(i18n.t('common:sessionExpired'), {
       position: 'bottom-center',
       toastId: 'UNAUTHORIZED_ERROR',
     });
@@ -146,7 +147,7 @@ httpClient.interceptors.response.use(
         }
         return Promise.reject(error);
       }
-      toast.error('Bạn không có quyền truy cập tài nguyên này!', {
+      toast.error(i18n.t('common:forbidden'), {
         position: 'bottom-center',
         toastId: 'FORBIDDEN_ERROR',
       });

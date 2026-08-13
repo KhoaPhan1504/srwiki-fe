@@ -1,0 +1,24 @@
+{
+  "title": "Dashboard 👋",
+  "welcome": "Chào mừng trở lại, {{name}}!",
+  "error": "Không thể tải dữ liệu bảng điều khiển.",
+  "stats": {
+    "memberSince": "Thành viên từ",
+    "profileCompletion": "Hồ sơ hoàn thiện",
+    "phone": "Số điện thoại",
+    "email": "Email"
+  },
+  "phoneStatus": { "verified": "Đã xác thực", "unverified": "Chưa xác thực" },
+  "accountInfo": {
+    "title": "Thông tin tài khoản",
+    "fullName": "Họ và tên",
+    "email": "Email",
+    "phone": "Số điện thoại",
+    "address": "Địa chỉ"
+  },
+  "quickLinks": {
+    "title": "Liên kết nhanh",
+    "editProfile": "Chỉnh sửa hồ sơ",
+    "settings": "Cài đặt tài khoản"
+  }
+}

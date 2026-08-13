@@ -1,9 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import { httpClient } from '~root/lib/http-client';
 import { Endpoints } from '~root/constants';
 import { toast } from 'react-toastify';
 
 export const useMarkAllNotificationsRead = () => {
+  const { t } = useTranslation('notifications');
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async () => {
@@ -16,7 +18,7 @@ export const useMarkAllNotificationsRead = () => {
       queryClient.invalidateQueries({ queryKey: [Endpoints.NOTIFICATIONS] });
     },
     onError: () => {
-      toast.error('Đánh dấu tất cả đã đọc thất bại.', { position: 'top-center' });
+      toast.error(t('markAllReadError'), { position: 'top-center' });
     },
   });
 };

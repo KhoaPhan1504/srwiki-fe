@@ -1,11 +1,15 @@
 import { z } from 'zod';
+import { useTranslation } from 'react-i18next';
 
-export const profileFormSchema = z.object({
-  fullName: z.string().min(1, 'Họ và tên không được để trống'),
-  address: z.string().optional(),
-  dateOfBirth: z.string().optional(),
-  bio: z.string().max(280, 'Tiểu sử tối đa 280 ký tự').optional(),
-  phone: z.string().optional(),
-});
+export const useProfileFormSchema = () => {
+  const { t } = useTranslation('profile');
+  return z.object({
+    fullName: z.string().min(1, t('validation.fullNameRequired')),
+    address: z.string().optional(),
+    dateOfBirth: z.string().optional(),
+    bio: z.string().max(280, t('validation.bioMaxLength')).optional(),
+    phone: z.string().optional(),
+  });
+};
 
-export type ProfileFormValues = z.infer<typeof profileFormSchema>;
+export type ProfileFormValues = z.infer<ReturnType<typeof useProfileFormSchema>>;

@@ -1,9 +1,11 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { useLogin } from '~root/apis';
 
 export const useLoginHooks = () => {
+  const { t } = useTranslation('auth');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ export const useLoginHooks = () => {
           navigate(callbackUrl || '/dashboard', { replace: true });
         },
         onError: () => {
-          toast.error('Email hoặc mật khẩu không đúng.', { position: 'bottom-center' });
+          toast.error(t('login.error'), { position: 'bottom-center' });
         },
       },
     );

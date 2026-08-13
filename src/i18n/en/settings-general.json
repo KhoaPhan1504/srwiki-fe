@@ -1,0 +1,10 @@
+{
+  "pageTitle": "Settings",
+  "title": "General",
+  "error": "Couldn't load general settings.",
+  "language": "Language",
+  "timezone": "Timezone",
+  "saveSuccess": "Settings saved.",
+  "saveError": "Failed to save settings.",
+  "validation": { "timezoneRequired": "Please select a timezone" }
+}
