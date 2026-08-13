@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import { CalendarIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import {
   FormField,
   FormControl,
@@ -10,6 +11,8 @@ import {
   Calendar,
 } from '~root/components/ui';
 import { cn } from '~root/lib/utils';
+import { getIntlLocaleTag } from '~root/i18n/dateLocale';
+import type { Language } from '~root/constants';
 import { FieldShell } from '../../shared/FieldShell';
 import { toDateOnlyString, parseDateOnlyString } from '../../shared/date';
 import type { SrDatePickerFieldProps } from '../../types';
@@ -24,6 +27,7 @@ export const SrDatePickerField = ({
   maxDate,
 }: SrDatePickerFieldProps) => {
   const { control } = useFormContext();
+  const { t, i18n } = useTranslation('forms');
 
   return (
     <FormField
@@ -47,7 +51,9 @@ export const SrDatePickerField = ({
                     )}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {value ? value.toLocaleDateString('vi-VN') : (placeholder ?? 'Chọn ngày')}
+                    {value
+                      ? value.toLocaleDateString(getIntlLocaleTag(i18n.language as Language))
+                      : (placeholder ?? t('datePickerPlaceholder'))}
                   </Button>
                 </FormControl>
               </PopoverTrigger>

@@ -1,0 +1,9 @@
+{
+  "search": "Search...",
+  "noResults": "No results.",
+  "searching": "Searching...",
+  "loading": "Loading...",
+  "datePickerPlaceholder": "Pick a date",
+  "selectedCount": "{{count}} selected",
+  "unlimitedTime": "No time limit"
+}
