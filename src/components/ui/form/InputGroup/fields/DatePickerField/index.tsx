@@ -11,7 +11,7 @@ import {
   Calendar,
 } from '~root/components/ui';
 import { cn } from '~root/lib/utils';
-import { getIntlLocaleTag } from '~root/i18n/dateLocale';
+import { getDateFnsLocale, getIntlLocaleTag } from '~root/i18n/dateLocale';
 import type { Language } from '~root/constants';
 import { FieldShell } from '../../shared/FieldShell';
 import { toDateOnlyString, parseDateOnlyString } from '../../shared/date';
@@ -65,6 +65,7 @@ export const SrDatePickerField = ({
                   disabled={(date) =>
                     (minDate ? date < minDate : false) || (maxDate ? date > maxDate : false)
                   }
+                  locale={getDateFnsLocale(i18n.language as Language)}
                   autoFocus
                 />
               </PopoverContent>

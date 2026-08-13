@@ -1,4 +1,5 @@
 {
+  "title": "Account",
   "changePassword": {
     "title": "Change password",
     "currentPassword": "Current password",
