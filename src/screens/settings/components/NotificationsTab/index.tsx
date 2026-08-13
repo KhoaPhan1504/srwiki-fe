@@ -1,13 +1,15 @@
+import { useTranslation } from 'react-i18next';
 import { QueryErrorCard } from '~root/components/common';
 import { useNotificationsTabHooks } from './hooks';
 import { Card, CardContent, Label, Skeleton, Switch } from '~root/components/ui';
 
 export const NotificationsTab = () => {
+  const { t } = useTranslation('settings-notifications');
   const { settings, isLoading, isError, refetch, emailNotifications, handleToggle } =
     useNotificationsTabHooks();
 
   if (isError) {
-    return <QueryErrorCard message="Không thể tải cài đặt thông báo." onRetry={() => refetch()} />;
+    return <QueryErrorCard message={t('error')} onRetry={() => refetch()} />;
   }
 
   if (isLoading || !settings) {
@@ -18,10 +20,8 @@ export const NotificationsTab = () => {
     <Card>
       <CardContent className="flex items-center justify-between pt-6">
         <div>
-          <Label htmlFor="email-notifications">Nhận email thông báo</Label>
-          <p className="text-sm text-muted-foreground">
-            Nhận email khi có hoạt động quan trọng trên tài khoản.
-          </p>
+          <Label htmlFor="email-notifications">{t('emailLabel')}</Label>
+          <p className="text-sm text-muted-foreground">{t('emailHint')}</p>
         </div>
         <Switch
           id="email-notifications"

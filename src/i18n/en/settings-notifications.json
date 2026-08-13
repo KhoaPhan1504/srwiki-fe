@@ -1,0 +1,7 @@
+{
+  "error": "Couldn't load notification settings.",
+  "emailLabel": "Receive email notifications",
+  "emailHint": "Get emailed when there's important activity on your account.",
+  "saveSuccess": "Settings saved.",
+  "saveError": "Failed to save settings."
+}

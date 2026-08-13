@@ -19,6 +19,8 @@ import viSettingsGeneral from './vi/settings-general.json';
 import enSettingsGeneral from './en/settings-general.json';
 import viSettingsAppearance from './vi/settings-appearance.json';
 import enSettingsAppearance from './en/settings-appearance.json';
+import viSettingsNotifications from './vi/settings-notifications.json';
+import enSettingsNotifications from './en/settings-notifications.json';
 
 export const NAMESPACES = [
   'common',
@@ -29,6 +31,7 @@ export const NAMESPACES = [
   'profile',
   'settings-general',
   'settings-appearance',
+  'settings-notifications',
 ] as const;
 
 const resources = {
@@ -41,6 +44,7 @@ const resources = {
     profile: viProfile,
     'settings-general': viSettingsGeneral,
     'settings-appearance': viSettingsAppearance,
+    'settings-notifications': viSettingsNotifications,
   },
   [Language.EN]: {
     common: enCommon,
@@ -51,6 +55,7 @@ const resources = {
     profile: enProfile,
     'settings-general': enSettingsGeneral,
     'settings-appearance': enSettingsAppearance,
+    'settings-notifications': enSettingsNotifications,
   },
 };
 
