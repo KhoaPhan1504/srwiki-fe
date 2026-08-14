@@ -5,7 +5,7 @@ import { Provider as JotaiProvider, createStore } from 'jotai';
 import { SidebarContent } from './index';
 import { authAtom } from '~root/stores';
 import type { AuthState } from '~root/stores';
-import { Role } from '~root/constants';
+import { MembershipTier, Role } from '~root/constants';
 
 vi.mock('~root/apis', () => ({ useLogout: () => vi.fn() }));
 
@@ -41,7 +41,12 @@ describe('SidebarContent', () => {
   it('hides the Member List item for a member', () => {
     renderSidebar({
       token: 'tok',
-      user: { id: '1', email: 'a@b.com', role: Role.MEMBER, membershipTier: 'regular' },
+      user: {
+        id: '1',
+        email: 'a@b.com',
+        role: Role.MEMBER,
+        membershipTier: MembershipTier.REGULAR,
+      },
     });
     expect(screen.queryByText('Danh sách thành viên')).not.toBeInTheDocument();
   });

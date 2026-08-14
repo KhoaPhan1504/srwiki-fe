@@ -2,8 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { httpClient } from '~root/lib/http-client';
-import { Endpoints } from '~root/constants';
-import type { Member, MembershipTier } from './useGetMembers';
+import { Endpoints, type MembershipTier } from '~root/constants';
+import type { Member } from './useGetMembers';
 
 type UpdateMemberPayload = {
   id: string;

@@ -14,6 +14,7 @@ import { SrInputGroup, type SrFormFieldConfig } from '~root/components/ui/form/i
 import { useFilterSchema, type FilterFormValues } from '~root/schemas';
 import { EMPTY_FILTERS } from '../../types';
 import type { MemberFilters } from '../../types';
+import { MembershipTier } from '~root/constants';
 
 type Props = {
   open: boolean;
@@ -45,8 +46,8 @@ export const FilterSheet = ({ open, onOpenChange, appliedFilters, onApply, onCle
       label: t('filter.membershipTier'),
       colSpan: 'col-span-12',
       items: [
-        { value: 'regular', label: t('table.membershipTier.regular') },
-        { value: 'vip', label: t('table.membershipTier.vip') },
+        { value: MembershipTier.REGULAR, label: t('table.membershipTier.regular') },
+        { value: MembershipTier.VIP, label: t('table.membershipTier.vip') },
       ],
     },
     {

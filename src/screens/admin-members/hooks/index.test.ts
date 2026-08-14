@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { countActiveFilterGroups } from './index';
 import { EMPTY_FILTERS } from '../types';
+import { MembershipTier } from '~root/constants';
 
 describe('countActiveFilterGroups', () => {
   it('returns 0 when no filters are active', () => {
@@ -8,9 +9,12 @@ describe('countActiveFilterGroups', () => {
   });
 
   it('counts Regular + VIP membership tier as a single group', () => {
-    expect(countActiveFilterGroups({ ...EMPTY_FILTERS, membershipTier: ['regular', 'vip'] })).toBe(
-      1,
-    );
+    expect(
+      countActiveFilterGroups({
+        ...EMPTY_FILTERS,
+        membershipTier: [MembershipTier.REGULAR, MembershipTier.VIP],
+      }),
+    ).toBe(1);
   });
 
   it('counts createdAt range as a single group even with only one bound set', () => {
@@ -21,7 +25,7 @@ describe('countActiveFilterGroups', () => {
     expect(
       countActiveFilterGroups({
         ...EMPTY_FILTERS,
-        membershipTier: ['vip'],
+        membershipTier: [MembershipTier.VIP],
         address: 'Ha Noi',
         birthdayFrom: '1990-01-01',
       }),

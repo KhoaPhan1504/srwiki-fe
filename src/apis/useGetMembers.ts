@@ -1,8 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { httpClient } from '~root/lib/http-client';
-import { Endpoints, Role } from '~root/constants';
-
-export type MembershipTier = 'regular' | 'vip';
+import { Endpoints, MembershipTier, Role } from '~root/constants';
 
 export type Member = {
   id: string;

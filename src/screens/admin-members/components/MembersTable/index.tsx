@@ -23,6 +23,7 @@ import {
 import { QueryErrorCard } from '~root/components/common';
 import { formatDate } from '~root/utils';
 import type { Member } from '~root/apis';
+import { MembershipTier } from '~root/constants';
 
 type Props = {
   members: Member[];
@@ -107,7 +108,9 @@ export const MembersTable = ({
               </TableCell>
               <TableCell>
                 {member.membershipTier ? (
-                  <Badge variant={member.membershipTier === 'vip' ? 'default' : 'secondary'}>
+                  <Badge
+                    variant={member.membershipTier === MembershipTier.VIP ? 'default' : 'secondary'}
+                  >
                     {t(`table.membershipTier.${member.membershipTier}`)}
                   </Badge>
                 ) : (

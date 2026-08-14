@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { EMPTY_FILTERS } from '../types';
 import type { MemberFilters } from '../types';
-import type { MembershipTier } from '~root/apis';
+import type { MembershipTier } from '~root/constants';
 
 const parseFiltersFromParams = (params: URLSearchParams): MemberFilters => ({
   membershipTier: (params.get('membershipTier')?.split(',').filter(Boolean) ??

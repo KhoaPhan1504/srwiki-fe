@@ -5,7 +5,7 @@ import { Provider as JotaiProvider, createStore } from 'jotai';
 import { PrivateRoute } from './protected';
 import { authAtom } from '~root/stores';
 import type { AuthState } from '~root/stores';
-import { Role } from '~root/constants';
+import { MembershipTier, Role } from '~root/constants';
 
 const renderWithAuth = (auth: AuthState, allowedRoles?: Array<Role>) => {
   const store = createStore();
@@ -37,7 +37,12 @@ describe('PrivateRoute', () => {
   it('renders children when authenticated and no role restriction is set', () => {
     renderWithAuth({
       token: 'tok',
-      user: { id: '1', email: 'a@b.com', role: Role.MEMBER, membershipTier: 'regular' },
+      user: {
+        id: '1',
+        email: 'a@b.com',
+        role: Role.MEMBER,
+        membershipTier: MembershipTier.REGULAR,
+      },
     });
     expect(screen.getByText('Protected content')).toBeInTheDocument();
   });
@@ -46,7 +51,12 @@ describe('PrivateRoute', () => {
     renderWithAuth(
       {
         token: 'tok',
-        user: { id: '1', email: 'a@b.com', role: Role.MEMBER, membershipTier: 'regular' },
+        user: {
+          id: '1',
+          email: 'a@b.com',
+          role: Role.MEMBER,
+          membershipTier: MembershipTier.REGULAR,
+        },
       },
       [Role.ADMIN],
     );

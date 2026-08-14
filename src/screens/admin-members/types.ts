@@ -1,4 +1,4 @@
-import type { MembershipTier } from '~root/apis';
+import type { MembershipTier } from '~root/constants';
 
 export type MemberFilters = {
   membershipTier: MembershipTier[];

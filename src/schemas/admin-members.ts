@@ -1,11 +1,12 @@
 import { z } from 'zod';
 import { useTranslation } from 'react-i18next';
+import { MembershipTier } from '~root/constants';
 
 export const useFilterSchema = () => {
   const { t } = useTranslation('admin-members');
   return z
     .object({
-      membershipTier: z.array(z.enum(['regular', 'vip'])),
+      membershipTier: z.array(z.nativeEnum(MembershipTier)),
       createdAtFrom: z.string(),
       createdAtTo: z.string(),
       address: z.string(),
@@ -43,7 +44,7 @@ export const useEditMemberSchema = () => {
     fullName: z.string().min(1, t('edit.validation.fullNameRequired')),
     address: z.string().optional(),
     dateOfBirth: z.string().optional(),
-    membershipTier: z.enum(['regular', 'vip']),
+    membershipTier: z.nativeEnum(MembershipTier),
   });
 };
 

@@ -14,6 +14,7 @@ import { SrInputGroup, type SrFormFieldConfig } from '~root/components/ui/form/i
 import { useUpdateMember } from '~root/apis';
 import type { Member } from '~root/apis';
 import { useEditMemberSchema, type EditMemberValues } from '~root/schemas';
+import { MembershipTier } from '~root/constants';
 
 type Props = {
   mode: 'view' | 'edit';
@@ -32,7 +33,7 @@ export const MemberFormDialog = ({ mode, member, open, onOpenChange }: Props) =>
       fullName: member.fullName ?? '',
       address: member.address ?? '',
       dateOfBirth: member.dateOfBirth ?? '',
-      membershipTier: member.membershipTier ?? 'regular',
+      membershipTier: member.membershipTier ?? MembershipTier.REGULAR,
     },
   });
 
@@ -65,8 +66,8 @@ export const MemberFormDialog = ({ mode, member, open, onOpenChange }: Props) =>
       colSpan: 'col-span-12',
       disabled: isView,
       items: [
-        { value: 'regular', label: t('table.membershipTier.regular') },
-        { value: 'vip', label: t('table.membershipTier.vip') },
+        { value: MembershipTier.REGULAR, label: t('table.membershipTier.regular') },
+        { value: MembershipTier.VIP, label: t('table.membershipTier.vip') },
       ],
     },
   ];

@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { FilterSheet } from './index';
 import { EMPTY_FILTERS } from '../../types';
+import { MembershipTier } from '~root/constants';
 
 describe('FilterSheet', () => {
   it('is not in the document when closed', () => {
@@ -48,7 +49,9 @@ describe('FilterSheet', () => {
     await user.click(screen.getByRole('checkbox', { name: 'VIP' }));
     await user.click(screen.getByRole('button', { name: 'Áp dụng' }));
 
-    expect(onApply).toHaveBeenCalledWith(expect.objectContaining({ membershipTier: ['vip'] }));
+    expect(onApply).toHaveBeenCalledWith(
+      expect.objectContaining({ membershipTier: [MembershipTier.VIP] }),
+    );
     expect(onOpenChange).toHaveBeenCalledWith(false);
   });
 
