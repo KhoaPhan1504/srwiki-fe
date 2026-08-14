@@ -6,18 +6,24 @@ import DashboardPage from '~root/pages/Dashboard';
 import ProfilePage from '~root/pages/Profile';
 import SettingsPage from '~root/pages/Settings';
 import { authAtom } from '~root/stores';
+import type { AuthUser } from '~root/stores';
 
 interface PrivateRouteProps {
   element: ReactElement;
+  allowedRoles?: Array<AuthUser['role']>;
 }
 
-export const PrivateRoute = ({ element }: PrivateRouteProps) => {
+export const PrivateRoute = ({ element, allowedRoles }: PrivateRouteProps) => {
   const auth = useAtomValue(authAtom);
   const location = useLocation();
 
   if (!auth?.token) {
     const callbackUrl = `${location.pathname}${location.search}`;
     return <Navigate to={`/auth/login?callbackUrl=${encodeURIComponent(callbackUrl)}`} replace />;
+  }
+
+  if (allowedRoles && !allowedRoles.includes(auth.user.role)) {
+    return <Navigate to="/dashboard" replace />;
   }
 
   return element;
