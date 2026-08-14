@@ -48,3 +48,27 @@ export const useEditMemberSchema = () => {
 };
 
 export type EditMemberValues = z.infer<ReturnType<typeof useEditMemberSchema>>;
+
+export const useCreateAdminSchema = () => {
+  const { t } = useTranslation('admin-members');
+  return z.object({
+    email: z.string().email(t('createAdmin.validation.emailInvalid')),
+    password: z.string().min(8, t('createAdmin.validation.passwordMinLength')),
+    fullName: z.string().min(1, t('createAdmin.validation.fullNameRequired')),
+    address: z.string().optional(),
+    dateOfBirth: z.string().optional(),
+  });
+};
+
+export type CreateAdminValues = z.infer<ReturnType<typeof useCreateAdminSchema>>;
+
+export const useEditAdminSchema = () => {
+  const { t } = useTranslation('admin-members');
+  return z.object({
+    fullName: z.string().min(1, t('editAdmin.validation.fullNameRequired')),
+    address: z.string().optional(),
+    dateOfBirth: z.string().optional(),
+  });
+};
+
+export type EditAdminValues = z.infer<ReturnType<typeof useEditAdminSchema>>;

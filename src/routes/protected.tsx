@@ -37,6 +37,8 @@ export const protectedRoutes: RouteObject[] = [
   { path: '/settings', element: <PrivateRoute element={<SettingsPage />} /> },
   {
     path: '/admin/members',
-    element: <PrivateRoute element={<AdminMembersPage />} allowedRoles={['admin']} />,
+    element: (
+      <PrivateRoute element={<AdminMembersPage />} allowedRoles={['admin', 'super_admin']} />
+    ),
   },
 ];

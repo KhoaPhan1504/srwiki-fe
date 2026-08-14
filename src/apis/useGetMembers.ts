@@ -8,7 +8,7 @@ export type Member = {
   id: string;
   email: string;
   fullName: string | null;
-  role: 'admin' | 'member';
+  role: 'super_admin' | 'admin' | 'member';
   membershipTier: MembershipTier | null;
   address: string | null;
   dateOfBirth: string | null;

@@ -44,7 +44,7 @@ export const CommandPalette = ({ open, onOpenChange }: Props) => {
   const { setLanguagePreference } = useLanguagePreference();
   const auth = useAtomValue(authAtom);
   const visibleNavItems = NAV_ITEMS.filter(
-    (item) => !item.adminOnly || auth?.user.role === 'admin',
+    (item) => !item.adminOnly || auth?.user.role === 'admin' || auth?.user.role === 'super_admin',
   );
   const isCommandMode = search.startsWith('/');
   const commands = [

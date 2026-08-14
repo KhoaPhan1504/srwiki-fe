@@ -1,5 +1,6 @@
 {
   "pageTitle": "Member List",
+  "pageTitleAdmins": "Admin List",
   "filterButton": "Filter",
   "createButton": "Add member",
   "table": {
@@ -67,11 +68,78 @@
     "validation": { "fullNameRequired": "Full name is required" }
   },
   "view": { "title": "Member details" },
+  "viewAdmin": { "title": "Admin details" },
   "delete": {
     "confirmTitle": "Delete this member?",
     "confirmDescription": "The member won't be able to log in again after deletion. This action cannot be undone.",
     "button": "Delete",
     "success": "Member deleted.",
     "error": "Could not delete member."
+  },
+  "promote": {
+    "button": "Promote to Admin",
+    "confirmTitle": "Promote this member to Admin?",
+    "confirmDescription": "The member will gain full management access to the member list once promoted.",
+    "success": "Promoted to Admin.",
+    "error": "Could not promote to Admin."
+  },
+  "demote": {
+    "button": "Demote to Member",
+    "confirmTitle": "Demote this admin to Member?",
+    "confirmDescription": "The admin will lose all administrative access once demoted.",
+    "success": "Demoted to Member.",
+    "error": "Could not demote to Member."
+  },
+  "tabs": {
+    "members": "Members",
+    "admins": "Admins"
+  },
+  "adminsTable": {
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "address": "Address",
+      "createdAt": "Created At",
+      "actions": "Actions"
+    },
+    "role": { "super_admin": "SuperAdmin", "admin": "Admin" },
+    "loading": "Loading admins...",
+    "empty": "No admins found.",
+    "error": "Could not load admins."
+  },
+  "createAdminButton": "Add admin",
+  "createAdmin": {
+    "title": "Add new admin",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full name",
+    "address": "Address",
+    "dateOfBirth": "Date of birth",
+    "submit": "Create admin",
+    "success": "Admin created.",
+    "error": "Could not create admin.",
+    "validation": {
+      "emailInvalid": "Invalid email",
+      "passwordMinLength": "Password must be at least 8 characters",
+      "fullNameRequired": "Full name is required"
+    }
+  },
+  "editAdmin": {
+    "title": "Edit admin",
+    "fullName": "Full name",
+    "address": "Address",
+    "dateOfBirth": "Date of birth",
+    "submit": "Save changes",
+    "success": "Admin updated.",
+    "error": "Could not update admin.",
+    "validation": { "fullNameRequired": "Full name is required" }
+  },
+  "deleteAdmin": {
+    "confirmTitle": "Delete this admin?",
+    "confirmDescription": "The admin won't be able to log in again after deletion. This action cannot be undone.",
+    "button": "Delete",
+    "success": "Admin deleted.",
+    "error": "Could not delete admin."
   }
 }

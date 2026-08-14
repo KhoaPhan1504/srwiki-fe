@@ -29,6 +29,14 @@ describe('SidebarContent', () => {
     expect(screen.getByText('Danh sách thành viên')).toBeInTheDocument();
   });
 
+  it('shows the Member List item for a super_admin', () => {
+    renderSidebar({
+      token: 'tok',
+      user: { id: '1', email: 'a@b.com', role: 'super_admin', membershipTier: null },
+    });
+    expect(screen.getByText('Danh sách thành viên')).toBeInTheDocument();
+  });
+
   it('hides the Member List item for a member', () => {
     renderSidebar({
       token: 'tok',

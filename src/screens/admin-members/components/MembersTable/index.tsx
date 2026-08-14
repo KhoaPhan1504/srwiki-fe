@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Eye, Pencil, Trash2 } from 'lucide-react';
+import { Eye, Pencil, Trash2, UserPlus } from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -32,11 +32,13 @@ type Props = {
   isLoading: boolean;
   isError: boolean;
   currentUserId: string;
+  canPromote: boolean;
   onRetry: () => void;
   onPageChange: (page: number) => void;
   onView: (member: Member) => void;
   onEdit: (member: Member) => void;
   onDelete: (member: Member) => void;
+  onPromote: (member: Member) => void;
 };
 
 export const MembersTable = ({
@@ -47,11 +49,13 @@ export const MembersTable = ({
   isLoading,
   isError,
   currentUserId,
+  canPromote,
   onRetry,
   onPageChange,
   onView,
   onEdit,
   onDelete,
+  onPromote,
 }: Props) => {
   const { t } = useTranslation('admin-members');
 
@@ -131,6 +135,29 @@ export const MembersTable = ({
                   >
                     <Pencil className="h-4 w-4" />
                   </Button>
+                  {canPromote && (
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="ghost" size="icon" aria-label={t('promote.button')}>
+                          <UserPlus className="h-4 w-4" />
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>{t('promote.confirmTitle')}</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            {t('promote.confirmDescription')}
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>{t('common:buttons.cancel')}</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => onPromote(member)}>
+                            {t('promote.button')}
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  )}
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
                       <Button

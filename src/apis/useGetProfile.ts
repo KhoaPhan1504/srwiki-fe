@@ -12,7 +12,7 @@ export type Profile = {
   dateOfBirth: string | null;
   avatarUrl: string | null;
   bio: string | null;
-  role: 'admin' | 'member';
+  role: 'super_admin' | 'admin' | 'member';
   membershipTier: 'regular' | 'vip' | null;
   createdAt: string;
   updatedAt: string;

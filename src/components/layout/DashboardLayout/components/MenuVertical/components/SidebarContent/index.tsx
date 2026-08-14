@@ -18,7 +18,7 @@ export const SidebarContent = ({
   const auth = useAtomValue(authAtom);
   const logout = useLogout();
   const visibleOptions = MenuOptions.filter(
-    (item) => !item.adminOnly || auth?.user.role === 'admin',
+    (item) => !item.adminOnly || auth?.user.role === 'admin' || auth?.user.role === 'super_admin',
   );
 
   return (

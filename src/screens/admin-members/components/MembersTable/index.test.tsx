@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MembersTable } from './index';
 import type { Member } from '~root/apis';
 
@@ -22,11 +23,13 @@ const baseProps = {
   isLoading: false,
   isError: false,
   currentUserId: 'admin-1',
+  canPromote: false,
   onRetry: vi.fn(),
   onPageChange: vi.fn(),
   onView: vi.fn(),
   onEdit: vi.fn(),
   onDelete: vi.fn(),
+  onPromote: vi.fn(),
 };
 
 describe('MembersTable', () => {
@@ -62,5 +65,24 @@ describe('MembersTable', () => {
       />,
     );
     expect(screen.getByRole('button', { name: 'Xoá' })).toBeDisabled();
+  });
+
+  it('hides the promote action when canPromote is false', () => {
+    render(<MembersTable {...baseProps} members={[MEMBER]} total={1} canPromote={false} />);
+    expect(
+      screen.queryByRole('button', { name: 'Nâng lên Quản trị viên' }),
+    ).not.toBeInTheDocument();
+  });
+
+  it('promotes a member after confirming when canPromote is true', async () => {
+    const user = userEvent.setup();
+    const onPromote = vi.fn();
+    render(
+      <MembersTable {...baseProps} members={[MEMBER]} total={1} canPromote onPromote={onPromote} />,
+    );
+    await user.click(screen.getByRole('button', { name: 'Nâng lên Quản trị viên' }));
+    const confirmButtons = screen.getAllByRole('button', { name: 'Nâng lên Quản trị viên' });
+    await user.click(confirmButtons[confirmButtons.length - 1]);
+    expect(onPromote).toHaveBeenCalledWith(MEMBER);
   });
 });

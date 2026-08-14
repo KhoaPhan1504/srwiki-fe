@@ -42,6 +42,7 @@ export const Endpoints = {
   SETTINGS: '/settings',
   NOTIFICATIONS: '/notifications',
   ADMIN_MEMBERS: '/admin/members',
+  ADMIN_ADMINS: '/admin/admins',
 } as const;
 
 export enum Theme {
@@ -77,3 +78,9 @@ export const TIMEZONES = [
   'Europe/Paris',
   'America/New_York',
 ];
+
+export enum Role {
+  SUPER_ADMIN = 'super_admin',
+  ADMIN = 'admin',
+  MEMBER = 'member',
+}

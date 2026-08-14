@@ -4,7 +4,7 @@ import { isJsonString } from '~root/utils';
 export type AuthUser = {
   id: string;
   email: string;
-  role: 'admin' | 'member';
+  role: 'super_admin' | 'admin' | 'member';
   membershipTier: 'regular' | 'vip' | null;
 };
 
