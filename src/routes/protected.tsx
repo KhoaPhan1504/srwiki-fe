@@ -8,6 +8,7 @@ import ProfilePage from '~root/pages/Profile';
 import SettingsPage from '~root/pages/Settings';
 import { authAtom } from '~root/stores';
 import type { AuthUser } from '~root/stores';
+import { Role } from '~root/constants';
 
 interface PrivateRouteProps {
   element: ReactElement;
@@ -38,7 +39,7 @@ export const protectedRoutes: RouteObject[] = [
   {
     path: '/admin/members',
     element: (
-      <PrivateRoute element={<AdminMembersPage />} allowedRoles={['admin', 'super_admin']} />
+      <PrivateRoute element={<AdminMembersPage />} allowedRoles={[Role.ADMIN, Role.SUPER_ADMIN]} />
     ),
   },
 ];

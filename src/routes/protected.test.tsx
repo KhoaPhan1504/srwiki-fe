@@ -5,8 +5,9 @@ import { Provider as JotaiProvider, createStore } from 'jotai';
 import { PrivateRoute } from './protected';
 import { authAtom } from '~root/stores';
 import type { AuthState } from '~root/stores';
+import { Role } from '~root/constants';
 
-const renderWithAuth = (auth: AuthState, allowedRoles?: Array<'admin' | 'member'>) => {
+const renderWithAuth = (auth: AuthState, allowedRoles?: Array<Role>) => {
   const store = createStore();
   store.set(authAtom, auth);
   return render(
@@ -36,7 +37,7 @@ describe('PrivateRoute', () => {
   it('renders children when authenticated and no role restriction is set', () => {
     renderWithAuth({
       token: 'tok',
-      user: { id: '1', email: 'a@b.com', role: 'member', membershipTier: 'regular' },
+      user: { id: '1', email: 'a@b.com', role: Role.MEMBER, membershipTier: 'regular' },
     });
     expect(screen.getByText('Protected content')).toBeInTheDocument();
   });
@@ -45,17 +46,20 @@ describe('PrivateRoute', () => {
     renderWithAuth(
       {
         token: 'tok',
-        user: { id: '1', email: 'a@b.com', role: 'member', membershipTier: 'regular' },
+        user: { id: '1', email: 'a@b.com', role: Role.MEMBER, membershipTier: 'regular' },
       },
-      ['admin'],
+      [Role.ADMIN],
     );
     expect(screen.getByText('Dashboard page')).toBeInTheDocument();
   });
 
   it('renders children when the role is in allowedRoles', () => {
     renderWithAuth(
-      { token: 'tok', user: { id: '1', email: 'a@b.com', role: 'admin', membershipTier: null } },
-      ['admin'],
+      {
+        token: 'tok',
+        user: { id: '1', email: 'a@b.com', role: Role.ADMIN, membershipTier: null },
+      },
+      [Role.ADMIN],
     );
     expect(screen.getByText('Protected content')).toBeInTheDocument();
   });

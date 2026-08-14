@@ -3,12 +3,13 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AdminsTable } from './index';
 import type { Admin } from '~root/apis';
+import { Role } from '~root/constants';
 
 const ADMIN: Admin = {
   id: 'admin-1',
   email: 'admin1@b.com',
   fullName: 'Admin One',
-  role: 'admin',
+  role: Role.ADMIN,
   address: '123 Le Loi, Ha Noi',
   dateOfBirth: '1990-01-01',
   createdAt: '2026-08-01T00:00:00Z',

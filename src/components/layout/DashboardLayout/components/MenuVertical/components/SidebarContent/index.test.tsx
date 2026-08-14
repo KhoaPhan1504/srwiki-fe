@@ -5,6 +5,7 @@ import { Provider as JotaiProvider, createStore } from 'jotai';
 import { SidebarContent } from './index';
 import { authAtom } from '~root/stores';
 import type { AuthState } from '~root/stores';
+import { Role } from '~root/constants';
 
 vi.mock('~root/apis', () => ({ useLogout: () => vi.fn() }));
 
@@ -24,7 +25,7 @@ describe('SidebarContent', () => {
   it('shows the Member List item for an admin', () => {
     renderSidebar({
       token: 'tok',
-      user: { id: '1', email: 'a@b.com', role: 'admin', membershipTier: null },
+      user: { id: '1', email: 'a@b.com', role: Role.ADMIN, membershipTier: null },
     });
     expect(screen.getByText('Danh sách thành viên')).toBeInTheDocument();
   });
@@ -32,7 +33,7 @@ describe('SidebarContent', () => {
   it('shows the Member List item for a super_admin', () => {
     renderSidebar({
       token: 'tok',
-      user: { id: '1', email: 'a@b.com', role: 'super_admin', membershipTier: null },
+      user: { id: '1', email: 'a@b.com', role: Role.SUPER_ADMIN, membershipTier: null },
     });
     expect(screen.getByText('Danh sách thành viên')).toBeInTheDocument();
   });
@@ -40,7 +41,7 @@ describe('SidebarContent', () => {
   it('hides the Member List item for a member', () => {
     renderSidebar({
       token: 'tok',
-      user: { id: '1', email: 'a@b.com', role: 'member', membershipTier: 'regular' },
+      user: { id: '1', email: 'a@b.com', role: Role.MEMBER, membershipTier: 'regular' },
     });
     expect(screen.queryByText('Danh sách thành viên')).not.toBeInTheDocument();
   });

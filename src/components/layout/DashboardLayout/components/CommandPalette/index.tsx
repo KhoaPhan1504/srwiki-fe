@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAtomValue } from 'jotai';
 import { authAtom } from '~root/stores';
+import { Role } from '~root/constants';
 import {
   Command,
   CommandEmpty,
@@ -44,7 +45,8 @@ export const CommandPalette = ({ open, onOpenChange }: Props) => {
   const { setLanguagePreference } = useLanguagePreference();
   const auth = useAtomValue(authAtom);
   const visibleNavItems = NAV_ITEMS.filter(
-    (item) => !item.adminOnly || auth?.user.role === 'admin' || auth?.user.role === 'super_admin',
+    (item) =>
+      !item.adminOnly || auth?.user.role === Role.ADMIN || auth?.user.role === Role.SUPER_ADMIN,
   );
   const isCommandMode = search.startsWith('/');
   const commands = [

@@ -84,3 +84,8 @@ export enum Role {
   ADMIN = 'admin',
   MEMBER = 'member',
 }
+
+export enum MembershipTier {
+  REGULAR = 'regular',
+  VIP = 'vip',
+}

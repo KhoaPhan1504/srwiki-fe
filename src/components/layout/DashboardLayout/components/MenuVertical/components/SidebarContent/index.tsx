@@ -6,6 +6,7 @@ import { cn } from '~root/lib/utils';
 import { LogOut } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { authAtom } from '~root/stores';
+import { Role } from '~root/constants';
 
 export const SidebarContent = ({
   onNavigate,
@@ -18,7 +19,8 @@ export const SidebarContent = ({
   const auth = useAtomValue(authAtom);
   const logout = useLogout();
   const visibleOptions = MenuOptions.filter(
-    (item) => !item.adminOnly || auth?.user.role === 'admin' || auth?.user.role === 'super_admin',
+    (item) =>
+      !item.adminOnly || auth?.user.role === Role.ADMIN || auth?.user.role === Role.SUPER_ADMIN,
   );
 
   return (

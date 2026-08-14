@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Filter as FilterIcon, Plus } from 'lucide-react';
 import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from '~root/components/ui';
 import { authAtom } from '~root/stores';
+import { Role } from '~root/constants';
 import {
   useDeleteAdmin,
   useDeleteMember,
@@ -36,7 +37,7 @@ const isValidTab = (value: string | null): value is AdminMembersTab =>
 export const AdminMembersScreen = () => {
   const { t } = useTranslation('admin-members');
   const auth = useAtomValue(authAtom);
-  const isSuperAdmin = auth?.user.role === 'super_admin';
+  const isSuperAdmin = auth?.user.role === Role.SUPER_ADMIN;
   const [searchParams, setSearchParams] = useSearchParams();
   const tab: AdminMembersTab = isValidTab(searchParams.get('tab'))
     ? (searchParams.get('tab') as AdminMembersTab)

@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { httpClient } from '~root/lib/http-client';
-import { Endpoints } from '~root/constants';
+import { Endpoints, Role } from '~root/constants';
 
 export type Admin = {
   id: string;
   email: string;
   fullName: string | null;
-  role: 'super_admin' | 'admin' | 'member';
+  role: Role;
   address: string | null;
   dateOfBirth: string | null;
   createdAt: string;

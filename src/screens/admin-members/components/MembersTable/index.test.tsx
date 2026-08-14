@@ -3,12 +3,13 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MembersTable } from './index';
 import type { Member } from '~root/apis';
+import { Role } from '~root/constants';
 
 const MEMBER: Member = {
   id: 'member-1',
   email: 'member1@b.com',
   fullName: 'Member One',
-  role: 'member',
+  role: Role.MEMBER,
   membershipTier: 'vip',
   address: '123 Le Loi, Ha Noi',
   dateOfBirth: '1995-06-01',
