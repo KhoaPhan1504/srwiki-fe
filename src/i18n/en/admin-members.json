@@ -1,0 +1,77 @@
+{
+  "pageTitle": "Member List",
+  "filterButton": "Filter",
+  "createButton": "Add member",
+  "table": {
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "membershipTier": "Membership Tier",
+      "address": "Address",
+      "birthday": "Birthday",
+      "createdAt": "Created At",
+      "actions": "Actions"
+    },
+    "role": { "admin": "Admin", "member": "Member" },
+    "membershipTier": { "regular": "Regular", "vip": "VIP", "none": "—" },
+    "loading": "Loading members...",
+    "empty": "No members found.",
+    "error": "Could not load members."
+  },
+  "pagination": {
+    "pageInfo": "Page {{page}} of {{totalPages}}",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "filter": {
+    "title": "Filter",
+    "membershipTier": "Membership Tier",
+    "createdAtFrom": "From",
+    "createdAtTo": "To",
+    "address": "Address",
+    "birthdayFrom": "From",
+    "birthdayTo": "To",
+    "clearAll": "Clear All",
+    "apply": "Apply",
+    "invalidCreatedAtRange": "From date must be before or equal to the To date",
+    "invalidBirthdayRange": "From date must be before or equal to the To date",
+    "timezoneUtc": "UTC",
+    "timezoneLocal": "Local time"
+  },
+  "create": {
+    "title": "Add new member",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full name",
+    "address": "Address",
+    "dateOfBirth": "Date of birth",
+    "submit": "Create member",
+    "success": "Member created.",
+    "error": "Could not create member.",
+    "validation": {
+      "emailInvalid": "Invalid email",
+      "passwordMinLength": "Password must be at least 8 characters",
+      "fullNameRequired": "Full name is required"
+    }
+  },
+  "edit": {
+    "title": "Edit member",
+    "fullName": "Full name",
+    "address": "Address",
+    "dateOfBirth": "Date of birth",
+    "membershipTier": "Membership Tier",
+    "submit": "Save changes",
+    "success": "Member updated.",
+    "error": "Could not update member.",
+    "validation": { "fullNameRequired": "Full name is required" }
+  },
+  "view": { "title": "Member details" },
+  "delete": {
+    "confirmTitle": "Delete this member?",
+    "confirmDescription": "The member won't be able to log in again after deletion. This action cannot be undone.",
+    "button": "Delete",
+    "success": "Member deleted.",
+    "error": "Could not delete member."
+  }
+}

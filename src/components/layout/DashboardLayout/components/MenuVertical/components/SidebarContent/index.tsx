@@ -1,9 +1,11 @@
+import { useAtomValue } from 'jotai';
 import { useLogout } from '~root/apis';
 import { MenuOptions } from './configs';
 import { NavLink } from 'react-router-dom';
 import { cn } from '~root/lib/utils';
 import { LogOut } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { authAtom } from '~root/stores';
 
 export const SidebarContent = ({
   onNavigate,
@@ -13,7 +15,11 @@ export const SidebarContent = ({
   logoSrc: string;
 }) => {
   const { t } = useTranslation('header');
+  const auth = useAtomValue(authAtom);
   const logout = useLogout();
+  const visibleOptions = MenuOptions.filter(
+    (item) => !item.adminOnly || auth?.user.role === 'admin',
+  );
 
   return (
     <div className="flex h-full flex-col gap-6 p-4">
@@ -21,7 +27,7 @@ export const SidebarContent = ({
         <img src={logoSrc} alt="SR-WIKI Logo" className="inline-block" />
       </div>
       <div className="flex flex-1 flex-col gap-3">
-        {MenuOptions.map(({ to, labelKey, icon: Icon }) => (
+        {visibleOptions.map(({ to, labelKey, icon: Icon }) => (
           <NavLink
             key={to}
             to={to}

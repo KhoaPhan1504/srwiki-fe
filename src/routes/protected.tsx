@@ -2,6 +2,7 @@ import type { ReactElement } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
+import AdminMembersPage from '~root/pages/AdminMembers';
 import DashboardPage from '~root/pages/Dashboard';
 import ProfilePage from '~root/pages/Profile';
 import SettingsPage from '~root/pages/Settings';
@@ -34,4 +35,8 @@ export const protectedRoutes: RouteObject[] = [
   { path: '/dashboard', element: <PrivateRoute element={<DashboardPage />} /> },
   { path: '/profile', element: <PrivateRoute element={<ProfilePage />} /> },
   { path: '/settings', element: <PrivateRoute element={<SettingsPage />} /> },
+  {
+    path: '/admin/members',
+    element: <PrivateRoute element={<AdminMembersPage />} allowedRoles={['admin']} />,
+  },
 ];

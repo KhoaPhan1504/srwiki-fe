@@ -1,0 +1,77 @@
+{
+  "pageTitle": "Danh sách thành viên",
+  "filterButton": "Bộ lọc",
+  "createButton": "Thêm thành viên",
+  "table": {
+    "columns": {
+      "name": "Họ tên",
+      "email": "Email",
+      "role": "Vai trò",
+      "membershipTier": "Hạng thành viên",
+      "address": "Địa chỉ",
+      "birthday": "Ngày sinh",
+      "createdAt": "Ngày tạo",
+      "actions": "Thao tác"
+    },
+    "role": { "admin": "Quản trị viên", "member": "Thành viên" },
+    "membershipTier": { "regular": "Thường", "vip": "VIP", "none": "—" },
+    "loading": "Đang tải danh sách thành viên...",
+    "empty": "Không tìm thấy thành viên nào.",
+    "error": "Không thể tải danh sách thành viên."
+  },
+  "pagination": {
+    "pageInfo": "Trang {{page}} / {{totalPages}}",
+    "previous": "Trước",
+    "next": "Sau"
+  },
+  "filter": {
+    "title": "Bộ lọc",
+    "membershipTier": "Hạng thành viên",
+    "createdAtFrom": "Từ ngày",
+    "createdAtTo": "Đến ngày",
+    "address": "Địa chỉ",
+    "birthdayFrom": "Từ ngày",
+    "birthdayTo": "Đến ngày",
+    "clearAll": "Xoá tất cả",
+    "apply": "Áp dụng",
+    "invalidCreatedAtRange": "Ngày bắt đầu phải trước hoặc bằng ngày kết thúc",
+    "invalidBirthdayRange": "Ngày bắt đầu phải trước hoặc bằng ngày kết thúc",
+    "timezoneUtc": "UTC",
+    "timezoneLocal": "Giờ địa phương"
+  },
+  "create": {
+    "title": "Thêm thành viên mới",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "fullName": "Họ tên",
+    "address": "Địa chỉ",
+    "dateOfBirth": "Ngày sinh",
+    "submit": "Tạo thành viên",
+    "success": "Đã tạo thành viên mới.",
+    "error": "Không thể tạo thành viên.",
+    "validation": {
+      "emailInvalid": "Email không hợp lệ",
+      "passwordMinLength": "Mật khẩu tối thiểu 8 ký tự",
+      "fullNameRequired": "Vui lòng nhập họ tên"
+    }
+  },
+  "edit": {
+    "title": "Sửa thông tin thành viên",
+    "fullName": "Họ tên",
+    "address": "Địa chỉ",
+    "dateOfBirth": "Ngày sinh",
+    "membershipTier": "Hạng thành viên",
+    "submit": "Lưu thay đổi",
+    "success": "Đã cập nhật thành viên.",
+    "error": "Không thể cập nhật thành viên.",
+    "validation": { "fullNameRequired": "Vui lòng nhập họ tên" }
+  },
+  "view": { "title": "Thông tin thành viên" },
+  "delete": {
+    "confirmTitle": "Xoá thành viên này?",
+    "confirmDescription": "Thành viên sẽ không thể đăng nhập lại sau khi bị xoá. Hành động này không thể hoàn tác.",
+    "button": "Xoá",
+    "success": "Đã xoá thành viên.",
+    "error": "Không thể xoá thành viên."
+  }
+}

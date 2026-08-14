@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useAtomValue } from 'jotai';
+import { authAtom } from '~root/stores';
 import {
   Command,
   CommandEmpty,
@@ -40,6 +42,10 @@ export const CommandPalette = ({ open, onOpenChange }: Props) => {
   const navigate = useNavigate();
   const { setThemePreference } = useThemePreference();
   const { setLanguagePreference } = useLanguagePreference();
+  const auth = useAtomValue(authAtom);
+  const visibleNavItems = NAV_ITEMS.filter(
+    (item) => !item.adminOnly || auth?.user.role === 'admin',
+  );
   const isCommandMode = search.startsWith('/');
   const commands = [
     ...getThemeCommands(t, setThemePreference),
@@ -115,7 +121,7 @@ export const CommandPalette = ({ open, onOpenChange }: Props) => {
               </CommandGroup>
             ) : (
               <CommandGroup heading={t('groups.navigation')}>
-                {NAV_ITEMS.map((item) => (
+                {visibleNavItems.map((item) => (
                   <CommandListItem
                     key={item.id}
                     value={t(item.labelKey)}
