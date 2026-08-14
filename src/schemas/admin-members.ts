@@ -23,3 +23,16 @@ export const useFilterSchema = () => {
 };
 
 export type FilterFormValues = z.infer<ReturnType<typeof useFilterSchema>>;
+
+export const useCreateMemberSchema = () => {
+  const { t } = useTranslation('admin-members');
+  return z.object({
+    email: z.string().email(t('create.validation.emailInvalid')),
+    password: z.string().min(8, t('create.validation.passwordMinLength')),
+    fullName: z.string().min(1, t('create.validation.fullNameRequired')),
+    address: z.string().optional(),
+    dateOfBirth: z.string().optional(),
+  });
+};
+
+export type CreateMemberValues = z.infer<ReturnType<typeof useCreateMemberSchema>>;

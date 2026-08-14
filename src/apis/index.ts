@@ -1,3 +1,4 @@
+export * from './useCreateMember';
 export * from './useDeleteAccount';
 export * from './useGetMembers';
 export * from './useGetNotifications';
