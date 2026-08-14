@@ -1,4 +1,5 @@
 export * from './useDeleteAccount';
+export * from './useGetMembers';
 export * from './useGetNotifications';
 export * from './useGetProfile';
 export * from './useGetSettings';
