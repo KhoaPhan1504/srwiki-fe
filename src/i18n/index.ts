@@ -27,6 +27,8 @@ import viNotifications from './vi/notifications.json';
 import enNotifications from './en/notifications.json';
 import viForms from './vi/forms.json';
 import enForms from './en/forms.json';
+import viAdminMembers from './vi/admin-members.json';
+import enAdminMembers from './en/admin-members.json';
 
 export const NAMESPACES = [
   'common',
@@ -41,6 +43,7 @@ export const NAMESPACES = [
   'settings-account',
   'notifications',
   'forms',
+  'admin-members',
 ] as const;
 
 const resources = {
@@ -57,6 +60,7 @@ const resources = {
     'settings-account': viSettingsAccount,
     notifications: viNotifications,
     forms: viForms,
+    'admin-members': viAdminMembers,
   },
   [Language.EN]: {
     common: enCommon,
@@ -71,6 +75,7 @@ const resources = {
     'settings-account': enSettingsAccount,
     notifications: enNotifications,
     forms: enForms,
+    'admin-members': enAdminMembers,
   },
 };
 

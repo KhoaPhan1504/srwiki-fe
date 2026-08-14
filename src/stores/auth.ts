@@ -1,9 +1,12 @@
 import { atom } from 'jotai';
 import { isJsonString } from '~root/utils';
+import { MembershipTier, Role } from '~root/constants';
 
 export type AuthUser = {
   id: string;
   email: string;
+  role: Role;
+  membershipTier: MembershipTier | null;
 };
 
 export type AuthState = {

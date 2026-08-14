@@ -15,7 +15,8 @@
     "settingsGeneral": "Settings · General",
     "settingsAppearance": "Settings · Appearance",
     "settingsNotifications": "Settings · Notifications",
-    "settingsAccount": "Settings · Account"
+    "settingsAccount": "Settings · Account",
+    "memberList": "Member List"
   },
   "commands": {
     "themeLight": "Switch to Light theme",

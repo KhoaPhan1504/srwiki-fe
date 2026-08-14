@@ -15,7 +15,8 @@
     "settingsGeneral": "Cài đặt · Chung",
     "settingsAppearance": "Cài đặt · Giao diện",
     "settingsNotifications": "Cài đặt · Thông báo",
-    "settingsAccount": "Cài đặt · Tài khoản"
+    "settingsAccount": "Cài đặt · Tài khoản",
+    "memberList": "Danh sách thành viên"
   },
   "commands": {
     "themeLight": "Chuyển sang giao diện Sáng",

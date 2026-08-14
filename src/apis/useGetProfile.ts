@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { httpClient } from '~root/lib/http-client';
-import { Endpoints } from '~root/constants';
+import { Endpoints, MembershipTier, Role } from '~root/constants';
 
 export type Profile = {
   id: string;
@@ -12,6 +12,8 @@ export type Profile = {
   dateOfBirth: string | null;
   avatarUrl: string | null;
   bio: string | null;
+  role: Role;
+  membershipTier: MembershipTier | null;
   createdAt: string;
   updatedAt: string;
 };

@@ -1,4 +1,4 @@
-import { LayoutDashboard, SettingsIcon, User } from 'lucide-react';
+import { LayoutDashboard, SettingsIcon, User, Users } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 export type NavItem = {
@@ -6,6 +6,7 @@ export type NavItem = {
   labelKey: string;
   to: string;
   icon: LucideIcon;
+  adminOnly?: boolean;
 };
 
 export const NAV_ITEMS: NavItem[] = [
@@ -35,5 +36,12 @@ export const NAV_ITEMS: NavItem[] = [
     labelKey: 'nav.settingsAccount',
     to: '/settings?tab=account',
     icon: SettingsIcon,
+  },
+  {
+    id: 'admin-members',
+    labelKey: 'nav.memberList',
+    to: '/admin/members',
+    icon: Users,
+    adminOnly: true,
   },
 ];

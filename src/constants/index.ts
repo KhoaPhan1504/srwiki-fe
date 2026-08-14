@@ -41,6 +41,8 @@ export const Endpoints = {
   PROFILE_PHONE_VERIFY_OTP: '/profile/phone/verify-otp',
   SETTINGS: '/settings',
   NOTIFICATIONS: '/notifications',
+  ADMIN_MEMBERS: '/admin/members',
+  ADMIN_ADMINS: '/admin/admins',
 } as const;
 
 export enum Theme {
@@ -76,3 +78,14 @@ export const TIMEZONES = [
   'Europe/Paris',
   'America/New_York',
 ];
+
+export enum Role {
+  SUPER_ADMIN = 'super_admin',
+  ADMIN = 'admin',
+  MEMBER = 'member',
+}
+
+export enum MembershipTier {
+  REGULAR = 'regular',
+  VIP = 'vip',
+}
