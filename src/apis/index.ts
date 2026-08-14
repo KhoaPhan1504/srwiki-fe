@@ -11,6 +11,7 @@ export * from './useMarkNotificationRead';
 export * from './useNotificationsRealtime';
 export * from './useRegister';
 export * from './useSendOtp';
+export * from './useUpdateMember';
 export * from './useUpdateProfile';
 export * from './useUpdateSettings';
 export * from './useUploadAvatar';

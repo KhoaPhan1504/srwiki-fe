@@ -10,7 +10,9 @@ import { MembersTable } from './components/MembersTable';
 import { FilterSheet } from './components/FilterSheet';
 import { TimezoneSwitch } from './components/TimezoneSwitch';
 import { CreateMemberDialog } from './components/CreateMemberDialog';
+import { MemberFormDialog } from './components/MemberFormDialog';
 import { toCreatedAtFromIso, toCreatedAtToIso } from './utils';
+import type { Member } from '~root/apis';
 
 const PAGE_SIZE = 20;
 
@@ -20,6 +22,8 @@ export const AdminMembersScreen = () => {
   const { appliedFilters, page, applyFilters, clearFilters, setPage } = useAdminMembersFilters();
   const [filterOpen, setFilterOpen] = useState(false);
   const [createOpen, setCreateOpen] = useState(false);
+  const [viewingMember, setViewingMember] = useState<Member | null>(null);
+  const [editingMember, setEditingMember] = useState<Member | null>(null);
   const { settings } = useGetSettings();
   const timezoneMode: 'UTC' | 'local' = settings?.timezone === 'UTC' ? 'UTC' : 'local';
   const { data, isLoading, isError, refetch } = useGetMembers({
@@ -67,8 +71,8 @@ export const AdminMembersScreen = () => {
         currentUserId={auth?.user.id ?? ''}
         onRetry={() => refetch()}
         onPageChange={setPage}
-        onView={() => {}}
-        onEdit={() => {}}
+        onView={setViewingMember}
+        onEdit={setEditingMember}
         onDelete={() => {}}
       />
 
@@ -80,6 +84,22 @@ export const AdminMembersScreen = () => {
         onClearAll={clearFilters}
       />
       <CreateMemberDialog open={createOpen} onOpenChange={setCreateOpen} />
+      {viewingMember && (
+        <MemberFormDialog
+          mode="view"
+          member={viewingMember}
+          open={Boolean(viewingMember)}
+          onOpenChange={(open) => !open && setViewingMember(null)}
+        />
+      )}
+      {editingMember && (
+        <MemberFormDialog
+          mode="edit"
+          member={editingMember}
+          open={Boolean(editingMember)}
+          onOpenChange={(open) => !open && setEditingMember(null)}
+        />
+      )}
     </div>
   );
 };

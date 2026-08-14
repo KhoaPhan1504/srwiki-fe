@@ -36,3 +36,15 @@ export const useCreateMemberSchema = () => {
 };
 
 export type CreateMemberValues = z.infer<ReturnType<typeof useCreateMemberSchema>>;
+
+export const useEditMemberSchema = () => {
+  const { t } = useTranslation('admin-members');
+  return z.object({
+    fullName: z.string().min(1, t('edit.validation.fullNameRequired')),
+    address: z.string().optional(),
+    dateOfBirth: z.string().optional(),
+    membershipTier: z.enum(['regular', 'vip']),
+  });
+};
+
+export type EditMemberValues = z.infer<ReturnType<typeof useEditMemberSchema>>;
