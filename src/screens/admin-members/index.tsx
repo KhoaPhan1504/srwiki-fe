@@ -4,7 +4,7 @@ import { useAtomValue } from 'jotai';
 import { Filter as FilterIcon, Plus } from 'lucide-react';
 import { Button } from '~root/components/ui';
 import { authAtom } from '~root/stores';
-import { useGetMembers, useGetSettings } from '~root/apis';
+import { useDeleteMember, useGetMembers, useGetSettings } from '~root/apis';
 import { useAdminMembersFilters, countActiveFilterGroups } from './hooks';
 import { MembersTable } from './components/MembersTable';
 import { FilterSheet } from './components/FilterSheet';
@@ -25,6 +25,7 @@ export const AdminMembersScreen = () => {
   const [viewingMember, setViewingMember] = useState<Member | null>(null);
   const [editingMember, setEditingMember] = useState<Member | null>(null);
   const { settings } = useGetSettings();
+  const { mutate: deleteMember } = useDeleteMember();
   const timezoneMode: 'UTC' | 'local' = settings?.timezone === 'UTC' ? 'UTC' : 'local';
   const { data, isLoading, isError, refetch } = useGetMembers({
     page,
@@ -73,7 +74,7 @@ export const AdminMembersScreen = () => {
         onPageChange={setPage}
         onView={setViewingMember}
         onEdit={setEditingMember}
-        onDelete={() => {}}
+        onDelete={(member) => deleteMember(member.id)}
       />
 
       <FilterSheet
