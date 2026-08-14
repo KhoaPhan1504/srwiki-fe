@@ -122,7 +122,9 @@ export const ProfilePage = () => {
             <SrInputGroup formHandler={form} formStructure={formStructure} />
             <div className="flex items-center gap-2">
               {profile.phoneVerified && profile.phone === phone ? (
-                <Badge>{t('phone.verified')}</Badge>
+                <Badge variant={profile.phoneVerified ? 'verify-primary' : 'destructive'}>
+                  {t('phone.verified')}
+                </Badge>
               ) : (
                 <Button
                   type="button"
