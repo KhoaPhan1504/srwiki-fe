@@ -287,6 +287,8 @@ export function TableCustom<T>({
     header: '#',
     pinned: 'left',
     hideable: false,
+    headerClassName: 'w-16',
+    className: 'w-16',
     render: (_row, index) =>
       pagination ? (pagination.page - 1) * pagination.pageSize + index + 1 : index + 1,
   };

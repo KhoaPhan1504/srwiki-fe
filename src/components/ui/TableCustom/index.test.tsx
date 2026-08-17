@@ -327,4 +327,10 @@ describe('TableCustom', () => {
     render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" />);
     expect(screen.getByText('#').closest('th')).toHaveClass('sticky', 'left-0');
   });
+
+  it('gives the default "#" column extra width', () => {
+    render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" />);
+    expect(screen.getByText('#').closest('th')).toHaveClass('w-16');
+    expect(screen.getByText('1').closest('td')).toHaveClass('w-16');
+  });
 });
