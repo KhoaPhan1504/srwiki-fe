@@ -1,5 +1,8 @@
 {
-  "dialog": { "title": "Command palette", "description": "Search pages or type / to run a command" },
+  "dialog": {
+    "title": "Command palette",
+    "description": "Search pages or type / to run a command"
+  },
   "searchInput": {
     "placeholderNav": "Search pages...",
     "placeholderCommand": "Type a command...",

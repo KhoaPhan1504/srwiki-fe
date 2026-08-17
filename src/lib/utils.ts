@@ -1,8 +1,8 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 /**
@@ -13,7 +13,7 @@ export function cn(...inputs: ClassValue[]) {
  * after a re-upload.
  */
 export function withCacheBust(url?: string | null, version?: string | null) {
-  if (!url) return undefined
-  if (!version) return url
-  return `${url}?v=${encodeURIComponent(version)}`
+  if (!url) return undefined;
+  if (!version) return url;
+  return `${url}?v=${encodeURIComponent(version)}`;
 }
