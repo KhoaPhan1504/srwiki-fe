@@ -19,6 +19,7 @@ export * from './sheet';
 export * from './skeleton';
 export * from './switch';
 export * from './table';
+export * from './TableAction';
 export * from './TableCustom';
 export * from './tabs';
 export * from './textarea';
