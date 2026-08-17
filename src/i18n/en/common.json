@@ -16,6 +16,10 @@
       "pageInfo": "Page {{page}} of {{totalPages}}",
       "previous": "Previous",
       "next": "Next"
+    },
+    "filter": {
+      "apply": "Apply",
+      "clear": "Clear"
     }
   }
 }

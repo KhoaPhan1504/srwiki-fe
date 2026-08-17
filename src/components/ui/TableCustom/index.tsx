@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ChevronDown, ChevronsUpDown, ChevronUp } from 'lucide-react';
+import type { DateRange } from 'react-day-picker';
+import { ChevronDown, ChevronsUpDown, ChevronUp, Funnel } from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -10,11 +12,22 @@ import {
 } from '~root/components/ui/table';
 import { Skeleton } from '~root/components/ui/skeleton';
 import { Button } from '~root/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '~root/components/ui/popover';
+import { Input } from '~root/components/ui/input';
+import { Checkbox } from '~root/components/ui/checkbox';
+import { Calendar } from '~root/components/ui/calendar';
 import { cn } from '~root/lib/utils';
 
 export type ColumnAlign = 'left' | 'center' | 'right';
 export type SortDirection = 'asc' | 'desc';
 export type SortState = { column: string; direction: SortDirection };
+
+export type FilterValue = string | string[] | { from?: Date; to?: Date };
+
+export type ColumnFilterConfig =
+  | { type: 'text'; placeholder?: string }
+  | { type: 'multiSelect'; options: { value: string; label: React.ReactNode }[] }
+  | { type: 'dateRange' };
 
 export type ColumnType<T> = {
   key: string;
@@ -25,6 +38,7 @@ export type ColumnType<T> = {
   className?: string;
   headerClassName?: string;
   sortable?: boolean;
+  filter?: ColumnFilterConfig;
 };
 
 type RowKey<T> = keyof T | ((row: T, index: number) => string | number);
@@ -45,6 +59,8 @@ export type TableCustomProps<T> = {
   };
   sort?: SortState | null;
   onSortChange?: (sort: SortState | null) => void;
+  filters?: Record<string, FilterValue>;
+  onFiltersChange?: (filters: Record<string, FilterValue>) => void;
 };
 
 const alignClass: Record<ColumnAlign, string> = {
@@ -72,6 +88,154 @@ function SortIcon({ state }: { state: SortDirection | null }) {
   return <ChevronsUpDown className="h-3.5 w-3.5 text-muted-foreground/50" />;
 }
 
+function ColumnFilterForm({
+  filter,
+  value,
+  onApply,
+  onClear,
+  applyLabel,
+  clearLabel,
+}: {
+  filter: ColumnFilterConfig;
+  value: FilterValue | undefined;
+  onApply: (value: FilterValue) => void;
+  onClear: () => void;
+  applyLabel: string;
+  clearLabel: string;
+}) {
+  const [text, setText] = useState(typeof value === 'string' ? value : '');
+  const [selected, setSelected] = useState<string[]>(Array.isArray(value) ? value : []);
+  const initialRange: DateRange | undefined =
+    value && typeof value === 'object' && !Array.isArray(value)
+      ? { from: value.from, to: value.to }
+      : undefined;
+  const [range, setRange] = useState<DateRange | undefined>(initialRange);
+
+  if (filter.type === 'text') {
+    return (
+      <div className="flex flex-col gap-3">
+        <Input
+          value={text}
+          placeholder={filter.placeholder}
+          onChange={(e) => setText(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && onApply(text)}
+        />
+        <div className="flex justify-between">
+          <Button type="button" variant="outline" size="sm" onClick={onClear}>
+            {clearLabel}
+          </Button>
+          <Button type="button" size="sm" onClick={() => onApply(text)}>
+            {applyLabel}
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (filter.type === 'multiSelect') {
+    return (
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2">
+          {filter.options.map((option) => (
+            <label key={option.value} className="flex items-center gap-2 text-sm">
+              <Checkbox
+                checked={selected.includes(option.value)}
+                onCheckedChange={(checked) =>
+                  setSelected((prev) =>
+                    checked === true
+                      ? [...prev, option.value]
+                      : prev.filter((v) => v !== option.value),
+                  )
+                }
+              />
+              {option.label}
+            </label>
+          ))}
+        </div>
+        <div className="flex justify-between">
+          <Button type="button" variant="outline" size="sm" onClick={onClear}>
+            {clearLabel}
+          </Button>
+          <Button type="button" size="sm" onClick={() => onApply(selected)}>
+            {applyLabel}
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-3">
+      <Calendar mode="range" selected={range} onSelect={setRange} />
+      <div className="flex justify-between">
+        <Button type="button" variant="outline" size="sm" onClick={onClear}>
+          {clearLabel}
+        </Button>
+        <Button
+          type="button"
+          size="sm"
+          onClick={() => onApply({ from: range?.from, to: range?.to })}
+        >
+          {applyLabel}
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function ColumnFilterButton<T>({
+  column,
+  value,
+  onApply,
+  onClear,
+}: {
+  column: ColumnType<T>;
+  value: FilterValue | undefined;
+  onApply: (value: FilterValue) => void;
+  onClear: () => void;
+}) {
+  const { t } = useTranslation('common');
+  const [open, setOpen] = useState(false);
+  const { filter } = column;
+  if (!filter) return null;
+
+  const isActive = Array.isArray(value)
+    ? value.length > 0
+    : typeof value === 'string'
+      ? value.length > 0
+      : Boolean(value && (value.from || value.to));
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <button
+          type="button"
+          aria-label={`filter-${column.key}`}
+          className={cn('ml-1 inline-flex', isActive ? 'text-primary' : 'text-muted-foreground')}
+        >
+          <Funnel className="h-3.5 w-3.5" />
+        </button>
+      </PopoverTrigger>
+      <PopoverContent className="w-64">
+        <ColumnFilterForm
+          filter={filter}
+          value={value}
+          onApply={(next) => {
+            onApply(next);
+            setOpen(false);
+          }}
+          onClear={() => {
+            onClear();
+            setOpen(false);
+          }}
+          applyLabel={t('table.filter.apply')}
+          clearLabel={t('table.filter.clear')}
+        />
+      </PopoverContent>
+    </Popover>
+  );
+}
+
 export function TableCustom<T>({
   columns,
   data,
@@ -83,6 +247,8 @@ export function TableCustom<T>({
   pagination,
   sort,
   onSortChange,
+  filters = {},
+  onFiltersChange,
 }: TableCustomProps<T>) {
   const { t } = useTranslation('common');
 
@@ -111,18 +277,32 @@ export function TableCustom<T>({
                 key={column.key}
                 className={cn(column.align && alignClass[column.align], column.headerClassName)}
               >
-                {column.sortable ? (
-                  <button
-                    type="button"
-                    className="inline-flex items-center gap-1"
-                    onClick={() => handleSortClick(column)}
-                  >
-                    {column.header}
-                    <SortIcon state={sort?.column === column.key ? sort.direction : null} />
-                  </button>
-                ) : (
-                  column.header
-                )}
+                <div className="flex items-center gap-1">
+                  {column.sortable ? (
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-1"
+                      onClick={() => handleSortClick(column)}
+                    >
+                      {column.header}
+                      <SortIcon state={sort?.column === column.key ? sort.direction : null} />
+                    </button>
+                  ) : (
+                    column.header
+                  )}
+                  {column.filter && onFiltersChange && (
+                    <ColumnFilterButton
+                      column={column}
+                      value={filters[column.key]}
+                      onApply={(value) => onFiltersChange({ ...filters, [column.key]: value })}
+                      onClear={() => {
+                        const next = { ...filters };
+                        delete next[column.key];
+                        onFiltersChange(next);
+                      }}
+                    />
+                  )}
+                </div>
               </TableHead>
             ))}
           </TableRow>

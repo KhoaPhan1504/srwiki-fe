@@ -16,6 +16,10 @@
       "pageInfo": "Trang {{page}} / {{totalPages}}",
       "previous": "Trước",
       "next": "Sau"
+    },
+    "filter": {
+      "apply": "Áp dụng",
+      "clear": "Xoá"
     }
   }
 }

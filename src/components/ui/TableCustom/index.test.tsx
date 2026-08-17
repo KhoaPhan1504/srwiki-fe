@@ -156,4 +156,89 @@ describe('TableCustom', () => {
     render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" />);
     expect(screen.getByText('Name').closest('button')).not.toBeInTheDocument();
   });
+
+  it('applies a text filter and calls onFiltersChange', async () => {
+    const user = userEvent.setup();
+    const onFiltersChange = vi.fn();
+    const filterColumns: ColumnType<Row>[] = [
+      { key: 'name', header: 'Name', accessor: 'name', filter: { type: 'text' } },
+    ];
+    render(
+      <TableCustom
+        columns={filterColumns}
+        data={ROWS}
+        rowKey="id"
+        filters={{}}
+        onFiltersChange={onFiltersChange}
+      />,
+    );
+
+    await user.click(screen.getByLabelText('filter-name'));
+    await user.type(screen.getByRole('textbox'), 'Ali');
+    await user.click(screen.getByText('Áp dụng'));
+
+    expect(onFiltersChange).toHaveBeenCalledWith({ name: 'Ali' });
+  });
+
+  it('applies a multiSelect filter with the checked options', async () => {
+    const user = userEvent.setup();
+    const onFiltersChange = vi.fn();
+    const filterColumns: ColumnType<Row>[] = [
+      {
+        key: 'name',
+        header: 'Name',
+        accessor: 'name',
+        filter: {
+          type: 'multiSelect',
+          options: [
+            { value: 'a', label: 'Option A' },
+            { value: 'b', label: 'Option B' },
+          ],
+        },
+      },
+    ];
+    render(
+      <TableCustom
+        columns={filterColumns}
+        data={ROWS}
+        rowKey="id"
+        filters={{}}
+        onFiltersChange={onFiltersChange}
+      />,
+    );
+
+    await user.click(screen.getByLabelText('filter-name'));
+    await user.click(screen.getByText('Option B'));
+    await user.click(screen.getByText('Áp dụng'));
+
+    expect(onFiltersChange).toHaveBeenCalledWith({ name: ['b'] });
+  });
+
+  it('clearing a filter removes its key from the filters object', async () => {
+    const user = userEvent.setup();
+    const onFiltersChange = vi.fn();
+    const filterColumns: ColumnType<Row>[] = [
+      { key: 'name', header: 'Name', accessor: 'name', filter: { type: 'text' } },
+      { key: 'age', header: 'Age', accessor: (row) => String(row.age) },
+    ];
+    render(
+      <TableCustom
+        columns={filterColumns}
+        data={ROWS}
+        rowKey="id"
+        filters={{ name: 'Ali', age: 'irrelevant' }}
+        onFiltersChange={onFiltersChange}
+      />,
+    );
+
+    await user.click(screen.getByLabelText('filter-name'));
+    await user.click(screen.getByText('Xoá'));
+
+    expect(onFiltersChange).toHaveBeenCalledWith({ age: 'irrelevant' });
+  });
+
+  it('a column without filter config has no filter icon', () => {
+    render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" />);
+    expect(screen.queryByLabelText('filter-name')).not.toBeInTheDocument();
+  });
 });
