@@ -11,6 +11,11 @@
   "settingsSaved": "Preferences saved.",
   "settingsSaveError": "Failed to save preferences.",
   "table": {
-    "empty": "No data available"
+    "empty": "No data available",
+    "pagination": {
+      "pageInfo": "Page {{page}} of {{totalPages}}",
+      "previous": "Previous",
+      "next": "Next"
+    }
   }
 }

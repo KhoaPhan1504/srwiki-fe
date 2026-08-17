@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '~root/i18n';
 import { TableCustom, type ColumnType } from './index';
 
@@ -48,5 +49,41 @@ describe('TableCustom', () => {
   it('shows a custom empty message when provided', () => {
     render(<TableCustom columns={COLUMNS} data={[]} rowKey="id" emptyMessage="Nothing here" />);
     expect(screen.getByText('Nothing here')).toBeInTheDocument();
+  });
+
+  it('does not render pagination controls when the prop is omitted', () => {
+    render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" />);
+    expect(screen.queryByText(/Trước/)).not.toBeInTheDocument();
+  });
+
+  it('renders page info and disables the previous button on the first page', () => {
+    const onPageChange = vi.fn();
+    render(
+      <TableCustom
+        columns={COLUMNS}
+        data={ROWS}
+        rowKey="id"
+        pagination={{ page: 1, pageSize: 10, total: 25, onPageChange }}
+      />,
+    );
+    expect(screen.getByText('Trang 1 / 3')).toBeInTheDocument();
+    expect(screen.getByText('Trước').closest('button')).toBeDisabled();
+    expect(screen.getByText('Sau').closest('button')).not.toBeDisabled();
+  });
+
+  it('disables the next button on the last page and calls onPageChange', async () => {
+    const user = userEvent.setup();
+    const onPageChange = vi.fn();
+    render(
+      <TableCustom
+        columns={COLUMNS}
+        data={ROWS}
+        rowKey="id"
+        pagination={{ page: 3, pageSize: 10, total: 25, onPageChange }}
+      />,
+    );
+    expect(screen.getByText('Sau').closest('button')).toBeDisabled();
+    await user.click(screen.getByText('Trước'));
+    expect(onPageChange).toHaveBeenCalledWith(2);
   });
 });

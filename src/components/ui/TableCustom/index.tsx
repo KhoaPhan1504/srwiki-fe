@@ -8,6 +8,7 @@ import {
   TableRow,
 } from '~root/components/ui/table';
 import { Skeleton } from '~root/components/ui/skeleton';
+import { Button } from '~root/components/ui/button';
 import { cn } from '~root/lib/utils';
 
 export type ColumnAlign = 'left' | 'center' | 'right';
@@ -32,6 +33,12 @@ export type TableCustomProps<T> = {
   skeletonRows?: number;
   emptyMessage?: React.ReactNode;
   className?: string;
+  pagination?: {
+    page: number;
+    pageSize: number;
+    total: number;
+    onPageChange: (page: number) => void;
+  };
 };
 
 const alignClass: Record<ColumnAlign, string> = {
@@ -61,55 +68,90 @@ export function TableCustom<T>({
   skeletonRows = 5,
   emptyMessage,
   className,
+  pagination,
 }: TableCustomProps<T>) {
   const { t } = useTranslation('common');
 
+  const totalPages = pagination
+    ? Math.max(1, Math.ceil(pagination.total / pagination.pageSize))
+    : 1;
+
   return (
-    <Table className={className}>
-      <TableHeader>
-        <TableRow>
-          {columns.map((column) => (
-            <TableHead
-              key={column.key}
-              className={cn(column.align && alignClass[column.align], column.headerClassName)}
-            >
-              {column.header}
-            </TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {isLoading ? (
-          Array.from({ length: skeletonRows }).map((_, rowIndex) => (
-            <TableRow key={`skeleton-${rowIndex}`}>
-              {columns.map((column) => (
-                <TableCell key={column.key}>
-                  <Skeleton className="h-4 w-full" />
-                </TableCell>
-              ))}
-            </TableRow>
-          ))
-        ) : data.length === 0 ? (
+    <div className="space-y-4">
+      <Table className={className}>
+        <TableHeader>
           <TableRow>
-            <TableCell colSpan={columns.length} className="py-10 text-center text-muted-foreground">
-              {emptyMessage ?? t('table.empty')}
-            </TableCell>
+            {columns.map((column) => (
+              <TableHead
+                key={column.key}
+                className={cn(column.align && alignClass[column.align], column.headerClassName)}
+              >
+                {column.header}
+              </TableHead>
+            ))}
           </TableRow>
-        ) : (
-          data.map((row, index) => (
-            <TableRow key={getRowKeyValue(row, index, rowKey)}>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.key}
-                  className={cn(column.align && alignClass[column.align], column.className)}
-                >
-                  {getCellValue(row, column, index)}
-                </TableCell>
-              ))}
+        </TableHeader>
+        <TableBody>
+          {isLoading ? (
+            Array.from({ length: skeletonRows }).map((_, rowIndex) => (
+              <TableRow key={`skeleton-${rowIndex}`}>
+                {columns.map((column) => (
+                  <TableCell key={column.key}>
+                    <Skeleton className="h-4 w-full" />
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          ) : data.length === 0 ? (
+            <TableRow>
+              <TableCell
+                colSpan={columns.length}
+                className="py-10 text-center text-muted-foreground"
+              >
+                {emptyMessage ?? t('table.empty')}
+              </TableCell>
             </TableRow>
-          ))
-        )}
-      </TableBody>
-    </Table>
+          ) : (
+            data.map((row, index) => (
+              <TableRow key={getRowKeyValue(row, index, rowKey)}>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.key}
+                    className={cn(column.align && alignClass[column.align], column.className)}
+                  >
+                    {getCellValue(row, column, index)}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          )}
+        </TableBody>
+      </Table>
+      {pagination && (
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-muted-foreground">
+            {t('table.pagination.pageInfo', { page: pagination.page, totalPages })}
+          </span>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={pagination.page <= 1}
+              onClick={() => pagination.onPageChange(pagination.page - 1)}
+            >
+              {t('table.pagination.previous')}
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={pagination.page >= totalPages}
+              onClick={() => pagination.onPageChange(pagination.page + 1)}
+            >
+              {t('table.pagination.next')}
+            </Button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

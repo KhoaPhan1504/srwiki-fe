@@ -11,6 +11,11 @@
   "settingsSaved": "Đã lưu tuỳ chọn.",
   "settingsSaveError": "Lưu tuỳ chọn thất bại.",
   "table": {
-    "empty": "Không có dữ liệu"
+    "empty": "Không có dữ liệu",
+    "pagination": {
+      "pageInfo": "Trang {{page}} / {{totalPages}}",
+      "previous": "Trước",
+      "next": "Sau"
+    }
   }
 }
