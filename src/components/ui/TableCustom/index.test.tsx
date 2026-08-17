@@ -255,4 +255,45 @@ describe('TableCustom', () => {
     render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" />);
     expect(screen.getByText('Name').closest('th')).not.toHaveClass('sticky');
   });
+
+  it('shows no "Columns" button when every column has hideable: false', () => {
+    const columns: ColumnType<Row>[] = [
+      { key: 'name', header: 'Name', accessor: 'name', hideable: false },
+    ];
+    render(<TableCustom columns={columns} data={ROWS} rowKey="id" />);
+    expect(screen.queryByText('Cột hiển thị')).not.toBeInTheDocument();
+  });
+
+  it('uncontrolled: toggling a column in the menu hides it from the table', async () => {
+    const user = userEvent.setup();
+    render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" />);
+
+    await user.click(screen.getByText('Cột hiển thị'));
+    await user.click(screen.getByRole('menuitemcheckbox', { name: 'Age' }));
+    await user.keyboard('{Escape}');
+
+    expect(screen.queryByText('Age')).not.toBeInTheDocument();
+    expect(screen.getByText('Name')).toBeInTheDocument();
+  });
+
+  it('controlled: toggling calls onColumnVisibilityChange instead of hiding directly', async () => {
+    const user = userEvent.setup();
+    const onColumnVisibilityChange = vi.fn();
+    render(
+      <TableCustom
+        columns={COLUMNS}
+        data={ROWS}
+        rowKey="id"
+        columnVisibility={{}}
+        onColumnVisibilityChange={onColumnVisibilityChange}
+      />,
+    );
+
+    await user.click(screen.getByText('Cột hiển thị'));
+    await user.click(screen.getByRole('menuitemcheckbox', { name: 'Age' }));
+    await user.keyboard('{Escape}');
+
+    expect(onColumnVisibilityChange).toHaveBeenCalledWith({ age: false });
+    expect(screen.getByText('Age')).toBeInTheDocument();
+  });
 });

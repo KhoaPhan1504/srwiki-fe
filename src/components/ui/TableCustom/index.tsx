@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { DateRange } from 'react-day-picker';
-import { ChevronDown, ChevronsUpDown, ChevronUp, Funnel } from 'lucide-react';
+import { ChevronDown, ChevronsUpDown, ChevronUp, Columns3, Funnel } from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -16,6 +16,12 @@ import { Popover, PopoverContent, PopoverTrigger } from '~root/components/ui/pop
 import { Input } from '~root/components/ui/input';
 import { Checkbox } from '~root/components/ui/checkbox';
 import { Calendar } from '~root/components/ui/calendar';
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '~root/components/ui/dropdown-menu';
 import { cn } from '~root/lib/utils';
 
 export type ColumnAlign = 'left' | 'center' | 'right';
@@ -40,6 +46,7 @@ export type ColumnType<T> = {
   sortable?: boolean;
   filter?: ColumnFilterConfig;
   pinned?: 'left' | 'right';
+  hideable?: boolean;
 };
 
 type RowKey<T> = keyof T | ((row: T, index: number) => string | number);
@@ -62,6 +69,8 @@ export type TableCustomProps<T> = {
   onSortChange?: (sort: SortState | null) => void;
   filters?: Record<string, FilterValue>;
   onFiltersChange?: (filters: Record<string, FilterValue>) => void;
+  columnVisibility?: Record<string, boolean>;
+  onColumnVisibilityChange?: (visibility: Record<string, boolean>) => void;
 };
 
 const alignClass: Record<ColumnAlign, string> = {
@@ -261,8 +270,16 @@ export function TableCustom<T>({
   onSortChange,
   filters = {},
   onFiltersChange,
+  columnVisibility,
+  onColumnVisibilityChange,
 }: TableCustomProps<T>) {
   const { t } = useTranslation('common');
+  const [internalVisibility, setInternalVisibility] = useState<Record<string, boolean>>({});
+  const visibility = columnVisibility ?? internalVisibility;
+  const setVisibility = onColumnVisibilityChange ?? setInternalVisibility;
+
+  const visibleColumns = columns.filter((column) => visibility[column.key] !== false);
+  const hideableColumns = columns.filter((column) => column.hideable !== false);
 
   const handleSortClick = (column: ColumnType<T>) => {
     if (!column.sortable || !onSortChange) return;
@@ -284,10 +301,36 @@ export function TableCustom<T>({
 
   return (
     <div className="space-y-4">
+      {hideableColumns.length > 0 && (
+        <div className="flex justify-end">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button type="button" variant="outline" size="sm">
+                <Columns3 className="mr-2 h-4 w-4" />
+                {t('table.columns')}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {hideableColumns.map((column) => (
+                <DropdownMenuCheckboxItem
+                  key={column.key}
+                  checked={visibility[column.key] !== false}
+                  onCheckedChange={(checked) =>
+                    setVisibility({ ...visibility, [column.key]: checked })
+                  }
+                  onSelect={(e) => e.preventDefault()}
+                >
+                  {column.header}
+                </DropdownMenuCheckboxItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      )}
       <Table className={className}>
         <TableHeader>
           <TableRow>
-            {columns.map((column) => (
+            {visibleColumns.map((column) => (
               <TableHead
                 key={column.key}
                 className={cn(
@@ -330,7 +373,7 @@ export function TableCustom<T>({
           {isLoading ? (
             Array.from({ length: skeletonRows }).map((_, rowIndex) => (
               <TableRow key={`skeleton-${rowIndex}`}>
-                {columns.map((column) => (
+                {visibleColumns.map((column) => (
                   <TableCell key={column.key}>
                     <Skeleton className="h-4 w-full" />
                   </TableCell>
@@ -340,7 +383,7 @@ export function TableCustom<T>({
           ) : data.length === 0 ? (
             <TableRow>
               <TableCell
-                colSpan={columns.length}
+                colSpan={visibleColumns.length}
                 className="py-10 text-center text-muted-foreground"
               >
                 {emptyMessage ?? t('table.empty')}
@@ -349,7 +392,7 @@ export function TableCustom<T>({
           ) : (
             data.map((row, index) => (
               <TableRow key={getRowKeyValue(row, index, rowKey)}>
-                {columns.map((column) => (
+                {visibleColumns.map((column) => (
                   <TableCell
                     key={column.key}
                     className={cn(

@@ -20,6 +20,7 @@
     "filter": {
       "apply": "Apply",
       "clear": "Clear"
-    }
+    },
+    "columns": "Columns"
   }
 }

@@ -20,6 +20,7 @@
     "filter": {
       "apply": "Áp dụng",
       "clear": "Xoá"
-    }
+    },
+    "columns": "Cột hiển thị"
   }
 }
