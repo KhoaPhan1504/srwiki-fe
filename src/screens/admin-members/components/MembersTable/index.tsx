@@ -71,13 +71,6 @@ export const MembersTable = ({
 
   const columns: ColumnType<Member>[] = [
     {
-      key: 'stt',
-      header: '#',
-      pinned: 'left',
-      hideable: false,
-      render: (_row, index) => (page - 1) * pageSize + index + 1,
-    },
-    {
       key: 'fullName',
       header: t('table.columns.name'),
       accessor: (row) => row.fullName ?? '—',

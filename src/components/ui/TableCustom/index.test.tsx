@@ -38,7 +38,8 @@ describe('TableCustom', () => {
   it('shows skeleton rows while loading instead of data', () => {
     render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" isLoading skeletonRows={3} />);
     expect(screen.queryByText('Alice')).not.toBeInTheDocument();
-    expect(document.querySelectorAll('[data-slot="skeleton"]')).toHaveLength(6);
+    // 3 skeleton rows * (2 declared columns + the default "#" row-number column)
+    expect(document.querySelectorAll('[data-slot="skeleton"]')).toHaveLength(9);
   });
 
   it('shows the default empty message when data is empty', () => {
@@ -295,5 +296,35 @@ describe('TableCustom', () => {
 
     expect(onColumnVisibilityChange).toHaveBeenCalledWith({ age: false });
     expect(screen.getByText('Age')).toBeInTheDocument();
+  });
+
+  it('shows a "#" row-number column by default, numbered from 1 without pagination', () => {
+    render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" />);
+    expect(screen.getByText('#')).toBeInTheDocument();
+    expect(screen.getByText('1')).toBeInTheDocument();
+    expect(screen.getByText('2')).toBeInTheDocument();
+  });
+
+  it('numbers the "#" column relative to the current page when pagination is provided', () => {
+    render(
+      <TableCustom
+        columns={COLUMNS}
+        data={ROWS}
+        rowKey="id"
+        pagination={{ page: 3, pageSize: 10, total: 25, onPageChange: vi.fn() }}
+      />,
+    );
+    expect(screen.getByText('21')).toBeInTheDocument();
+    expect(screen.getByText('22')).toBeInTheDocument();
+  });
+
+  it('hides the "#" column when showRowNumber is false', () => {
+    render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" showRowNumber={false} />);
+    expect(screen.queryByText('#')).not.toBeInTheDocument();
+  });
+
+  it('pins the default "#" column to the left', () => {
+    render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" />);
+    expect(screen.getByText('#').closest('th')).toHaveClass('sticky', 'left-0');
   });
 });

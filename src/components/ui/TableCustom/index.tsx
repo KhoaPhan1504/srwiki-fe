@@ -71,7 +71,10 @@ export type TableCustomProps<T> = {
   onFiltersChange?: (filters: Record<string, FilterValue>) => void;
   columnVisibility?: Record<string, boolean>;
   onColumnVisibilityChange?: (visibility: Record<string, boolean>) => void;
+  showRowNumber?: boolean;
 };
+
+const ROW_NUMBER_COLUMN_KEY = '#';
 
 const alignClass: Record<ColumnAlign, string> = {
   left: 'text-left',
@@ -272,14 +275,25 @@ export function TableCustom<T>({
   onFiltersChange,
   columnVisibility,
   onColumnVisibilityChange,
+  showRowNumber = true,
 }: TableCustomProps<T>) {
   const { t } = useTranslation('common');
   const [internalVisibility, setInternalVisibility] = useState<Record<string, boolean>>({});
   const visibility = columnVisibility ?? internalVisibility;
   const setVisibility = onColumnVisibilityChange ?? setInternalVisibility;
 
-  const visibleColumns = columns.filter((column) => visibility[column.key] !== false);
-  const hideableColumns = columns.filter((column) => column.hideable !== false);
+  const rowNumberColumn: ColumnType<T> = {
+    key: ROW_NUMBER_COLUMN_KEY,
+    header: '#',
+    pinned: 'left',
+    hideable: false,
+    render: (_row, index) =>
+      pagination ? (pagination.page - 1) * pagination.pageSize + index + 1 : index + 1,
+  };
+  const allColumns = showRowNumber ? [rowNumberColumn, ...columns] : columns;
+
+  const visibleColumns = allColumns.filter((column) => visibility[column.key] !== false);
+  const hideableColumns = allColumns.filter((column) => column.hideable !== false);
 
   const handleSortClick = (column: ColumnType<T>) => {
     if (!column.sortable || !onSortChange) return;
@@ -292,8 +306,8 @@ export function TableCustom<T>({
     }
   };
 
-  const firstLeftKey = columns.find((column) => column.pinned === 'left')?.key;
-  const firstRightKey = columns.find((column) => column.pinned === 'right')?.key;
+  const firstLeftKey = allColumns.find((column) => column.pinned === 'left')?.key;
+  const firstRightKey = allColumns.find((column) => column.pinned === 'right')?.key;
 
   const totalPages = pagination
     ? Math.max(1, Math.ceil(pagination.total / pagination.pageSize))
