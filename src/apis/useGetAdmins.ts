@@ -16,6 +16,11 @@ export type Admin = {
 export type AdminListParams = {
   page: number;
   pageSize: number;
+  sortBy?: string;
+  sortDirection?: 'asc' | 'desc';
+  address?: string;
+  createdAtFrom?: string;
+  createdAtTo?: string;
 };
 
 export type AdminListResponse = {

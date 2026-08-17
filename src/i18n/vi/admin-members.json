@@ -1,7 +1,6 @@
 {
   "pageTitle": "Danh sách thành viên",
   "pageTitleAdmins": "Danh sách quản trị viên",
-  "filterButton": "Bộ lọc",
   "createButton": "Thêm thành viên",
   "table": {
     "columns": {
@@ -26,17 +25,6 @@
     "next": "Sau"
   },
   "filter": {
-    "title": "Bộ lọc",
-    "membershipTier": "Hạng thành viên",
-    "createdAtFrom": "Từ ngày",
-    "createdAtTo": "Đến ngày",
-    "address": "Địa chỉ",
-    "birthdayFrom": "Từ ngày",
-    "birthdayTo": "Đến ngày",
-    "clearAll": "Xoá tất cả",
-    "apply": "Áp dụng",
-    "invalidCreatedAtRange": "Ngày bắt đầu phải trước hoặc bằng ngày kết thúc",
-    "invalidBirthdayRange": "Ngày bắt đầu phải trước hoặc bằng ngày kết thúc",
     "timezoneUtc": "UTC",
     "timezoneLocal": "Giờ địa phương"
   },

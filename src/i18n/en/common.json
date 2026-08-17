@@ -9,5 +9,18 @@
   "sessionExpired": "Your session has expired! Please log in again.",
   "forbidden": "You don't have permission to access this resource!",
   "settingsSaved": "Preferences saved.",
-  "settingsSaveError": "Failed to save preferences."
+  "settingsSaveError": "Failed to save preferences.",
+  "table": {
+    "empty": "No data available",
+    "pagination": {
+      "pageInfo": "Page {{page}} of {{totalPages}}",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "filter": {
+      "apply": "Apply",
+      "clear": "Clear"
+    },
+    "columns": "Columns"
+  }
 }
