@@ -59,6 +59,19 @@ describe('MembersTable', () => {
     expect(screen.getByText('VIP')).toBeInTheDocument();
   });
 
+  it('shows a # column numbering rows from 1 on page 1', () => {
+    render(<MembersTable {...baseProps} members={[MEMBER]} page={1} pageSize={20} />);
+    expect(screen.getByText('#')).toBeInTheDocument();
+    expect(screen.getByText('1')).toBeInTheDocument();
+  });
+
+  it('offsets the # column by page on later pages', () => {
+    const member2: Member = { ...MEMBER, id: 'member-2' };
+    render(<MembersTable {...baseProps} members={[MEMBER, member2]} page={2} pageSize={20} />);
+    expect(screen.getByText('21')).toBeInTheDocument();
+    expect(screen.getByText('22')).toBeInTheDocument();
+  });
+
   it('calls onSortChange when clicking a sortable column header', async () => {
     const user = userEvent.setup();
     const onSortChange = vi.fn();

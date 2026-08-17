@@ -58,6 +58,21 @@ describe('AdminsTable', () => {
     expect(screen.getByText('123 Le Loi, Ha Noi')).toBeInTheDocument();
   });
 
+  it('shows a # column numbering rows from 1 on page 1', () => {
+    render(<AdminsTable {...baseProps} admins={[ADMIN]} total={1} page={1} pageSize={20} />);
+    expect(screen.getByText('#')).toBeInTheDocument();
+    expect(screen.getByText('1')).toBeInTheDocument();
+  });
+
+  it('offsets the # column by page on later pages', () => {
+    const admin2: Admin = { ...ADMIN, id: 'admin-2' };
+    render(
+      <AdminsTable {...baseProps} admins={[ADMIN, admin2]} total={22} page={2} pageSize={20} />,
+    );
+    expect(screen.getByText('21')).toBeInTheDocument();
+    expect(screen.getByText('22')).toBeInTheDocument();
+  });
+
   it('hides edit/delete/demote actions when canManage is false', () => {
     render(<AdminsTable {...baseProps} admins={[ADMIN]} total={1} canManage={false} />);
     expect(screen.getByRole('button', { name: 'Thông tin quản trị viên' })).toBeInTheDocument();
