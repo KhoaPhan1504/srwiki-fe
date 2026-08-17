@@ -241,4 +241,18 @@ describe('TableCustom', () => {
     render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" />);
     expect(screen.queryByLabelText('filter-name')).not.toBeInTheDocument();
   });
+
+  it('applies sticky-right styling to a pinned="right" column', () => {
+    const pinnedColumns: ColumnType<Row>[] = [
+      { key: 'name', header: 'Name', accessor: 'name' },
+      { key: 'age', header: 'Age', accessor: (row) => String(row.age), pinned: 'right' },
+    ];
+    render(<TableCustom columns={pinnedColumns} data={ROWS} rowKey="id" />);
+    expect(screen.getByText('Age').closest('th')).toHaveClass('sticky', 'right-0');
+  });
+
+  it('does not apply sticky styling to a column without pinned', () => {
+    render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" />);
+    expect(screen.getByText('Name').closest('th')).not.toHaveClass('sticky');
+  });
 });

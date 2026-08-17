@@ -39,6 +39,7 @@ export type ColumnType<T> = {
   headerClassName?: string;
   sortable?: boolean;
   filter?: ColumnFilterConfig;
+  pinned?: 'left' | 'right';
 };
 
 type RowKey<T> = keyof T | ((row: T, index: number) => string | number);
@@ -68,6 +69,17 @@ const alignClass: Record<ColumnAlign, string> = {
   center: 'text-center',
   right: 'text-right',
 };
+
+const pinnedClass = {
+  left: 'sticky left-0 z-10 bg-background shadow-[2px_0_4px_-2px_rgb(0_0_0_/_0.15)]',
+  right: 'sticky right-0 z-10 bg-background shadow-[-2px_0_4px_-2px_rgb(0_0_0_/_0.15)]',
+};
+
+function pinnedClassFor<T>(column: ColumnType<T>, firstLeftKey?: string, firstRightKey?: string) {
+  if (column.pinned === 'left' && column.key === firstLeftKey) return pinnedClass.left;
+  if (column.pinned === 'right' && column.key === firstRightKey) return pinnedClass.right;
+  return '';
+}
 
 function getRowKeyValue<T>(row: T, index: number, rowKey: RowKey<T>): string | number {
   if (typeof rowKey === 'function') return rowKey(row, index);
@@ -263,6 +275,9 @@ export function TableCustom<T>({
     }
   };
 
+  const firstLeftKey = columns.find((column) => column.pinned === 'left')?.key;
+  const firstRightKey = columns.find((column) => column.pinned === 'right')?.key;
+
   const totalPages = pagination
     ? Math.max(1, Math.ceil(pagination.total / pagination.pageSize))
     : 1;
@@ -275,7 +290,11 @@ export function TableCustom<T>({
             {columns.map((column) => (
               <TableHead
                 key={column.key}
-                className={cn(column.align && alignClass[column.align], column.headerClassName)}
+                className={cn(
+                  column.align && alignClass[column.align],
+                  pinnedClassFor(column, firstLeftKey, firstRightKey),
+                  column.headerClassName,
+                )}
               >
                 <div className="flex items-center gap-1">
                   {column.sortable ? (
@@ -333,7 +352,11 @@ export function TableCustom<T>({
                 {columns.map((column) => (
                   <TableCell
                     key={column.key}
-                    className={cn(column.align && alignClass[column.align], column.className)}
+                    className={cn(
+                      column.align && alignClass[column.align],
+                      pinnedClassFor(column, firstLeftKey, firstRightKey),
+                      column.className,
+                    )}
                   >
                     {getCellValue(row, column, index)}
                   </TableCell>
