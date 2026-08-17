@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAtomValue } from 'jotai';
 import { useSearchParams } from 'react-router-dom';
-import { Filter as FilterIcon, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from '~root/components/ui';
+import type { FilterValue } from '~root/components/ui';
 import { authAtom } from '~root/stores';
 import { Role } from '~root/constants';
 import {
@@ -15,10 +16,9 @@ import {
   useGetSettings,
   usePromoteMember,
 } from '~root/apis';
-import { useAdminMembersFilters, countActiveFilterGroups } from './hooks';
+import { useAdminMembersFilters } from './hooks';
 import { MembersTable } from './components/MembersTable';
 import { AdminsTable } from './components/AdminsTable';
-import { FilterSheet } from './components/FilterSheet';
 import { TimezoneSwitch } from './components/TimezoneSwitch';
 import { CreateMemberDialog } from './components/CreateMemberDialog';
 import { MemberFormDialog } from './components/MemberFormDialog';
@@ -26,6 +26,9 @@ import { CreateAdminDialog } from './components/CreateAdminDialog';
 import { AdminFormDialog } from './components/AdminFormDialog';
 import { toCreatedAtFromIso, toCreatedAtToIso } from './utils';
 import type { Admin, Member } from '~root/apis';
+
+const asFilterDateRange = (value: FilterValue | undefined): { from?: Date; to?: Date } =>
+  value && typeof value === 'object' && !Array.isArray(value) ? value : {};
 
 const PAGE_SIZE = 20;
 const VALID_TABS = ['members', 'admins'] as const;
@@ -43,8 +46,7 @@ export const AdminMembersScreen = () => {
     ? (searchParams.get('tab') as AdminMembersTab)
     : 'members';
 
-  const { appliedFilters, page, applyFilters, clearFilters, setPage } = useAdminMembersFilters();
-  const [filterOpen, setFilterOpen] = useState(false);
+  const { filters, sort, page, setFilters, setSort, setPage } = useAdminMembersFilters();
   const [createOpen, setCreateOpen] = useState(false);
   const [viewingMember, setViewingMember] = useState<Member | null>(null);
   const [editingMember, setEditingMember] = useState<Member | null>(null);
@@ -52,21 +54,28 @@ export const AdminMembersScreen = () => {
   const { mutate: deleteMember } = useDeleteMember();
   const { mutate: promoteMember } = usePromoteMember();
   const timezoneMode: 'UTC' | 'local' = settings?.timezone === 'UTC' ? 'UTC' : 'local';
+  const createdAtRange = asFilterDateRange(filters.createdAt);
+  const birthdayRange = asFilterDateRange(filters.birthday);
+  const membershipTierFilter = filters.membershipTier;
   const { data, isLoading, isError, refetch } = useGetMembers({
     page,
     pageSize: PAGE_SIZE,
-    membershipTier: appliedFilters.membershipTier.join(',') || undefined,
-    createdAtFrom: appliedFilters.createdAtFrom
-      ? toCreatedAtFromIso(appliedFilters.createdAtFrom, timezoneMode)
+    sortBy: sort?.column,
+    sortDirection: sort?.direction,
+    membershipTier:
+      Array.isArray(membershipTierFilter) && membershipTierFilter.length > 0
+        ? membershipTierFilter.join(',')
+        : undefined,
+    createdAtFrom: createdAtRange.from
+      ? toCreatedAtFromIso(createdAtRange.from.toISOString().slice(0, 10), timezoneMode)
       : undefined,
-    createdAtTo: appliedFilters.createdAtTo
-      ? toCreatedAtToIso(appliedFilters.createdAtTo, timezoneMode)
+    createdAtTo: createdAtRange.to
+      ? toCreatedAtToIso(createdAtRange.to.toISOString().slice(0, 10), timezoneMode)
       : undefined,
-    address: appliedFilters.address || undefined,
-    birthdayFrom: appliedFilters.birthdayFrom || undefined,
-    birthdayTo: appliedFilters.birthdayTo || undefined,
+    address: typeof filters.address === 'string' && filters.address ? filters.address : undefined,
+    birthdayFrom: birthdayRange.from ? birthdayRange.from.toISOString().slice(0, 10) : undefined,
+    birthdayTo: birthdayRange.to ? birthdayRange.to.toISOString().slice(0, 10) : undefined,
   });
-  const activeFilterCount = countActiveFilterGroups(appliedFilters);
 
   const [adminPage, setAdminPage] = useState(1);
   const [createAdminOpen, setCreateAdminOpen] = useState(false);
@@ -92,12 +101,6 @@ export const AdminMembersScreen = () => {
             {tab === 'members' && (
               <>
                 <TimezoneSwitch />
-                <Button variant="outline" onClick={() => setFilterOpen(true)}>
-                  <FilterIcon className="mr-2 h-4 w-4" />
-                  {activeFilterCount > 0
-                    ? `${t('filterButton')} (${activeFilterCount})`
-                    : t('filterButton')}
-                </Button>
                 <Button onClick={() => setCreateOpen(true)}>
                   <Plus className="mr-2 h-4 w-4" />
                   {t('createButton')}
@@ -128,8 +131,12 @@ export const AdminMembersScreen = () => {
             isError={isError}
             currentUserId={auth?.user.id ?? ''}
             canPromote={isSuperAdmin}
+            sort={sort}
+            filters={filters}
             onRetry={() => refetch()}
             onPageChange={setPage}
+            onSortChange={setSort}
+            onFiltersChange={setFilters}
             onView={setViewingMember}
             onEdit={setEditingMember}
             onDelete={(member) => deleteMember(member.id)}
@@ -155,13 +162,6 @@ export const AdminMembersScreen = () => {
         </TabsContent>
       </Tabs>
 
-      <FilterSheet
-        open={filterOpen}
-        onOpenChange={setFilterOpen}
-        appliedFilters={appliedFilters}
-        onApply={applyFilters}
-        onClearAll={clearFilters}
-      />
       <CreateMemberDialog open={createOpen} onOpenChange={setCreateOpen} />
       {viewingMember && (
         <MemberFormDialog

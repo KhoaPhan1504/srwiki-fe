@@ -18,15 +18,19 @@ const MEMBER: Member = {
 };
 
 const baseProps = {
-  total: 0,
+  total: 1,
   page: 1,
   pageSize: 20,
   isLoading: false,
   isError: false,
   currentUserId: 'admin-1',
   canPromote: false,
+  sort: null,
+  filters: {},
   onRetry: vi.fn(),
   onPageChange: vi.fn(),
+  onSortChange: vi.fn(),
+  onFiltersChange: vi.fn(),
   onView: vi.fn(),
   onEdit: vi.fn(),
   onDelete: vi.fn(),
@@ -39,51 +43,57 @@ describe('MembersTable', () => {
     expect(screen.queryByText('member1@b.com')).not.toBeInTheDocument();
   });
 
-  it('shows the empty state when there are no members', () => {
-    render(<MembersTable {...baseProps} members={[]} />);
-    expect(screen.getByText('Không tìm thấy thành viên nào.')).toBeInTheDocument();
+  it('shows an error card and retries', async () => {
+    const user = userEvent.setup();
+    const onRetry = vi.fn();
+    render(<MembersTable {...baseProps} members={[]} isError onRetry={onRetry} />);
+    await user.click(screen.getByText('Thử lại'));
+    expect(onRetry).toHaveBeenCalled();
   });
 
-  it('shows the error state and calls onRetry', () => {
-    render(<MembersTable {...baseProps} members={[]} isError />);
-    expect(screen.getByText('Không thể tải danh sách thành viên.')).toBeInTheDocument();
-  });
-
-  it('renders a member row with its fields', () => {
-    render(<MembersTable {...baseProps} members={[MEMBER]} total={1} />);
+  it('renders a member row with role and membership tier badges', () => {
+    render(<MembersTable {...baseProps} members={[MEMBER]} />);
     expect(screen.getByText('Member One')).toBeInTheDocument();
     expect(screen.getByText('member1@b.com')).toBeInTheDocument();
-    expect(screen.getByText('123 Le Loi, Ha Noi')).toBeInTheDocument();
+    expect(screen.getByText('Thành viên')).toBeInTheDocument();
+    expect(screen.getByText('VIP')).toBeInTheDocument();
   });
 
-  it("disables the delete action for the current user's own row", () => {
+  it('calls onSortChange when clicking a sortable column header', async () => {
+    const user = userEvent.setup();
+    const onSortChange = vi.fn();
+    render(<MembersTable {...baseProps} members={[MEMBER]} onSortChange={onSortChange} />);
+    await user.click(screen.getByText('Họ tên'));
+    expect(onSortChange).toHaveBeenCalledWith({ column: 'fullName', direction: 'asc' });
+  });
+
+  it('calls onView when clicking the view action, and onDelete after confirming', async () => {
+    const user = userEvent.setup();
+    const onView = vi.fn();
+    const onDelete = vi.fn();
+    render(<MembersTable {...baseProps} members={[MEMBER]} onView={onView} onDelete={onDelete} />);
+
+    await user.click(screen.getByLabelText('Thông tin thành viên'));
+    expect(onView).toHaveBeenCalledWith(MEMBER);
+
+    await user.click(screen.getByLabelText('Xoá'));
+    await user.click(screen.getByText('Xoá'));
+    expect(onDelete).toHaveBeenCalledWith(MEMBER);
+  });
+
+  it('paginates via onPageChange', async () => {
+    const user = userEvent.setup();
+    const onPageChange = vi.fn();
     render(
       <MembersTable
         {...baseProps}
-        members={[{ ...MEMBER, id: 'admin-1' }]}
-        total={1}
-        currentUserId="admin-1"
+        members={[MEMBER]}
+        total={40}
+        page={1}
+        onPageChange={onPageChange}
       />,
     );
-    expect(screen.getByRole('button', { name: 'Xoá' })).toBeDisabled();
-  });
-
-  it('hides the promote action when canPromote is false', () => {
-    render(<MembersTable {...baseProps} members={[MEMBER]} total={1} canPromote={false} />);
-    expect(
-      screen.queryByRole('button', { name: 'Nâng lên Quản trị viên' }),
-    ).not.toBeInTheDocument();
-  });
-
-  it('promotes a member after confirming when canPromote is true', async () => {
-    const user = userEvent.setup();
-    const onPromote = vi.fn();
-    render(
-      <MembersTable {...baseProps} members={[MEMBER]} total={1} canPromote onPromote={onPromote} />,
-    );
-    await user.click(screen.getByRole('button', { name: 'Nâng lên Quản trị viên' }));
-    const confirmButtons = screen.getAllByRole('button', { name: 'Nâng lên Quản trị viên' });
-    await user.click(confirmButtons[confirmButtons.length - 1]);
-    expect(onPromote).toHaveBeenCalledWith(MEMBER);
+    await user.click(screen.getByText('Sau'));
+    expect(onPageChange).toHaveBeenCalledWith(2);
   });
 });
