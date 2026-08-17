@@ -23,8 +23,12 @@ const baseProps = {
   isLoading: false,
   isError: false,
   canManage: false,
+  sort: null,
+  filters: {},
   onRetry: vi.fn(),
   onPageChange: vi.fn(),
+  onSortChange: vi.fn(),
+  onFiltersChange: vi.fn(),
   onView: vi.fn(),
   onEdit: vi.fn(),
   onDelete: vi.fn(),
@@ -72,5 +76,29 @@ describe('AdminsTable', () => {
     const confirmButtons = screen.getAllByRole('button', { name: 'Hạ xuống Thành viên' });
     await user.click(confirmButtons[confirmButtons.length - 1]);
     expect(onDemote).toHaveBeenCalledWith(ADMIN);
+  });
+
+  it('calls onSortChange when clicking a sortable column header', async () => {
+    const user = userEvent.setup();
+    const onSortChange = vi.fn();
+    render(<AdminsTable {...baseProps} admins={[ADMIN]} total={1} onSortChange={onSortChange} />);
+    await user.click(screen.getByText('Họ tên'));
+    expect(onSortChange).toHaveBeenCalledWith({ column: 'fullName', direction: 'asc' });
+  });
+
+  it('paginates via onPageChange', async () => {
+    const user = userEvent.setup();
+    const onPageChange = vi.fn();
+    render(
+      <AdminsTable
+        {...baseProps}
+        admins={[ADMIN]}
+        total={40}
+        page={1}
+        onPageChange={onPageChange}
+      />,
+    );
+    await user.click(screen.getByText('Sau'));
+    expect(onPageChange).toHaveBeenCalledWith(2);
   });
 });

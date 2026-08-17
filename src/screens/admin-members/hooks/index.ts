@@ -132,3 +132,95 @@ export const useAdminMembersFilters = () => {
     setPage,
   };
 };
+
+const ADMINS_PARAM_PREFIX = 'admins';
+
+const parseAdminsStateFromParams = (params: URLSearchParams): TableUrlState => {
+  const filters: Record<string, FilterValue> = {};
+
+  const address = params.get('adminsAddress');
+  if (address) filters.address = address;
+
+  const createdAtFrom = params.get('adminsCreatedAtFrom');
+  const createdAtTo = params.get('adminsCreatedAtTo');
+  if (createdAtFrom || createdAtTo) {
+    filters.createdAt = {
+      from: createdAtFrom ? new Date(createdAtFrom) : undefined,
+      to: createdAtTo ? new Date(createdAtTo) : undefined,
+    };
+  }
+
+  const sortBy = params.get('adminsSortBy');
+  const sortDirection = params.get('adminsSortDirection');
+  const sort: SortState | null =
+    sortBy && (sortDirection === 'asc' || sortDirection === 'desc')
+      ? { column: sortBy, direction: sortDirection }
+      : null;
+
+  const rawPage = Number(params.get('adminsPage') ?? '1');
+  const page = Number.isFinite(rawPage) && rawPage >= 1 ? rawPage : 1;
+
+  return { filters, sort, page };
+};
+
+const adminsStateToParams = (
+  filters: Record<string, FilterValue>,
+  sort: SortState | null,
+  page: number,
+  currentParams: URLSearchParams,
+): Record<string, string> => {
+  const params: Record<string, string> = {};
+  currentParams.forEach((value, key) => {
+    if (!key.startsWith(ADMINS_PARAM_PREFIX)) params[key] = value;
+  });
+
+  params.adminsPage = String(page);
+
+  if (typeof filters.address === 'string' && filters.address) {
+    params.adminsAddress = filters.address;
+  }
+  const createdAt = asDateRange(filters.createdAt);
+  const createdAtFrom = dateOnly(createdAt.from);
+  const createdAtTo = dateOnly(createdAt.to);
+  if (createdAtFrom) params.adminsCreatedAtFrom = createdAtFrom;
+  if (createdAtTo) params.adminsCreatedAtTo = createdAtTo;
+
+  if (sort) {
+    params.adminsSortBy = sort.column;
+    params.adminsSortDirection = sort.direction;
+  }
+
+  return params;
+};
+
+export const useAdminAdminsFilters = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const state = useMemo(() => parseAdminsStateFromParams(searchParams), [searchParams]);
+
+  const setFilters = useCallback(
+    (nextFilters: Record<string, FilterValue>) =>
+      setSearchParams(adminsStateToParams(nextFilters, state.sort, 1, searchParams)),
+    [setSearchParams, state.sort, searchParams],
+  );
+
+  const setSort = useCallback(
+    (nextSort: SortState | null) =>
+      setSearchParams(adminsStateToParams(state.filters, nextSort, 1, searchParams)),
+    [setSearchParams, state.filters, searchParams],
+  );
+
+  const setPage = useCallback(
+    (nextPage: number) =>
+      setSearchParams(adminsStateToParams(state.filters, state.sort, nextPage, searchParams)),
+    [setSearchParams, state.filters, state.sort, searchParams],
+  );
+
+  return {
+    filters: state.filters,
+    sort: state.sort,
+    page: state.page,
+    setFilters,
+    setSort,
+    setPage,
+  };
+};

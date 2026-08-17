@@ -16,7 +16,7 @@ import {
   useGetSettings,
   usePromoteMember,
 } from '~root/apis';
-import { useAdminMembersFilters } from './hooks';
+import { useAdminMembersFilters, useAdminAdminsFilters } from './hooks';
 import { MembersTable } from './components/MembersTable';
 import { AdminsTable } from './components/AdminsTable';
 import { TimezoneSwitch } from './components/TimezoneSwitch';
@@ -77,18 +77,42 @@ export const AdminMembersScreen = () => {
     birthdayTo: birthdayRange.to ? birthdayRange.to.toISOString().slice(0, 10) : undefined,
   });
 
-  const [adminPage, setAdminPage] = useState(1);
+  const {
+    filters: adminsFilters,
+    sort: adminsSort,
+    page: adminPage,
+    setFilters: setAdminsFilters,
+    setSort: setAdminsSort,
+    setPage: setAdminPage,
+  } = useAdminAdminsFilters();
   const [createAdminOpen, setCreateAdminOpen] = useState(false);
   const [viewingAdmin, setViewingAdmin] = useState<Admin | null>(null);
   const [editingAdmin, setEditingAdmin] = useState<Admin | null>(null);
   const { mutate: deleteAdmin } = useDeleteAdmin();
   const { mutate: demoteAdmin } = useDemoteAdmin();
+  const adminsAddressFilter = adminsFilters.address;
+  const adminsCreatedAtRange = asFilterDateRange(adminsFilters.createdAt);
   const {
     data: adminsData,
     isLoading: isAdminsLoading,
     isError: isAdminsError,
     refetch: refetchAdmins,
-  } = useGetAdmins({ page: adminPage, pageSize: PAGE_SIZE });
+  } = useGetAdmins({
+    page: adminPage,
+    pageSize: PAGE_SIZE,
+    sortBy: adminsSort?.column,
+    sortDirection: adminsSort?.direction,
+    address:
+      typeof adminsAddressFilter === 'string' && adminsAddressFilter
+        ? adminsAddressFilter
+        : undefined,
+    createdAtFrom: adminsCreatedAtRange.from
+      ? toCreatedAtFromIso(adminsCreatedAtRange.from.toISOString().slice(0, 10), timezoneMode)
+      : undefined,
+    createdAtTo: adminsCreatedAtRange.to
+      ? toCreatedAtToIso(adminsCreatedAtRange.to.toISOString().slice(0, 10), timezoneMode)
+      : undefined,
+  });
 
   return (
     <div className="space-y-4">
@@ -152,8 +176,12 @@ export const AdminMembersScreen = () => {
             isLoading={isAdminsLoading}
             isError={isAdminsError}
             canManage={isSuperAdmin}
+            sort={adminsSort}
+            filters={adminsFilters}
             onRetry={() => refetchAdmins()}
             onPageChange={setAdminPage}
+            onSortChange={setAdminsSort}
+            onFiltersChange={setAdminsFilters}
             onView={setViewingAdmin}
             onEdit={setEditingAdmin}
             onDelete={(admin) => deleteAdmin(admin.id)}

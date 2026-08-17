@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { act, renderHook, screen } from '@testing-library/react';
 import { MemoryRouter, useSearchParams } from 'react-router-dom';
 import type { ReactNode } from 'react';
-import { useAdminMembersFilters } from './index';
+import { useAdminMembersFilters, useAdminAdminsFilters } from './index';
 
 const LocationProbe = () => {
   const [params] = useSearchParams();
@@ -65,5 +65,40 @@ describe('useAdminMembersFilters', () => {
     const { result } = renderHook(() => useAdminMembersFilters(), { wrapper: adminsWrapper });
     act(() => result.current.setPage(2));
     expect(screen.getByTestId('location').textContent).toContain('adminsPage=2');
+  });
+});
+
+describe('useAdminAdminsFilters', () => {
+  it('defaults to page 1, no filters, no sort', () => {
+    const { result } = renderHook(() => useAdminAdminsFilters(), { wrapper });
+    expect(result.current.page).toBe(1);
+    expect(result.current.filters).toEqual({});
+    expect(result.current.sort).toBeNull();
+  });
+
+  it('setPage writes adminsPage and does not collide with Members-tab page', () => {
+    const combinedWrapper = ({ children }: { children: ReactNode }) => (
+      <MemoryRouter initialEntries={['/admin-members?tab=admins&page=5']}>
+        {children}
+        <LocationProbe />
+      </MemoryRouter>
+    );
+    const { result } = renderHook(() => useAdminAdminsFilters(), { wrapper: combinedWrapper });
+    act(() => result.current.setPage(2));
+    expect(screen.getByTestId('location').textContent).toContain('adminsPage=2');
+    expect(screen.getByTestId('location').textContent).toContain('page=5');
+  });
+
+  it('setFilters round-trips address and createdAt', () => {
+    const { result } = renderHook(() => useAdminAdminsFilters(), { wrapper });
+    act(() =>
+      result.current.setFilters({
+        address: 'Da Nang',
+        createdAt: { from: new Date('2026-03-01'), to: new Date('2026-04-01') },
+      }),
+    );
+    expect(result.current.filters.address).toBe('Da Nang');
+    const createdAt = result.current.filters.createdAt as { from?: Date; to?: Date };
+    expect(createdAt.from?.toISOString().slice(0, 10)).toBe('2026-03-01');
   });
 });
