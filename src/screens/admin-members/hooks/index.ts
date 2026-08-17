@@ -1,61 +1,134 @@
 import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { EMPTY_FILTERS } from '../types';
-import type { MemberFilters } from '../types';
-import type { MembershipTier } from '~root/constants';
+import type { FilterValue, SortState } from '~root/components/ui';
 
-const parseFiltersFromParams = (params: URLSearchParams): MemberFilters => ({
-  membershipTier: (params.get('membershipTier')?.split(',').filter(Boolean) ??
-    []) as MembershipTier[],
-  createdAtFrom: params.get('createdAtFrom') ?? '',
-  createdAtTo: params.get('createdAtTo') ?? '',
-  address: params.get('address') ?? '',
-  birthdayFrom: params.get('birthdayFrom') ?? '',
-  birthdayTo: params.get('birthdayTo') ?? '',
-});
+const MEMBERS_PARAM_KEYS = [
+  'page',
+  'sortBy',
+  'sortDirection',
+  'membershipTier',
+  'address',
+  'createdAtFrom',
+  'createdAtTo',
+  'birthdayFrom',
+  'birthdayTo',
+];
 
-const filtersToParams = (filters: MemberFilters, page: number): Record<string, string> => {
-  const params: Record<string, string> = { page: String(page) };
-  if (filters.membershipTier.length > 0) params.membershipTier = filters.membershipTier.join(',');
-  if (filters.createdAtFrom) params.createdAtFrom = filters.createdAtFrom;
-  if (filters.createdAtTo) params.createdAtTo = filters.createdAtTo;
-  if (filters.address) params.address = filters.address;
-  if (filters.birthdayFrom) params.birthdayFrom = filters.birthdayFrom;
-  if (filters.birthdayTo) params.birthdayTo = filters.birthdayTo;
+type TableUrlState = { filters: Record<string, FilterValue>; sort: SortState | null; page: number };
+
+const dateOnly = (date?: Date): string | undefined => date?.toISOString().slice(0, 10);
+
+const asDateRange = (value: FilterValue | undefined): { from?: Date; to?: Date } =>
+  value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+
+const parseMembersStateFromParams = (params: URLSearchParams): TableUrlState => {
+  const filters: Record<string, FilterValue> = {};
+
+  const membershipTier = params.get('membershipTier');
+  if (membershipTier) filters.membershipTier = membershipTier.split(',').filter(Boolean);
+
+  const address = params.get('address');
+  if (address) filters.address = address;
+
+  const createdAtFrom = params.get('createdAtFrom');
+  const createdAtTo = params.get('createdAtTo');
+  if (createdAtFrom || createdAtTo) {
+    filters.createdAt = {
+      from: createdAtFrom ? new Date(createdAtFrom) : undefined,
+      to: createdAtTo ? new Date(createdAtTo) : undefined,
+    };
+  }
+
+  const birthdayFrom = params.get('birthdayFrom');
+  const birthdayTo = params.get('birthdayTo');
+  if (birthdayFrom || birthdayTo) {
+    filters.birthday = {
+      from: birthdayFrom ? new Date(birthdayFrom) : undefined,
+      to: birthdayTo ? new Date(birthdayTo) : undefined,
+    };
+  }
+
+  const sortBy = params.get('sortBy');
+  const sortDirection = params.get('sortDirection');
+  const sort: SortState | null =
+    sortBy && (sortDirection === 'asc' || sortDirection === 'desc')
+      ? { column: sortBy, direction: sortDirection }
+      : null;
+
+  const rawPage = Number(params.get('page') ?? '1');
+  const page = Number.isFinite(rawPage) && rawPage >= 1 ? rawPage : 1;
+
+  return { filters, sort, page };
+};
+
+const membersStateToParams = (
+  filters: Record<string, FilterValue>,
+  sort: SortState | null,
+  page: number,
+  currentParams: URLSearchParams,
+): Record<string, string> => {
+  const params: Record<string, string> = {};
+  currentParams.forEach((value, key) => {
+    if (!MEMBERS_PARAM_KEYS.includes(key)) params[key] = value;
+  });
+
+  params.page = String(page);
+
+  const membershipTier = filters.membershipTier;
+  if (Array.isArray(membershipTier) && membershipTier.length > 0) {
+    params.membershipTier = membershipTier.join(',');
+  }
+  if (typeof filters.address === 'string' && filters.address) {
+    params.address = filters.address;
+  }
+  const createdAt = asDateRange(filters.createdAt);
+  const createdAtFrom = dateOnly(createdAt.from);
+  const createdAtTo = dateOnly(createdAt.to);
+  if (createdAtFrom) params.createdAtFrom = createdAtFrom;
+  if (createdAtTo) params.createdAtTo = createdAtTo;
+
+  const birthday = asDateRange(filters.birthday);
+  const birthdayFrom = dateOnly(birthday.from);
+  const birthdayTo = dateOnly(birthday.to);
+  if (birthdayFrom) params.birthdayFrom = birthdayFrom;
+  if (birthdayTo) params.birthdayTo = birthdayTo;
+
+  if (sort) {
+    params.sortBy = sort.column;
+    params.sortDirection = sort.direction;
+  }
+
   return params;
 };
 
-export const countActiveFilterGroups = (filters: MemberFilters): number =>
-  [
-    filters.membershipTier.length > 0,
-    Boolean(filters.createdAtFrom || filters.createdAtTo),
-    Boolean(filters.address),
-    Boolean(filters.birthdayFrom || filters.birthdayTo),
-  ].filter(Boolean).length;
-
 export const useAdminMembersFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const state = useMemo(() => parseMembersStateFromParams(searchParams), [searchParams]);
 
-  const appliedFilters = useMemo(() => parseFiltersFromParams(searchParams), [searchParams]);
-  const page = useMemo(() => {
-    const raw = Number(searchParams.get('page') ?? '1');
-    return Number.isFinite(raw) && raw >= 1 ? raw : 1;
-  }, [searchParams]);
-
-  const applyFilters = useCallback(
-    (next: MemberFilters) => setSearchParams(filtersToParams(next, 1)),
-    [setSearchParams],
+  const setFilters = useCallback(
+    (nextFilters: Record<string, FilterValue>) =>
+      setSearchParams(membersStateToParams(nextFilters, state.sort, 1, searchParams)),
+    [setSearchParams, state.sort, searchParams],
   );
 
-  const clearFilters = useCallback(
-    () => setSearchParams(filtersToParams(EMPTY_FILTERS, 1)),
-    [setSearchParams],
+  const setSort = useCallback(
+    (nextSort: SortState | null) =>
+      setSearchParams(membersStateToParams(state.filters, nextSort, 1, searchParams)),
+    [setSearchParams, state.filters, searchParams],
   );
 
   const setPage = useCallback(
-    (next: number) => setSearchParams(filtersToParams(appliedFilters, next)),
-    [appliedFilters, setSearchParams],
+    (nextPage: number) =>
+      setSearchParams(membersStateToParams(state.filters, state.sort, nextPage, searchParams)),
+    [setSearchParams, state.filters, state.sort, searchParams],
   );
 
-  return { appliedFilters, page, applyFilters, clearFilters, setPage };
+  return {
+    filters: state.filters,
+    sort: state.sort,
+    page: state.page,
+    setFilters,
+    setSort,
+    setPage,
+  };
 };
