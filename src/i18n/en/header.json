@@ -1,6 +1,12 @@
 {
   "search": { "ariaLabel": "Search", "placeholder": "Search..." },
-  "nav": { "dashboard": "Dashboard", "profile": "Profile", "settings": "Settings", "memberList": "Member List", "logout": "Log out" },
+  "nav": {
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "memberList": "Member List",
+    "logout": "Log out"
+  },
   "theme": { "light": "Light", "dark": "Dark", "system": "System" },
   "languageSwitch": { "ariaLabel": "Change language" }
 }

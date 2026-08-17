@@ -1,4 +1,4 @@
-import { Theme } from "~root/constants";
+import { Theme } from '~root/constants';
 
 const THEME_STORAGE_KEY = 'theme';
 
@@ -12,7 +12,9 @@ export const applyTheme = (theme: Theme) => {
 
 export const readStoredTheme = (): Theme => {
   const stored = localStorage.getItem(THEME_STORAGE_KEY);
-  return stored === Theme.LIGHT || stored === Theme.DARK || stored === Theme.SYSTEM ? stored : Theme.SYSTEM;
+  return stored === Theme.LIGHT || stored === Theme.DARK || stored === Theme.SYSTEM
+    ? stored
+    : Theme.SYSTEM;
 };
 
 export const storeTheme = (theme: Theme) => {
