@@ -86,4 +86,74 @@ describe('TableCustom', () => {
     await user.click(screen.getByText('Trước'));
     expect(onPageChange).toHaveBeenCalledWith(2);
   });
+
+  it('cycles sort state on a sortable column: none -> asc -> desc -> none', async () => {
+    const user = userEvent.setup();
+    const onSortChange = vi.fn();
+    const sortableColumns: ColumnType<Row>[] = [
+      { key: 'name', header: 'Name', accessor: 'name', sortable: true },
+    ];
+    const { rerender } = render(
+      <TableCustom
+        columns={sortableColumns}
+        data={ROWS}
+        rowKey="id"
+        sort={null}
+        onSortChange={onSortChange}
+      />,
+    );
+
+    await user.click(screen.getByText('Name'));
+    expect(onSortChange).toHaveBeenLastCalledWith({ column: 'name', direction: 'asc' });
+
+    rerender(
+      <TableCustom
+        columns={sortableColumns}
+        data={ROWS}
+        rowKey="id"
+        sort={{ column: 'name', direction: 'asc' }}
+        onSortChange={onSortChange}
+      />,
+    );
+    await user.click(screen.getByText('Name'));
+    expect(onSortChange).toHaveBeenLastCalledWith({ column: 'name', direction: 'desc' });
+
+    rerender(
+      <TableCustom
+        columns={sortableColumns}
+        data={ROWS}
+        rowKey="id"
+        sort={{ column: 'name', direction: 'desc' }}
+        onSortChange={onSortChange}
+      />,
+    );
+    await user.click(screen.getByText('Name'));
+    expect(onSortChange).toHaveBeenLastCalledWith(null);
+  });
+
+  it('clicking a different sortable column always starts at asc', async () => {
+    const user = userEvent.setup();
+    const onSortChange = vi.fn();
+    const sortableColumns: ColumnType<Row>[] = [
+      { key: 'name', header: 'Name', accessor: 'name', sortable: true },
+      { key: 'age', header: 'Age', accessor: (row) => String(row.age), sortable: true },
+    ];
+    render(
+      <TableCustom
+        columns={sortableColumns}
+        data={ROWS}
+        rowKey="id"
+        sort={{ column: 'name', direction: 'desc' }}
+        onSortChange={onSortChange}
+      />,
+    );
+
+    await user.click(screen.getByText('Age'));
+    expect(onSortChange).toHaveBeenCalledWith({ column: 'age', direction: 'asc' });
+  });
+
+  it('a non-sortable column header is not a button', () => {
+    render(<TableCustom columns={COLUMNS} data={ROWS} rowKey="id" />);
+    expect(screen.getByText('Name').closest('button')).not.toBeInTheDocument();
+  });
 });

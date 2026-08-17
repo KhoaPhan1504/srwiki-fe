@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { ChevronDown, ChevronsUpDown, ChevronUp } from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -12,6 +13,8 @@ import { Button } from '~root/components/ui/button';
 import { cn } from '~root/lib/utils';
 
 export type ColumnAlign = 'left' | 'center' | 'right';
+export type SortDirection = 'asc' | 'desc';
+export type SortState = { column: string; direction: SortDirection };
 
 export type ColumnType<T> = {
   key: string;
@@ -21,6 +24,7 @@ export type ColumnType<T> = {
   align?: ColumnAlign;
   className?: string;
   headerClassName?: string;
+  sortable?: boolean;
 };
 
 type RowKey<T> = keyof T | ((row: T, index: number) => string | number);
@@ -39,6 +43,8 @@ export type TableCustomProps<T> = {
     total: number;
     onPageChange: (page: number) => void;
   };
+  sort?: SortState | null;
+  onSortChange?: (sort: SortState | null) => void;
 };
 
 const alignClass: Record<ColumnAlign, string> = {
@@ -60,6 +66,12 @@ function getCellValue<T>(row: T, column: ColumnType<T>, index: number): React.Re
   return null;
 }
 
+function SortIcon({ state }: { state: SortDirection | null }) {
+  if (state === 'asc') return <ChevronUp className="h-3.5 w-3.5" />;
+  if (state === 'desc') return <ChevronDown className="h-3.5 w-3.5" />;
+  return <ChevronsUpDown className="h-3.5 w-3.5 text-muted-foreground/50" />;
+}
+
 export function TableCustom<T>({
   columns,
   data,
@@ -69,8 +81,21 @@ export function TableCustom<T>({
   emptyMessage,
   className,
   pagination,
+  sort,
+  onSortChange,
 }: TableCustomProps<T>) {
   const { t } = useTranslation('common');
+
+  const handleSortClick = (column: ColumnType<T>) => {
+    if (!column.sortable || !onSortChange) return;
+    if (sort?.column !== column.key) {
+      onSortChange({ column: column.key, direction: 'asc' });
+    } else if (sort.direction === 'asc') {
+      onSortChange({ column: column.key, direction: 'desc' });
+    } else {
+      onSortChange(null);
+    }
+  };
 
   const totalPages = pagination
     ? Math.max(1, Math.ceil(pagination.total / pagination.pageSize))
@@ -86,7 +111,18 @@ export function TableCustom<T>({
                 key={column.key}
                 className={cn(column.align && alignClass[column.align], column.headerClassName)}
               >
-                {column.header}
+                {column.sortable ? (
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-1"
+                    onClick={() => handleSortClick(column)}
+                  >
+                    {column.header}
+                    <SortIcon state={sort?.column === column.key ? sort.direction : null} />
+                  </button>
+                ) : (
+                  column.header
+                )}
               </TableHead>
             ))}
           </TableRow>
