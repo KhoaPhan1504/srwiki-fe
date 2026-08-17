@@ -2,20 +2,12 @@ import { useTranslation } from 'react-i18next';
 import { Eye, Pencil, Trash2, UserPlus } from 'lucide-react';
 import {
   TableCustom,
+  TableAction,
   Badge,
-  Button,
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
   type ColumnType,
   type FilterValue,
   type SortState,
+  type TableActionItem,
 } from '~root/components/ui';
 import { QueryErrorCard } from '~root/components/common';
 import { formatDate } from '~root/utils';
@@ -126,71 +118,43 @@ export const MembersTable = ({
       align: 'right',
       pinned: 'right',
       hideable: false,
-      render: (member) => (
-        <div className="flex justify-end gap-1">
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label={t('view.title')}
-            onClick={() => onView(member)}
-          >
-            <Eye className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label={t('edit.title')}
-            onClick={() => onEdit(member)}
-          >
-            <Pencil className="h-4 w-4" />
-          </Button>
-          {canPromote && (
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label={t('promote.button')}>
-                  <UserPlus className="h-4 w-4" />
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>{t('promote.confirmTitle')}</AlertDialogTitle>
-                  <AlertDialogDescription>{t('promote.confirmDescription')}</AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>{t('common:buttons.cancel')}</AlertDialogCancel>
-                  <AlertDialogAction onClick={() => onPromote(member)}>
-                    {t('promote.button')}
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          )}
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label={t('delete.button')}
-                disabled={member.id === currentUserId}
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>{t('delete.confirmTitle')}</AlertDialogTitle>
-                <AlertDialogDescription>{t('delete.confirmDescription')}</AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>{t('common:buttons.cancel')}</AlertDialogCancel>
-                <AlertDialogAction onClick={() => onDelete(member)}>
-                  {t('delete.button')}
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-        </div>
-      ),
+      render: (member) => {
+        const items: TableActionItem[] = [
+          { key: 'view', label: t('view.title'), icon: Eye, onSelect: () => onView(member) },
+          { key: 'edit', label: t('edit.title'), icon: Pencil, onSelect: () => onEdit(member) },
+          ...(canPromote
+            ? [
+                {
+                  key: 'promote',
+                  label: t('promote.button'),
+                  icon: UserPlus,
+                  onSelect: () => onPromote(member),
+                  confirm: {
+                    title: t('promote.confirmTitle'),
+                    description: t('promote.confirmDescription'),
+                    confirmLabel: t('promote.button'),
+                    cancelLabel: t('common:buttons.cancel'),
+                  },
+                },
+              ]
+            : []),
+          {
+            key: 'delete',
+            label: t('delete.button'),
+            icon: Trash2,
+            variant: 'destructive',
+            disabled: member.id === currentUserId,
+            onSelect: () => onDelete(member),
+            confirm: {
+              title: t('delete.confirmTitle'),
+              description: t('delete.confirmDescription'),
+              confirmLabel: t('delete.button'),
+              cancelLabel: t('common:buttons.cancel'),
+            },
+          },
+        ];
+        return <TableAction items={items} triggerLabel={t('table.columns.actions')} />;
+      },
     },
   ];
 

@@ -86,12 +86,34 @@ describe('MembersTable', () => {
     const onDelete = vi.fn();
     render(<MembersTable {...baseProps} members={[MEMBER]} onView={onView} onDelete={onDelete} />);
 
-    await user.click(screen.getByLabelText('Thông tin thành viên'));
+    await user.click(screen.getByLabelText('Thao tác'));
+    await user.click(screen.getByText('Thông tin thành viên'));
     expect(onView).toHaveBeenCalledWith(MEMBER);
 
-    await user.click(screen.getByLabelText('Xoá'));
+    await user.click(screen.getByLabelText('Thao tác'));
     await user.click(screen.getByText('Xoá'));
+    const confirmButtons = screen.getAllByText('Xoá');
+    await user.click(confirmButtons[confirmButtons.length - 1]);
     expect(onDelete).toHaveBeenCalledWith(MEMBER);
+  });
+
+  it('shows the promote action only when canPromote is true, behind a confirm', async () => {
+    const user = userEvent.setup();
+    const onPromote = vi.fn();
+    render(
+      <MembersTable {...baseProps} members={[MEMBER]} canPromote={false} onPromote={onPromote} />,
+    );
+    await user.click(screen.getByLabelText('Thao tác'));
+    expect(screen.queryByText('Nâng lên Quản trị viên')).not.toBeInTheDocument();
+    await user.keyboard('{Escape}');
+
+    render(<MembersTable {...baseProps} members={[MEMBER]} canPromote onPromote={onPromote} />);
+    const triggers = screen.getAllByLabelText('Thao tác');
+    await user.click(triggers[triggers.length - 1]);
+    await user.click(screen.getByText('Nâng lên Quản trị viên'));
+    const confirmButtons = screen.getAllByText('Nâng lên Quản trị viên');
+    await user.click(confirmButtons[confirmButtons.length - 1]);
+    expect(onPromote).toHaveBeenCalledWith(MEMBER);
   });
 
   it('paginates via onPageChange', async () => {

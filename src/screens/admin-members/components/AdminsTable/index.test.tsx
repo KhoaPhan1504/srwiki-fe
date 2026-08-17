@@ -73,22 +73,23 @@ describe('AdminsTable', () => {
     expect(screen.getByText('22')).toBeInTheDocument();
   });
 
-  it('hides edit/delete/demote actions when canManage is false', () => {
+  it('hides edit/delete/demote actions when canManage is false', async () => {
+    const user = userEvent.setup();
     render(<AdminsTable {...baseProps} admins={[ADMIN]} total={1} canManage={false} />);
-    expect(screen.getByRole('button', { name: 'Thông tin quản trị viên' })).toBeInTheDocument();
-    expect(
-      screen.queryByRole('button', { name: 'Sửa thông tin quản trị viên' }),
-    ).not.toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Hạ xuống Thành viên' })).not.toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Xoá' })).not.toBeInTheDocument();
+    await user.click(screen.getByLabelText('Thao tác'));
+    expect(screen.getByText('Thông tin quản trị viên')).toBeInTheDocument();
+    expect(screen.queryByText('Sửa thông tin quản trị viên')).not.toBeInTheDocument();
+    expect(screen.queryByText('Hạ xuống Thành viên')).not.toBeInTheDocument();
+    expect(screen.queryByText('Xoá')).not.toBeInTheDocument();
   });
 
   it('demotes an admin after confirming when canManage is true', async () => {
     const user = userEvent.setup();
     const onDemote = vi.fn();
     render(<AdminsTable {...baseProps} admins={[ADMIN]} total={1} canManage onDemote={onDemote} />);
-    await user.click(screen.getByRole('button', { name: 'Hạ xuống Thành viên' }));
-    const confirmButtons = screen.getAllByRole('button', { name: 'Hạ xuống Thành viên' });
+    await user.click(screen.getByLabelText('Thao tác'));
+    await user.click(screen.getByText('Hạ xuống Thành viên'));
+    const confirmButtons = screen.getAllByText('Hạ xuống Thành viên');
     await user.click(confirmButtons[confirmButtons.length - 1]);
     expect(onDemote).toHaveBeenCalledWith(ADMIN);
   });

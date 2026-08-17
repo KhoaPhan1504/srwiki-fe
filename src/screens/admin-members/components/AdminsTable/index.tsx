@@ -2,20 +2,12 @@ import { useTranslation } from 'react-i18next';
 import { Eye, Pencil, Trash2, UserMinus } from 'lucide-react';
 import {
   TableCustom,
+  TableAction,
   Badge,
-  Button,
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
   type ColumnType,
   type FilterValue,
   type SortState,
+  type TableActionItem,
 } from '~root/components/ui';
 import { QueryErrorCard } from '~root/components/common';
 import { formatDate } from '~root/utils';
@@ -98,72 +90,52 @@ export const AdminsTable = ({
       align: 'right',
       pinned: 'right',
       hideable: false,
-      render: (admin) => (
-        <div className="flex justify-end gap-1">
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label={t('viewAdmin.title')}
-            onClick={() => onView(admin)}
-          >
-            <Eye className="h-4 w-4" />
-          </Button>
-          {canManage && (
-            <>
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label={t('editAdmin.title')}
-                onClick={() => onEdit(admin)}
-              >
-                <Pencil className="h-4 w-4" />
-              </Button>
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button variant="ghost" size="icon" aria-label={t('demote.button')}>
-                    <UserMinus className="h-4 w-4" />
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>{t('demote.confirmTitle')}</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      {t('demote.confirmDescription')}
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>{t('common:buttons.cancel')}</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => onDemote(admin)}>
-                      {t('demote.button')}
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button variant="ghost" size="icon" aria-label={t('deleteAdmin.button')}>
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>{t('deleteAdmin.confirmTitle')}</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      {t('deleteAdmin.confirmDescription')}
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>{t('common:buttons.cancel')}</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => onDelete(admin)}>
-                      {t('deleteAdmin.button')}
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
-            </>
-          )}
-        </div>
-      ),
+      render: (admin) => {
+        const items: TableActionItem[] = [
+          {
+            key: 'view',
+            label: t('viewAdmin.title'),
+            icon: Eye,
+            onSelect: () => onView(admin),
+          },
+          ...(canManage
+            ? [
+                {
+                  key: 'edit',
+                  label: t('editAdmin.title'),
+                  icon: Pencil,
+                  onSelect: () => onEdit(admin),
+                },
+                {
+                  key: 'demote',
+                  label: t('demote.button'),
+                  icon: UserMinus,
+                  onSelect: () => onDemote(admin),
+                  confirm: {
+                    title: t('demote.confirmTitle'),
+                    description: t('demote.confirmDescription'),
+                    confirmLabel: t('demote.button'),
+                    cancelLabel: t('common:buttons.cancel'),
+                  },
+                },
+                {
+                  key: 'delete',
+                  label: t('deleteAdmin.button'),
+                  icon: Trash2,
+                  variant: 'destructive' as const,
+                  onSelect: () => onDelete(admin),
+                  confirm: {
+                    title: t('deleteAdmin.confirmTitle'),
+                    description: t('deleteAdmin.confirmDescription'),
+                    confirmLabel: t('deleteAdmin.button'),
+                    cancelLabel: t('common:buttons.cancel'),
+                  },
+                },
+              ]
+            : []),
+        ];
+        return <TableAction items={items} triggerLabel={t('adminsTable.columns.actions')} />;
+      },
     },
   ];
 
