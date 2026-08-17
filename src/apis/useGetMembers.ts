@@ -23,6 +23,8 @@ export type MemberListParams = {
   address?: string;
   birthdayFrom?: string;
   birthdayTo?: string;
+  sortBy?: string;
+  sortDirection?: 'asc' | 'desc';
 };
 
 export type MemberListResponse = {
