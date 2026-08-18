@@ -48,14 +48,16 @@ export const DashboardLayout = ({ children }: Props) => {
   }, []);
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex h-dvh overflow-hidden bg-background">
       <MenuVertical mobileOpen={mobileNavOpen} onMobileOpenChange={setMobileNavOpen} />
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col">
         <Header
           onMenuClick={() => setMobileNavOpen(true)}
           onOpenPalette={() => setPaletteOpen(true)}
         />
-        <main className="mx-auto w-full max-w-7xl flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
+        <main className="mx-auto min-h-0 w-full max-w-7xl flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+          {children}
+        </main>
       </div>
       <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} />
     </div>
