@@ -55,8 +55,8 @@ export const DashboardLayout = ({ children }: Props) => {
           onMenuClick={() => setMobileNavOpen(true)}
           onOpenPalette={() => setPaletteOpen(true)}
         />
-        <main className="mx-auto min-h-0 w-full max-w-7xl flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
-          {children}
+        <main className="min-h-0 flex-1 overflow-y-auto">
+          <div className="mx-auto w-full max-w-7xl p-4 sm:p-6 lg:p-8">{children}</div>
         </main>
       </div>
       <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} />
