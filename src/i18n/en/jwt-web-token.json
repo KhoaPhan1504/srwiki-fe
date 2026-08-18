@@ -1,0 +1,86 @@
+{
+  "title": "JWT Web Token",
+  "description": "Decode, inspect and sign JWT tokens locally.",
+  "input": {
+    "title": "JWT Token",
+    "charCount": "{{count}} characters",
+    "placeholder": "Paste a JWT token here, e.g. eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "clear": "Clear",
+    "clearConfirmTitle": "Clear token?",
+    "clearConfirmDescription": "This will remove the current token and all decoded results. This can't be undone.",
+    "copyToken": "Copy token",
+    "copyTokenCopied": "Token copied",
+    "copyError": "Couldn't copy to clipboard.",
+    "errors": {
+      "invalidSegmentCount": "Invalid JWT format. A JWT must contain three segments separated by dots.",
+      "invalidBase64": "Couldn't decode the token — invalid Base64URL encoding.",
+      "invalidJsonHeader": "Unable to decode the JWT header as JSON.",
+      "invalidJsonPayload": "Unable to decode the JWT payload as JSON."
+    }
+  },
+  "header": {
+    "title": "Header",
+    "copy": "Copy header",
+    "copyCopied": "Header copied",
+    "copyError": "Couldn't copy to clipboard.",
+    "invalidJson": "Invalid JSON: {{message}}"
+  },
+  "payload": {
+    "title": "Payload",
+    "copy": "Copy payload",
+    "copyCopied": "Payload copied",
+    "copyError": "Couldn't copy to clipboard.",
+    "invalidJson": "Invalid JSON: {{message}}"
+  },
+  "signing": {
+    "title": "Algorithm & Key",
+    "algorithmLabel": "Algorithm",
+    "groupHmac": "HMAC",
+    "groupRsa": "RSA",
+    "groupRsaPss": "RSA-PSS",
+    "groupEcdsa": "ECDSA",
+    "secretLabel": "Secret",
+    "secretPlaceholder": "your-256-bit-secret",
+    "privateKeyLabel": "Private Key",
+    "privateKeyPlaceholder": "-----BEGIN PRIVATE KEY-----...",
+    "publicKeyLabel": "Public Key",
+    "publicKeyPlaceholder": "-----BEGIN PUBLIC KEY-----...",
+    "errors": {
+      "invalidKey": "This key is invalid or malformed.",
+      "signingFailed": "Failed to sign the token with the current key."
+    }
+  },
+  "signature": {
+    "title": "Signature",
+    "verified": "Signature Verified",
+    "invalid": "Signature Invalid",
+    "notVerified": "Not verified",
+    "copy": "Copy signature",
+    "copyCopied": "Signature copied",
+    "copyError": "Couldn't copy to clipboard.",
+    "empty": "The signature will appear here once you have a token.",
+    "provideKeyHint": "Enter the secret or public key above to verify this signature."
+  },
+  "status": {
+    "expiredTitle": "Token expired",
+    "expiredTime": "Expired {{time}}",
+    "activeTitle": "Token active",
+    "activeTime": "Expires {{time}}",
+    "notYetValidTitle": "Token is not active yet",
+    "notYetValidTime": "Starts {{time}}",
+    "noExpiration": "No expiration claim"
+  },
+  "info": {
+    "title": "Token Information",
+    "status": "Status",
+    "issuedAt": "Issued At",
+    "expires": "Expires",
+    "notBefore": "Not Before",
+    "issuer": "Issuer",
+    "subject": "Subject",
+    "audience": "Audience",
+    "jwtId": "JWT ID",
+    "noExpirationStatus": "Valid (no expiration)",
+    "empty": "No standard claims found in the payload."
+  }
+}
