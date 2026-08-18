@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { useAtomValue } from 'jotai';
 import { useLogout } from '~root/apis';
 import { MenuOptions } from './configs';
@@ -7,6 +8,7 @@ import { LogOut } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { authAtom } from '~root/stores';
 import { Role } from '~root/constants';
+import { Separator } from '~root/components/ui';
 
 export const SidebarContent = ({
   onNavigate,
@@ -29,24 +31,36 @@ export const SidebarContent = ({
         <img src={logoSrc} alt="SR-WIKI Logo" className="inline-block" />
       </div>
       <div className="flex flex-1 flex-col gap-3">
-        {visibleOptions.map(({ to, labelKey, icon: Icon }) => (
-          <NavLink
-            key={to}
-            to={to}
-            onClick={onNavigate}
-            className={({ isActive }) =>
-              cn(
-                'flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                isActive
-                  ? 'bg-dashboard-accent text-dashboard-accent-foreground'
-                  : 'text-muted-foreground hover:bg-muted',
-              )
-            }
-          >
-            <Icon className="h-4 w-4" />
-            {t(labelKey)}
-          </NavLink>
-        ))}
+        {visibleOptions.map(({ to, labelKey, icon: Icon, section }, index) => {
+          const showSectionHeader = section && section !== visibleOptions[index - 1]?.section;
+          return (
+            <Fragment key={to}>
+              {showSectionHeader && (
+                <>
+                  <Separator className="my-2" />
+                  <p className="px-3 text-xs font-semibold tracking-wide text-muted-foreground/70 uppercase">
+                    {t(section)}
+                  </p>
+                </>
+              )}
+              <NavLink
+                to={to}
+                onClick={onNavigate}
+                className={({ isActive }) =>
+                  cn(
+                    'flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                    isActive
+                      ? 'bg-dashboard-accent text-dashboard-accent-foreground'
+                      : 'text-muted-foreground hover:bg-muted',
+                  )
+                }
+              >
+                <Icon className="h-4 w-4" />
+                {t(labelKey)}
+              </NavLink>
+            </Fragment>
+          );
+        })}
         <button
           onClick={logout}
           className="mt-auto flex items-center gap-2 rounded-md px-3 py-2 text-left text-sm font-medium text-destructive hover:bg-destructive/10"

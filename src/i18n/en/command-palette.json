@@ -19,7 +19,8 @@
     "settingsAppearance": "Settings · Appearance",
     "settingsNotifications": "Settings · Notifications",
     "settingsAccount": "Settings · Account",
-    "memberList": "Member List"
+    "memberList": "Member List",
+    "jsonFormatter": "JSON Formatter"
   },
   "commands": {
     "themeLight": "Switch to Light theme",

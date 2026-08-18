@@ -1,0 +1,39 @@
+{
+  "title": "JSON Formatter",
+  "description": "Định dạng, kiểm tra và rút gọn JSON ngay lập tức.",
+  "input": {
+    "title": "JSON đầu vào",
+    "charCount": "{{count}} ký tự",
+    "placeholder": "Dán JSON vào đây...",
+    "upload": "Tải lên JSON",
+    "uploadEmpty": "File rỗng.",
+    "uploadTooLarge": "File quá lớn. Kích thước tối đa là 5 MB.",
+    "uploadInvalidType": "Vui lòng tải lên file .json.",
+    "uploadReadError": "Không thể đọc file.",
+    "clear": "Clear",
+    "clearConfirmTitle": "Xoá nội dung đầu vào?",
+    "clearConfirmDescription": "Thao tác này sẽ xoá JSON đầu vào và kết quả hiện tại. Không thể hoàn tác."
+  },
+  "output": {
+    "title": "JSON đã định dạng",
+    "emptyNoInput": "Dán JSON hoặc tải lên file JSON để bắt đầu.",
+    "emptyWithInput": "Nhấn Format, Minify hoặc Validate để xem kết quả tại đây.",
+    "emptyValidNoOutput": "JSON hợp lệ. Nhấn Format hoặc Minify để xem kết quả tại đây.",
+    "invalidTitle": "JSON không hợp lệ",
+    "errorDetail": "Dòng {{line}}, cột {{column}}: {{message}}",
+    "validBadge": "JSON hợp lệ",
+    "copy": "Copy",
+    "copied": "Đã sao chép",
+    "copyError": "Không thể sao chép vào clipboard.",
+    "download": "Download"
+  },
+  "actions": {
+    "format": "Format",
+    "minify": "Minify",
+    "validate": "Validate",
+    "indentLabel": "Kích thước thụt lề",
+    "indent2": "2 dấu cách",
+    "indent4": "4 dấu cách",
+    "indentTab": "Tab"
+  }
+}

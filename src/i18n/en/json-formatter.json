@@ -1,0 +1,39 @@
+{
+  "title": "JSON Formatter",
+  "description": "Format, validate and minify JSON instantly.",
+  "input": {
+    "title": "Input JSON",
+    "charCount": "{{count}} characters",
+    "placeholder": "Paste JSON here...",
+    "upload": "Upload JSON",
+    "uploadEmpty": "The file is empty.",
+    "uploadTooLarge": "File is too large. Maximum size is 5 MB.",
+    "uploadInvalidType": "Please upload a .json file.",
+    "uploadReadError": "Couldn't read the file.",
+    "clear": "Clear",
+    "clearConfirmTitle": "Clear input?",
+    "clearConfirmDescription": "This will remove the current JSON input and result. This can't be undone."
+  },
+  "output": {
+    "title": "Formatted JSON",
+    "emptyNoInput": "Paste JSON or upload a JSON file to get started.",
+    "emptyWithInput": "Click Format, Minify or Validate to see the result here.",
+    "emptyValidNoOutput": "Valid JSON. Click Format or Minify to see the result here.",
+    "invalidTitle": "Invalid JSON",
+    "errorDetail": "Line {{line}}, column {{column}}: {{message}}",
+    "validBadge": "Valid JSON",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyError": "Couldn't copy to clipboard.",
+    "download": "Download"
+  },
+  "actions": {
+    "format": "Format",
+    "minify": "Minify",
+    "validate": "Validate",
+    "indentLabel": "Indent size",
+    "indent2": "2 spaces",
+    "indent4": "4 spaces",
+    "indentTab": "Tab"
+  }
+}
