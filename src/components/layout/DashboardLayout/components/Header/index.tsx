@@ -2,7 +2,6 @@ import { CommandIcon, Menu, Search } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '~root/components/ui';
 import { NotificationBell } from '../NotificationBell';
-import { ThemeToggle } from '../ThemeToggle';
 import { LanguageSwitch } from '../LanguageSwitch';
 import { UserMenu } from '../UserMenu';
 
@@ -40,7 +39,6 @@ export const Header = ({ onMenuClick, onOpenPalette }: Props) => {
       </div>
       <div className="flex items-center gap-3">
         <NotificationBell />
-        <ThemeToggle />
         <LanguageSwitch />
         <UserMenu />
       </div>
