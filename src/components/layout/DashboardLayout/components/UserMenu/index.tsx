@@ -8,11 +8,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '~root/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '~root/components/ui/avatar';
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '~root/components/ui';
 import { withCacheBust } from '~root/lib/utils';
 import { useGetProfile } from '~root/apis/useGetProfile';
-import { useLogout } from '~root/apis/useLogout';
+import { useLogout } from '~root/apis';
+import { Badge } from '~root/components/ui';
+import { getRoleLabel } from '~root/utils';
 
 export const UserMenu = () => {
   const { t } = useTranslation('header');
@@ -25,7 +29,7 @@ export const UserMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex items-center gap-2 rounded-full">
+        <button className="flex items-center gap-2">
           <Avatar className="h-8 w-8">
             <AvatarImage
               src={withCacheBust(profile?.avatarUrl, profile?.updatedAt)}
@@ -33,6 +37,12 @@ export const UserMenu = () => {
             />
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
+          <div className="flex flex-col items-start leading-tight max-w-40">
+            <span className="hidden text-sm font-medium sm:inline">{profile?.fullName}</span>
+            <Badge variant="secondary" className="hidden sm:inline">
+              {getRoleLabel(profile?.role)}
+            </Badge>
+          </div>
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
