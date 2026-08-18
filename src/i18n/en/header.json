@@ -5,7 +5,9 @@
     "profile": "Profile",
     "settings": "Settings",
     "memberList": "Member List",
-    "logout": "Log out"
+    "logout": "Log out",
+    "sectionTools": "Tools",
+    "jsonFormatter": "JSON Formatter"
   },
   "theme": { "light": "Light", "dark": "Dark", "system": "System" },
   "languageSwitch": { "ariaLabel": "Change language" }

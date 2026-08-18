@@ -16,7 +16,8 @@
     "settingsAppearance": "Cài đặt · Giao diện",
     "settingsNotifications": "Cài đặt · Thông báo",
     "settingsAccount": "Cài đặt · Tài khoản",
-    "memberList": "Danh sách thành viên"
+    "memberList": "Danh sách thành viên",
+    "jsonFormatter": "JSON Formatter"
   },
   "commands": {
     "themeLight": "Chuyển sang giao diện Sáng",

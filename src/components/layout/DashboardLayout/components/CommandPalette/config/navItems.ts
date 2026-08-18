@@ -1,4 +1,4 @@
-import { LayoutDashboard, SettingsIcon, User, Users } from 'lucide-react';
+import { Braces, LayoutDashboard, SettingsIcon, User, Users } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 export type NavItem = {
@@ -43,5 +43,11 @@ export const NAV_ITEMS: NavItem[] = [
     to: '/admin/members',
     icon: Users,
     adminOnly: true,
+  },
+  {
+    id: 'json-formatter',
+    labelKey: 'nav.jsonFormatter',
+    to: '/tools/json-formatter',
+    icon: Braces,
   },
 ];

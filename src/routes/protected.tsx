@@ -4,6 +4,7 @@ import type { RouteObject } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
 import AdminMembersPage from '~root/pages/AdminMembers';
 import DashboardPage from '~root/pages/Dashboard';
+import JsonFormatterPage from '~root/pages/JsonFormatter';
 import ProfilePage from '~root/pages/Profile';
 import SettingsPage from '~root/pages/Settings';
 import { authAtom } from '~root/stores';
@@ -36,6 +37,7 @@ export const protectedRoutes: RouteObject[] = [
   { path: '/dashboard', element: <PrivateRoute element={<DashboardPage />} /> },
   { path: '/profile', element: <PrivateRoute element={<ProfilePage />} /> },
   { path: '/settings', element: <PrivateRoute element={<SettingsPage />} /> },
+  { path: '/tools/json-formatter', element: <PrivateRoute element={<JsonFormatterPage />} /> },
   {
     path: '/admin/members',
     element: (

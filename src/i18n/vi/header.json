@@ -5,7 +5,9 @@
     "profile": "Hồ sơ",
     "settings": "Cài đặt",
     "memberList": "Danh sách thành viên",
-    "logout": "Đăng xuất"
+    "logout": "Đăng xuất",
+    "sectionTools": "Công cụ",
+    "jsonFormatter": "JSON Formatter"
   },
   "theme": { "light": "Sáng", "dark": "Tối", "system": "Theo hệ thống" },
   "languageSwitch": { "ariaLabel": "Đổi ngôn ngữ" }
