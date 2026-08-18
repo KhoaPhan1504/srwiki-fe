@@ -31,6 +31,8 @@ import viAdminMembers from './vi/admin-members.json';
 import enAdminMembers from './en/admin-members.json';
 import viJsonFormatter from './vi/json-formatter.json';
 import enJsonFormatter from './en/json-formatter.json';
+import viJwtWebToken from './vi/jwt-web-token.json';
+import enJwtWebToken from './en/jwt-web-token.json';
 
 export const NAMESPACES = [
   'common',
@@ -47,6 +49,7 @@ export const NAMESPACES = [
   'forms',
   'admin-members',
   'json-formatter',
+  'jwt-web-token',
 ] as const;
 
 const resources = {
@@ -65,6 +68,7 @@ const resources = {
     forms: viForms,
     'admin-members': viAdminMembers,
     'json-formatter': viJsonFormatter,
+    'jwt-web-token': viJwtWebToken,
   },
   [Language.EN]: {
     common: enCommon,
@@ -81,6 +85,7 @@ const resources = {
     forms: enForms,
     'admin-members': enAdminMembers,
     'json-formatter': enJsonFormatter,
+    'jwt-web-token': enJwtWebToken,
   },
 };
 

@@ -5,6 +5,7 @@ import { useAtomValue } from 'jotai';
 import AdminMembersPage from '~root/pages/AdminMembers';
 import DashboardPage from '~root/pages/Dashboard';
 import JsonFormatterPage from '~root/pages/JsonFormatter';
+import JwtWebTokenPage from '~root/pages/JwtWebToken';
 import ProfilePage from '~root/pages/Profile';
 import SettingsPage from '~root/pages/Settings';
 import { authAtom } from '~root/stores';
@@ -38,6 +39,7 @@ export const protectedRoutes: RouteObject[] = [
   { path: '/profile', element: <PrivateRoute element={<ProfilePage />} /> },
   { path: '/settings', element: <PrivateRoute element={<SettingsPage />} /> },
   { path: '/tools/json-formatter', element: <PrivateRoute element={<JsonFormatterPage />} /> },
+  { path: '/tools/jwt', element: <PrivateRoute element={<JwtWebTokenPage />} /> },
   {
     path: '/admin/members',
     element: (

@@ -1,0 +1,86 @@
+{
+  "title": "JWT Web Token",
+  "description": "Giải mã, kiểm tra và ký JWT token ngay trên trình duyệt.",
+  "input": {
+    "title": "JWT Token",
+    "charCount": "{{count}} ký tự",
+    "placeholder": "Dán JWT token vào đây, ví dụ: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "clear": "Clear",
+    "clearConfirmTitle": "Xoá token?",
+    "clearConfirmDescription": "Thao tác này sẽ xoá token hiện tại và toàn bộ kết quả đã giải mã. Không thể hoàn tác.",
+    "copyToken": "Copy token",
+    "copyTokenCopied": "Đã copy token",
+    "copyError": "Không thể sao chép vào clipboard.",
+    "errors": {
+      "invalidSegmentCount": "Định dạng JWT không hợp lệ. JWT phải gồm 3 phần cách nhau bởi dấu chấm.",
+      "invalidBase64": "Không thể giải mã token — Base64URL không hợp lệ.",
+      "invalidJsonHeader": "Không thể giải mã header JWT thành JSON.",
+      "invalidJsonPayload": "Không thể giải mã payload JWT thành JSON."
+    }
+  },
+  "header": {
+    "title": "Header",
+    "copy": "Copy header",
+    "copyCopied": "Đã copy header",
+    "copyError": "Không thể sao chép vào clipboard.",
+    "invalidJson": "JSON không hợp lệ: {{message}}"
+  },
+  "payload": {
+    "title": "Payload",
+    "copy": "Copy payload",
+    "copyCopied": "Đã copy payload",
+    "copyError": "Không thể sao chép vào clipboard.",
+    "invalidJson": "JSON không hợp lệ: {{message}}"
+  },
+  "signing": {
+    "title": "Thuật toán & Khoá",
+    "algorithmLabel": "Algorithm",
+    "groupHmac": "HMAC",
+    "groupRsa": "RSA",
+    "groupRsaPss": "RSA-PSS",
+    "groupEcdsa": "ECDSA",
+    "secretLabel": "Secret",
+    "secretPlaceholder": "your-256-bit-secret",
+    "privateKeyLabel": "Private Key",
+    "privateKeyPlaceholder": "-----BEGIN PRIVATE KEY-----...",
+    "publicKeyLabel": "Public Key",
+    "publicKeyPlaceholder": "-----BEGIN PUBLIC KEY-----...",
+    "errors": {
+      "invalidKey": "Khoá này không hợp lệ hoặc sai định dạng.",
+      "signingFailed": "Ký token thất bại với khoá hiện tại."
+    }
+  },
+  "signature": {
+    "title": "Signature",
+    "verified": "Signature Verified",
+    "invalid": "Signature Invalid",
+    "notVerified": "Chưa xác thực",
+    "copy": "Copy signature",
+    "copyCopied": "Đã copy signature",
+    "copyError": "Không thể sao chép vào clipboard.",
+    "empty": "Signature sẽ hiện ở đây khi có token.",
+    "provideKeyHint": "Nhập secret hoặc public key ở trên để xác thực chữ ký này."
+  },
+  "status": {
+    "expiredTitle": "Token đã hết hạn",
+    "expiredTime": "Đã hết hạn {{time}}",
+    "activeTitle": "Token đang hoạt động",
+    "activeTime": "Hết hạn {{time}}",
+    "notYetValidTitle": "Token chưa có hiệu lực",
+    "notYetValidTime": "Bắt đầu {{time}}",
+    "noExpiration": "Không có claim hết hạn (exp)"
+  },
+  "info": {
+    "title": "Thông tin Token",
+    "status": "Trạng thái",
+    "issuedAt": "Ngày cấp",
+    "expires": "Hết hạn",
+    "notBefore": "Có hiệu lực từ",
+    "issuer": "Đơn vị cấp",
+    "subject": "Subject",
+    "audience": "Audience",
+    "jwtId": "JWT ID",
+    "noExpirationStatus": "Hợp lệ (không hết hạn)",
+    "empty": "Không tìm thấy claim chuẩn nào trong payload."
+  }
+}
