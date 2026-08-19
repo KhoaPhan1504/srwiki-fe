@@ -33,6 +33,8 @@ import viJsonFormatter from './vi/json-formatter.json';
 import enJsonFormatter from './en/json-formatter.json';
 import viJwtWebToken from './vi/jwt-web-token.json';
 import enJwtWebToken from './en/jwt-web-token.json';
+import viUuidGenerator from './vi/uuid-generator.json';
+import enUuidGenerator from './en/uuid-generator.json';
 
 export const NAMESPACES = [
   'common',
@@ -50,6 +52,7 @@ export const NAMESPACES = [
   'admin-members',
   'json-formatter',
   'jwt-web-token',
+  'uuid-generator',
 ] as const;
 
 const resources = {
@@ -69,6 +72,7 @@ const resources = {
     'admin-members': viAdminMembers,
     'json-formatter': viJsonFormatter,
     'jwt-web-token': viJwtWebToken,
+    'uuid-generator': viUuidGenerator,
   },
   [Language.EN]: {
     common: enCommon,
@@ -86,6 +90,7 @@ const resources = {
     'admin-members': enAdminMembers,
     'json-formatter': enJsonFormatter,
     'jwt-web-token': enJwtWebToken,
+    'uuid-generator': enUuidGenerator,
   },
 };
 

@@ -1,0 +1,60 @@
+{
+  "title": "UUID Generator",
+  "description": "Tạo UUID an toàn và chuẩn hoá ngay lập tức.",
+  "emptyState": {
+    "title": "Chưa có UUID nào được tạo.",
+    "description": "Chọn tuỳ chọn của bạn và nhấn \"Generate UUIDs\"."
+  },
+  "config": {
+    "title": "Cấu hình",
+    "versionLabel": "Phiên bản",
+    "versionV4": "UUID v4 — Ngẫu nhiên",
+    "versionV7": "UUID v7 — Có thứ tự thời gian",
+    "versionV4Description": "UUID ngẫu nhiên, phù hợp làm định danh cho mục đích chung.",
+    "versionV7Description": "UUID có thứ tự theo thời gian, phù hợp cho chỉ mục cơ sở dữ liệu và định danh có thể sắp xếp.",
+    "quantityLabel": "Số lượng",
+    "quantityError": {
+      "EMPTY": "Vui lòng nhập số lượng.",
+      "NOT_A_NUMBER": "Số lượng phải là một con số.",
+      "NOT_AN_INTEGER": "Số lượng phải là số nguyên.",
+      "TOO_SMALL": "Số lượng tối thiểu là 1.",
+      "TOO_LARGE": "Số lượng tối đa là 100."
+    },
+    "formatLabel": "Định dạng",
+    "caseLower": "Chữ thường",
+    "caseUpper": "Chữ hoa",
+    "removeHyphens": "Bỏ dấu gạch nối",
+    "generate": "Generate UUIDs"
+  },
+  "results": {
+    "title": "UUID đã tạo",
+    "copy": "Copy",
+    "copied": "Đã sao chép",
+    "copyAll": "Copy All",
+    "copyAllSuccess": "Đã sao chép tất cả UUID.",
+    "copyError": "Không thể sao chép vào clipboard.",
+    "download": "Download",
+    "clear": "Clear",
+    "countStat": "{{count}} UUID được tạo",
+    "versionStat": "Phiên bản: {{version}}",
+    "versionV4": "UUID v4",
+    "versionV7": "UUID v7"
+  },
+  "validate": {
+    "title": "Kiểm tra UUID",
+    "inputLabel": "UUID cần kiểm tra",
+    "placeholder": "Dán UUID vào đây...",
+    "valid": "UUID hợp lệ",
+    "invalid": "UUID không hợp lệ",
+    "versionLine": "Phiên bản: {{version}}",
+    "variantLine": "Variant: {{variant}}",
+    "timestampLine": "Timestamp: {{timestamp}}",
+    "variant": {
+      "rfc9562": "RFC 9562",
+      "ncs": "Dự trữ (NCS)",
+      "microsoft": "Dự trữ (Microsoft)",
+      "future": "Dự trữ (tương lai)",
+      "unknown": "Không xác định"
+    }
+  }
+}

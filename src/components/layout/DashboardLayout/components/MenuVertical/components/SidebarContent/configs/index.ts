@@ -1,4 +1,12 @@
-import { Braces, KeyRound, LayoutDashboard, SettingsIcon, User, Users } from 'lucide-react';
+import {
+  Braces,
+  Fingerprint,
+  KeyRound,
+  LayoutDashboard,
+  SettingsIcon,
+  User,
+  Users,
+} from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 export type MenuOption = {
@@ -25,6 +33,13 @@ export const MenuOptions: MenuOption[] = [
     to: '/tools/jwt',
     labelKey: 'nav.jwtWebToken',
     icon: KeyRound,
+    adminOnly: false,
+    section: 'nav.sectionTools',
+  },
+  {
+    to: '/tools/uuid-generator',
+    labelKey: 'nav.uuidGenerator',
+    icon: Fingerprint,
     adminOnly: false,
     section: 'nav.sectionTools',
   },

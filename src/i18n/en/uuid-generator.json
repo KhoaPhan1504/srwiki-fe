@@ -1,0 +1,60 @@
+{
+  "title": "UUID Generator",
+  "description": "Generate secure and standards-compliant UUIDs instantly.",
+  "emptyState": {
+    "title": "No UUIDs generated yet.",
+    "description": "Choose your options and click \"Generate UUIDs\"."
+  },
+  "config": {
+    "title": "Configuration",
+    "versionLabel": "Version",
+    "versionV4": "UUID v4 — Random",
+    "versionV7": "UUID v7 — Time-ordered",
+    "versionV4Description": "Random UUID suitable for general-purpose identifiers.",
+    "versionV7Description": "Time-ordered UUID suitable for database indexes and sortable identifiers.",
+    "quantityLabel": "Quantity",
+    "quantityError": {
+      "EMPTY": "Enter a quantity.",
+      "NOT_A_NUMBER": "Quantity must be a number.",
+      "NOT_AN_INTEGER": "Quantity must be a whole number.",
+      "TOO_SMALL": "Quantity must be at least 1.",
+      "TOO_LARGE": "Quantity must be at most 100."
+    },
+    "formatLabel": "Format",
+    "caseLower": "Lowercase",
+    "caseUpper": "Uppercase",
+    "removeHyphens": "Remove hyphens",
+    "generate": "Generate UUIDs"
+  },
+  "results": {
+    "title": "Generated UUIDs",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyAll": "Copy All",
+    "copyAllSuccess": "Copied all UUIDs.",
+    "copyError": "Couldn't copy to clipboard.",
+    "download": "Download",
+    "clear": "Clear",
+    "countStat": "{{count}} UUIDs generated",
+    "versionStat": "Version: {{version}}",
+    "versionV4": "UUID v4",
+    "versionV7": "UUID v7"
+  },
+  "validate": {
+    "title": "Validate UUID",
+    "inputLabel": "UUID to validate",
+    "placeholder": "Paste a UUID here...",
+    "valid": "Valid UUID",
+    "invalid": "Invalid UUID",
+    "versionLine": "Version: {{version}}",
+    "variantLine": "Variant: {{variant}}",
+    "timestampLine": "Timestamp: {{timestamp}}",
+    "variant": {
+      "rfc9562": "RFC 9562",
+      "ncs": "Reserved (NCS)",
+      "microsoft": "Reserved (Microsoft)",
+      "future": "Reserved (future)",
+      "unknown": "Unknown"
+    }
+  }
+}
