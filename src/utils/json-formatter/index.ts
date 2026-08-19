@@ -1,7 +1,10 @@
+import { ErrorCodes, ValidationReason } from '~root/constants';
+import i18n from '~root/i18n';
+
 export type IndentOption = 2 | 4 | 'tab';
 
 export type JsonParseError = {
-  code: 'EMPTY_INPUT' | 'PARSE_ERROR';
+  code: ErrorCodes;
   message: string;
   line?: number;
   column?: number;
@@ -21,15 +24,16 @@ const locateError = (input: string, message: string): { line: number; column: nu
 
 const parseInput = (input: string): ParsedInput => {
   if (!input.trim()) {
-    return { success: false, error: { code: 'EMPTY_INPUT', message: '' } };
+    return { success: false, error: { code: ErrorCodes.EMPTY_INPUT, message: '' } };
   }
   try {
     return { success: true, data: JSON.parse(input) };
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'Invalid JSON';
+    const message =
+      err instanceof Error ? err.message : i18n.t('common:errorMessages.invalidJsonFallback');
     return {
       success: false,
-      error: { code: 'PARSE_ERROR', message, ...locateError(input, message) },
+      error: { code: ErrorCodes.PARSE_ERROR, message, ...locateError(input, message) },
     };
   }
 };
@@ -60,12 +64,17 @@ export const MAX_UPLOAD_SIZE_BYTES = 5 * 1024 * 1024;
 export type UploadFileInfo = { name: string; size: number; type: string };
 
 export type UploadValidation =
-  { valid: true } | { valid: false; reason: 'EMPTY' | 'TOO_LARGE' | 'INVALID_TYPE' };
+  | { valid: true }
+  | {
+      valid: false;
+      reason: ValidationReason.EMPTY | ValidationReason.TOO_LARGE | ValidationReason.INVALID_TYPE;
+    };
 
 export const validateUploadFile = (file: UploadFileInfo): UploadValidation => {
   const isJsonFile = file.name.toLowerCase().endsWith('.json') || file.type === 'application/json';
-  if (!isJsonFile) return { valid: false, reason: 'INVALID_TYPE' };
-  if (file.size === 0) return { valid: false, reason: 'EMPTY' };
-  if (file.size > MAX_UPLOAD_SIZE_BYTES) return { valid: false, reason: 'TOO_LARGE' };
+  if (!isJsonFile) return { valid: false, reason: ValidationReason.INVALID_TYPE };
+  if (file.size === 0) return { valid: false, reason: ValidationReason.EMPTY };
+  if (file.size > MAX_UPLOAD_SIZE_BYTES)
+    return { valid: false, reason: ValidationReason.TOO_LARGE };
   return { valid: true };
 };

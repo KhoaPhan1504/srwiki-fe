@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useSendOtp } from '~root/apis/useSendOtp';
 import { useVerifyOtp } from '~root/apis/useVerifyOtp';
+import { formatDuration } from '~root/utils';
 
 const OTP_TTL_SECONDS = 5 * 60;
 
@@ -64,9 +65,6 @@ export const OtpModal = ({ phone, onClose, onVerified }: Props) => {
     );
   };
 
-  const minutes = String(Math.floor(secondsLeft / 60)).padStart(2, '0');
-  const seconds = String(secondsLeft % 60).padStart(2, '0');
-
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/40">
       <div className="w-full max-w-sm rounded-lg bg-white p-6 shadow-xl">
@@ -81,7 +79,7 @@ export const OtpModal = ({ phone, onClose, onVerified }: Props) => {
             className="mb-2 w-full rounded border border-slate-300 px-3 py-2 tracking-widest"
           />
           <p className="mb-4 text-xs text-slate-500">
-            {t('otp.expiresIn', { time: `${minutes}:${seconds}` })}
+            {t('otp.expiresIn', { time: formatDuration(secondsLeft) })}
           </p>
           <div className="flex gap-2">
             <button

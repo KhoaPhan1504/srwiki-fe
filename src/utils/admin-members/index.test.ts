@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { toCreatedAtFromIso, toCreatedAtToIso } from './utils';
+import { toCreatedAtFromIso, toCreatedAtToIso } from './index';
 
 describe('toCreatedAtFromIso', () => {
   it('returns undefined for an empty string', () => {

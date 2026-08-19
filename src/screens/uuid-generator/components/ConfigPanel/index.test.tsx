@@ -3,12 +3,12 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '~root/i18n';
 import { ConfigPanel } from '.';
-import { QuantityValidationReason, UUIDCase, UUIDVersion } from '~root/constants';
+import { ValidationReason, UUIDCase, UUIDVersion } from '~root/constants';
 
 const validQuantity = { valid: true as const, value: 5 };
 const invalidQuantity = {
   valid: false as const,
-  reason: QuantityValidationReason.TOO_LARGE as const,
+  reason: ValidationReason.TOO_LARGE as const,
 };
 
 const renderPanel = (overrides: Partial<React.ComponentProps<typeof ConfigPanel>> = {}) => {

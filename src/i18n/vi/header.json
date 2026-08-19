@@ -1,7 +1,7 @@
 {
   "search": { "ariaLabel": "Tìm kiếm", "placeholder": "Tìm kiếm..." },
   "nav": {
-    "dashboard": "Dashboard",
+    "dashboard": "Trang chủ",
     "profile": "Hồ sơ",
     "settings": "Cài đặt",
     "memberList": "Danh sách thành viên",
@@ -12,5 +12,6 @@
     "uuidGenerator": "UUID Generator"
   },
   "theme": { "light": "Sáng", "dark": "Tối", "system": "Theo hệ thống" },
-  "languageSwitch": { "ariaLabel": "Đổi ngôn ngữ" }
+  "languageSwitch": { "ariaLabel": "Đổi ngôn ngữ" },
+  "language": { "en": "Tiếng Anh", "vi": "Tiếng Việt" }
 }

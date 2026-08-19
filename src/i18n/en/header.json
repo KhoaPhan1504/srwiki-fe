@@ -12,5 +12,6 @@
     "uuidGenerator": "UUID Generator"
   },
   "theme": { "light": "Light", "dark": "Dark", "system": "System" },
-  "languageSwitch": { "ariaLabel": "Change language" }
+  "languageSwitch": { "ariaLabel": "Change language" },
+  "language": { "en": "English", "vi": "Vietnamese" }
 }

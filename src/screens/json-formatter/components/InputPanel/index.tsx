@@ -20,7 +20,8 @@ import {
   CardTitle,
   Textarea,
 } from '~root/components/ui';
-import { validateUploadFile } from '../utils';
+import { UPLOAD_ERROR_KEY } from '~root/constants';
+import { validateUploadFile } from '~root/utils';
 
 type Props = {
   value: string;
@@ -28,12 +29,6 @@ type Props = {
   onFileLoaded: (content: string) => void;
   onClear: () => void;
 };
-
-const UPLOAD_ERROR_KEY = {
-  EMPTY: 'input.uploadEmpty',
-  TOO_LARGE: 'input.uploadTooLarge',
-  INVALID_TYPE: 'input.uploadInvalidType',
-} as const;
 
 export const InputPanel = ({ value, onChange, onFileLoaded, onClear }: Props) => {
   const { t } = useTranslation('json-formatter');

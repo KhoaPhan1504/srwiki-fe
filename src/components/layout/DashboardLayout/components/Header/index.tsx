@@ -1,10 +1,7 @@
 import { CommandIcon, Menu, Search } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '~root/components/ui';
-import { NotificationBell } from '../NotificationBell';
-import { LanguageSwitch } from '../LanguageSwitch';
-import { UserMenu } from '../UserMenu';
-
+import { LanguageSwitch, NotificationBell, UserMenu } from './components';
 type Props = { onMenuClick: () => void; onOpenPalette: () => void };
 
 export const Header = ({ onMenuClick, onOpenPalette }: Props) => {

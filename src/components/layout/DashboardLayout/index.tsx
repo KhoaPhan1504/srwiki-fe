@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Header } from './components/Header';
-import { MenuVertical } from './components/MenuVertical';
-import { CommandPalette } from './components/CommandPalette';
 import { useGetSettings } from '~root/apis/useGetSettings';
 import { useTheme } from '~root/providers/ThemeProvider';
+import { CommandPalette, Header, MenuVertical } from './components';
 
 interface Props {
   children: ReactNode;

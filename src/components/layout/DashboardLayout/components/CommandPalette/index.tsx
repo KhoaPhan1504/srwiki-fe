@@ -25,7 +25,7 @@ import { NAV_ITEMS } from './config/navItems';
 import type { NavItem } from './config/navItems';
 import { getLanguageCommands, getThemeCommands } from './config/commands';
 import type { PaletteCommand } from './config/commands';
-import { fuzzyScore } from './fuzzyMatch';
+import { fuzzyScore } from '~root/utils';
 
 type Props = {
   open: boolean;

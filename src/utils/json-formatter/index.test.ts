@@ -1,11 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  MAX_UPLOAD_SIZE_BYTES,
-  formatJson,
-  minifyJson,
-  validateJson,
-  validateUploadFile,
-} from './utils';
+import { MAX_UPLOAD_SIZE_BYTES, formatJson, minifyJson, validateJson, validateUploadFile } from '.';
 
 describe('formatJson', () => {
   it('formats a valid object with 2-space indent', () => {

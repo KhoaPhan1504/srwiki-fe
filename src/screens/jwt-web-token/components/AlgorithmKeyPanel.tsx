@@ -14,8 +14,8 @@ import {
   SelectValue,
   Textarea,
 } from '~root/components/ui';
-import type { JwtAlgorithm } from '../crypto';
-import type { SigningError } from '../crypto';
+import type { SigningError } from '~root/screens/jwt-web-token/crypto';
+import type { JwtAlgorithm } from '~root/constants';
 
 const ALGORITHM_GROUPS: { labelKey: string; algorithms: JwtAlgorithm[] }[] = [
   { labelKey: 'signing.groupHmac', algorithms: ['HS256', 'HS384', 'HS512'] },

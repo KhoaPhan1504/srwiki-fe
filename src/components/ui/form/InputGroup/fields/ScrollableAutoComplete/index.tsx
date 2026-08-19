@@ -15,8 +15,8 @@ import {
   Button,
 } from '~root/components/ui';
 import { cn } from '~root/lib/utils';
-import { FieldShell } from '../../shared/FieldShell';
-import type { SrScrollableAutoCompleteProps } from '../../types';
+import { FieldShell } from '~root/components/common';
+import type { SrScrollableAutoCompleteProps } from '~root/components/ui/form/InputGroup/types';
 
 export const SrScrollableAutoComplete = ({
   name,

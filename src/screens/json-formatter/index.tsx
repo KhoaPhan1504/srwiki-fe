@@ -8,10 +8,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~root/components/ui';
-import { InputPanel } from './components/InputPanel';
-import { OutputPanel } from './components/OutputPanel';
 import { useJsonFormatterHooks } from './hooks';
-import type { IndentOption } from './utils';
+import type { IndentOption } from '~root/utils';
+import { InputPanel, OutputPanel } from './components';
 
 export const JsonFormatterPage = () => {
   const { t } = useTranslation('json-formatter');

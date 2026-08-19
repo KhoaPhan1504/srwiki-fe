@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from 'vitest';
 import { act, renderHook } from '@testing-library/react';
 
-vi.mock('../crypto', () => ({
+vi.mock('~root/screens/jwt-web-token/crypto', () => ({
   buildJwt: vi.fn(),
   verifyJwtSignature: vi.fn().mockResolvedValue({ success: true, valid: true }),
 }));
 
-import { buildJwt } from '../crypto';
+import { buildJwt } from '~root/screens/jwt-web-token/crypto';
 import { useJwtWebTokenHooks } from './index';
 
 type BuildJwtSuccess = { success: true; token: string };

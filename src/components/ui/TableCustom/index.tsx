@@ -23,9 +23,8 @@ import {
   DropdownMenuTrigger,
 } from '~root/components/ui/dropdown-menu';
 import { cn } from '~root/lib/utils';
+import type { ColumnAlign, SortDirection } from '~root/constants';
 
-export type ColumnAlign = 'left' | 'center' | 'right';
-export type SortDirection = 'asc' | 'desc';
 export type SortState = { column: string; direction: SortDirection };
 
 export type FilterValue = string | string[] | { from?: Date; to?: Date };

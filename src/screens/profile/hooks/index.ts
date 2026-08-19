@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useGetProfile, useUpdateProfile, useUploadAvatar } from '~root/apis';
 import { useProfileFormSchema, type ProfileFormValues } from '~root/schemas';
+import { getInitials } from '~root/utils';
 
 export const useProfileHooks = () => {
   const { t } = useTranslation('profile');
@@ -13,7 +14,7 @@ export const useProfileHooks = () => {
   const { mutate: uploadAvatar, isPending: isUploadingAvatar } = useUploadAvatar();
   const [showOtpModal, setShowOtpModal] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const initials = (profile?.fullName || profile?.email)?.slice(0, 1).toUpperCase();
+  const initials = getInitials(profile?.fullName, profile?.email);
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(useProfileFormSchema()),

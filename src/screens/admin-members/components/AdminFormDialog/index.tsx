@@ -14,9 +14,10 @@ import { SrInputGroup, type SrFormFieldConfig } from '~root/components/ui/form/i
 import { useUpdateAdmin } from '~root/apis';
 import type { Admin } from '~root/apis';
 import { useEditAdminSchema, type EditAdminValues } from '~root/schemas';
+import type { FormDialogMode } from '~root/constants';
 
 type Props = {
-  mode: 'view' | 'edit';
+  mode: FormDialogMode;
   admin: Admin;
   open: boolean;
   onOpenChange: (open: boolean) => void;

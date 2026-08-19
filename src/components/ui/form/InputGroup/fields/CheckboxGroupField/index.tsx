@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { FormField, Checkbox, Label } from '~root/components/ui';
-import { FieldShell } from '../../shared/FieldShell';
-import type { SrCheckboxGroupFieldProps } from '../../types';
+import { FieldShell } from '~root/components/common';
+import type { SrCheckboxGroupFieldProps } from '~root/components/ui/form/InputGroup/types';
 
 export const SrCheckboxGroupField = ({
   name,

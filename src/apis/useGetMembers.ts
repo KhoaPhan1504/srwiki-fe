@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { httpClient } from '~root/lib/http-client';
 import { Endpoints, MembershipTier, Role } from '~root/constants';
+import type { SortDirection } from '~root/constants';
 
 export type Member = {
   id: string;
@@ -24,7 +25,7 @@ export type MemberListParams = {
   birthdayFrom?: string;
   birthdayTo?: string;
   sortBy?: string;
-  sortDirection?: 'asc' | 'desc';
+  sortDirection?: SortDirection;
 };
 
 export type MemberListResponse = {

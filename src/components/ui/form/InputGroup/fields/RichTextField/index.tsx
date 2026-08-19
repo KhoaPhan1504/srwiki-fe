@@ -6,8 +6,8 @@ import StarterKit from '@tiptap/starter-kit';
 import { Bold, Italic, List, ListOrdered } from 'lucide-react';
 import { FormField, Button } from '~root/components/ui';
 import { cn } from '~root/lib/utils';
-import { FieldShell } from '../../shared/FieldShell';
-import type { SrRichTextFieldProps } from '../../types';
+import { FieldShell } from '~root/components/common';
+import type { SrRichTextFieldProps } from '~root/components/ui/form/InputGroup/types';
 
 export const SrRichTextField = ({ name, label, description, disabled }: SrRichTextFieldProps) => {
   const { control } = useFormContext();

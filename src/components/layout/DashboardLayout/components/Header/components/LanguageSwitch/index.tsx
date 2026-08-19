@@ -20,17 +20,17 @@ export const LanguageSwitch = () => {
         <Button variant="ghost" className="gap-1.5 px-2" aria-label={t('languageSwitch.ariaLabel')}>
           <span>{language === Language.VI ? '🇻🇳' : '🇬🇧'}</span>
           <span className="hidden sm:inline">
-            {language === Language.VI ? 'Tiếng Việt' : 'English'}
+            {language === Language.VI ? t('language.vi') : t('language.en')}
           </span>
           <ChevronDown className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setLanguagePreference(Language.VI)}>
-          🇻🇳 Tiếng Việt
+          🇻🇳 {t('language.vi')}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setLanguagePreference(Language.EN)}>
-          🇬🇧 English
+          🇬🇧 {t('language.en')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

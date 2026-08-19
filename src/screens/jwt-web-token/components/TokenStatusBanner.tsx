@@ -3,7 +3,7 @@ import { CircleCheck, CircleX, Clock, Info } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { getDateFnsLocale } from '~root/i18n/dateLocale';
 import type { Language } from '~root/constants';
-import { extractClaims, getTokenStatus } from '../utils';
+import { extractClaims, getTokenStatus } from '~root/utils/jwt-web-token';
 
 type Props = { payloadText: string };
 

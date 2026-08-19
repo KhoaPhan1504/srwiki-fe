@@ -2,7 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '~root/i18n';
-import { OutputPanel } from './OutputPanel';
+import { OutputPanel } from '.';
+import { ErrorCodes, ProcessingStatus } from '~root/constants';
 
 vi.mock('react-toastify', () => ({ toast: { error: vi.fn(), success: vi.fn() } }));
 
@@ -23,19 +24,19 @@ describe('OutputPanel', () => {
   });
 
   it('shows the empty state when there is no input', () => {
-    render(<OutputPanel value="" hasInput={false} error={null} status="idle" />);
+    render(<OutputPanel value="" hasInput={false} error={null} status={ProcessingStatus.IDLE} />);
     expect(screen.getByText('Dán JSON hoặc tải lên file JSON để bắt đầu.')).toBeInTheDocument();
   });
 
   it('shows a hint to run an action when there is input but no result yet', () => {
-    render(<OutputPanel value="" hasInput error={null} status="idle" />);
+    render(<OutputPanel value="" hasInput error={null} status={ProcessingStatus.IDLE} />);
     expect(
       screen.getByText('Nhấn Format, Minify hoặc Validate để xem kết quả tại đây.'),
     ).toBeInTheDocument();
   });
 
   it('shows the valid badge and a follow-up hint when validated but not formatted', () => {
-    render(<OutputPanel value="" hasInput error={null} status="valid" />);
+    render(<OutputPanel value="" hasInput error={null} status={ProcessingStatus.VALID} />);
     expect(screen.getByText('JSON hợp lệ')).toBeInTheDocument();
     expect(
       screen.getByText('JSON hợp lệ. Nhấn Format hoặc Minify để xem kết quả tại đây.'),
@@ -43,7 +44,7 @@ describe('OutputPanel', () => {
   });
 
   it('renders the formatted output', () => {
-    render(<OutputPanel value='{"a":1}' hasInput error={null} status="valid" />);
+    render(<OutputPanel value='{"a":1}' hasInput error={null} status={ProcessingStatus.VALID} />);
     expect(screen.getByText('{"a":1}')).toBeInTheDocument();
   });
 
@@ -52,8 +53,13 @@ describe('OutputPanel', () => {
       <OutputPanel
         value=""
         hasInput
-        error={{ code: 'PARSE_ERROR', message: 'Unexpected token', line: 1, column: 8 }}
-        status="invalid"
+        error={{
+          code: ErrorCodes.PARSE_ERROR,
+          message: 'Unexpected token',
+          line: 1,
+          column: 8,
+        }}
+        status={ProcessingStatus.INVALID}
       />,
     );
     expect(screen.getByText('JSON không hợp lệ')).toBeInTheDocument();
@@ -61,7 +67,7 @@ describe('OutputPanel', () => {
   });
 
   it('disables Copy and Download when there is no output', () => {
-    render(<OutputPanel value="" hasInput={false} error={null} status="idle" />);
+    render(<OutputPanel value="" hasInput={false} error={null} status={ProcessingStatus.IDLE} />);
     expect(screen.getByRole('button', { name: 'Copy' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Download' })).toBeDisabled();
   });
@@ -70,7 +76,7 @@ describe('OutputPanel', () => {
     const user = userEvent.setup();
     const writeText = vi.fn().mockResolvedValue(undefined);
     stubClipboard(writeText);
-    render(<OutputPanel value='{"a":1}' hasInput error={null} status="valid" />);
+    render(<OutputPanel value='{"a":1}' hasInput error={null} status={ProcessingStatus.VALID} />);
 
     await user.click(screen.getByRole('button', { name: 'Copy' }));
 
@@ -82,7 +88,7 @@ describe('OutputPanel', () => {
     const { toast } = await import('react-toastify');
     const user = userEvent.setup();
     stubClipboard(vi.fn().mockRejectedValue(new Error('denied')));
-    render(<OutputPanel value='{"a":1}' hasInput error={null} status="valid" />);
+    render(<OutputPanel value='{"a":1}' hasInput error={null} status={ProcessingStatus.VALID} />);
 
     await user.click(screen.getByRole('button', { name: 'Copy' }));
 
@@ -100,7 +106,7 @@ describe('OutputPanel', () => {
     vi.stubGlobal('URL', { ...URL, createObjectURL, revokeObjectURL });
     const clickSpy = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
     const user = userEvent.setup();
-    render(<OutputPanel value='{"a":1}' hasInput error={null} status="valid" />);
+    render(<OutputPanel value='{"a":1}' hasInput error={null} status={ProcessingStatus.VALID} />);
 
     await user.click(screen.getByRole('button', { name: 'Download' }));
 

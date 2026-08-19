@@ -1,3 +1,6 @@
+import { ErrorCodes } from '~root/constants';
+import i18n from '~root/i18n';
+
 export type JwtHeader = Record<string, unknown>;
 export type JwtPayload = Record<string, unknown>;
 
@@ -8,14 +11,7 @@ export type DecodedJwt = {
   segments: { header: string; payload: string; signature: string };
 };
 
-export type DecodeErrorCode =
-  | 'EMPTY_TOKEN'
-  | 'INVALID_SEGMENT_COUNT'
-  | 'INVALID_BASE64'
-  | 'INVALID_JSON_HEADER'
-  | 'INVALID_JSON_PAYLOAD';
-
-export type DecodeError = { code: DecodeErrorCode; message: string };
+export type DecodeError = { code: ErrorCodes; message: string };
 
 export type DecodeResult =
   { success: true; data: DecodedJwt } | { success: false; error: DecodeError };
@@ -49,8 +45,7 @@ export const base64UrlEncodeText = (text: string): string =>
 
 const PEM_LINE_LENGTH = 64;
 
-export type PemErrorCode = 'INVALID_PEM';
-export type PemError = { code: PemErrorCode; message: string };
+export type PemError = { code: ErrorCodes.INVALID_PEM; message: string };
 export type PemParseResult =
   { success: true; data: ArrayBuffer } | { success: false; error: PemError };
 
@@ -59,13 +54,19 @@ export const parsePem = (pem: string): PemParseResult => {
   if (!match) {
     return {
       success: false,
-      error: { code: 'INVALID_PEM', message: 'Missing PEM header/footer.' },
+      error: {
+        code: ErrorCodes.INVALID_PEM,
+        message: i18n.t('common:errorMessages.pemMissingHeaderFooter'),
+      },
     };
   }
 
   const base64 = match[1].replace(/\s+/g, '');
   if (!base64) {
-    return { success: false, error: { code: 'INVALID_PEM', message: 'PEM body is empty.' } };
+    return {
+      success: false,
+      error: { code: ErrorCodes.INVALID_PEM, message: i18n.t('common:errorMessages.pemBodyEmpty') },
+    };
   }
 
   try {
@@ -75,7 +76,10 @@ export const parsePem = (pem: string): PemParseResult => {
   } catch (err) {
     return {
       success: false,
-      error: { code: 'INVALID_PEM', message: err instanceof Error ? err.message : String(err) },
+      error: {
+        code: ErrorCodes.INVALID_PEM,
+        message: err instanceof Error ? err.message : String(err),
+      },
     };
   }
 };
@@ -98,24 +102,33 @@ const isJsonObject = (value: unknown): value is Record<string, unknown> =>
 
 const decodeSegmentAsJsonObject = (
   segment: string,
-  errorCode: 'INVALID_BASE64' | 'INVALID_JSON_HEADER' | 'INVALID_JSON_PAYLOAD',
+  errorCode: ErrorCodes,
 ): { success: true; data: Record<string, unknown> } | { success: false; error: DecodeError } => {
   let decoded: string;
   try {
     decoded = base64UrlDecode(segment);
   } catch (err) {
-    return { success: false, error: { code: 'INVALID_BASE64', message: errorMessage(err) } };
+    return {
+      success: false,
+      error: { code: ErrorCodes.INVALID_BASE64, message: errorMessage(err) },
+    };
   }
 
   let parsed: unknown;
   try {
     parsed = JSON.parse(decoded);
   } catch (err) {
-    return { success: false, error: { code: errorCode, message: errorMessage(err) } };
+    return {
+      success: false,
+      error: { code: errorCode, message: errorMessage(err) },
+    };
   }
 
   if (!isJsonObject(parsed)) {
-    return { success: false, error: { code: errorCode, message: 'Expected a JSON object.' } };
+    return {
+      success: false,
+      error: { code: errorCode, message: i18n.t('common:errorMessages.expectedJsonObject') },
+    };
   }
 
   return { success: true, data: parsed };
@@ -124,7 +137,10 @@ const decodeSegmentAsJsonObject = (
 export const decodeJwt = (rawToken: string): DecodeResult => {
   const normalized = normalizeToken(rawToken);
   if (!normalized) {
-    return { success: false, error: { code: 'EMPTY_TOKEN', message: 'Token is empty.' } };
+    return {
+      success: false,
+      error: { code: ErrorCodes.EMPTY_TOKEN, message: i18n.t('common:errorMessages.tokenEmpty') },
+    };
   }
 
   const segments = splitSegments(normalized);
@@ -132,18 +148,18 @@ export const decodeJwt = (rawToken: string): DecodeResult => {
     return {
       success: false,
       error: {
-        code: 'INVALID_SEGMENT_COUNT',
-        message: `Expected 3 segments, got ${segments.length}.`,
+        code: ErrorCodes.INVALID_SEGMENT_COUNT,
+        message: i18n.t('common:errorMessages.invalidSegmentCount', { count: segments.length }),
       },
     };
   }
 
   const [headerSegment, payloadSegment, signatureSegment] = segments;
 
-  const header = decodeSegmentAsJsonObject(headerSegment, 'INVALID_JSON_HEADER');
+  const header = decodeSegmentAsJsonObject(headerSegment, ErrorCodes.INVALID_JSON_HEADER);
   if (!header.success) return header;
 
-  const payload = decodeSegmentAsJsonObject(payloadSegment, 'INVALID_JSON_PAYLOAD');
+  const payload = decodeSegmentAsJsonObject(payloadSegment, ErrorCodes.INVALID_JSON_PAYLOAD);
   if (!payload.success) return payload;
 
   return {

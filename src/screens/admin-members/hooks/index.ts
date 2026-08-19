@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import type { FilterValue, SortState } from '~root/components/ui';
+import { asDateRange, dateOnly } from '~root/utils';
 
 const MEMBERS_PARAM_KEYS = [
   'page',
@@ -15,11 +16,6 @@ const MEMBERS_PARAM_KEYS = [
 ];
 
 type TableUrlState = { filters: Record<string, FilterValue>; sort: SortState | null; page: number };
-
-const dateOnly = (date?: Date): string | undefined => date?.toISOString().slice(0, 10);
-
-const asDateRange = (value: FilterValue | undefined): { from?: Date; to?: Date } =>
-  value && typeof value === 'object' && !Array.isArray(value) ? value : {};
 
 const parseMembersStateFromParams = (params: URLSearchParams): TableUrlState => {
   const filters: Record<string, FilterValue> = {};

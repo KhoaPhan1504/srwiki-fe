@@ -16,8 +16,8 @@ import {
   Badge,
 } from '~root/components/ui';
 import { cn } from '~root/lib/utils';
-import { FieldShell } from '../../shared/FieldShell';
-import type { SrDropDownListFieldProps } from '../../types';
+import { FieldShell } from '~root/components/common';
+import type { SrDropDownListFieldProps } from '~root/components/ui/form/InputGroup/types';
 
 export const SrDropDownListField = ({
   name,

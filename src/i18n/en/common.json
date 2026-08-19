@@ -10,6 +10,14 @@
   "forbidden": "You don't have permission to access this resource!",
   "settingsSaved": "Preferences saved.",
   "settingsSaveError": "Failed to save preferences.",
+  "errorMessages": {
+    "invalidJsonFallback": "Invalid JSON",
+    "expectedJsonObject": "Expected a JSON object.",
+    "pemMissingHeaderFooter": "Missing PEM header/footer.",
+    "pemBodyEmpty": "PEM body is empty.",
+    "tokenEmpty": "Token is empty.",
+    "invalidSegmentCount": "Expected 3 segments, got {{count}}."
+  },
   "table": {
     "empty": "No data available",
     "pagination": {

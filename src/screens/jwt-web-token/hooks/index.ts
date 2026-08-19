@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { buildJwt, verifyJwtSignature } from '../crypto';
-import type { JwtAlgorithm, SigningError } from '../crypto';
-import { decodeJwt } from '../utils';
-import type { DecodeError, JwtHeader, JwtPayload } from '../utils';
+import { buildJwt, verifyJwtSignature } from '~root/screens/jwt-web-token/crypto';
+import type { SigningError } from '~root/screens/jwt-web-token/crypto';
+import { decodeJwt } from '~root/utils/jwt-web-token';
+import type { DecodeError, JwtHeader, JwtPayload } from '~root/utils/jwt-web-token';
+import type { JwtAlgorithm, SignatureStatus } from '~root/constants';
+import i18n from '~root/i18n';
 
 const DEFAULT_HEADER_TEXT = '{\n  "alg": "HS256",\n  "typ": "JWT"\n}';
 const DEFAULT_PAYLOAD_TEXT = '{}';
@@ -34,15 +36,13 @@ const parseJsonObject = (text: string): JsonObjectParseResult => {
   try {
     const parsed: unknown = JSON.parse(text);
     if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
-      return { success: false, message: 'Expected a JSON object.' };
+      return { success: false, message: i18n.t('common:errorMessages.expectedJsonObject') };
     }
     return { success: true, data: parsed as Record<string, unknown> };
   } catch (err) {
     return { success: false, message: err instanceof Error ? err.message : String(err) };
   }
 };
-
-export type SignatureStatus = 'unknown' | 'valid' | 'invalid';
 
 export const useJwtWebTokenHooks = () => {
   const [token, setTokenState] = useState('');

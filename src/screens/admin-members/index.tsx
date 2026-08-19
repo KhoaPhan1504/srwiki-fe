@@ -4,9 +4,10 @@ import { useAtomValue } from 'jotai';
 import { useSearchParams } from 'react-router-dom';
 import { Plus } from 'lucide-react';
 import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from '~root/components/ui';
-import type { FilterValue } from '~root/components/ui';
 import { authAtom } from '~root/stores';
 import { Role } from '~root/constants';
+import type { TimezoneMode } from '~root/constants';
+import { asDateRange, dateOnly, toCreatedAtFromIso, toCreatedAtToIso } from '~root/utils';
 import {
   useDeleteAdmin,
   useDeleteMember,
@@ -24,11 +25,7 @@ import { CreateMemberDialog } from './components/CreateMemberDialog';
 import { MemberFormDialog } from './components/MemberFormDialog';
 import { CreateAdminDialog } from './components/CreateAdminDialog';
 import { AdminFormDialog } from './components/AdminFormDialog';
-import { toCreatedAtFromIso, toCreatedAtToIso } from './utils';
 import type { Admin, Member } from '~root/apis';
-
-const asFilterDateRange = (value: FilterValue | undefined): { from?: Date; to?: Date } =>
-  value && typeof value === 'object' && !Array.isArray(value) ? value : {};
 
 const PAGE_SIZE = 20;
 const VALID_TABS = ['members', 'admins'] as const;
@@ -53,9 +50,9 @@ export const AdminMembersScreen = () => {
   const { settings } = useGetSettings();
   const { mutate: deleteMember } = useDeleteMember();
   const { mutate: promoteMember } = usePromoteMember();
-  const timezoneMode: 'UTC' | 'local' = settings?.timezone === 'UTC' ? 'UTC' : 'local';
-  const createdAtRange = asFilterDateRange(filters.createdAt);
-  const birthdayRange = asFilterDateRange(filters.birthday);
+  const timezoneMode: TimezoneMode = settings?.timezone === 'UTC' ? 'UTC' : 'local';
+  const createdAtRange = asDateRange(filters.createdAt);
+  const birthdayRange = asDateRange(filters.birthday);
   const membershipTierFilter = filters.membershipTier;
   const { data, isLoading, isError, refetch } = useGetMembers({
     page,
@@ -67,14 +64,14 @@ export const AdminMembersScreen = () => {
         ? membershipTierFilter.join(',')
         : undefined,
     createdAtFrom: createdAtRange.from
-      ? toCreatedAtFromIso(createdAtRange.from.toISOString().slice(0, 10), timezoneMode)
+      ? toCreatedAtFromIso(dateOnly(createdAtRange.from) ?? '', timezoneMode)
       : undefined,
     createdAtTo: createdAtRange.to
-      ? toCreatedAtToIso(createdAtRange.to.toISOString().slice(0, 10), timezoneMode)
+      ? toCreatedAtToIso(dateOnly(createdAtRange.to) ?? '', timezoneMode)
       : undefined,
     address: typeof filters.address === 'string' && filters.address ? filters.address : undefined,
-    birthdayFrom: birthdayRange.from ? birthdayRange.from.toISOString().slice(0, 10) : undefined,
-    birthdayTo: birthdayRange.to ? birthdayRange.to.toISOString().slice(0, 10) : undefined,
+    birthdayFrom: dateOnly(birthdayRange.from),
+    birthdayTo: dateOnly(birthdayRange.to),
   });
 
   const {
@@ -91,7 +88,7 @@ export const AdminMembersScreen = () => {
   const { mutate: deleteAdmin } = useDeleteAdmin();
   const { mutate: demoteAdmin } = useDemoteAdmin();
   const adminsAddressFilter = adminsFilters.address;
-  const adminsCreatedAtRange = asFilterDateRange(adminsFilters.createdAt);
+  const adminsCreatedAtRange = asDateRange(adminsFilters.createdAt);
   const {
     data: adminsData,
     isLoading: isAdminsLoading,
@@ -107,10 +104,10 @@ export const AdminMembersScreen = () => {
         ? adminsAddressFilter
         : undefined,
     createdAtFrom: adminsCreatedAtRange.from
-      ? toCreatedAtFromIso(adminsCreatedAtRange.from.toISOString().slice(0, 10), timezoneMode)
+      ? toCreatedAtFromIso(dateOnly(adminsCreatedAtRange.from) ?? '', timezoneMode)
       : undefined,
     createdAtTo: adminsCreatedAtRange.to
-      ? toCreatedAtToIso(adminsCreatedAtRange.to.toISOString().slice(0, 10), timezoneMode)
+      ? toCreatedAtToIso(dateOnly(adminsCreatedAtRange.to) ?? '', timezoneMode)
       : undefined,
   });
 
