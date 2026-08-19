@@ -11,12 +11,11 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
+  Badge,
 } from '~root/components/ui';
 import { withCacheBust } from '~root/lib/utils';
-import { useGetProfile } from '~root/apis/useGetProfile';
-import { useLogout } from '~root/apis';
-import { Badge } from '~root/components/ui';
-import { getRoleLabel } from '~root/utils';
+import { useLogout, useGetProfile } from '~root/apis';
+import { getInitials, getRoleLabel } from '~root/utils';
 
 export const UserMenu = () => {
   const { t } = useTranslation('header');
@@ -24,7 +23,7 @@ export const UserMenu = () => {
   const navigate = useNavigate();
   const logout = useLogout();
 
-  const initials = (profile?.fullName ?? profile?.email ?? '?').slice(0, 1).toUpperCase();
+  const initials = getInitials(profile?.fullName, profile?.email);
 
   return (
     <DropdownMenu>

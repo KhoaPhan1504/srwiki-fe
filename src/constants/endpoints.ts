@@ -1,0 +1,14 @@
+export const Endpoints = {
+  AUTH_REGISTER: '/auth/register',
+  AUTH_LOGIN: '/auth/login',
+  AUTH_REFRESH: '/auth/refresh',
+  AUTH_LOGOUT: '/auth/logout',
+  PROFILE: '/profile',
+  PROFILE_AVATAR: '/profile/avatar',
+  PROFILE_PHONE_SEND_OTP: '/profile/phone/send-otp',
+  PROFILE_PHONE_VERIFY_OTP: '/profile/phone/verify-otp',
+  SETTINGS: '/settings',
+  NOTIFICATIONS: '/notifications',
+  ADMIN_MEMBERS: '/admin/members',
+  ADMIN_ADMINS: '/admin/admins',
+} as const;

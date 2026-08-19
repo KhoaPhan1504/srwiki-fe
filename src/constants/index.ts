@@ -1,3 +1,5 @@
+export * from './endpoints';
+
 // Vite substitutes this at build time. If it is missing the axios client would
 // fall back to `baseURL: undefined` and quietly resolve every request against
 // the page's own origin -- which surfaces as bogus 200s and fake "wrong
@@ -30,21 +32,6 @@ if (!supabaseUrl || !supabaseAnonKey) {
 export const SUPABASE_URL: string | null = supabaseUrl || null;
 export const SUPABASE_ANON_KEY: string | null = supabaseAnonKey || null;
 
-export const Endpoints = {
-  AUTH_REGISTER: '/auth/register',
-  AUTH_LOGIN: '/auth/login',
-  AUTH_REFRESH: '/auth/refresh',
-  AUTH_LOGOUT: '/auth/logout',
-  PROFILE: '/profile',
-  PROFILE_AVATAR: '/profile/avatar',
-  PROFILE_PHONE_SEND_OTP: '/profile/phone/send-otp',
-  PROFILE_PHONE_VERIFY_OTP: '/profile/phone/verify-otp',
-  SETTINGS: '/settings',
-  NOTIFICATIONS: '/notifications',
-  ADMIN_MEMBERS: '/admin/members',
-  ADMIN_ADMINS: '/admin/admins',
-} as const;
-
 export enum Theme {
   LIGHT = 'light',
   DARK = 'dark',
@@ -55,15 +42,7 @@ export enum Language {
   VI = 'vi',
   EN = 'en',
 }
-
-export enum DashboardTab {
-  MEMBER_SINCE = 'Thành viên từ',
-  PROFILE_COMPLETION = 'Hồ sơ hoàn thiện',
-  PHONE_NUMBER = 'Số điện thoại',
-  EMAIL = 'Email',
-}
-
-export enum PhoneVerificationStatus {
+export enum VerificationStatus {
   VERIFIED = 'verified',
   UNVERIFIED = 'unverified',
 }
@@ -100,12 +79,13 @@ export enum UUIDVersion {
   V7 = 'v7',
 }
 
-export enum QuantityValidationReason {
+export enum ValidationReason {
   EMPTY = 'EMPTY',
   NOT_A_NUMBER = 'NOT_A_NUMBER',
   NOT_AN_INTEGER = 'NOT_AN_INTEGER',
   TOO_SMALL = 'TOO_SMALL',
   TOO_LARGE = 'TOO_LARGE',
+  INVALID_TYPE = 'INVALID_TYPE',
 }
 
 export enum UuidVariant {
@@ -115,3 +95,43 @@ export enum UuidVariant {
   FUTURE = 'future',
   UNKNOWN = 'unknown',
 }
+
+export enum ProcessingStatus {
+  IDLE = 'idle',
+  VALID = 'valid',
+  INVALID = 'invalid',
+}
+
+export const UPLOAD_ERROR_KEY = {
+  EMPTY: 'input.uploadEmpty',
+  TOO_LARGE: 'input.uploadTooLarge',
+  INVALID_TYPE: 'input.uploadInvalidType',
+} as const;
+
+export enum ErrorCodes {
+  EMPTY_TOKEN = 'EMPTY_TOKEN',
+  INVALID_SEGMENT_COUNT = 'INVALID_SEGMENT_COUNT',
+  INVALID_BASE64 = 'INVALID_BASE64',
+  INVALID_JSON_HEADER = 'INVALID_JSON_HEADER',
+  INVALID_JSON_PAYLOAD = 'INVALID_JSON_PAYLOAD',
+  INVALID_PEM = 'INVALID_PEM',
+  EMPTY_INPUT = 'EMPTY_INPUT',
+  PARSE_ERROR = 'PARSE_ERROR',
+}
+
+export type ColumnAlign = 'left' | 'center' | 'right';
+export type SortDirection = 'asc' | 'desc';
+export type SignatureStatus = 'unknown' | 'valid' | 'invalid';
+
+export type HmacAlgorithm = 'HS256' | 'HS384' | 'HS512';
+export type RsaAlgorithm = 'RS256' | 'RS384' | 'RS512';
+export type RsaPssAlgorithm = 'PS256' | 'PS384' | 'PS512';
+export type EcdsaAlgorithm = 'ES256' | 'ES384' | 'ES512';
+
+export type JwtAlgorithm = HmacAlgorithm | RsaAlgorithm | RsaPssAlgorithm | EcdsaAlgorithm;
+
+export type SigningErrorCode = 'INVALID_KEY' | 'SIGNING_FAILED' | 'VERIFICATION_FAILED';
+
+export type FormDialogMode = 'view' | 'edit';
+
+export type TimezoneMode = 'UTC' | 'local';

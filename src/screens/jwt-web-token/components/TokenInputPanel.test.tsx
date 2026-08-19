@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '~root/i18n';
 import { TokenInputPanel } from './TokenInputPanel';
+import { ErrorCodes } from '~root/constants';
 
 vi.mock('react-toastify', () => ({ toast: { error: vi.fn(), success: vi.fn() } }));
 
@@ -132,7 +133,7 @@ describe('TokenInputPanel', () => {
         value=""
         onChange={vi.fn()}
         onClear={vi.fn()}
-        error={{ code: 'EMPTY_TOKEN', message: 'Token is empty.' }}
+        error={{ code: ErrorCodes.EMPTY_TOKEN, message: 'Token is empty.' }}
       />,
     );
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
@@ -144,7 +145,7 @@ describe('TokenInputPanel', () => {
         value="not.a.valid.jwt"
         onChange={vi.fn()}
         onClear={vi.fn()}
-        error={{ code: 'INVALID_SEGMENT_COUNT', message: 'Expected 3 segments, got 4.' }}
+        error={{ code: ErrorCodes.INVALID_SEGMENT_COUNT, message: 'Expected 3 segments, got 4.' }}
       />,
     );
     expect(screen.getByRole('alert')).toHaveTextContent(
@@ -158,7 +159,7 @@ describe('TokenInputPanel', () => {
         value="aaa.bbb.ccc"
         onChange={vi.fn()}
         onClear={vi.fn()}
-        error={{ code: 'INVALID_BASE64', message: 'raw atob error' }}
+        error={{ code: ErrorCodes.INVALID_BASE64, message: 'raw atob error' }}
       />,
     );
     expect(screen.getByRole('alert')).toHaveTextContent(
@@ -172,7 +173,7 @@ describe('TokenInputPanel', () => {
         value="aaa.bbb.ccc"
         onChange={vi.fn()}
         onClear={vi.fn()}
-        error={{ code: 'INVALID_JSON_HEADER', message: 'raw parse error' }}
+        error={{ code: ErrorCodes.INVALID_JSON_HEADER, message: 'raw parse error' }}
       />,
     );
     expect(screen.getByRole('alert')).toHaveTextContent('Không thể giải mã header JWT thành JSON.');
@@ -184,7 +185,7 @@ describe('TokenInputPanel', () => {
         value="aaa.bbb.ccc"
         onChange={vi.fn()}
         onClear={vi.fn()}
-        error={{ code: 'INVALID_JSON_PAYLOAD', message: 'raw parse error' }}
+        error={{ code: ErrorCodes.INVALID_JSON_PAYLOAD, message: 'raw parse error' }}
       />,
     );
     expect(screen.getByRole('alert')).toHaveTextContent(

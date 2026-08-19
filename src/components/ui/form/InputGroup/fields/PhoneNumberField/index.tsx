@@ -1,8 +1,7 @@
 import { useFormContext } from 'react-hook-form';
+import { FieldShell, PhoneInput } from '~root/components/common';
 import { FormField } from '~root/components/ui';
-import { PhoneInput } from '~root/components/common';
-import { FieldShell } from '../../shared/FieldShell';
-import type { SrPhoneNumberFieldProps } from '../../types';
+import type { SrPhoneNumberFieldProps } from '~root/components/ui/form/InputGroup/types';
 
 export const SrPhoneNumberField = ({ name, label, description }: SrPhoneNumberFieldProps) => {
   const { control } = useFormContext();

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Eye, EyeOff } from 'lucide-react';
 import { FormField, FormControl, Input } from '~root/components/ui';
-import { FieldShell } from '../../shared/FieldShell';
-import type { SrPasswordFieldProps } from '../../types';
+import { FieldShell } from '~root/components/common';
+import type { SrPasswordFieldProps } from '~root/components/ui/form/InputGroup/types';
 
 export const SrPasswordField = ({
   name,

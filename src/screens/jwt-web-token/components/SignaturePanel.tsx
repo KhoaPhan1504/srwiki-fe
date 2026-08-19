@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle } from '~root/components/ui';
-import { splitSegments } from '../utils';
-import type { SignatureStatus } from '../hooks';
+import { splitSegments } from '~root/utils/jwt-web-token';
+import type { SignatureStatus } from '~root/constants';
 
 type Props = {
   token: string;

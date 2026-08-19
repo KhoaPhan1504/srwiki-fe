@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FormField, Checkbox, Label } from '~root/components/ui';
+import type { SrDateRangeWithTimespanFieldProps } from '~root/components/ui/form/InputGroup/types';
 import { SrDatePickerField } from '../DatePickerField';
-import type { SrDateRangeWithTimespanFieldProps } from '../../types';
 
 export const SrDateRangeWithTimespanField = ({
   fromName,

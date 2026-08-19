@@ -1,33 +1,38 @@
 import { useState } from 'react';
-import { formatJson, minifyJson, validateJson } from '../utils';
-import type { IndentOption, JsonParseError, ValidateResult } from '../utils';
-
-type Status = 'idle' | 'valid' | 'invalid';
+import { ErrorCodes, ProcessingStatus } from '~root/constants';
+import {
+  formatJson,
+  minifyJson,
+  validateJson,
+  type IndentOption,
+  type JsonParseError,
+  type ValidateResult,
+} from '~root/utils';
 
 export const useJsonFormatterHooks = () => {
   const [input, setInputValue] = useState('');
   const [output, setOutput] = useState('');
   const [indent, setIndent] = useState<IndentOption>(2);
   const [error, setError] = useState<JsonParseError | null>(null);
-  const [status, setStatus] = useState<Status>('idle');
+  const [status, setStatus] = useState<ProcessingStatus>(ProcessingStatus.IDLE);
 
   const applyValidation = (result: ValidateResult) => {
     if (result.success) {
       setError(null);
-      setStatus('valid');
-    } else if (result.error.code === 'EMPTY_INPUT') {
+      setStatus(ProcessingStatus.VALID);
+    } else if (result.error.code === ErrorCodes.EMPTY_INPUT) {
       setError(null);
-      setStatus('idle');
+      setStatus(ProcessingStatus.IDLE);
     } else {
       setError(result.error);
-      setStatus('invalid');
+      setStatus(ProcessingStatus.INVALID);
     }
   };
 
   const setInput = (value: string) => {
     setInputValue(value);
     setError(null);
-    setStatus('idle');
+    setStatus(ProcessingStatus.IDLE);
   };
 
   const handleFileLoaded = (content: string) => {
@@ -62,7 +67,7 @@ export const useJsonFormatterHooks = () => {
     setInputValue('');
     setOutput('');
     setError(null);
-    setStatus('idle');
+    setStatus(ProcessingStatus.IDLE);
   };
 
   return {

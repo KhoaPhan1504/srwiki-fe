@@ -2,8 +2,8 @@ import { useState, type KeyboardEvent } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { X } from 'lucide-react';
 import { FormField, Input, Badge } from '~root/components/ui';
-import { FieldShell } from '../../shared/FieldShell';
-import type { SrMultipleSearchKeywordsFieldProps } from '../../types';
+import { FieldShell } from '~root/components/common';
+import type { SrMultipleSearchKeywordsFieldProps } from '~root/components/ui/form/InputGroup/types';
 
 export const SrMultipleSearchKeywordsField = ({
   name,

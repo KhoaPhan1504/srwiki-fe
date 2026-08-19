@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { FormField, RadioGroup, RadioGroupItem, Label } from '~root/components/ui';
-import { FieldShell } from '../../shared/FieldShell';
-import type { SrRadioGroupFieldProps } from '../../types';
+import { FieldShell } from '~root/components/common';
+import type { SrRadioGroupFieldProps } from '~root/components/ui/form/InputGroup/types';
 
 export const SrRadioGroupField = ({
   name,

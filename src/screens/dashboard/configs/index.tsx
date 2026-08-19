@@ -2,7 +2,7 @@ import { CalendarCheck, Mail, Phone, UserRound, type LucideIcon } from 'lucide-r
 import type { TFunction } from 'i18next';
 import type { Profile } from '~root/apis';
 import { Badge } from '~root/components/ui';
-import { PhoneVerificationStatus } from '~root/constants';
+import { VerificationStatus } from '~root/constants';
 import { formatDate } from '~root/utils';
 
 // ---- Config for stat cards ----
@@ -42,9 +42,7 @@ export const STAT_CARDS: StatCardConfig[] = [
       <Badge variant={profile.phoneVerified ? 'verify-primary' : 'destructive'}>
         {t(
           `phoneStatus.${
-            profile.phoneVerified
-              ? PhoneVerificationStatus.VERIFIED
-              : PhoneVerificationStatus.UNVERIFIED
+            profile.phoneVerified ? VerificationStatus.VERIFIED : VerificationStatus.UNVERIFIED
           }`,
         )}
       </Badge>

@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { FormField, Input } from '~root/components/ui';
-import { FieldShell } from '../../shared/FieldShell';
-import type { SrTimePickerFieldProps } from '../../types';
+import { FieldShell } from '~root/components/common';
+import type { SrTimePickerFieldProps } from '~root/components/ui/form/InputGroup/types';
 
 export const SrTimePickerField = ({
   name,

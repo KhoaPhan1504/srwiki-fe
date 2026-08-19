@@ -1,26 +1,28 @@
-import { base64UrlDecodeBytes, base64UrlEncode, base64UrlEncodeText, parsePem } from './utils';
-import type { JwtHeader, JwtPayload } from './utils';
+import {
+  base64UrlDecodeBytes,
+  base64UrlEncode,
+  base64UrlEncodeText,
+  parsePem,
+} from '~root/utils/jwt-web-token';
+import type { JwtHeader, JwtPayload } from '~root/utils/jwt-web-token';
+import type {
+  EcdsaAlgorithm,
+  HmacAlgorithm,
+  JwtAlgorithm,
+  RsaAlgorithm,
+  RsaPssAlgorithm,
+  SigningErrorCode,
+} from '~root/constants';
 
-export type JwtAlgorithm =
-  | 'HS256'
-  | 'HS384'
-  | 'HS512'
-  | 'RS256'
-  | 'RS384'
-  | 'RS512'
-  | 'PS256'
-  | 'PS384'
-  | 'PS512'
-  | 'ES256'
-  | 'ES384'
-  | 'ES512';
+export type {
+  EcdsaAlgorithm,
+  HmacAlgorithm,
+  JwtAlgorithm,
+  RsaAlgorithm,
+  RsaPssAlgorithm,
+  SigningErrorCode,
+};
 
-export type HmacAlgorithm = 'HS256' | 'HS384' | 'HS512';
-export type RsaAlgorithm = 'RS256' | 'RS384' | 'RS512';
-export type RsaPssAlgorithm = 'PS256' | 'PS384' | 'PS512';
-export type EcdsaAlgorithm = 'ES256' | 'ES384' | 'ES512';
-
-export type SigningErrorCode = 'INVALID_KEY' | 'SIGNING_FAILED' | 'VERIFICATION_FAILED';
 export type SigningError = { code: SigningErrorCode; message: string };
 
 export type SignResult =

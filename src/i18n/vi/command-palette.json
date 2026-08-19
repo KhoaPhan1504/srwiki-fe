@@ -9,7 +9,7 @@
   "empty": "Không tìm thấy kết quả.",
   "groups": { "commands": "Lệnh", "navigation": "Điều hướng" },
   "nav": {
-    "dashboard": "Dashboard",
+    "dashboard": "Trang chủ",
     "profile": "Hồ sơ",
     "settings": "Cài đặt",
     "settingsGeneral": "Cài đặt · Chung",
@@ -17,13 +17,15 @@
     "settingsNotifications": "Cài đặt · Thông báo",
     "settingsAccount": "Cài đặt · Tài khoản",
     "memberList": "Danh sách thành viên",
-    "jsonFormatter": "JSON Formatter"
+    "jsonFormatter": "JSON Formatter",
+    "jwtWebToken": "JWT Web Token",
+    "uuidGenerator": "UUID Generator"
   },
   "commands": {
     "themeLight": "Chuyển sang giao diện Sáng",
     "themeDark": "Chuyển sang giao diện Tối",
     "themeSystem": "Chuyển theo hệ thống",
     "languageVi": "Chuyển sang Tiếng Việt",
-    "languageEn": "Chuyển sang English"
+    "languageEn": "Chuyển sang Tiếng Anh"
   }
 }

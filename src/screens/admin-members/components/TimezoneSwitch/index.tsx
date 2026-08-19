@@ -1,12 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Switch, Label } from '~root/components/ui';
 import { useGetSettings, useUpdateSettings } from '~root/apis';
-import { TIMEZONES } from '~root/constants';
-
-const resolveLocalTimezone = (): string => {
-  const detected = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  return (TIMEZONES as readonly string[]).includes(detected) ? detected : 'Asia/Ho_Chi_Minh';
-};
+import { resolveLocalTimezone } from '~root/utils';
 
 export const TimezoneSwitch = () => {
   const { t } = useTranslation('admin-members');

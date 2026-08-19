@@ -20,13 +20,15 @@
     "settingsNotifications": "Settings · Notifications",
     "settingsAccount": "Settings · Account",
     "memberList": "Member List",
-    "jsonFormatter": "JSON Formatter"
+    "jsonFormatter": "JSON Formatter",
+    "jwtWebToken": "JWT Web Token",
+    "uuidGenerator": "UUID Generator"
   },
   "commands": {
     "themeLight": "Switch to Light theme",
     "themeDark": "Switch to Dark theme",
     "themeSystem": "Switch to System theme",
-    "languageVi": "Switch to Tiếng Việt",
+    "languageVi": "Switch to Vietnamese",
     "languageEn": "Switch to English"
   }
 }

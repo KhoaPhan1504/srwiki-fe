@@ -1,4 +1,4 @@
-import { QuantityValidationReason, UUIDCase, UuidVariant, UUIDVersion } from '~root/constants';
+import { ValidationReason, UUIDCase, UuidVariant, UUIDVersion } from '~root/constants';
 
 export type FormatOptions = {
   case: UUIDCase;
@@ -43,19 +43,18 @@ export type QuantityValidation =
   | { valid: true; value: number }
   | {
       valid: false;
-      reason: QuantityValidationReason;
+      reason: ValidationReason;
     };
 
 export const validateQuantity = (input: string): QuantityValidation => {
   const trimmed = input.trim();
-  if (!trimmed) return { valid: false, reason: QuantityValidationReason.EMPTY };
+  if (!trimmed) return { valid: false, reason: ValidationReason.EMPTY };
 
   const value = Number(trimmed);
-  if (Number.isNaN(value)) return { valid: false, reason: QuantityValidationReason.NOT_A_NUMBER };
-  if (!Number.isInteger(value))
-    return { valid: false, reason: QuantityValidationReason.NOT_AN_INTEGER };
-  if (value < MIN_QUANTITY) return { valid: false, reason: QuantityValidationReason.TOO_SMALL };
-  if (value > MAX_QUANTITY) return { valid: false, reason: QuantityValidationReason.TOO_LARGE };
+  if (Number.isNaN(value)) return { valid: false, reason: ValidationReason.NOT_A_NUMBER };
+  if (!Number.isInteger(value)) return { valid: false, reason: ValidationReason.NOT_AN_INTEGER };
+  if (value < MIN_QUANTITY) return { valid: false, reason: ValidationReason.TOO_SMALL };
+  if (value > MAX_QUANTITY) return { valid: false, reason: ValidationReason.TOO_LARGE };
 
   return { valid: true, value };
 };

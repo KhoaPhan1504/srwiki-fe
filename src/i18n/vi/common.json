@@ -10,6 +10,14 @@
   "forbidden": "Bạn không có quyền truy cập tài nguyên này!",
   "settingsSaved": "Đã lưu tuỳ chọn.",
   "settingsSaveError": "Lưu tuỳ chọn thất bại.",
+  "errorMessages": {
+    "invalidJsonFallback": "JSON không hợp lệ",
+    "expectedJsonObject": "Yêu cầu một đối tượng JSON.",
+    "pemMissingHeaderFooter": "Thiếu phần đầu/cuối PEM.",
+    "pemBodyEmpty": "Nội dung PEM trống.",
+    "tokenEmpty": "Token đang trống.",
+    "invalidSegmentCount": "Cần 3 đoạn, nhưng nhận được {{count}}."
+  },
   "table": {
     "empty": "Không có dữ liệu",
     "pagination": {

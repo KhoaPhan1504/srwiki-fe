@@ -1,20 +1,22 @@
 import { Bell } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { useTranslation } from 'react-i18next';
+import { getDateFnsLocale } from '~root/i18n/dateLocale';
+import type { Language } from '~root/constants';
+import { DEFAULT_NOTIFICATION_TYPE_CONFIG, NOTIFICATION_TYPE_CONFIG } from './configs';
 import {
+  useGetNotifications,
+  useMarkAllNotificationsRead,
+  useMarkNotificationRead,
+  useNotificationsRealtime,
+} from '~root/apis';
+import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '~root/components/ui/dropdown-menu';
-import { Button } from '~root/components/ui/button';
-import { useGetNotifications } from '~root/apis/useGetNotifications';
-import { useMarkNotificationRead } from '~root/apis/useMarkNotificationRead';
-import { useMarkAllNotificationsRead } from '~root/apis/useMarkAllNotificationsRead';
-import { useNotificationsRealtime } from '~root/apis/useNotificationsRealtime';
-import { getDateFnsLocale } from '~root/i18n/dateLocale';
-import type { Language } from '~root/constants';
-import { DEFAULT_NOTIFICATION_TYPE_CONFIG, NOTIFICATION_TYPE_CONFIG } from './configs';
+} from '~root/components/ui';
 
 export const NotificationBell = () => {
   const { t, i18n } = useTranslation('notifications');

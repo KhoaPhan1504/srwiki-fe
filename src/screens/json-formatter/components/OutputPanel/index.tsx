@@ -3,13 +3,14 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle } from '~root/components/ui';
-import type { JsonParseError } from '../utils';
+import type { ProcessingStatus } from '~root/constants';
+import type { JsonParseError } from '~root/utils';
 
 type Props = {
   value: string;
   hasInput: boolean;
   error: JsonParseError | null;
-  status: 'idle' | 'valid' | 'invalid';
+  status: ProcessingStatus;
 };
 
 export const OutputPanel = ({ value, hasInput, error, status }: Props) => {

@@ -19,7 +19,7 @@ import {
   CardTitle,
   Textarea,
 } from '~root/components/ui';
-import type { DecodeError } from '../utils';
+import type { DecodeError } from '~root/utils/jwt-web-token';
 
 const DECODE_ERROR_KEY: Partial<Record<DecodeError['code'], string>> = {
   INVALID_SEGMENT_COUNT: 'input.errors.invalidSegmentCount',

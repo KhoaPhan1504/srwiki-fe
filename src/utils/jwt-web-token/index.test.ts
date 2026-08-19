@@ -12,7 +12,7 @@ import {
   numericDateToDate,
   parsePem,
   splitSegments,
-} from './utils';
+} from '.';
 
 const VALID_TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' +

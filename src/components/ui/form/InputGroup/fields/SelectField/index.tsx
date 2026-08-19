@@ -8,8 +8,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~root/components/ui';
-import { FieldShell } from '../../shared/FieldShell';
-import type { SrSelectFieldProps } from '../../types';
+import { FieldShell } from '~root/components/common';
+import type { SrSelectFieldProps } from '~root/components/ui/form/InputGroup/types';
 
 // WARNING: Do NOT feed this a controlled value that changes after mount (e.g., via form.reset(...) in useEffect).
 // This causes Radix Select's displayed value to become visually blank despite correct react-hook-form state.

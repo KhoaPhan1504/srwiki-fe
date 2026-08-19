@@ -1,4 +1,3 @@
-// src/components/form/InputGroup/shared/FieldShell.tsx
 import type { ReactNode } from 'react';
 import {
   FormControl,

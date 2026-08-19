@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { COMPLETION_FIELDS } from '../configs';
+import { COMPLETION_FIELDS } from '~root/screens/dashboard/configs';
 import { useGetProfile } from '~root/apis';
 
 export const useDashboardHooks = () => {

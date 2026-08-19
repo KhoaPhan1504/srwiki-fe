@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { FormField, Textarea } from '~root/components/ui';
-import { FieldShell } from '../../shared/FieldShell';
-import type { SrTextAreaFieldProps } from '../../types';
+import { FieldShell } from '~root/components/common';
+import type { SrTextAreaFieldProps } from '~root/components/ui/form/InputGroup/types';
 
 export const SrTextAreaField = ({
   name,

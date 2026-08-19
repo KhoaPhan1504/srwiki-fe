@@ -17,8 +17,11 @@ import {
   Badge,
 } from '~root/components/ui';
 import { cn } from '~root/lib/utils';
-import { FieldShell } from '../../shared/FieldShell';
-import type { SrAutoCompleteFieldProps, SrSelectItem } from '../../types';
+import { FieldShell } from '~root/components/common';
+import type {
+  SrAutoCompleteFieldProps,
+  SrSelectItem,
+} from '~root/components/ui/form/InputGroup/types';
 
 export const SrAutoCompleteField = ({
   name,

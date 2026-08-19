@@ -15,9 +15,10 @@ import { useUpdateMember } from '~root/apis';
 import type { Member } from '~root/apis';
 import { useEditMemberSchema, type EditMemberValues } from '~root/schemas';
 import { MembershipTier } from '~root/constants';
+import type { FormDialogMode } from '~root/constants';
 
 type Props = {
-  mode: 'view' | 'edit';
+  mode: FormDialogMode;
   member: Member;
   open: boolean;
   onOpenChange: (open: boolean) => void;

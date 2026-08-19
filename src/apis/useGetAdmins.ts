@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { httpClient } from '~root/lib/http-client';
 import { Endpoints, Role } from '~root/constants';
+import type { SortDirection } from '~root/constants';
 
 export type Admin = {
   id: string;
@@ -17,7 +18,7 @@ export type AdminListParams = {
   page: number;
   pageSize: number;
   sortBy?: string;
-  sortDirection?: 'asc' | 'desc';
+  sortDirection?: SortDirection;
   address?: string;
   createdAtFrom?: string;
   createdAtTo?: string;

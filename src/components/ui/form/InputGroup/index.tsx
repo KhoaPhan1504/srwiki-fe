@@ -1,27 +1,29 @@
 // src/components/form/InputGroup/index.tsx
 import { FormProvider, type FieldValues, type UseFormReturn } from 'react-hook-form';
 import { cn } from '~root/lib/utils';
-import { SrTextField } from './fields/TextField';
-import { SrPasswordField } from './fields/PasswordField';
-import { SrNumberField } from './fields/NumberField';
-import { SrTextAreaField } from './fields/TextAreaField';
-import { SrSelectField } from './fields/SelectField';
-import { SrDropDownListField } from './fields/DropDownListField';
-import { SrCheckboxGroupField } from './fields/CheckboxGroupField';
-import { SrRadioGroupField } from './fields/RadioGroupField';
-import { SrRadioActionField } from './fields/RadioActionField';
-import { SrPhoneNumberField } from './fields/PhoneNumberField';
-import { SrDatePickerField } from './fields/DatePickerField';
-import { SrDateRangePicker } from './fields/DateRangePicker';
-import { SrDateRangeWithTimespanField } from './fields/DateRangeWithTimespanField';
-import { SrTimePickerField } from './fields/TimePickerField';
-import { SrCalendarField } from './fields/CalendarField';
-import { SrRichTextField } from './fields/RichTextField';
-import { SrAutoCompleteField } from './fields/AutoCompleteField';
-import { SrDynamicAutoCompleteField } from './fields/DynamicAutoCompleteField';
-import { SrScrollableAutoComplete } from './fields/ScrollableAutoComplete';
-import { SrMultipleSearchKeywordsField } from './fields/MultipleSearchKeywordsField';
 import type { SrFormFieldConfig } from './types';
+import {
+  SrAutoCompleteField,
+  SrCalendarField,
+  SrCheckboxGroupField,
+  SrDatePickerField,
+  SrDateRangePicker,
+  SrDateRangeWithTimespanField,
+  SrDropDownListField,
+  SrDynamicAutoCompleteField,
+  SrMultipleSearchKeywordsField,
+  SrNumberField,
+  SrPasswordField,
+  SrPhoneNumberField,
+  SrRadioActionField,
+  SrRadioGroupField,
+  SrRichTextField,
+  SrScrollableAutoComplete,
+  SrSelectField,
+  SrTextAreaField,
+  SrTextField,
+  SrTimePickerField,
+} from './fields';
 
 const InputRender = (field: SrFormFieldConfig) => {
   switch (field.inputType) {

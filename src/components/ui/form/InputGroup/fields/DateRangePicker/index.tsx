@@ -1,5 +1,5 @@
-import { SrDatePickerField } from '../DatePickerField';
-import type { SrDateRangePickerProps } from '../../types';
+import { SrDatePickerField } from '~root/components/ui/form/InputGroup/fields/DatePickerField';
+import type { SrDateRangePickerProps } from '~root/components/ui/form/InputGroup/types';
 
 export const SrDateRangePicker = ({
   fromName,

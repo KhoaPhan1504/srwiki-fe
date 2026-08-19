@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '~root/components/ui';
 import { getDateFnsLocale } from '~root/i18n/dateLocale';
 import type { Language } from '~root/constants';
-import { extractClaims, getTokenStatus, numericDateToDate } from '../utils';
+import { extractClaims, getTokenStatus, numericDateToDate } from '~root/utils/jwt-web-token';
 
 type Props = { payloadText: string };
 
