@@ -2,6 +2,8 @@ import i18n from '~root/i18n';
 import { getIntlLocaleTag } from '~root/i18n/dateLocale';
 import type { Language } from '~root/constants';
 
+export * from './uuid-generator';
+
 export const isJsonString = (value: string): boolean => {
   try {
     JSON.parse(value);

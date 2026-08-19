@@ -8,6 +8,7 @@ import JsonFormatterPage from '~root/pages/JsonFormatter';
 import JwtWebTokenPage from '~root/pages/JwtWebToken';
 import ProfilePage from '~root/pages/Profile';
 import SettingsPage from '~root/pages/Settings';
+import UuidGeneratorPage from '~root/pages/UuidGenerator';
 import { authAtom } from '~root/stores';
 import type { AuthUser } from '~root/stores';
 import { Role } from '~root/constants';
@@ -40,6 +41,7 @@ export const protectedRoutes: RouteObject[] = [
   { path: '/settings', element: <PrivateRoute element={<SettingsPage />} /> },
   { path: '/tools/json-formatter', element: <PrivateRoute element={<JsonFormatterPage />} /> },
   { path: '/tools/jwt', element: <PrivateRoute element={<JwtWebTokenPage />} /> },
+  { path: '/tools/uuid-generator', element: <PrivateRoute element={<UuidGeneratorPage />} /> },
   {
     path: '/admin/members',
     element: (

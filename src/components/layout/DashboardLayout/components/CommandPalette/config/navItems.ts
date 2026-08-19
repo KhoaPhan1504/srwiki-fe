@@ -1,4 +1,12 @@
-import { Braces, KeyRound, LayoutDashboard, SettingsIcon, User, Users } from 'lucide-react';
+import {
+  Braces,
+  Fingerprint,
+  KeyRound,
+  LayoutDashboard,
+  SettingsIcon,
+  User,
+  Users,
+} from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 export type NavItem = {
@@ -55,5 +63,11 @@ export const NAV_ITEMS: NavItem[] = [
     labelKey: 'nav.jwtWebToken',
     to: '/tools/jwt',
     icon: KeyRound,
+  },
+  {
+    id: 'uuid-generator',
+    labelKey: 'nav.uuidGenerator',
+    to: '/tools/uuid-generator',
+    icon: Fingerprint,
   },
 ];

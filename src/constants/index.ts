@@ -89,3 +89,29 @@ export enum MembershipTier {
   REGULAR = 'regular',
   VIP = 'vip',
 }
+
+export enum UUIDCase {
+  LOWER = 'lower',
+  UPPER = 'upper',
+}
+
+export enum UUIDVersion {
+  V4 = 'v4',
+  V7 = 'v7',
+}
+
+export enum QuantityValidationReason {
+  EMPTY = 'EMPTY',
+  NOT_A_NUMBER = 'NOT_A_NUMBER',
+  NOT_AN_INTEGER = 'NOT_AN_INTEGER',
+  TOO_SMALL = 'TOO_SMALL',
+  TOO_LARGE = 'TOO_LARGE',
+}
+
+export enum UuidVariant {
+  RFC9562 = 'rfc9562',
+  NCS = 'ncs',
+  MICROSOFT = 'microsoft',
+  FUTURE = 'future',
+  UNKNOWN = 'unknown',
+}
