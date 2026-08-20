@@ -1,0 +1,29 @@
+{
+  "title": "Chuyển đổi màu",
+  "description": "Chuyển đổi màu giữa HEX, RGB và HSL — dán bất kỳ định dạng nào để nhận cả ba ngay lập tức.",
+  "input": {
+    "title": "Đầu vào",
+    "label": "Giá trị màu",
+    "placeholder": "vd: #3a7bd5, rgb(58, 123, 213), hsl(212, 63%, 53%)",
+    "hint": "Định dạng được tự động nhận diện từ cú pháp HEX, RGB hoặc HSL.",
+    "clear": "Clear",
+    "clearConfirmTitle": "Xoá nội dung đầu vào?",
+    "clearConfirmDescription": "Thao tác này sẽ xoá nội dung đầu vào và kết quả hiện tại. Không thể hoàn tác."
+  },
+  "output": {
+    "title": "Kết quả",
+    "hex": "HEX",
+    "rgb": "RGB",
+    "hsl": "HSL",
+    "copy": "Copy",
+    "copied": "Đã sao chép",
+    "copyError": "Không thể sao chép vào clipboard.",
+    "invalidTitle": "Đầu vào không hợp lệ",
+    "invalidHexDescription": "Đây không phải mã màu HEX hợp lệ. Dùng # theo sau bởi 3 hoặc 6 ký tự hex, vd #f00 hoặc #ff0000.",
+    "invalidRgbDescription": "Đây không phải mã màu RGB hợp lệ. Dùng rgb(r, g, b) với mỗi kênh từ 0 đến 255.",
+    "invalidHslDescription": "Đây không phải mã màu HSL hợp lệ. Dùng hsl(h, s%, l%) với hue từ 0-360 và saturation/lightness từ 0-100%.",
+    "invalidFormatDescription": "Giá trị này không giống mã màu HEX, RGB hay HSL.",
+    "empty": "Nhập mã màu để chuyển đổi.",
+    "previewAlt": "Xem trước màu cho {{hex}}"
+  }
+}

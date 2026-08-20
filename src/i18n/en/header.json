@@ -14,7 +14,8 @@
     "markdownPreview": "Markdown Preview",
     "base64EncoderDecoder": "Base64 Encoder / Decoder",
     "urlEncoderDecoder": "URL Encoder / Decoder",
-    "timestampConverter": "Timestamp Converter"
+    "timestampConverter": "Timestamp Converter",
+    "colorConverter": "Color Converter"
   },
   "theme": { "light": "Light", "dark": "Dark", "system": "System" },
   "languageSwitch": { "ariaLabel": "Change language" },

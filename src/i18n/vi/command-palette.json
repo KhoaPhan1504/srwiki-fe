@@ -24,7 +24,8 @@
     "markdownPreview": "Xem trước Markdown",
     "base64EncoderDecoder": "Mã hóa / giải mã Base64",
     "urlEncoderDecoder": "Mã hóa / giải mã URL",
-    "timestampConverter": "Chuyển đổi timestamp"
+    "timestampConverter": "Chuyển đổi timestamp",
+    "colorConverter": "Chuyển đổi màu"
   },
   "commands": {
     "themeLight": "Chuyển sang giao diện Sáng",

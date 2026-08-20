@@ -4,6 +4,7 @@ import type { RouteObject } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
 import AdminMembersPage from '~root/pages/AdminMembers';
 import Base64EncoderDecoderPage from '~root/pages/Base64EncoderDecoder';
+import ColorConverterPage from '~root/pages/ColorConverter';
 import DashboardPage from '~root/pages/Dashboard';
 import JsonFormatterPage from '~root/pages/JsonFormatter';
 import JwtWebTokenPage from '~root/pages/JwtWebToken';
@@ -60,6 +61,10 @@ export const protectedRoutes: RouteObject[] = [
   {
     path: '/tools/timestamp-converter',
     element: <PrivateRoute element={<TimestampConverterPage />} />,
+  },
+  {
+    path: '/tools/color-converter',
+    element: <PrivateRoute element={<ColorConverterPage />} />,
   },
   {
     path: '/admin/members',
