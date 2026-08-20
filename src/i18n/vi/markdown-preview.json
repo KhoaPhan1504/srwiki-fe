@@ -1,0 +1,56 @@
+{
+  "title": "Markdown Preview",
+  "description": "Soạn Markdown và xem trước kết quả hiển thị ngay lập tức.",
+  "viewMode": {
+    "editor": "Soạn thảo",
+    "split": "Chia đôi",
+    "preview": "Xem trước"
+  },
+  "toolbar": {
+    "heading": "Tiêu đề",
+    "bold": "Đậm",
+    "italic": "Nghiêng",
+    "strikethrough": "Gạch ngang",
+    "link": "Liên kết",
+    "image": "Hình ảnh",
+    "unorderedList": "Danh sách chấm",
+    "orderedList": "Danh sách số",
+    "quote": "Trích dẫn",
+    "inlineCode": "Mã inline",
+    "codeBlock": "Khối mã",
+    "horizontalRule": "Đường kẻ ngang"
+  },
+  "input": {
+    "title": "Markdown",
+    "placeholder": "Soạn Markdown tại đây...",
+    "charCount": "{{count}} ký tự",
+    "lineCount": "{{count}} dòng",
+    "upload": "Tải lên",
+    "uploadEmpty": "File rỗng.",
+    "uploadTooLarge": "File quá lớn. Kích thước tối đa là 5 MB.",
+    "uploadInvalidType": "Vui lòng tải lên file .md, .markdown hoặc .txt.",
+    "uploadReadError": "Không thể đọc file."
+  },
+  "preview": {
+    "title": "Xem trước",
+    "empty": "Bắt đầu soạn Markdown để xem trước kết quả tại đây."
+  },
+  "actions": {
+    "copy": "Copy",
+    "copied": "Đã sao chép",
+    "copyError": "Không thể sao chép vào clipboard.",
+    "downloadMarkdown": "Tải xuống .md",
+    "downloadHtml": "Tải xuống .html",
+    "clear": "Clear",
+    "clearConfirmTitle": "Xoá toàn bộ nội dung?",
+    "clearConfirmDescription": "Thao tác này sẽ xoá nội dung Markdown hiện tại. Không thể hoàn tác."
+  },
+  "examples": {
+    "title": "Ví dụ mẫu",
+    "selectLabel": "Chọn ví dụ",
+    "selectPlaceholder": "Chọn một ví dụ...",
+    "gettingStarted": "Bắt đầu",
+    "taskList": "Danh sách công việc",
+    "table": "Bảng"
+  }
+}

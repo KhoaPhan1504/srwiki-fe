@@ -6,6 +6,7 @@ import AdminMembersPage from '~root/pages/AdminMembers';
 import DashboardPage from '~root/pages/Dashboard';
 import JsonFormatterPage from '~root/pages/JsonFormatter';
 import JwtWebTokenPage from '~root/pages/JwtWebToken';
+import MarkdownPreviewPage from '~root/pages/MarkdownPreview';
 import ProfilePage from '~root/pages/Profile';
 import RegexTesterPage from '~root/pages/RegexTester';
 import SettingsPage from '~root/pages/Settings';
@@ -44,6 +45,10 @@ export const protectedRoutes: RouteObject[] = [
   { path: '/tools/jwt', element: <PrivateRoute element={<JwtWebTokenPage />} /> },
   { path: '/tools/uuid-generator', element: <PrivateRoute element={<UuidGeneratorPage />} /> },
   { path: '/tools/regex-tester', element: <PrivateRoute element={<RegexTesterPage />} /> },
+  {
+    path: '/tools/markdown-preview',
+    element: <PrivateRoute element={<MarkdownPreviewPage />} />,
+  },
   {
     path: '/admin/members',
     element: (

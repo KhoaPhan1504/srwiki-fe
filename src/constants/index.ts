@@ -1,5 +1,6 @@
 export * from './endpoints';
 export * from './regex';
+export * from './markdown-preview';
 // Vite substitutes this at build time. If it is missing the axios client would
 // fall back to `baseURL: undefined` and quietly resolve every request against
 // the page's own origin -- which surfaces as bogus 200s and fake "wrong

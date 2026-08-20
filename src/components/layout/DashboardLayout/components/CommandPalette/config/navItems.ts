@@ -3,6 +3,7 @@ import {
   Fingerprint,
   KeyRound,
   LayoutDashboard,
+  NotebookText,
   Regex,
   SettingsIcon,
   User,
@@ -76,5 +77,11 @@ export const NAV_ITEMS: NavItem[] = [
     labelKey: 'nav.regexTester',
     to: '/tools/regex-tester',
     icon: Regex,
+  },
+  {
+    id: 'markdown-preview',
+    labelKey: 'nav.markdownPreview',
+    to: '/tools/markdown-preview',
+    icon: NotebookText,
   },
 ];
