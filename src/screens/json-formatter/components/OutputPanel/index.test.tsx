@@ -69,7 +69,7 @@ describe('OutputPanel', () => {
   it('disables Copy and Download when there is no output', () => {
     render(<OutputPanel value="" hasInput={false} error={null} status={ProcessingStatus.IDLE} />);
     expect(screen.getByRole('button', { name: 'Copy' })).toBeDisabled();
-    expect(screen.getByRole('button', { name: 'Download' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Tải xuống' })).toBeDisabled();
   });
 
   it('copies the output to the clipboard and shows a temporary confirmation', async () => {
@@ -103,12 +103,16 @@ describe('OutputPanel', () => {
   it('triggers a formatted.json download', async () => {
     const createObjectURL = vi.fn().mockReturnValue('blob:mock');
     const revokeObjectURL = vi.fn();
+
     vi.stubGlobal('URL', { ...URL, createObjectURL, revokeObjectURL });
+
     const clickSpy = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
+
     const user = userEvent.setup();
+
     render(<OutputPanel value='{"a":1}' hasInput error={null} status={ProcessingStatus.VALID} />);
 
-    await user.click(screen.getByRole('button', { name: 'Download' }));
+    await user.click(screen.getByRole('button', { name: 'Tải xuống' }));
 
     expect(createObjectURL).toHaveBeenCalled();
     expect(clickSpy).toHaveBeenCalled();

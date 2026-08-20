@@ -7,6 +7,7 @@ export * from './json-formatter';
 export * from './admin-members';
 export * from './fuzzy-match';
 export * from './date-format';
+export * from './regex-tester';
 
 export const isJsonString = (value: string): boolean => {
   try {

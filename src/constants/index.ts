@@ -1,5 +1,5 @@
 export * from './endpoints';
-
+export * from './regex';
 // Vite substitutes this at build time. If it is missing the axios client would
 // fall back to `baseURL: undefined` and quietly resolve every request against
 // the page's own origin -- which surfaces as bogus 200s and fake "wrong
@@ -100,6 +100,9 @@ export enum ProcessingStatus {
   IDLE = 'idle',
   VALID = 'valid',
   INVALID = 'invalid',
+  DONE = 'done',
+  TIMEOUT = 'timeout',
+  ERROR = 'error',
 }
 
 export const UPLOAD_ERROR_KEY = {
@@ -135,3 +138,11 @@ export type SigningErrorCode = 'INVALID_KEY' | 'SIGNING_FAILED' | 'VERIFICATION_
 export type FormDialogMode = 'view' | 'edit';
 
 export type TimezoneMode = 'UTC' | 'local';
+
+export const DEBOUNCE_MS = 350;
+
+export const WORKER_TIMEOUT_MS = 1500;
+
+export const TEST_STRING_WARN_LENGTH = 50_000;
+
+export const HIGHLIGHT_MAX_LENGTH = 20_000;

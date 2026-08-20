@@ -3,6 +3,7 @@ import {
   Fingerprint,
   KeyRound,
   LayoutDashboard,
+  Regex,
   SettingsIcon,
   User,
   Users,
@@ -69,5 +70,11 @@ export const NAV_ITEMS: NavItem[] = [
     labelKey: 'nav.uuidGenerator',
     to: '/tools/uuid-generator',
     icon: Fingerprint,
+  },
+  {
+    id: 'regex-tester',
+    labelKey: 'nav.regexTester',
+    to: '/tools/regex-tester',
+    icon: Regex,
   },
 ];

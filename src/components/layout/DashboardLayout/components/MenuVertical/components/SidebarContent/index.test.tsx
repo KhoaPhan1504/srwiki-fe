@@ -50,4 +50,17 @@ describe('SidebarContent', () => {
     });
     expect(screen.queryByText('Danh sách thành viên')).not.toBeInTheDocument();
   });
+
+  it('shows the Regex Tester tool item for a member (tools are open to everyone)', () => {
+    renderSidebar({
+      token: 'tok',
+      user: {
+        id: '1',
+        email: 'a@b.com',
+        role: Role.MEMBER,
+        membershipTier: MembershipTier.REGULAR,
+      },
+    });
+    expect(screen.getByText('Regex Tester')).toBeInTheDocument();
+  });
 });

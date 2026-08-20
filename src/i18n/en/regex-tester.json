@@ -1,0 +1,92 @@
+{
+  "title": "Regex Tester",
+  "description": "Test and debug regular expressions instantly.",
+  "comingSoon": "This feature is under construction.",
+  "pattern": {
+    "title": "Regular Expression",
+    "inputLabel": "Pattern",
+    "placeholder": "^[A-Z][a-z]+$",
+    "invalidTitle": "Invalid regular expression",
+    "copyPreview": "Copy",
+    "copied": "Copied",
+    "copyError": "Could not copy to clipboard."
+  },
+  "flags": {
+    "g": { "label": "g", "description": "Global — find all matches" },
+    "i": { "label": "i", "description": "Ignore case" },
+    "m": { "label": "m", "description": "Multiline — ^ and $ match per line" },
+    "s": { "label": "s", "description": "Dot matches newline" },
+    "u": { "label": "u", "description": "Unicode-aware matching" },
+    "y": { "label": "y", "description": "Sticky — match only at the start position" },
+    "d": { "label": "d", "description": "Match indices" }
+  },
+  "testString": {
+    "title": "Test String",
+    "placeholder": "Paste the text you want to test...",
+    "charCount": "{{count}} characters",
+    "largeInputWarning": "The test string is quite large — matching may be slower."
+  },
+  "highlight": {
+    "title": "Highlighted Result",
+    "tooLarge": "Test string is too large to highlight — see the results table below."
+  },
+  "results": {
+    "title": "Matches",
+    "matchCount": "{{count}} matches found",
+    "noMatches": "No matches found",
+    "truncated": "Results truncated because there are too many matches.",
+    "columnMatch": "#",
+    "columnValue": "Value",
+    "columnIndex": "Index",
+    "columnLength": "Length",
+    "fullMatch": "Full Match",
+    "groups": "Groups",
+    "namedGroups": "Named Groups",
+    "noMatchGroup": "(no match)",
+    "emptyMatch": "(empty string)"
+  },
+  "replace": {
+    "title": "Replace",
+    "inputLabel": "Replacement",
+    "placeholder": "$1-$2, or literal text...",
+    "previewTitle": "Preview Result",
+    "replaceAll": "Replace All",
+    "copyResult": "Copy",
+    "copied": "Copied",
+    "copyError": "Could not copy to clipboard."
+  },
+  "examples": {
+    "title": "Examples",
+    "selectLabel": "Select an example",
+    "selectPlaceholder": "Choose an example...",
+    "email": "Email",
+    "url": "URL",
+    "ipv4": "IPv4 Address",
+    "phone": "Phone Number",
+    "numbers": "Numbers",
+    "whitespace": "Whitespace"
+  },
+  "cheatsheet": {
+    "title": "Quick Reference",
+    "toggle": "Show common syntax",
+    "dot": "Any character",
+    "digit": "Digit",
+    "word": "Word character",
+    "whitespace": "Whitespace",
+    "start": "Start of string/line",
+    "end": "End of string/line",
+    "zeroOrMore": "Zero or more",
+    "oneOrMore": "One or more",
+    "zeroOrOne": "Zero or one",
+    "range": "Between n and m times",
+    "charClass": "Character class",
+    "group": "Capture group",
+    "nonCapturingGroup": "Non-capturing group",
+    "or": "Or"
+  },
+  "clear": {
+    "button": "Clear",
+    "confirmTitle": "Clear everything?",
+    "confirmDescription": "This will clear the pattern, flags, test string, and current results. This cannot be undone."
+  }
+}
