@@ -15,7 +15,8 @@
     "base64EncoderDecoder": "Base64 Encoder / Decoder",
     "urlEncoderDecoder": "URL Encoder / Decoder",
     "timestampConverter": "Timestamp Converter",
-    "colorConverter": "Color Converter"
+    "colorConverter": "Color Converter",
+    "unitConverter": "Unit Converter"
   },
   "theme": { "light": "Light", "dark": "Dark", "system": "System" },
   "languageSwitch": { "ariaLabel": "Change language" },

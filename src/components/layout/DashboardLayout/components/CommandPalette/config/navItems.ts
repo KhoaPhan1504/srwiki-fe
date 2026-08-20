@@ -9,6 +9,7 @@ import {
   NotebookText,
   Palette,
   Regex,
+  Ruler,
   SettingsIcon,
   User,
   Users,
@@ -111,5 +112,11 @@ export const NAV_ITEMS: NavItem[] = [
     labelKey: 'nav.colorConverter',
     to: '/tools/color-converter',
     icon: Palette,
+  },
+  {
+    id: 'unit-converter',
+    labelKey: 'nav.unitConverter',
+    to: '/tools/unit-converter',
+    icon: Ruler,
   },
 ];

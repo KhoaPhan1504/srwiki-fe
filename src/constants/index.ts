@@ -1,6 +1,7 @@
 export * from './endpoints';
 export * from './regex';
 export * from './markdown-preview';
+export * from './unit-converter';
 // Vite substitutes this at build time. If it is missing the axios client would
 // fall back to `baseURL: undefined` and quietly resolve every request against
 // the page's own origin -- which surfaces as bogus 200s and fake "wrong
@@ -128,6 +129,9 @@ export enum ErrorCodes {
   INVALID_RGB = 'INVALID_RGB',
   INVALID_HSL = 'INVALID_HSL',
   INVALID_COLOR_FORMAT = 'INVALID_COLOR_FORMAT',
+  INVALID_NUMBER = 'INVALID_NUMBER',
+  NEGATIVE_NOT_ALLOWED = 'NEGATIVE_NOT_ALLOWED',
+  BELOW_ABSOLUTE_ZERO = 'BELOW_ABSOLUTE_ZERO',
 }
 
 export type ColumnAlign = 'left' | 'center' | 'right';
@@ -168,4 +172,11 @@ export enum TimestampUnit {
 export enum TimestampConversionMode {
   TIMESTAMP_TO_DATE = 'timestampToDate',
   DATE_TO_TIMESTAMP = 'dateToTimestamp',
+}
+
+export enum UnitCategory {
+  LENGTH = 'length',
+  DATA = 'data',
+  TIME = 'time',
+  TEMPERATURE = 'temperature',
 }

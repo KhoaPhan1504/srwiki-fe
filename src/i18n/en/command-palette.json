@@ -28,7 +28,8 @@
     "base64EncoderDecoder": "Base64 Encoder / Decoder",
     "urlEncoderDecoder": "URL Encoder / Decoder",
     "timestampConverter": "Timestamp Converter",
-    "colorConverter": "Color Converter"
+    "colorConverter": "Color Converter",
+    "unitConverter": "Unit Converter"
   },
   "commands": {
     "themeLight": "Switch to Light theme",

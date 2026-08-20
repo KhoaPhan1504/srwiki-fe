@@ -1,0 +1,54 @@
+{
+  "title": "Chuyển đổi đơn vị",
+  "description": "Chuyển đổi giá trị giữa các đơn vị thường dùng khi lập trình — độ dài, dung lượng dữ liệu, thời gian và nhiệt độ.",
+  "categories": {
+    "length": "Độ dài",
+    "data": "Dung lượng",
+    "time": "Thời gian",
+    "temperature": "Nhiệt độ"
+  },
+  "input": {
+    "title": "Đầu vào",
+    "unitLabel": "Đơn vị nguồn",
+    "valueLabel": "Giá trị",
+    "placeholder": "vd: 16",
+    "baseFontSizeLabel": "Cỡ chữ gốc (px)",
+    "baseFontSizeHint": "Dùng để quy đổi rem/em sang và từ các đơn vị độ dài khác.",
+    "clear": "Clear",
+    "clearConfirmTitle": "Xoá nội dung đầu vào?",
+    "clearConfirmDescription": "Thao tác này sẽ xoá nội dung đầu vào và kết quả hiện tại. Không thể hoàn tác."
+  },
+  "units": {
+    "px": "px",
+    "rem": "rem",
+    "em": "em",
+    "pt": "pt",
+    "cm": "cm",
+    "mm": "mm",
+    "in": "in",
+    "B": "B",
+    "KB": "KB",
+    "MB": "MB",
+    "GB": "GB",
+    "TB": "TB",
+    "ms": "ms",
+    "s": "s",
+    "min": "min",
+    "h": "h",
+    "day": "day",
+    "C": "°C",
+    "F": "°F",
+    "K": "K"
+  },
+  "output": {
+    "title": "Kết quả",
+    "copy": "Copy",
+    "copied": "Đã sao chép",
+    "copyError": "Không thể sao chép vào clipboard.",
+    "invalidTitle": "Đầu vào không hợp lệ",
+    "invalidNumberDescription": "Nhập một số hữu hạn hợp lệ.",
+    "negativeNotAllowedDescription": "Dung lượng dữ liệu không thể là số âm.",
+    "belowAbsoluteZeroDescription": "Giá trị này thấp hơn độ 0 tuyệt đối, điều không thể xảy ra về mặt vật lý.",
+    "empty": "Nhập giá trị để chuyển đổi."
+  }
+}

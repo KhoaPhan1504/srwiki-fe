@@ -13,6 +13,7 @@ import ProfilePage from '~root/pages/Profile';
 import RegexTesterPage from '~root/pages/RegexTester';
 import SettingsPage from '~root/pages/Settings';
 import TimestampConverterPage from '~root/pages/TimestampConverter';
+import UnitConverterPage from '~root/pages/UnitConverter';
 import UrlEncoderDecoderPage from '~root/pages/UrlEncoderDecoder';
 import UuidGeneratorPage from '~root/pages/UuidGenerator';
 import { authAtom } from '~root/stores';
@@ -65,6 +66,10 @@ export const protectedRoutes: RouteObject[] = [
   {
     path: '/tools/color-converter',
     element: <PrivateRoute element={<ColorConverterPage />} />,
+  },
+  {
+    path: '/tools/unit-converter',
+    element: <PrivateRoute element={<UnitConverterPage />} />,
   },
   {
     path: '/admin/members',
