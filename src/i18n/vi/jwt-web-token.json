@@ -51,14 +51,14 @@
     }
   },
   "signature": {
-    "title": "Signature",
-    "verified": "Signature Verified",
-    "invalid": "Signature Invalid",
+    "title": "Chữ ký",
+    "verified": "Chữ ký Đã xác thực",
+    "invalid": "Chữ ký Không hợp lệ",
     "notVerified": "Chưa xác thực",
-    "copy": "Copy signature",
-    "copyCopied": "Đã copy signature",
+    "copy": "Sao chép chữ ký",
+    "copyCopied": "Đã copy chữ ký",
     "copyError": "Không thể sao chép vào clipboard.",
-    "empty": "Signature sẽ hiện ở đây khi có token.",
+    "empty": "Chữ ký sẽ hiện ở đây khi có token.",
     "provideKeyHint": "Nhập secret hoặc public key ở trên để xác thực chữ ký này."
   },
   "status": {

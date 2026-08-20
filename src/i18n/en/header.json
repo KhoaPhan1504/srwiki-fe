@@ -9,7 +9,8 @@
     "sectionTools": "Tools",
     "jsonFormatter": "JSON Formatter",
     "jwtWebToken": "JWT Web Token",
-    "uuidGenerator": "UUID Generator"
+    "uuidGenerator": "UUID Generator",
+    "regexTester": "Regex Tester"
   },
   "theme": { "light": "Light", "dark": "Dark", "system": "System" },
   "languageSwitch": { "ariaLabel": "Change language" },

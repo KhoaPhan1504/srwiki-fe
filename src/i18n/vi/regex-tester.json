@@ -1,0 +1,92 @@
+{
+  "title": "Regex Tester",
+  "description": "Kiểm tra và debug biểu thức chính quy ngay lập tức.",
+  "comingSoon": "Tính năng đang được xây dựng.",
+  "pattern": {
+    "title": "Biểu thức chính quy",
+    "inputLabel": "Pattern",
+    "placeholder": "^[A-Z][a-z]+$",
+    "invalidTitle": "Biểu thức chính quy không hợp lệ",
+    "copyPreview": "Copy",
+    "copied": "Đã sao chép",
+    "copyError": "Không thể sao chép vào clipboard."
+  },
+  "flags": {
+    "g": { "label": "g", "description": "Global — tìm tất cả kết quả khớp" },
+    "i": { "label": "i", "description": "Ignore case — không phân biệt hoa/thường" },
+    "m": { "label": "m", "description": "Multiline — ^ và $ khớp theo từng dòng" },
+    "s": { "label": "s", "description": "Dot matches newline — . khớp cả ký tự xuống dòng" },
+    "u": { "label": "u", "description": "Unicode — nhận diện ký tự Unicode đầy đủ" },
+    "y": { "label": "y", "description": "Sticky — chỉ khớp đúng vị trí bắt đầu" },
+    "d": { "label": "d", "description": "Match indices — trả về vị trí chi tiết từng nhóm" }
+  },
+  "testString": {
+    "title": "Chuỗi kiểm tra",
+    "placeholder": "Dán văn bản cần kiểm tra vào đây...",
+    "charCount": "{{count}} ký tự",
+    "largeInputWarning": "Chuỗi kiểm tra khá lớn, việc khớp mẫu có thể chậm hơn."
+  },
+  "highlight": {
+    "title": "Kết quả highlight",
+    "tooLarge": "Chuỗi kiểm tra quá lớn để hiển thị highlight — xem bảng kết quả bên dưới."
+  },
+  "results": {
+    "title": "Kết quả khớp",
+    "matchCount": "{{count}} kết quả khớp",
+    "noMatches": "Không có kết quả khớp",
+    "truncated": "Đã cắt bớt kết quả do số lượng khớp quá lớn.",
+    "columnMatch": "#",
+    "columnValue": "Giá trị",
+    "columnIndex": "Vị trí",
+    "columnLength": "Độ dài",
+    "fullMatch": "Khớp toàn phần",
+    "groups": "Nhóm bắt (capture groups)",
+    "namedGroups": "Nhóm có tên (named groups)",
+    "noMatchGroup": "(không khớp)",
+    "emptyMatch": "(chuỗi rỗng)"
+  },
+  "replace": {
+    "title": "Thay thế",
+    "inputLabel": "Chuỗi thay thế",
+    "placeholder": "$1-$2, hoặc văn bản cố định...",
+    "previewTitle": "Kết quả xem trước",
+    "replaceAll": "Replace All",
+    "copyResult": "Copy",
+    "copied": "Đã sao chép",
+    "copyError": "Không thể sao chép vào clipboard."
+  },
+  "examples": {
+    "title": "Ví dụ mẫu",
+    "selectLabel": "Chọn ví dụ",
+    "selectPlaceholder": "Chọn một ví dụ...",
+    "email": "Email",
+    "url": "URL",
+    "ipv4": "Địa chỉ IPv4",
+    "phone": "Số điện thoại",
+    "numbers": "Chữ số",
+    "whitespace": "Khoảng trắng"
+  },
+  "cheatsheet": {
+    "title": "Tham chiếu nhanh",
+    "toggle": "Xem cú pháp thường dùng",
+    "dot": "Bất kỳ ký tự nào",
+    "digit": "Chữ số",
+    "word": "Ký tự chữ/số/gạch dưới",
+    "whitespace": "Khoảng trắng",
+    "start": "Đầu chuỗi/dòng",
+    "end": "Cuối chuỗi/dòng",
+    "zeroOrMore": "0 lần trở lên",
+    "oneOrMore": "1 lần trở lên",
+    "zeroOrOne": "0 hoặc 1 lần",
+    "range": "Từ n đến m lần",
+    "charClass": "Nhóm ký tự",
+    "group": "Nhóm bắt (capture group)",
+    "nonCapturingGroup": "Nhóm không bắt",
+    "or": "Hoặc"
+  },
+  "clear": {
+    "button": "Clear",
+    "confirmTitle": "Xoá toàn bộ nội dung?",
+    "confirmDescription": "Thao tác này sẽ xoá pattern, flags, chuỗi kiểm tra và kết quả hiện tại. Không thể hoàn tác."
+  }
+}
