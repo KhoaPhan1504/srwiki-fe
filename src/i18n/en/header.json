@@ -12,7 +12,8 @@
     "uuidGenerator": "UUID Generator",
     "regexTester": "Regex Tester",
     "markdownPreview": "Markdown Preview",
-    "base64EncoderDecoder": "Base64 Encoder / Decoder"
+    "base64EncoderDecoder": "Base64 Encoder / Decoder",
+    "urlEncoderDecoder": "URL Encoder / Decoder"
   },
   "theme": { "light": "Light", "dark": "Dark", "system": "System" },
   "languageSwitch": { "ariaLabel": "Change language" },

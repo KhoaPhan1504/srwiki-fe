@@ -1,0 +1,27 @@
+{
+  "title": "URL Encoder / Decoder",
+  "description": "Mã hoá văn bản sang chuỗi URL an toàn (percent-encoding), hoặc giải mã ngược lại thành văn bản.",
+  "modes": {
+    "encode": "Mã hoá",
+    "decode": "Giải mã"
+  },
+  "input": {
+    "title": "Đầu vào",
+    "charCount": "{{count}} ký tự",
+    "placeholderEncode": "Nhập văn bản cần mã hoá...",
+    "placeholderDecode": "Dán chuỗi đã mã hoá URL cần giải mã...",
+    "clear": "Clear",
+    "clearConfirmTitle": "Xoá nội dung đầu vào?",
+    "clearConfirmDescription": "Thao tác này sẽ xoá nội dung đầu vào và kết quả hiện tại. Không thể hoàn tác."
+  },
+  "output": {
+    "title": "Kết quả",
+    "emptyNoInputEncode": "Nhập văn bản để mã hoá URL.",
+    "emptyNoInputDecode": "Dán chuỗi đã mã hoá URL để giải mã.",
+    "invalidTitle": "Mã hoá không hợp lệ",
+    "invalidUrlEncoding": "Chuỗi này không phải mã hoá URL hợp lệ. Kiểm tra các ký tự % và thử lại.",
+    "copy": "Copy",
+    "copied": "Đã sao chép",
+    "copyError": "Không thể sao chép vào clipboard."
+  }
+}

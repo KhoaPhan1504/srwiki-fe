@@ -22,7 +22,8 @@
     "uuidGenerator": "UUID Generator",
     "regexTester": "Regex Tester",
     "markdownPreview": "Markdown Preview",
-    "base64EncoderDecoder": "Base64 Encoder / Decoder"
+    "base64EncoderDecoder": "Base64 Encoder / Decoder",
+    "urlEncoderDecoder": "URL Encoder / Decoder"
   },
   "commands": {
     "themeLight": "Chuyển sang giao diện Sáng",

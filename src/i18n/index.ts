@@ -41,6 +41,8 @@ import viMarkdownPreview from './vi/markdown-preview.json';
 import enMarkdownPreview from './en/markdown-preview.json';
 import viBase64EncoderDecoder from './vi/base64-encoder-decoder.json';
 import enBase64EncoderDecoder from './en/base64-encoder-decoder.json';
+import viUrlEncoderDecoder from './vi/url-encoder-decoder.json';
+import enUrlEncoderDecoder from './en/url-encoder-decoder.json';
 
 export const NAMESPACES = [
   'common',
@@ -62,6 +64,7 @@ export const NAMESPACES = [
   'regex-tester',
   'markdown-preview',
   'base64-encoder-decoder',
+  'url-encoder-decoder',
 ] as const;
 
 const resources = {
@@ -85,6 +88,7 @@ const resources = {
     'regex-tester': viRegexTester,
     'markdown-preview': viMarkdownPreview,
     'base64-encoder-decoder': viBase64EncoderDecoder,
+    'url-encoder-decoder': viUrlEncoderDecoder,
   },
   [Language.EN]: {
     common: enCommon,
@@ -106,6 +110,7 @@ const resources = {
     'regex-tester': enRegexTester,
     'markdown-preview': enMarkdownPreview,
     'base64-encoder-decoder': enBase64EncoderDecoder,
+    'url-encoder-decoder': enUrlEncoderDecoder,
   },
 };
 
