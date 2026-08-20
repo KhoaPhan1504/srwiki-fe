@@ -19,7 +19,10 @@
     "memberList": "Danh sách thành viên",
     "jsonFormatter": "JSON Formatter",
     "jwtWebToken": "JWT Web Token",
-    "uuidGenerator": "UUID Generator"
+    "uuidGenerator": "UUID Generator",
+    "regexTester": "Regex Tester",
+    "markdownPreview": "Markdown Preview",
+    "base64EncoderDecoder": "Base64 Encoder / Decoder"
   },
   "commands": {
     "themeLight": "Chuyển sang giao diện Sáng",

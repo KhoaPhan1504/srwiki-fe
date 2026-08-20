@@ -11,7 +11,8 @@
     "jwtWebToken": "JWT Web Token",
     "uuidGenerator": "UUID Generator",
     "regexTester": "Regex Tester",
-    "markdownPreview": "Markdown Preview"
+    "markdownPreview": "Markdown Preview",
+    "base64EncoderDecoder": "Base64 Encoder / Decoder"
   },
   "theme": { "light": "Light", "dark": "Dark", "system": "System" },
   "languageSwitch": { "ariaLabel": "Change language" },

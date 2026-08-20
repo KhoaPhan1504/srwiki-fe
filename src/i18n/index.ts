@@ -39,6 +39,8 @@ import viRegexTester from './vi/regex-tester.json';
 import enRegexTester from './en/regex-tester.json';
 import viMarkdownPreview from './vi/markdown-preview.json';
 import enMarkdownPreview from './en/markdown-preview.json';
+import viBase64EncoderDecoder from './vi/base64-encoder-decoder.json';
+import enBase64EncoderDecoder from './en/base64-encoder-decoder.json';
 
 export const NAMESPACES = [
   'common',
@@ -59,6 +61,7 @@ export const NAMESPACES = [
   'uuid-generator',
   'regex-tester',
   'markdown-preview',
+  'base64-encoder-decoder',
 ] as const;
 
 const resources = {
@@ -81,6 +84,7 @@ const resources = {
     'uuid-generator': viUuidGenerator,
     'regex-tester': viRegexTester,
     'markdown-preview': viMarkdownPreview,
+    'base64-encoder-decoder': viBase64EncoderDecoder,
   },
   [Language.EN]: {
     common: enCommon,
@@ -101,6 +105,7 @@ const resources = {
     'uuid-generator': enUuidGenerator,
     'regex-tester': enRegexTester,
     'markdown-preview': enMarkdownPreview,
+    'base64-encoder-decoder': enBase64EncoderDecoder,
   },
 };
 

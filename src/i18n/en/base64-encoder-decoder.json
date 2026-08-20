@@ -1,0 +1,27 @@
+{
+  "title": "Base64 Encoder / Decoder",
+  "description": "Encode text to Base64 or decode Base64 back to text, with full Unicode support.",
+  "modes": {
+    "encode": "Encode",
+    "decode": "Decode"
+  },
+  "input": {
+    "title": "Input",
+    "charCount": "{{count}} characters",
+    "placeholderEncode": "Enter text to encode...",
+    "placeholderDecode": "Paste Base64 to decode...",
+    "clear": "Clear",
+    "clearConfirmTitle": "Clear input?",
+    "clearConfirmDescription": "This will remove the current input and result. This can't be undone."
+  },
+  "output": {
+    "title": "Result",
+    "emptyNoInputEncode": "Enter text to encode to Base64.",
+    "emptyNoInputDecode": "Paste a Base64 string to decode.",
+    "invalidTitle": "Invalid Base64",
+    "invalidBase64": "This isn't valid Base64. Check the characters and try again.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyError": "Couldn't copy to clipboard."
+  }
+}

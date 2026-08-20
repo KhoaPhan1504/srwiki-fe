@@ -1,4 +1,5 @@
 import {
+  Binary,
   Braces,
   Fingerprint,
   KeyRound,
@@ -56,6 +57,13 @@ export const MenuOptions: MenuOption[] = [
     to: '/tools/markdown-preview',
     labelKey: 'nav.markdownPreview',
     icon: NotebookText,
+    adminOnly: false,
+    section: 'nav.sectionTools',
+  },
+  {
+    to: '/tools/base64',
+    labelKey: 'nav.base64EncoderDecoder',
+    icon: Binary,
     adminOnly: false,
     section: 'nav.sectionTools',
   },

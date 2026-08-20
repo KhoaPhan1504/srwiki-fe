@@ -1,4 +1,5 @@
 import {
+  Binary,
   Braces,
   Fingerprint,
   KeyRound,
@@ -83,5 +84,11 @@ export const NAV_ITEMS: NavItem[] = [
     labelKey: 'nav.markdownPreview',
     to: '/tools/markdown-preview',
     icon: NotebookText,
+  },
+  {
+    id: 'base64-encoder-decoder',
+    labelKey: 'nav.base64EncoderDecoder',
+    to: '/tools/base64',
+    icon: Binary,
   },
 ];
