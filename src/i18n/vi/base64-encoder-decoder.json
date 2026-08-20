@@ -1,0 +1,27 @@
+{
+  "title": "Base64 Encoder / Decoder",
+  "description": "Mã hoá văn bản sang Base64 hoặc giải mã Base64 về văn bản, hỗ trợ Unicode.",
+  "modes": {
+    "encode": "Mã hoá",
+    "decode": "Giải mã"
+  },
+  "input": {
+    "title": "Đầu vào",
+    "charCount": "{{count}} ký tự",
+    "placeholderEncode": "Nhập văn bản cần mã hoá...",
+    "placeholderDecode": "Dán chuỗi Base64 cần giải mã...",
+    "clear": "Clear",
+    "clearConfirmTitle": "Xoá nội dung đầu vào?",
+    "clearConfirmDescription": "Thao tác này sẽ xoá nội dung đầu vào và kết quả hiện tại. Không thể hoàn tác."
+  },
+  "output": {
+    "title": "Kết quả",
+    "emptyNoInputEncode": "Nhập văn bản để mã hoá sang Base64.",
+    "emptyNoInputDecode": "Dán chuỗi Base64 để giải mã.",
+    "invalidTitle": "Base64 không hợp lệ",
+    "invalidBase64": "Chuỗi này không phải Base64 hợp lệ. Kiểm tra lại các ký tự hoặc dấu cách.",
+    "copy": "Copy",
+    "copied": "Đã sao chép",
+    "copyError": "Không thể sao chép vào clipboard."
+  }
+}

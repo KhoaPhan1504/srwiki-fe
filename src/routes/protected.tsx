@@ -3,6 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
 import AdminMembersPage from '~root/pages/AdminMembers';
+import Base64EncoderDecoderPage from '~root/pages/Base64EncoderDecoder';
 import DashboardPage from '~root/pages/Dashboard';
 import JsonFormatterPage from '~root/pages/JsonFormatter';
 import JwtWebTokenPage from '~root/pages/JwtWebToken';
@@ -49,6 +50,7 @@ export const protectedRoutes: RouteObject[] = [
     path: '/tools/markdown-preview',
     element: <PrivateRoute element={<MarkdownPreviewPage />} />,
   },
+  { path: '/tools/base64', element: <PrivateRoute element={<Base64EncoderDecoderPage />} /> },
   {
     path: '/admin/members',
     element: (

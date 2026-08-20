@@ -9,6 +9,7 @@ export * from './fuzzy-match';
 export * from './date-format';
 export * from './regex-tester';
 export * from './markdown-preview';
+export * from './base64-encoder-decoder';
 
 export const isJsonString = (value: string): boolean => {
   try {
