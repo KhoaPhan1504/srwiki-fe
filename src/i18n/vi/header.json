@@ -14,7 +14,8 @@
     "markdownPreview": "Markdown Preview",
     "base64EncoderDecoder": "Base64 Encoder / Decoder",
     "urlEncoderDecoder": "URL Encoder / Decoder",
-    "timestampConverter": "Timestamp Converter"
+    "timestampConverter": "Timestamp Converter",
+    "colorConverter": "Chuyển đổi màu"
   },
   "theme": { "light": "Sáng", "dark": "Tối", "system": "Theo hệ thống" },
   "languageSwitch": { "ariaLabel": "Đổi ngôn ngữ" },

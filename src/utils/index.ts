@@ -12,6 +12,7 @@ export * from './markdown-preview';
 export * from './base64-encoder-decoder';
 export * from './url-encoder-decoder';
 export * from './timestamp-converter';
+export * from './color-converter';
 
 export const isJsonString = (value: string): boolean => {
   try {

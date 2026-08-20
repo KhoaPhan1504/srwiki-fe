@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   Link,
   NotebookText,
+  Palette,
   Regex,
   SettingsIcon,
   User,
@@ -104,5 +105,11 @@ export const NAV_ITEMS: NavItem[] = [
     labelKey: 'nav.timestampConverter',
     to: '/tools/timestamp-converter',
     icon: Clock,
+  },
+  {
+    id: 'color-converter',
+    labelKey: 'nav.colorConverter',
+    to: '/tools/color-converter',
+    icon: Palette,
   },
 ];
