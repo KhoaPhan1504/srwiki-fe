@@ -47,6 +47,8 @@ import viTimestampConverter from './vi/timestamp-converter.json';
 import enTimestampConverter from './en/timestamp-converter.json';
 import viColorConverter from './vi/color-converter.json';
 import enColorConverter from './en/color-converter.json';
+import viUnitConverter from './vi/unit-converter.json';
+import enUnitConverter from './en/unit-converter.json';
 
 export const NAMESPACES = [
   'common',
@@ -71,6 +73,7 @@ export const NAMESPACES = [
   'url-encoder-decoder',
   'timestamp-converter',
   'color-converter',
+  'unit-converter',
 ] as const;
 
 const resources = {
@@ -97,6 +100,7 @@ const resources = {
     'url-encoder-decoder': viUrlEncoderDecoder,
     'timestamp-converter': viTimestampConverter,
     'color-converter': viColorConverter,
+    'unit-converter': viUnitConverter,
   },
   [Language.EN]: {
     common: enCommon,
@@ -121,6 +125,7 @@ const resources = {
     'url-encoder-decoder': enUrlEncoderDecoder,
     'timestamp-converter': enTimestampConverter,
     'color-converter': enColorConverter,
+    'unit-converter': enUnitConverter,
   },
 };
 

@@ -1,0 +1,54 @@
+{
+  "title": "Unit Converter",
+  "description": "Convert a value between developer-relevant units — length, data size, time, and temperature.",
+  "categories": {
+    "length": "Length",
+    "data": "Data",
+    "time": "Time",
+    "temperature": "Temperature"
+  },
+  "input": {
+    "title": "Input",
+    "unitLabel": "From unit",
+    "valueLabel": "Value",
+    "placeholder": "e.g. 16",
+    "baseFontSizeLabel": "Base font size (px)",
+    "baseFontSizeHint": "Used to convert rem/em to and from the other length units.",
+    "clear": "Clear",
+    "clearConfirmTitle": "Clear input?",
+    "clearConfirmDescription": "This will remove the current input and result. This can't be undone."
+  },
+  "units": {
+    "px": "px",
+    "rem": "rem",
+    "em": "em",
+    "pt": "pt",
+    "cm": "cm",
+    "mm": "mm",
+    "in": "in",
+    "B": "B",
+    "KB": "KB",
+    "MB": "MB",
+    "GB": "GB",
+    "TB": "TB",
+    "ms": "ms",
+    "s": "s",
+    "min": "min",
+    "h": "h",
+    "day": "day",
+    "C": "°C",
+    "F": "°F",
+    "K": "K"
+  },
+  "output": {
+    "title": "Result",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyError": "Couldn't copy to clipboard.",
+    "invalidTitle": "Invalid input",
+    "invalidNumberDescription": "Enter a valid finite number.",
+    "negativeNotAllowedDescription": "Data size can't be negative.",
+    "belowAbsoluteZeroDescription": "This value is below absolute zero, which isn't physically possible.",
+    "empty": "Enter a value to convert."
+  }
+}
