@@ -4,6 +4,7 @@ import {
   Fingerprint,
   KeyRound,
   LayoutDashboard,
+  Link,
   NotebookText,
   Regex,
   SettingsIcon,
@@ -90,5 +91,11 @@ export const NAV_ITEMS: NavItem[] = [
     labelKey: 'nav.base64EncoderDecoder',
     to: '/tools/base64',
     icon: Binary,
+  },
+  {
+    id: 'url-encoder-decoder',
+    labelKey: 'nav.urlEncoderDecoder',
+    to: '/tools/url-encoder-decoder',
+    icon: Link,
   },
 ];

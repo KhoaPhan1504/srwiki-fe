@@ -11,6 +11,7 @@ import MarkdownPreviewPage from '~root/pages/MarkdownPreview';
 import ProfilePage from '~root/pages/Profile';
 import RegexTesterPage from '~root/pages/RegexTester';
 import SettingsPage from '~root/pages/Settings';
+import UrlEncoderDecoderPage from '~root/pages/UrlEncoderDecoder';
 import UuidGeneratorPage from '~root/pages/UuidGenerator';
 import { authAtom } from '~root/stores';
 import type { AuthUser } from '~root/stores';
@@ -51,6 +52,10 @@ export const protectedRoutes: RouteObject[] = [
     element: <PrivateRoute element={<MarkdownPreviewPage />} />,
   },
   { path: '/tools/base64', element: <PrivateRoute element={<Base64EncoderDecoderPage />} /> },
+  {
+    path: '/tools/url-encoder-decoder',
+    element: <PrivateRoute element={<UrlEncoderDecoderPage />} />,
+  },
   {
     path: '/admin/members',
     element: (
