@@ -1,0 +1,56 @@
+{
+  "title": "Markdown Preview",
+  "description": "Write Markdown and preview the rendered result instantly.",
+  "viewMode": {
+    "editor": "Editor",
+    "split": "Split",
+    "preview": "Preview"
+  },
+  "toolbar": {
+    "heading": "Heading",
+    "bold": "Bold",
+    "italic": "Italic",
+    "strikethrough": "Strikethrough",
+    "link": "Link",
+    "image": "Image",
+    "unorderedList": "Bulleted List",
+    "orderedList": "Numbered List",
+    "quote": "Quote",
+    "inlineCode": "Inline Code",
+    "codeBlock": "Code Block",
+    "horizontalRule": "Horizontal Rule"
+  },
+  "input": {
+    "title": "Markdown",
+    "placeholder": "Write Markdown here...",
+    "charCount": "{{count}} characters",
+    "lineCount": "{{count}} lines",
+    "upload": "Upload",
+    "uploadEmpty": "The file is empty.",
+    "uploadTooLarge": "File is too large. Maximum size is 5 MB.",
+    "uploadInvalidType": "Please upload a .md, .markdown or .txt file.",
+    "uploadReadError": "Couldn't read the file."
+  },
+  "preview": {
+    "title": "Preview",
+    "empty": "Start typing Markdown to see the preview here."
+  },
+  "actions": {
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyError": "Couldn't copy to clipboard.",
+    "downloadMarkdown": "Download .md",
+    "downloadHtml": "Download .html",
+    "clear": "Clear",
+    "clearConfirmTitle": "Clear everything?",
+    "clearConfirmDescription": "This will remove the current Markdown content. This can't be undone."
+  },
+  "examples": {
+    "title": "Examples",
+    "selectLabel": "Select an example",
+    "selectPlaceholder": "Choose an example...",
+    "gettingStarted": "Getting Started",
+    "taskList": "Task List",
+    "table": "Table"
+  }
+}

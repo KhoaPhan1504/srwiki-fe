@@ -10,7 +10,8 @@
     "jsonFormatter": "JSON Formatter",
     "jwtWebToken": "JWT Web Token",
     "uuidGenerator": "UUID Generator",
-    "regexTester": "Regex Tester"
+    "regexTester": "Regex Tester",
+    "markdownPreview": "Markdown Preview"
   },
   "theme": { "light": "Light", "dark": "Dark", "system": "System" },
   "languageSwitch": { "ariaLabel": "Change language" },

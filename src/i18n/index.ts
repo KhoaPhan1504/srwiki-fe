@@ -37,6 +37,8 @@ import viUuidGenerator from './vi/uuid-generator.json';
 import enUuidGenerator from './en/uuid-generator.json';
 import viRegexTester from './vi/regex-tester.json';
 import enRegexTester from './en/regex-tester.json';
+import viMarkdownPreview from './vi/markdown-preview.json';
+import enMarkdownPreview from './en/markdown-preview.json';
 
 export const NAMESPACES = [
   'common',
@@ -56,6 +58,7 @@ export const NAMESPACES = [
   'jwt-web-token',
   'uuid-generator',
   'regex-tester',
+  'markdown-preview',
 ] as const;
 
 const resources = {
@@ -77,6 +80,7 @@ const resources = {
     'jwt-web-token': viJwtWebToken,
     'uuid-generator': viUuidGenerator,
     'regex-tester': viRegexTester,
+    'markdown-preview': viMarkdownPreview,
   },
   [Language.EN]: {
     common: enCommon,
@@ -96,6 +100,7 @@ const resources = {
     'jwt-web-token': enJwtWebToken,
     'uuid-generator': enUuidGenerator,
     'regex-tester': enRegexTester,
+    'markdown-preview': enMarkdownPreview,
   },
 };
 
