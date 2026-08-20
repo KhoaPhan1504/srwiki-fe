@@ -1,0 +1,40 @@
+{
+  "title": "Timestamp Converter",
+  "description": "Chuyển đổi Unix timestamp sang ngày giờ dễ đọc, hoặc chuyển ngày giờ ngược lại thành Unix timestamp.",
+  "modes": {
+    "timestampToDate": "Timestamp → Ngày giờ",
+    "dateToTimestamp": "Ngày giờ → Timestamp"
+  },
+  "input": {
+    "title": "Đầu vào",
+    "unitLabel": "Đơn vị timestamp",
+    "unitSeconds": "Giây",
+    "unitMilliseconds": "Mili giây",
+    "timezoneLabel": "Diễn giải theo",
+    "timezoneLocal": "Giờ địa phương",
+    "timezoneUtc": "UTC",
+    "timestampLabel": "Unix timestamp",
+    "dateLabel": "Ngày / giờ",
+    "placeholderTimestamp": "vd: 1700000000",
+    "placeholderDate": "vd: 2024-01-15T10:30:00",
+    "clear": "Clear",
+    "clearConfirmTitle": "Xoá nội dung đầu vào?",
+    "clearConfirmDescription": "Thao tác này sẽ xoá nội dung đầu vào và kết quả hiện tại. Không thể hoàn tác."
+  },
+  "output": {
+    "title": "Kết quả",
+    "local": "Giờ địa phương ({{zone}})",
+    "utc": "UTC",
+    "iso": "ISO 8601",
+    "seconds": "Unix timestamp (giây)",
+    "milliseconds": "Unix timestamp (mili giây)",
+    "emptyTimestampToDate": "Nhập Unix timestamp để chuyển đổi.",
+    "emptyDateToTimestamp": "Nhập ngày giờ để chuyển đổi.",
+    "invalidTitle": "Đầu vào không hợp lệ",
+    "invalidTimestampDescription": "Đây không phải timestamp hợp lệ. Nhập số nguyên hoặc số thập phân biểu thị giây hoặc mili giây.",
+    "invalidDateDescription": "Không nhận diện được định dạng ngày giờ này. Dùng YYYY-MM-DD, YYYY-MM-DDTHH:mm:ss, hoặc chuỗi ISO 8601 kèm offset.",
+    "copy": "Copy",
+    "copied": "Đã sao chép",
+    "copyError": "Không thể sao chép vào clipboard."
+  }
+}

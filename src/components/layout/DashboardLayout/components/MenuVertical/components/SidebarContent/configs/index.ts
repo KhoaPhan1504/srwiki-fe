@@ -1,6 +1,7 @@
 import {
   Binary,
   Braces,
+  Clock,
   Fingerprint,
   KeyRound,
   LayoutDashboard,
@@ -72,6 +73,13 @@ export const MenuOptions: MenuOption[] = [
     to: '/tools/url-encoder-decoder',
     labelKey: 'nav.urlEncoderDecoder',
     icon: Link,
+    adminOnly: false,
+    section: 'nav.sectionTools',
+  },
+  {
+    to: '/tools/timestamp-converter',
+    labelKey: 'nav.timestampConverter',
+    icon: Clock,
     adminOnly: false,
     section: 'nav.sectionTools',
   },

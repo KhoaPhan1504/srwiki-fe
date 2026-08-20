@@ -122,6 +122,8 @@ export enum ErrorCodes {
   INVALID_URI_ENCODING = 'INVALID_URI_ENCODING',
   EMPTY_INPUT = 'EMPTY_INPUT',
   PARSE_ERROR = 'PARSE_ERROR',
+  INVALID_TIMESTAMP = 'INVALID_TIMESTAMP',
+  INVALID_DATE = 'INVALID_DATE',
 }
 
 export type ColumnAlign = 'left' | 'center' | 'right';
@@ -152,4 +154,14 @@ export const HIGHLIGHT_MAX_LENGTH = 20_000;
 export enum OperationMode {
   ENCODE = 'encode',
   DECODE = 'decode',
+}
+
+export enum TimestampUnit {
+  SECONDS = 'seconds',
+  MILLISECONDS = 'milliseconds',
+}
+
+export enum TimestampConversionMode {
+  TIMESTAMP_TO_DATE = 'timestampToDate',
+  DATE_TO_TIMESTAMP = 'dateToTimestamp',
 }

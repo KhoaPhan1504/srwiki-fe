@@ -1,0 +1,40 @@
+{
+  "title": "Timestamp Converter",
+  "description": "Convert a Unix timestamp to a human-readable date/time, or a date/time back into a Unix timestamp.",
+  "modes": {
+    "timestampToDate": "Timestamp → Date",
+    "dateToTimestamp": "Date → Timestamp"
+  },
+  "input": {
+    "title": "Input",
+    "unitLabel": "Timestamp unit",
+    "unitSeconds": "Seconds",
+    "unitMilliseconds": "Milliseconds",
+    "timezoneLabel": "Interpret as",
+    "timezoneLocal": "Local time",
+    "timezoneUtc": "UTC",
+    "timestampLabel": "Unix timestamp",
+    "dateLabel": "Date / time",
+    "placeholderTimestamp": "e.g. 1700000000",
+    "placeholderDate": "e.g. 2024-01-15T10:30:00",
+    "clear": "Clear",
+    "clearConfirmTitle": "Clear input?",
+    "clearConfirmDescription": "This will remove the current input and result. This can't be undone."
+  },
+  "output": {
+    "title": "Result",
+    "local": "Local ({{zone}})",
+    "utc": "UTC",
+    "iso": "ISO 8601",
+    "seconds": "Unix timestamp (seconds)",
+    "milliseconds": "Unix timestamp (milliseconds)",
+    "emptyTimestampToDate": "Enter a Unix timestamp to convert.",
+    "emptyDateToTimestamp": "Enter a date/time to convert.",
+    "invalidTitle": "Invalid input",
+    "invalidTimestampDescription": "This isn't a valid timestamp. Enter a whole or decimal number of seconds or milliseconds.",
+    "invalidDateDescription": "This isn't a recognized date/time. Use YYYY-MM-DD, YYYY-MM-DDTHH:mm:ss, or an ISO 8601 string with an offset.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyError": "Couldn't copy to clipboard."
+  }
+}
