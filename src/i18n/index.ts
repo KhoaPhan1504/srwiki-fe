@@ -43,6 +43,8 @@ import viBase64EncoderDecoder from './vi/base64-encoder-decoder.json';
 import enBase64EncoderDecoder from './en/base64-encoder-decoder.json';
 import viUrlEncoderDecoder from './vi/url-encoder-decoder.json';
 import enUrlEncoderDecoder from './en/url-encoder-decoder.json';
+import viTimestampConverter from './vi/timestamp-converter.json';
+import enTimestampConverter from './en/timestamp-converter.json';
 
 export const NAMESPACES = [
   'common',
@@ -65,6 +67,7 @@ export const NAMESPACES = [
   'markdown-preview',
   'base64-encoder-decoder',
   'url-encoder-decoder',
+  'timestamp-converter',
 ] as const;
 
 const resources = {
@@ -89,6 +92,7 @@ const resources = {
     'markdown-preview': viMarkdownPreview,
     'base64-encoder-decoder': viBase64EncoderDecoder,
     'url-encoder-decoder': viUrlEncoderDecoder,
+    'timestamp-converter': viTimestampConverter,
   },
   [Language.EN]: {
     common: enCommon,
@@ -111,6 +115,7 @@ const resources = {
     'markdown-preview': enMarkdownPreview,
     'base64-encoder-decoder': enBase64EncoderDecoder,
     'url-encoder-decoder': enUrlEncoderDecoder,
+    'timestamp-converter': enTimestampConverter,
   },
 };
 

@@ -1,6 +1,7 @@
 import {
   Binary,
   Braces,
+  Clock,
   Fingerprint,
   KeyRound,
   LayoutDashboard,
@@ -97,5 +98,11 @@ export const NAV_ITEMS: NavItem[] = [
     labelKey: 'nav.urlEncoderDecoder',
     to: '/tools/url-encoder-decoder',
     icon: Link,
+  },
+  {
+    id: 'timestamp-converter',
+    labelKey: 'nav.timestampConverter',
+    to: '/tools/timestamp-converter',
+    icon: Clock,
   },
 ];

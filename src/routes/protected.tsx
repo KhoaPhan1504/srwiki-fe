@@ -11,6 +11,7 @@ import MarkdownPreviewPage from '~root/pages/MarkdownPreview';
 import ProfilePage from '~root/pages/Profile';
 import RegexTesterPage from '~root/pages/RegexTester';
 import SettingsPage from '~root/pages/Settings';
+import TimestampConverterPage from '~root/pages/TimestampConverter';
 import UrlEncoderDecoderPage from '~root/pages/UrlEncoderDecoder';
 import UuidGeneratorPage from '~root/pages/UuidGenerator';
 import { authAtom } from '~root/stores';
@@ -55,6 +56,10 @@ export const protectedRoutes: RouteObject[] = [
   {
     path: '/tools/url-encoder-decoder',
     element: <PrivateRoute element={<UrlEncoderDecoderPage />} />,
+  },
+  {
+    path: '/tools/timestamp-converter',
+    element: <PrivateRoute element={<TimestampConverterPage />} />,
   },
   {
     path: '/admin/members',

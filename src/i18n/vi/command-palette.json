@@ -17,13 +17,14 @@
     "settingsNotifications": "Cài đặt · Thông báo",
     "settingsAccount": "Cài đặt · Tài khoản",
     "memberList": "Danh sách thành viên",
-    "jsonFormatter": "JSON Formatter",
+    "jsonFormatter": "Định dạng JSON",
     "jwtWebToken": "JWT Web Token",
-    "uuidGenerator": "UUID Generator",
-    "regexTester": "Regex Tester",
-    "markdownPreview": "Markdown Preview",
-    "base64EncoderDecoder": "Base64 Encoder / Decoder",
-    "urlEncoderDecoder": "URL Encoder / Decoder"
+    "uuidGenerator": "Trình tạo UUID",
+    "regexTester": "Kiểm tra Regex",
+    "markdownPreview": "Xem trước Markdown",
+    "base64EncoderDecoder": "Mã hóa / giải mã Base64",
+    "urlEncoderDecoder": "Mã hóa / giải mã URL",
+    "timestampConverter": "Chuyển đổi timestamp"
   },
   "commands": {
     "themeLight": "Chuyển sang giao diện Sáng",
