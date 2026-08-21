@@ -12,6 +12,7 @@ import {
   Ruler,
   Send,
   SettingsIcon,
+  TerminalSquare,
   User,
   Users,
 } from 'lucide-react';
@@ -125,5 +126,11 @@ export const NAV_ITEMS: NavItem[] = [
     labelKey: 'nav.restApiClient',
     to: '/tools/rest-api-client',
     icon: Send,
+  },
+  {
+    id: 'curl-generator',
+    labelKey: 'nav.curlGenerator',
+    to: '/tools/curl-generator',
+    icon: TerminalSquare,
   },
 ];

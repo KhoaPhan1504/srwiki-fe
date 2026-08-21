@@ -1,0 +1,57 @@
+{
+  "title": "cURL Generator",
+  "description": "Build an HTTP request and get the equivalent curl command — copy it and run it from a terminal. This tool only generates the command, it never sends the request.",
+  "request": {
+    "title": "Request",
+    "methodLabel": "HTTP method",
+    "urlLabel": "Request URL",
+    "urlPlaceholder": "https://api.example.com/users",
+    "rowEnabled": "Enable this row",
+    "tabs": {
+      "params": "Params",
+      "headers": "Headers",
+      "body": "Body"
+    },
+    "params": {
+      "keyPlaceholder": "Key",
+      "valuePlaceholder": "Value",
+      "add": "Add param",
+      "remove": "Remove param",
+      "empty": "No query params yet."
+    },
+    "headers": {
+      "keyPlaceholder": "Header name",
+      "valuePlaceholder": "Header value",
+      "add": "Add header",
+      "remove": "Remove header",
+      "empty": "No headers yet."
+    },
+    "body": {
+      "placeholder": "{\n  \"key\": \"value\"\n}",
+      "validJson": "Valid JSON",
+      "invalidJson": "Not valid JSON",
+      "disabledForGet": "GET requests can't include a body."
+    }
+  },
+  "actions": {
+    "clear": "Clear",
+    "clearConfirmTitle": "Clear this request?",
+    "clearConfirmDescription": "This clears the method, URL, params, headers, and body. This can't be undone."
+  },
+  "errors": {
+    "invalidUrl": "Enter a valid absolute URL, e.g. https://api.example.com.",
+    "invalidHeaderKey": "That header name isn't valid."
+  },
+  "output": {
+    "title": "Generated Command",
+    "formatTabs": {
+      "singleLine": "Single-line",
+      "multiLine": "Multi-line"
+    },
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyError": "Couldn't copy to the clipboard.",
+    "empty": "Enter a request URL to generate a curl command.",
+    "invalidTitle": "Can't generate command"
+  }
+}

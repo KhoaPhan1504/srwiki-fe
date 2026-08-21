@@ -5,6 +5,7 @@ import { useAtomValue } from 'jotai';
 import AdminMembersPage from '~root/pages/AdminMembers';
 import Base64EncoderDecoderPage from '~root/pages/Base64EncoderDecoder';
 import ColorConverterPage from '~root/pages/ColorConverter';
+import CurlGeneratorPage from '~root/pages/CurlGenerator';
 import DashboardPage from '~root/pages/Dashboard';
 import JsonFormatterPage from '~root/pages/JsonFormatter';
 import JwtWebTokenPage from '~root/pages/JwtWebToken';
@@ -75,6 +76,10 @@ export const protectedRoutes: RouteObject[] = [
   {
     path: '/tools/rest-api-client',
     element: <PrivateRoute element={<RestApiClientPage />} />,
+  },
+  {
+    path: '/tools/curl-generator',
+    element: <PrivateRoute element={<CurlGeneratorPage />} />,
   },
   {
     path: '/admin/members',
