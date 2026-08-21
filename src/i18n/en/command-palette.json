@@ -29,7 +29,8 @@
     "urlEncoderDecoder": "URL Encoder / Decoder",
     "timestampConverter": "Timestamp Converter",
     "colorConverter": "Color Converter",
-    "unitConverter": "Unit Converter"
+    "unitConverter": "Unit Converter",
+    "restApiClient": "REST API Client"
   },
   "commands": {
     "themeLight": "Switch to Light theme",

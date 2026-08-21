@@ -1,0 +1,194 @@
+{
+  "title": "REST API Client",
+  "description": "Compose and send an HTTP request, then inspect the response — status, headers, body, and timing.",
+  "request": {
+    "title": "Request",
+    "methodLabel": "HTTP method",
+    "urlLabel": "Request URL",
+    "urlPlaceholder": "https://api.example.com/users",
+    "rowEnabled": "Enable this row",
+    "tabs": {
+      "params": "Params",
+      "authorization": "Authorization",
+      "headers": "Headers",
+      "body": "Body"
+    },
+    "params": {
+      "keyPlaceholder": "Key",
+      "valuePlaceholder": "Value",
+      "add": "Add param",
+      "remove": "Remove param",
+      "empty": "No query params yet."
+    },
+    "headers": {
+      "keyPlaceholder": "Header name",
+      "valuePlaceholder": "Header value",
+      "add": "Add header",
+      "remove": "Remove header",
+      "empty": "No headers yet."
+    },
+    "body": {
+      "placeholder": "{\n  \"key\": \"value\"\n}",
+      "validJson": "Valid JSON",
+      "invalidJson": "Invalid JSON",
+      "disabledForGet": "GET requests can't include a body.",
+      "typeLabel": "Body type",
+      "types": {
+        "raw": "Raw",
+        "urlEncoded": "x-www-form-urlencoded",
+        "formData": "Form Data"
+      },
+      "fields": {
+        "keyPlaceholder": "Key",
+        "valuePlaceholder": "Value",
+        "add": "Add field",
+        "remove": "Remove field",
+        "empty": "No fields yet."
+      }
+    },
+    "auth": {
+      "typeLabel": "Auth type",
+      "types": {
+        "none": "No Auth",
+        "bearer": "Bearer Token",
+        "basic": "Basic Auth",
+        "apiKey": "API Key"
+      },
+      "none": {
+        "description": "This request will not send any authorization data."
+      },
+      "bearer": {
+        "tokenLabel": "Token",
+        "tokenPlaceholder": "Paste your token here"
+      },
+      "basic": {
+        "usernameLabel": "Username",
+        "passwordLabel": "Password"
+      },
+      "apiKey": {
+        "keyLabel": "Key",
+        "keyPlaceholder": "e.g. X-Api-Key",
+        "valueLabel": "Value",
+        "addToLabel": "Add to",
+        "addToHeader": "Header",
+        "addToQuery": "Query Params"
+      }
+    }
+  },
+  "actions": {
+    "send": "Send",
+    "save": "Save",
+    "sending": "Sending...",
+    "cancel": "Cancel",
+    "clear": "Clear",
+    "clearConfirmTitle": "Clear this request?",
+    "clearConfirmDescription": "This clears the method, URL, params, headers, body, and any response. This can't be undone."
+  },
+  "errors": {
+    "emptyInput": "Enter a request URL.",
+    "invalidUrl": "Enter a valid absolute URL, e.g. https://api.example.com.",
+    "invalidJsonBody": "The request body must be valid JSON.",
+    "invalidHeaderKey": "That header name isn't valid.",
+    "networkError": "The request failed — check the URL and your connection.",
+    "requestTimeout": "The request timed out after 30s.",
+    "requestAborted": "Request cancelled."
+  },
+  "response": {
+    "title": "Response",
+    "emptyIdle": "Send a request to see the response here.",
+    "sending": "Sending request...",
+    "duration": "Time: {{value}}",
+    "size": "Size: {{value}}",
+    "tabs": {
+      "body": "Body",
+      "headers": "Headers"
+    },
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyError": "Couldn't copy to the clipboard.",
+    "emptyBody": "Empty response body.",
+    "noHeaders": "No response headers."
+  },
+  "collections": {
+    "title": "Collections",
+    "empty": "No collections yet.",
+    "newCollection": "New Collection",
+    "toast": {
+      "createCollectionSuccess": "Collection created",
+      "createCollectionError": "Could not create collection",
+      "renameCollectionSuccess": "Collection renamed",
+      "renameCollectionError": "Could not rename collection",
+      "deleteCollectionSuccess": "Collection deleted",
+      "deleteCollectionError": "Could not delete collection",
+      "saveRequestSuccess": "Request saved",
+      "saveRequestError": "Could not save request",
+      "renameRequestSuccess": "Request renamed",
+      "renameRequestError": "Could not rename request",
+      "deleteRequestSuccess": "Request deleted",
+      "deleteRequestError": "Could not delete request"
+    },
+    "renamePrompt": {
+      "nameLabel": "Name",
+      "submit": "Save",
+      "validation": {
+        "nameRequired": "Name is required"
+      }
+    },
+    "menu": {
+      "rename": "Rename",
+      "delete": "Delete",
+      "addRequest": "Add request"
+    },
+    "deleteCollectionConfirmTitle": "Delete this collection?",
+    "deleteCollectionConfirmDescription": "Every saved request inside this collection will be deleted too. This can't be undone.",
+    "deleteRequestConfirmTitle": "Delete this request?",
+    "deleteRequestConfirmDescription": "This can't be undone.",
+    "saveDialog": {
+      "title": "Save request",
+      "modeLabel": "Save into",
+      "modeExisting": "Existing collection",
+      "modeNew": "New collection",
+      "collectionLabel": "Collection",
+      "newCollectionLabel": "New collection name",
+      "requestNameLabel": "Request name",
+      "submit": "Save",
+      "validation": {
+        "requestNameRequired": "Request name is required",
+        "collectionRequired": "Choose or name a collection"
+      }
+    }
+  },
+  "environments": {
+    "selectorLabel": "Environment",
+    "noEnvironment": "No Environment",
+    "manage": "Manage environments",
+    "manager": {
+      "title": "Manage Environments",
+      "globalsTab": "Globals",
+      "environmentsTab": "Environments",
+      "newEnvironment": "New Environment",
+      "noneSelected": "No environment selected.",
+      "menu": {
+        "rename": "Rename",
+        "delete": "Delete"
+      }
+    },
+    "variables": {
+      "keyPlaceholder": "Variable name",
+      "valuePlaceholder": "Value",
+      "add": "Add variable",
+      "remove": "Remove variable",
+      "empty": "No variables yet."
+    },
+    "toast": {
+      "createSuccess": "Environment created",
+      "createError": "Could not create environment",
+      "updateSuccess": "Environment saved",
+      "updateError": "Could not save environment",
+      "deleteSuccess": "Environment deleted",
+      "deleteError": "Could not delete environment",
+      "globalUpdateSuccess": "Global variables saved",
+      "globalUpdateError": "Could not save global variables"
+    }
+  }
+}

@@ -11,6 +11,7 @@ import JwtWebTokenPage from '~root/pages/JwtWebToken';
 import MarkdownPreviewPage from '~root/pages/MarkdownPreview';
 import ProfilePage from '~root/pages/Profile';
 import RegexTesterPage from '~root/pages/RegexTester';
+import RestApiClientPage from '~root/pages/RestApiClient';
 import SettingsPage from '~root/pages/Settings';
 import TimestampConverterPage from '~root/pages/TimestampConverter';
 import UnitConverterPage from '~root/pages/UnitConverter';
@@ -70,6 +71,10 @@ export const protectedRoutes: RouteObject[] = [
   {
     path: '/tools/unit-converter',
     element: <PrivateRoute element={<UnitConverterPage />} />,
+  },
+  {
+    path: '/tools/rest-api-client',
+    element: <PrivateRoute element={<RestApiClientPage />} />,
   },
   {
     path: '/admin/members',
