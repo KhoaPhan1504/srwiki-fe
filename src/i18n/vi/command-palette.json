@@ -27,7 +27,8 @@
     "timestampConverter": "Chuyển đổi timestamp",
     "colorConverter": "Chuyển đổi màu",
     "unitConverter": "Chuyển đổi đơn vị",
-    "restApiClient": "REST API Client"
+    "restApiClient": "REST API Client",
+    "curlGenerator": "Trình tạo cURL"
   },
   "commands": {
     "themeLight": "Chuyển sang giao diện Sáng",

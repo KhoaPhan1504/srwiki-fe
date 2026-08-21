@@ -12,6 +12,7 @@ import {
   Ruler,
   Send,
   SettingsIcon,
+  TerminalSquare,
   User,
   Users,
 } from 'lucide-react';
@@ -104,6 +105,13 @@ export const MenuOptions: MenuOption[] = [
     to: '/tools/rest-api-client',
     labelKey: 'nav.restApiClient',
     icon: Send,
+    adminOnly: false,
+    section: 'nav.sectionTools',
+  },
+  {
+    to: '/tools/curl-generator',
+    labelKey: 'nav.curlGenerator',
+    icon: TerminalSquare,
     adminOnly: false,
     section: 'nav.sectionTools',
   },

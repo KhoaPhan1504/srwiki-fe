@@ -17,7 +17,8 @@
     "timestampConverter": "Timestamp Converter",
     "colorConverter": "Chuyển đổi màu",
     "unitConverter": "Chuyển đổi đơn vị",
-    "restApiClient": "REST API Client"
+    "restApiClient": "REST API Client",
+    "curlGenerator": "cURL Generator"
   },
   "theme": { "light": "Sáng", "dark": "Tối", "system": "Theo hệ thống" },
   "languageSwitch": { "ariaLabel": "Đổi ngôn ngữ" },

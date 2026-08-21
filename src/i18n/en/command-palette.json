@@ -30,7 +30,8 @@
     "timestampConverter": "Timestamp Converter",
     "colorConverter": "Color Converter",
     "unitConverter": "Unit Converter",
-    "restApiClient": "REST API Client"
+    "restApiClient": "REST API Client",
+    "curlGenerator": "cURL Generator"
   },
   "commands": {
     "themeLight": "Switch to Light theme",

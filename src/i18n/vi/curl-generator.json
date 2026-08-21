@@ -1,0 +1,57 @@
+{
+  "title": "cURL Generator",
+  "description": "Xây dựng một yêu cầu HTTP và lấy lệnh curl tương ứng — sao chép và chạy trong terminal. Tool này chỉ sinh ra lệnh, không bao giờ gửi yêu cầu.",
+  "request": {
+    "title": "Yêu cầu",
+    "methodLabel": "Phương thức HTTP",
+    "urlLabel": "URL yêu cầu",
+    "urlPlaceholder": "https://api.example.com/users",
+    "rowEnabled": "Bật/tắt dòng này",
+    "tabs": {
+      "params": "Tham số",
+      "headers": "Header",
+      "body": "Nội dung"
+    },
+    "params": {
+      "keyPlaceholder": "Tên",
+      "valuePlaceholder": "Giá trị",
+      "add": "Thêm tham số",
+      "remove": "Xoá tham số",
+      "empty": "Chưa có tham số nào."
+    },
+    "headers": {
+      "keyPlaceholder": "Tên header",
+      "valuePlaceholder": "Giá trị header",
+      "add": "Thêm header",
+      "remove": "Xoá header",
+      "empty": "Chưa có header nào."
+    },
+    "body": {
+      "placeholder": "{\n  \"key\": \"value\"\n}",
+      "validJson": "JSON hợp lệ",
+      "invalidJson": "JSON không hợp lệ",
+      "disabledForGet": "Yêu cầu GET không thể có nội dung."
+    }
+  },
+  "actions": {
+    "clear": "Xoá",
+    "clearConfirmTitle": "Xoá yêu cầu này?",
+    "clearConfirmDescription": "Thao tác này sẽ xoá phương thức, URL, tham số, header và nội dung hiện tại. Không thể hoàn tác."
+  },
+  "errors": {
+    "invalidUrl": "Nhập một URL hợp lệ, ví dụ https://api.example.com.",
+    "invalidHeaderKey": "Tên header này không hợp lệ."
+  },
+  "output": {
+    "title": "Lệnh đã sinh",
+    "formatTabs": {
+      "singleLine": "Một dòng",
+      "multiLine": "Nhiều dòng"
+    },
+    "copy": "Sao chép",
+    "copied": "Đã sao chép",
+    "copyError": "Không thể sao chép vào clipboard.",
+    "empty": "Nhập URL yêu cầu để sinh lệnh curl.",
+    "invalidTitle": "Không thể sinh lệnh"
+  }
+}
