@@ -16,7 +16,8 @@
     "urlEncoderDecoder": "URL Encoder / Decoder",
     "timestampConverter": "Timestamp Converter",
     "colorConverter": "Chuyển đổi màu",
-    "unitConverter": "Chuyển đổi đơn vị"
+    "unitConverter": "Chuyển đổi đơn vị",
+    "restApiClient": "REST API Client"
   },
   "theme": { "light": "Sáng", "dark": "Tối", "system": "Theo hệ thống" },
   "languageSwitch": { "ariaLabel": "Đổi ngôn ngữ" },

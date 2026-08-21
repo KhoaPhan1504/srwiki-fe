@@ -19,6 +19,9 @@ const badgeVariants = cva(
         link: 'text-primary underline-offset-4 [a&]:hover:underline',
         'verify-primary':
           'bg-[var(--verify-primary)] text-primary-foreground [a&]:hover:bg-[var(--verify-primary)]/90',
+        success: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-400',
+        info: 'bg-blue-100 text-blue-800 dark:bg-blue-500/15 dark:text-blue-400',
+        warning: 'bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-400',
       },
     },
     defaultVariants: {

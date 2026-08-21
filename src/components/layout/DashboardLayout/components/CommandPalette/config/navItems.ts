@@ -10,6 +10,7 @@ import {
   Palette,
   Regex,
   Ruler,
+  Send,
   SettingsIcon,
   User,
   Users,
@@ -118,5 +119,11 @@ export const NAV_ITEMS: NavItem[] = [
     labelKey: 'nav.unitConverter',
     to: '/tools/unit-converter',
     icon: Ruler,
+  },
+  {
+    id: 'rest-api-client',
+    labelKey: 'nav.restApiClient',
+    to: '/tools/rest-api-client',
+    icon: Send,
   },
 ];

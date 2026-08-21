@@ -2,6 +2,7 @@ export * from './endpoints';
 export * from './regex';
 export * from './markdown-preview';
 export * from './unit-converter';
+export * from './rest-api-client';
 // Vite substitutes this at build time. If it is missing the axios client would
 // fall back to `baseURL: undefined` and quietly resolve every request against
 // the page's own origin -- which surfaces as bogus 200s and fake "wrong
@@ -132,6 +133,12 @@ export enum ErrorCodes {
   INVALID_NUMBER = 'INVALID_NUMBER',
   NEGATIVE_NOT_ALLOWED = 'NEGATIVE_NOT_ALLOWED',
   BELOW_ABSOLUTE_ZERO = 'BELOW_ABSOLUTE_ZERO',
+  INVALID_URL = 'INVALID_URL',
+  INVALID_JSON_BODY = 'INVALID_JSON_BODY',
+  INVALID_HEADER_KEY = 'INVALID_HEADER_KEY',
+  NETWORK_ERROR = 'NETWORK_ERROR',
+  REQUEST_TIMEOUT = 'REQUEST_TIMEOUT',
+  REQUEST_ABORTED = 'REQUEST_ABORTED',
 }
 
 export type ColumnAlign = 'left' | 'center' | 'right';

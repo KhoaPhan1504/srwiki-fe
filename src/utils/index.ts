@@ -14,6 +14,7 @@ export * from './url-encoder-decoder';
 export * from './timestamp-converter';
 export * from './color-converter';
 export * from './unit-converter';
+export * from './rest-api-client';
 
 export const isJsonString = (value: string): boolean => {
   try {

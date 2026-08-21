@@ -16,7 +16,8 @@
     "urlEncoderDecoder": "URL Encoder / Decoder",
     "timestampConverter": "Timestamp Converter",
     "colorConverter": "Color Converter",
-    "unitConverter": "Unit Converter"
+    "unitConverter": "Unit Converter",
+    "restApiClient": "REST API Client"
   },
   "theme": { "light": "Light", "dark": "Dark", "system": "System" },
   "languageSwitch": { "ariaLabel": "Change language" },

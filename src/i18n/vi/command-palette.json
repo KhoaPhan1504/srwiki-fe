@@ -26,7 +26,8 @@
     "urlEncoderDecoder": "Mã hóa / giải mã URL",
     "timestampConverter": "Chuyển đổi timestamp",
     "colorConverter": "Chuyển đổi màu",
-    "unitConverter": "Chuyển đổi đơn vị"
+    "unitConverter": "Chuyển đổi đơn vị",
+    "restApiClient": "REST API Client"
   },
   "commands": {
     "themeLight": "Chuyển sang giao diện Sáng",

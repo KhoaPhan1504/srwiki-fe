@@ -9,6 +9,10 @@ export const Endpoints = {
   PROFILE_PHONE_VERIFY_OTP: '/profile/phone/verify-otp',
   SETTINGS: '/settings',
   NOTIFICATIONS: '/notifications',
+  REST_COLLECTIONS: '/rest-client/collections',
+  REST_SAVED_REQUESTS: '/rest-client/requests',
+  REST_ENVIRONMENTS: '/rest-client/environments',
+  REST_GLOBAL_VARIABLES: '/rest-client/global-variables',
   ADMIN_MEMBERS: '/admin/members',
   ADMIN_ADMINS: '/admin/admins',
 } as const;

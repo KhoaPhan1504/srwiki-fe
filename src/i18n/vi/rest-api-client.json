@@ -1,0 +1,194 @@
+{
+  "title": "REST API Client",
+  "description": "Soạn và gửi một yêu cầu HTTP, sau đó xem phản hồi — mã trạng thái, header, nội dung và thời gian phản hồi.",
+  "request": {
+    "title": "Yêu cầu",
+    "methodLabel": "Phương thức HTTP",
+    "urlLabel": "URL yêu cầu",
+    "urlPlaceholder": "https://api.example.com/users",
+    "rowEnabled": "Bật/tắt dòng này",
+    "tabs": {
+      "params": "Tham số",
+      "authorization": "Xác thực",
+      "headers": "Header",
+      "body": "Nội dung"
+    },
+    "params": {
+      "keyPlaceholder": "Tên",
+      "valuePlaceholder": "Giá trị",
+      "add": "Thêm tham số",
+      "remove": "Xoá tham số",
+      "empty": "Chưa có tham số nào."
+    },
+    "headers": {
+      "keyPlaceholder": "Tên header",
+      "valuePlaceholder": "Giá trị header",
+      "add": "Thêm header",
+      "remove": "Xoá header",
+      "empty": "Chưa có header nào."
+    },
+    "body": {
+      "placeholder": "{\n  \"key\": \"value\"\n}",
+      "validJson": "JSON hợp lệ",
+      "invalidJson": "JSON không hợp lệ",
+      "disabledForGet": "Yêu cầu GET không thể có nội dung.",
+      "typeLabel": "Loại nội dung",
+      "types": {
+        "raw": "Raw",
+        "urlEncoded": "x-www-form-urlencoded",
+        "formData": "Form Data"
+      },
+      "fields": {
+        "keyPlaceholder": "Tên",
+        "valuePlaceholder": "Giá trị",
+        "add": "Thêm trường",
+        "remove": "Xoá trường",
+        "empty": "Chưa có trường nào."
+      }
+    },
+    "auth": {
+      "typeLabel": "Loại xác thực",
+      "types": {
+        "none": "Không xác thực",
+        "bearer": "Bearer Token",
+        "basic": "Basic Auth",
+        "apiKey": "API Key"
+      },
+      "none": {
+        "description": "Yêu cầu này sẽ không gửi thông tin xác thực."
+      },
+      "bearer": {
+        "tokenLabel": "Token",
+        "tokenPlaceholder": "Dán token vào đây"
+      },
+      "basic": {
+        "usernameLabel": "Tên đăng nhập",
+        "passwordLabel": "Mật khẩu"
+      },
+      "apiKey": {
+        "keyLabel": "Tên key",
+        "keyPlaceholder": "vd: X-Api-Key",
+        "valueLabel": "Giá trị",
+        "addToLabel": "Thêm vào",
+        "addToHeader": "Header",
+        "addToQuery": "Tham số truy vấn"
+      }
+    }
+  },
+  "actions": {
+    "send": "Gửi",
+    "save": "Lưu",
+    "sending": "Đang gửi...",
+    "cancel": "Huỷ",
+    "clear": "Xoá",
+    "clearConfirmTitle": "Xoá yêu cầu này?",
+    "clearConfirmDescription": "Thao tác này sẽ xoá phương thức, URL, tham số, header, nội dung và phản hồi hiện tại. Không thể hoàn tác."
+  },
+  "errors": {
+    "emptyInput": "Nhập URL yêu cầu.",
+    "invalidUrl": "Nhập một URL hợp lệ, ví dụ https://api.example.com.",
+    "invalidJsonBody": "Nội dung yêu cầu phải là JSON hợp lệ.",
+    "invalidHeaderKey": "Tên header này không hợp lệ.",
+    "networkError": "Gửi yêu cầu thất bại — kiểm tra lại URL và kết nối mạng.",
+    "requestTimeout": "Yêu cầu đã hết thời gian chờ sau 30 giây.",
+    "requestAborted": "Đã huỷ yêu cầu."
+  },
+  "response": {
+    "title": "Phản hồi",
+    "emptyIdle": "Gửi một yêu cầu để xem phản hồi ở đây.",
+    "sending": "Đang gửi yêu cầu...",
+    "duration": "Thời gian: {{value}}",
+    "size": "Kích thước: {{value}}",
+    "tabs": {
+      "body": "Nội dung",
+      "headers": "Header"
+    },
+    "copy": "Sao chép",
+    "copied": "Đã sao chép",
+    "copyError": "Không thể sao chép vào clipboard.",
+    "emptyBody": "Phản hồi không có nội dung.",
+    "noHeaders": "Không có header phản hồi."
+  },
+  "collections": {
+    "title": "Collections",
+    "empty": "Chưa có collection nào.",
+    "newCollection": "Collection mới",
+    "toast": {
+      "createCollectionSuccess": "Đã tạo collection",
+      "createCollectionError": "Không thể tạo collection",
+      "renameCollectionSuccess": "Đã đổi tên collection",
+      "renameCollectionError": "Không thể đổi tên collection",
+      "deleteCollectionSuccess": "Đã xoá collection",
+      "deleteCollectionError": "Không thể xoá collection",
+      "saveRequestSuccess": "Đã lưu request",
+      "saveRequestError": "Không thể lưu request",
+      "renameRequestSuccess": "Đã đổi tên request",
+      "renameRequestError": "Không thể đổi tên request",
+      "deleteRequestSuccess": "Đã xoá request",
+      "deleteRequestError": "Không thể xoá request"
+    },
+    "renamePrompt": {
+      "nameLabel": "Tên",
+      "submit": "Lưu",
+      "validation": {
+        "nameRequired": "Tên không được để trống"
+      }
+    },
+    "menu": {
+      "rename": "Đổi tên",
+      "delete": "Xoá",
+      "addRequest": "Thêm request"
+    },
+    "deleteCollectionConfirmTitle": "Xoá collection này?",
+    "deleteCollectionConfirmDescription": "Toàn bộ request đã lưu bên trong collection này sẽ bị xoá theo. Không thể hoàn tác.",
+    "deleteRequestConfirmTitle": "Xoá request này?",
+    "deleteRequestConfirmDescription": "Không thể hoàn tác.",
+    "saveDialog": {
+      "title": "Lưu request",
+      "modeLabel": "Lưu vào",
+      "modeExisting": "Collection có sẵn",
+      "modeNew": "Tạo collection mới",
+      "collectionLabel": "Collection",
+      "newCollectionLabel": "Tên collection mới",
+      "requestNameLabel": "Tên request",
+      "submit": "Lưu",
+      "validation": {
+        "requestNameRequired": "Tên request không được để trống",
+        "collectionRequired": "Chọn hoặc đặt tên một collection"
+      }
+    }
+  },
+  "environments": {
+    "selectorLabel": "Environment",
+    "noEnvironment": "Không có Environment",
+    "manage": "Quản lý Environment",
+    "manager": {
+      "title": "Quản lý Environment",
+      "globalsTab": "Global",
+      "environmentsTab": "Environments",
+      "newEnvironment": "Environment mới",
+      "noneSelected": "Chưa có environment nào.",
+      "menu": {
+        "rename": "Đổi tên",
+        "delete": "Xoá"
+      }
+    },
+    "variables": {
+      "keyPlaceholder": "Tên biến",
+      "valuePlaceholder": "Giá trị",
+      "add": "Thêm biến",
+      "remove": "Xoá biến",
+      "empty": "Chưa có biến nào."
+    },
+    "toast": {
+      "createSuccess": "Đã tạo environment",
+      "createError": "Không thể tạo environment",
+      "updateSuccess": "Đã lưu environment",
+      "updateError": "Không thể lưu environment",
+      "deleteSuccess": "Đã xoá environment",
+      "deleteError": "Không thể xoá environment",
+      "globalUpdateSuccess": "Đã lưu global variables",
+      "globalUpdateError": "Không thể lưu global variables"
+    }
+  }
+}
