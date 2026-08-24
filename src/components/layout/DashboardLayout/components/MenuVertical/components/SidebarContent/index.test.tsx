@@ -48,7 +48,7 @@ describe('SidebarContent', () => {
 
   it('shows the Regex Tester tool item for a member (tools are open to everyone)', () => {
     renderSidebar(memberAuth);
-    expect(screen.getByText('Regex Tester')).toBeInTheDocument();
+    expect(screen.getByText('Kiểm tra Regex')).toBeInTheDocument();
   });
 
   it('does not render a Logout button', () => {
@@ -71,8 +71,8 @@ describe('SidebarContent', () => {
   it('renders tool links inside the scrollable nav area', () => {
     renderSidebar(memberAuth);
     const scrollArea = document.querySelector('.overflow-y-auto') as HTMLElement;
-    expect(within(scrollArea).getByText('Regex Tester')).toBeInTheDocument();
-    expect(within(scrollArea).getByText('cURL Generator')).toBeInTheDocument();
+    expect(within(scrollArea).getByText('Kiểm tra Regex')).toBeInTheDocument();
+    expect(within(scrollArea).getByText('Trình tạo cURL')).toBeInTheDocument();
   });
 
   it('puts the Member List item in the scrollable area for an admin, not pinned', () => {

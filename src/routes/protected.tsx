@@ -7,6 +7,7 @@ import Base64EncoderDecoderPage from '~root/pages/Base64EncoderDecoder';
 import ColorConverterPage from '~root/pages/ColorConverter';
 import CurlGeneratorPage from '~root/pages/CurlGenerator';
 import DashboardPage from '~root/pages/Dashboard';
+import HeadersInspectorPage from '~root/pages/HeadersInspector';
 import JsonFormatterPage from '~root/pages/JsonFormatter';
 import JwtWebTokenPage from '~root/pages/JwtWebToken';
 import MarkdownPreviewPage from '~root/pages/MarkdownPreview';
@@ -80,6 +81,10 @@ export const protectedRoutes: RouteObject[] = [
   {
     path: '/tools/curl-generator',
     element: <PrivateRoute element={<CurlGeneratorPage />} />,
+  },
+  {
+    path: '/tools/headers-inspector',
+    element: <PrivateRoute element={<HeadersInspectorPage />} />,
   },
   {
     path: '/admin/members',

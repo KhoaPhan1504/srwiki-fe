@@ -16,6 +16,7 @@ export * from './color-converter';
 export * from './unit-converter';
 export * from './rest-api-client';
 export * from './curl-generator';
+export * from './headers-inspector';
 
 export const isJsonString = (value: string): boolean => {
   try {

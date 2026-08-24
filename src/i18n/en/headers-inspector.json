@@ -1,0 +1,42 @@
+{
+  "title": "HTTP Headers Inspector",
+  "description": "Send a request to any URL and inspect its response — status code, timing, redirects, and the full header list.",
+  "request": {
+    "urlLabel": "Request URL",
+    "urlPlaceholder": "https://example.com"
+  },
+  "actions": {
+    "inspect": "Inspect",
+    "inspecting": "Inspecting...",
+    "clear": "Clear",
+    "clearConfirmTitle": "Clear this request?",
+    "clearConfirmDescription": "This clears the URL and any inspected response. This can't be undone."
+  },
+  "response": {
+    "title": "Response",
+    "idle": "Enter a URL and click Inspect to see the response.",
+    "sending": "Sending request…",
+    "duration": "Time: {{value}}",
+    "finalUrl": "Final URL: {{value}}",
+    "redirectCount": "Redirects: {{count}}",
+    "copyAll": "Copy all",
+    "copyAllCopied": "Copied",
+    "copyAllError": "Couldn't copy to the clipboard."
+  },
+  "headers": {
+    "searchLabel": "Search headers",
+    "searchPlaceholder": "Search headers…",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyError": "Couldn't copy to the clipboard.",
+    "empty": "No headers to show.",
+    "noResults": "No headers match your search."
+  },
+  "errors": {
+    "invalidUrl": "Enter a valid http:// or https:// URL.",
+    "blockedUrl": "This URL can't be inspected.",
+    "networkError": "Couldn't connect. Check the URL and try again.",
+    "requestTimeout": "The request timed out.",
+    "tooManyRedirects": "Too many redirects."
+  }
+}

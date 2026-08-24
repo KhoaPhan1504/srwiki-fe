@@ -31,7 +31,8 @@
     "colorConverter": "Color Converter",
     "unitConverter": "Unit Converter",
     "restApiClient": "REST API Client",
-    "curlGenerator": "cURL Generator"
+    "curlGenerator": "cURL Generator",
+    "headersInspector": "HTTP Headers Inspector"
   },
   "commands": {
     "themeLight": "Switch to Light theme",

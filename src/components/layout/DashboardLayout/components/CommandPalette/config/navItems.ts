@@ -10,6 +10,7 @@ import {
   Palette,
   Regex,
   Ruler,
+  ScrollText,
   Send,
   SettingsIcon,
   TerminalSquare,
@@ -132,5 +133,11 @@ export const NAV_ITEMS: NavItem[] = [
     labelKey: 'nav.curlGenerator',
     to: '/tools/curl-generator',
     icon: TerminalSquare,
+  },
+  {
+    id: 'headers-inspector',
+    labelKey: 'nav.headersInspector',
+    to: '/tools/headers-inspector',
+    icon: ScrollText,
   },
 ];
