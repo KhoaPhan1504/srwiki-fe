@@ -15,4 +15,5 @@ export const Endpoints = {
   REST_GLOBAL_VARIABLES: '/rest-client/global-variables',
   ADMIN_MEMBERS: '/admin/members',
   ADMIN_ADMINS: '/admin/admins',
+  HEADERS_INSPECTOR: '/headers-inspector/inspect',
 } as const;

@@ -1,0 +1,42 @@
+{
+  "title": "HTTP Headers Inspector",
+  "description": "Gửi một yêu cầu đến bất kỳ URL nào và xem phản hồi — mã trạng thái, thời gian, chuyển hướng và toàn bộ danh sách header.",
+  "request": {
+    "urlLabel": "URL yêu cầu",
+    "urlPlaceholder": "https://example.com"
+  },
+  "actions": {
+    "inspect": "Kiểm tra",
+    "inspecting": "Đang kiểm tra...",
+    "clear": "Xoá",
+    "clearConfirmTitle": "Xoá yêu cầu này?",
+    "clearConfirmDescription": "Thao tác này sẽ xoá URL và kết quả kiểm tra hiện tại. Không thể hoàn tác."
+  },
+  "response": {
+    "title": "Phản hồi",
+    "idle": "Nhập một URL và nhấn Kiểm tra để xem phản hồi.",
+    "sending": "Đang gửi yêu cầu…",
+    "duration": "Thời gian: {{value}}",
+    "finalUrl": "URL cuối cùng: {{value}}",
+    "redirectCount": "Số lần chuyển hướng: {{count}}",
+    "copyAll": "Sao chép tất cả",
+    "copyAllCopied": "Đã sao chép",
+    "copyAllError": "Không thể sao chép vào clipboard."
+  },
+  "headers": {
+    "searchLabel": "Tìm kiếm header",
+    "searchPlaceholder": "Tìm kiếm header…",
+    "copy": "Sao chép",
+    "copied": "Đã sao chép",
+    "copyError": "Không thể sao chép vào clipboard.",
+    "empty": "Không có header nào để hiển thị.",
+    "noResults": "Không tìm thấy header nào khớp với tìm kiếm của bạn."
+  },
+  "errors": {
+    "invalidUrl": "Nhập một URL http:// hoặc https:// hợp lệ.",
+    "blockedUrl": "Không thể kiểm tra URL này.",
+    "networkError": "Không thể kết nối. Kiểm tra URL và thử lại.",
+    "requestTimeout": "Yêu cầu đã hết thời gian chờ.",
+    "tooManyRedirects": "Quá nhiều lượt chuyển hướng (redirect)."
+  }
+}

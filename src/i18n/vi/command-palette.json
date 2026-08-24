@@ -28,7 +28,8 @@
     "colorConverter": "Chuyển đổi màu",
     "unitConverter": "Chuyển đổi đơn vị",
     "restApiClient": "REST API Client",
-    "curlGenerator": "Trình tạo cURL"
+    "curlGenerator": "Trình tạo cURL",
+    "headersInspector": "Trình kiểm tra Header HTTP"
   },
   "commands": {
     "themeLight": "Chuyển sang giao diện Sáng",

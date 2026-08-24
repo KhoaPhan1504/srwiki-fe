@@ -53,6 +53,8 @@ import viRestApiClient from './vi/rest-api-client.json';
 import enRestApiClient from './en/rest-api-client.json';
 import viCurlGenerator from './vi/curl-generator.json';
 import enCurlGenerator from './en/curl-generator.json';
+import viHeadersInspector from './vi/headers-inspector.json';
+import enHeadersInspector from './en/headers-inspector.json';
 
 export const NAMESPACES = [
   'common',
@@ -80,6 +82,7 @@ export const NAMESPACES = [
   'unit-converter',
   'rest-api-client',
   'curl-generator',
+  'headers-inspector',
 ] as const;
 
 const resources = {
@@ -109,6 +112,7 @@ const resources = {
     'unit-converter': viUnitConverter,
     'rest-api-client': viRestApiClient,
     'curl-generator': viCurlGenerator,
+    'headers-inspector': viHeadersInspector,
   },
   [Language.EN]: {
     common: enCommon,
@@ -136,6 +140,7 @@ const resources = {
     'unit-converter': enUnitConverter,
     'rest-api-client': enRestApiClient,
     'curl-generator': enCurlGenerator,
+    'headers-inspector': enHeadersInspector,
   },
 };
 
