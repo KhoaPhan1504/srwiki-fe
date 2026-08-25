@@ -1,11 +1,13 @@
+import type { ReactElement } from 'react';
 import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { Provider as JotaiProvider, createStore } from 'jotai';
-import { PrivateRoute } from './protected';
+import { PrivateRoute, flattenRouteTree } from './protected';
 import { authAtom } from '~root/stores';
 import type { AuthState } from '~root/stores';
 import { MembershipTier, Role } from '~root/constants';
+import type { RouteType } from './routeTree';
 
 const renderWithAuth = (auth: AuthState, allowedRoles?: Array<Role>) => {
   const store = createStore();
@@ -72,5 +74,46 @@ describe('PrivateRoute', () => {
       [Role.ADMIN],
     );
     expect(screen.getByText('Protected content')).toBeInTheDocument();
+  });
+});
+
+const Stub = () => null;
+
+describe('flattenRouteTree', () => {
+  it('produces one RouteObject per node that has both path and element, skipping group headers', () => {
+    const tree: RouteType[] = [
+      { title: 'a', path: '/a', element: <Stub /> },
+      {
+        title: 'group',
+        children: [
+          { title: 'b', path: '/b', element: <Stub /> },
+          { title: 'header-only, no path or element' },
+        ],
+      },
+    ];
+
+    const result = flattenRouteTree(tree);
+
+    expect(result.map((route) => route.path)).toEqual(['/a', '/b']);
+  });
+
+  it('wraps adminOnly nodes with allowedRoles for ADMIN and SUPER_ADMIN', () => {
+    const tree: RouteType[] = [
+      { title: 'admin', path: '/admin', element: <Stub />, adminOnly: true },
+    ];
+
+    const [route] = flattenRouteTree(tree);
+    const wrapped = route.element as ReactElement<{ allowedRoles?: Role[] }>;
+
+    expect(wrapped.props.allowedRoles).toEqual([Role.ADMIN, Role.SUPER_ADMIN]);
+  });
+
+  it('leaves allowedRoles undefined for regular nodes', () => {
+    const tree: RouteType[] = [{ title: 'plain', path: '/plain', element: <Stub /> }];
+
+    const [route] = flattenRouteTree(tree);
+    const wrapped = route.element as ReactElement<{ allowedRoles?: Role[] }>;
+
+    expect(wrapped.props.allowedRoles).toBeUndefined();
   });
 });

@@ -7,6 +7,7 @@
     "memberList": "Danh sách thành viên",
     "logout": "Đăng xuất",
     "sectionTools": "Công cụ",
+    "sectionDevelopment": "Phát triển",
     "jsonFormatter": "Định dạng JSON",
     "jwtWebToken": "JWT Web Token",
     "uuidGenerator": "Trình tạo UUID",
