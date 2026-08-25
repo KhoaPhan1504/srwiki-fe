@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider as JotaiProvider, createStore } from 'jotai';
 import { SidebarContent } from './index';
+import { filterTree } from './filterTree';
 import { authAtom } from '~root/stores';
 import type { AuthState } from '~root/stores';
 import { MembershipTier, Role } from '~root/constants';
+import type { RouteType } from '~root/routes/routeTree';
 
 const memberAuth: AuthState = {
   token: 'tok',
@@ -56,31 +58,50 @@ describe('SidebarContent', () => {
     expect(screen.queryByText('Đăng xuất')).not.toBeInTheDocument();
   });
 
-  it('keeps Dashboard/Profile/Settings pinned outside the scrollable nav area', () => {
+  it('renders every item, including Dashboard/Profile/Settings, inside the single scrollable nav area', () => {
     renderSidebar(memberAuth);
     const scrollArea = document.querySelector('.overflow-y-auto') as HTMLElement;
     expect(scrollArea).not.toBeNull();
-    expect(within(scrollArea).queryByText('Trang chủ')).not.toBeInTheDocument();
-    expect(within(scrollArea).queryByText('Hồ sơ')).not.toBeInTheDocument();
-    expect(within(scrollArea).queryByText('Cài đặt')).not.toBeInTheDocument();
-    expect(screen.getByText('Trang chủ')).toBeInTheDocument();
-    expect(screen.getByText('Hồ sơ')).toBeInTheDocument();
-    expect(screen.getByText('Cài đặt')).toBeInTheDocument();
+    expect(scrollArea).toContainElement(screen.getByText('Trang chủ'));
+    expect(scrollArea).toContainElement(screen.getByText('Hồ sơ'));
+    expect(scrollArea).toContainElement(screen.getByText('Cài đặt'));
+    expect(scrollArea).toContainElement(screen.getByText('Kiểm tra Regex'));
   });
 
-  it('renders tool links inside the scrollable nav area', () => {
+  it('splits tools between the Tools and Development groups', () => {
     renderSidebar(memberAuth);
-    const scrollArea = document.querySelector('.overflow-y-auto') as HTMLElement;
-    expect(within(scrollArea).getByText('Kiểm tra Regex')).toBeInTheDocument();
-    expect(within(scrollArea).getByText('Trình tạo cURL')).toBeInTheDocument();
+    expect(screen.getByText('Công cụ')).toBeInTheDocument();
+    expect(screen.getByText('Phát triển')).toBeInTheDocument();
+    expect(screen.getByText('Định dạng JSON')).toBeInTheDocument();
+    expect(screen.getByText('REST API Client')).toBeInTheDocument();
+  });
+});
+
+describe('filterTree', () => {
+  const tree: RouteType[] = [
+    { title: 'a', path: '/a' },
+    { title: 'admin-leaf', path: '/admin-leaf', adminOnly: true },
+    {
+      title: 'mixed-group',
+      children: [
+        { title: 'b', path: '/b' },
+        { title: 'admin-in-group', path: '/admin-in-group', adminOnly: true },
+      ],
+    },
+    {
+      title: 'admin-only-group',
+      children: [{ title: 'c', path: '/c', adminOnly: true }],
+    },
+  ];
+
+  it('keeps everything for an admin', () => {
+    const result = filterTree(tree, true);
+    expect(result).toHaveLength(4);
   });
 
-  it('puts the Member List item in the scrollable area for an admin, not pinned', () => {
-    renderSidebar({
-      token: 'tok',
-      user: { id: '1', email: 'a@b.com', role: Role.ADMIN, membershipTier: null },
-    });
-    const scrollArea = document.querySelector('.overflow-y-auto') as HTMLElement;
-    expect(within(scrollArea).getByText('Danh sách thành viên')).toBeInTheDocument();
+  it('drops adminOnly leaves and hides a group left with zero visible children', () => {
+    const result = filterTree(tree, false);
+    expect(result.map((node) => node.title)).toEqual(['a', 'mixed-group']);
+    expect(result[1].children?.map((child) => child.title)).toEqual(['b']);
   });
 });
