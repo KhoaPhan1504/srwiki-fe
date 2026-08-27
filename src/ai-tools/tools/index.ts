@@ -1,0 +1,28 @@
+import type { ToolRegistry } from '../registry';
+import { convertColorTool } from './convert-color';
+import { convertTimestampTool } from './convert-timestamp';
+import { convertUnitTool } from './convert-unit';
+import { decodeBase64Tool } from './decode-base64';
+import { decodeJwtTool } from './decode-jwt';
+import { decodeUrlTool } from './decode-url';
+import { encodeBase64Tool } from './encode-base64';
+import { encodeUrlTool } from './encode-url';
+import { formatJsonTool } from './format-json';
+import { generateUuidTool } from './generate-uuid';
+import { renderMarkdownTool } from './render-markdown';
+import { testRegexTool } from './test-regex';
+
+export const registerBuiltinTools = (registry: ToolRegistry): void => {
+  registry.register(decodeJwtTool);
+  registry.register(generateUuidTool);
+  registry.register(encodeBase64Tool);
+  registry.register(decodeBase64Tool);
+  registry.register(encodeUrlTool);
+  registry.register(decodeUrlTool);
+  registry.register(renderMarkdownTool);
+  registry.register(formatJsonTool);
+  registry.register(convertColorTool);
+  registry.register(convertTimestampTool);
+  registry.register(convertUnitTool);
+  registry.register(testRegexTool);
+};

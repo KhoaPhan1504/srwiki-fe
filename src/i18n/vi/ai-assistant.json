@@ -1,0 +1,18 @@
+{
+  "title": "Trợ lý AI",
+  "description": "Hỏi hoặc nhờ AI chạy trực tiếp các công cụ của SR-WIKI.",
+  "composer": {
+    "placeholder": "Nhập câu hỏi... (Shift+Enter để xuống dòng)",
+    "send": "Gửi"
+  },
+  "emptyState": {
+    "title": "Bắt đầu trò chuyện",
+    "description": "Ví dụ: \"Giải mã JWT này giúp tôi\" hoặc \"Tạo cho tôi 1 UUID v4\"."
+  },
+  "sidebar": {
+    "newChat": "Chat mới",
+    "collapse": "Thu gọn danh sách chat",
+    "expand": "Mở rộng danh sách chat",
+    "delete": "Xoá cuộc trò chuyện"
+  }
+}

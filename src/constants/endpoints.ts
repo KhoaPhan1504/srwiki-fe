@@ -16,4 +16,7 @@ export const Endpoints = {
   ADMIN_MEMBERS: '/admin/members',
   ADMIN_ADMINS: '/admin/admins',
   HEADERS_INSPECTOR: '/headers-inspector/inspect',
+  AI_CHAT: '/ai/chat',
+  AI_CONVERSATIONS: '/ai/conversations',
+  AI_MODELS: '/ai/models',
 } as const;
