@@ -9,6 +9,7 @@ import { encodeBase64Tool } from './encode-base64';
 import { encodeUrlTool } from './encode-url';
 import { formatJsonTool } from './format-json';
 import { generateUuidTool } from './generate-uuid';
+import { getWeatherTool } from './get-weather';
 import { renderMarkdownTool } from './render-markdown';
 import { testRegexTool } from './test-regex';
 
@@ -25,4 +26,5 @@ export const registerBuiltinTools = (registry: ToolRegistry): void => {
   registry.register(convertTimestampTool);
   registry.register(convertUnitTool);
   registry.register(testRegexTool);
+  registry.register(getWeatherTool);
 };

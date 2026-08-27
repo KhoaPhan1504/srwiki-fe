@@ -19,4 +19,5 @@ export const Endpoints = {
   AI_CHAT: '/ai/chat',
   AI_CONVERSATIONS: '/ai/conversations',
   AI_MODELS: '/ai/models',
+  WEATHER: '/weather',
 } as const;

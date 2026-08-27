@@ -38,7 +38,7 @@ describe('toAnthropicTools', () => {
   it('converts every registered tool with no execute leaking through', () => {
     const results = toAnthropicTools(toolRegistry.list());
 
-    expect(results).toHaveLength(12);
+    expect(results).toHaveLength(13);
     results.forEach((tool) => {
       expect(tool).not.toHaveProperty('execute');
     });
