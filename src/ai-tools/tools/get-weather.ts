@@ -34,7 +34,7 @@ type GetWeatherOutput = CurrentWeatherOutput | ForecastOutput;
 export const getWeatherTool: ToolDefinition<GetWeatherInput, GetWeatherOutput> = {
   name: 'get_weather',
   description:
-    'Get the current weather or a 5-day forecast for a city. Set mode to "current" or "forecast", and city to the city name (e.g. "Ho Chi Minh City"). Ask the user which city if they have not said one.',
+    'Get the current weather or a 5-day forecast for a city. Set mode to "current" or "forecast", and city to the city name (e.g. "Ho Chi Minh City"). Ask the user which city if they have not said one. When presenting the result, include a relevant weather emoji for each condition (e.g. ☀️ clear, ⛅ partly cloudy, ☁️ cloudy, 🌧️ rain, ⛈️ storm, ❄️ snow, 🌫️ fog) and use 🌡️ for temperature, 💧 for humidity, and 💨 for wind.',
   inputSchema,
   metadata: { category: 'lookup', readOnly: true, requiresNetwork: true },
   execute: async (input) => {
