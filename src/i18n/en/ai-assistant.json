@@ -1,0 +1,18 @@
+{
+  "title": "AI Assistant",
+  "description": "Ask questions, or have the AI run SR-WIKI's tools directly.",
+  "composer": {
+    "placeholder": "Type a message... (Shift+Enter for a new line)",
+    "send": "Send"
+  },
+  "emptyState": {
+    "title": "Start a conversation",
+    "description": "Try \"Decode this JWT for me\" or \"Generate a v4 UUID\"."
+  },
+  "sidebar": {
+    "newChat": "New chat",
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar",
+    "delete": "Delete conversation"
+  }
+}

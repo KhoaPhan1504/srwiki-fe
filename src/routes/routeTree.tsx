@@ -14,11 +14,13 @@ import {
   ScrollText,
   Send,
   SettingsIcon,
+  Sparkles,
   TerminalSquare,
   User,
   Users,
 } from 'lucide-react';
 import AdminMembersPage from '~root/pages/AdminMembers';
+import AiAssistantPage from '~root/pages/AiAssistant';
 import Base64EncoderDecoderPage from '~root/pages/Base64EncoderDecoder';
 import ColorConverterPage from '~root/pages/ColorConverter';
 import CurlGeneratorPage from '~root/pages/CurlGenerator';
@@ -68,6 +70,12 @@ export const protectedRouteTree: RouteType[] = [
     path: '/settings',
     prefix: <SettingsIcon className={iconClass} />,
     element: <SettingsPage />,
+  },
+  {
+    title: 'nav.aiAssistant',
+    path: '/ai-assistant',
+    prefix: <Sparkles className={iconClass} />,
+    element: <AiAssistantPage />,
   },
   {
     title: 'nav.memberList',

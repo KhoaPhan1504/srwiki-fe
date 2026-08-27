@@ -13,6 +13,7 @@ import {
   ScrollText,
   Send,
   SettingsIcon,
+  Sparkles,
   TerminalSquare,
   User,
   Users,
@@ -55,6 +56,7 @@ export const NAV_ITEMS: NavItem[] = [
     to: '/settings?tab=account',
     icon: SettingsIcon,
   },
+  { id: 'ai-assistant', labelKey: 'nav.aiAssistant', to: '/ai-assistant', icon: Sparkles },
   {
     id: 'admin-members',
     labelKey: 'nav.memberList',

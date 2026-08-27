@@ -29,6 +29,8 @@ import viForms from './vi/forms.json';
 import enForms from './en/forms.json';
 import viAdminMembers from './vi/admin-members.json';
 import enAdminMembers from './en/admin-members.json';
+import viAiAssistant from './vi/ai-assistant.json';
+import enAiAssistant from './en/ai-assistant.json';
 import viJsonFormatter from './vi/json-formatter.json';
 import enJsonFormatter from './en/json-formatter.json';
 import viJwtWebToken from './vi/jwt-web-token.json';
@@ -70,6 +72,7 @@ export const NAMESPACES = [
   'notifications',
   'forms',
   'admin-members',
+  'ai-assistant',
   'json-formatter',
   'jwt-web-token',
   'uuid-generator',
@@ -100,6 +103,7 @@ const resources = {
     notifications: viNotifications,
     forms: viForms,
     'admin-members': viAdminMembers,
+    'ai-assistant': viAiAssistant,
     'json-formatter': viJsonFormatter,
     'jwt-web-token': viJwtWebToken,
     'uuid-generator': viUuidGenerator,
@@ -128,6 +132,7 @@ const resources = {
     notifications: enNotifications,
     forms: enForms,
     'admin-members': enAdminMembers,
+    'ai-assistant': enAiAssistant,
     'json-formatter': enJsonFormatter,
     'jwt-web-token': enJwtWebToken,
     'uuid-generator': enUuidGenerator,

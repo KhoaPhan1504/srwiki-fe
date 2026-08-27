@@ -54,7 +54,7 @@ export const DashboardLayout = ({ children }: Props) => {
           onOpenPalette={() => setPaletteOpen(true)}
         />
         <main className="min-h-0 flex-1 overflow-y-auto">
-          <div className="mx-auto w-full max-w-7xl p-4 sm:p-6 lg:p-8">{children}</div>
+          <div className="mx-auto w-full h-full max-w-7xl p-4 sm:p-6 lg:p-8">{children}</div>
         </main>
       </div>
       <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} />

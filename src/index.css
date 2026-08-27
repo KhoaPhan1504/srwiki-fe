@@ -157,3 +157,14 @@
     display: none;
   }
 }
+
+@layer utilities {
+  /* Keeps the element scrollable while hiding the scrollbar track/thumb. */
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+}
