@@ -1,8 +1,7 @@
 import type { KeyboardEvent } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '~root/components/ui/button';
-import { Textarea } from '~root/components/ui/textarea';
+import { Button, Textarea } from '~root/components/ui';
 import type { ModelOut } from '~root/apis/useListModels';
 import { ModelSelector } from '../ModelSelector';
 
@@ -45,7 +44,7 @@ export const Composer = ({
         placeholder={t('composer.placeholder')}
         disabled={disabled}
         rows={1}
-        className="min-h-0 flex-1 resize-none !text-xl border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent"
+        className="min-h-0 flex-1 resize-none text-sm xl:text-xl border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 dark:bg-transparent"
       />
       <ModelSelector models={models} value={selectedModel} onChange={onModelChange} />
       <Button

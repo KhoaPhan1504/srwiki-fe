@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useGetProfile, useUpdateProfile, useUploadAvatar } from '~root/apis';
 import { useProfileFormSchema, type ProfileFormValues } from '~root/schemas';
 import { getInitials } from '~root/utils';
+import type { SrFormFieldConfig } from '~root/components/ui/form/index';
 
 export const useProfileHooks = () => {
   const { t } = useTranslation('profile');
@@ -22,6 +23,30 @@ export const useProfileHooks = () => {
   });
   const { reset, watch } = form;
   const phone = watch('phone');
+
+  const formStructure: SrFormFieldConfig[] = [
+    { inputType: 'TextField', name: 'fullName', label: t('form.fullName'), colSpan: 'col-span-12' },
+    {
+      inputType: 'TextAreaField',
+      name: 'bio',
+      label: t('form.bio'),
+      rows: 3,
+      colSpan: 'col-span-12',
+    },
+    { inputType: 'TextField', name: 'address', label: t('form.address'), colSpan: 'col-span-12' },
+    {
+      inputType: 'DatePickerField',
+      name: 'dateOfBirth',
+      label: t('form.dateOfBirth'),
+      colSpan: 'col-span-12',
+    },
+    {
+      inputType: 'PhoneNumberField',
+      name: 'phone',
+      label: t('form.phone'),
+      colSpan: 'col-span-12',
+    },
+  ];
 
   useEffect(() => {
     if (profile) {
@@ -75,5 +100,6 @@ export const useProfileHooks = () => {
     isPending,
     isUploadingAvatar,
     initials,
+    formStructure,
   };
 };

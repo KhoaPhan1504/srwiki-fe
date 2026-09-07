@@ -1,9 +1,18 @@
 import { useState } from 'react';
 import { PanelLeft, PanelLeftClose, Plus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '~root/components/ui/button';
-import { useListConversations } from '~root/apis/useListConversations';
-import { useDeleteConversation } from '~root/apis/useDeleteConversation';
+import {
+  Button,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '~root/components/ui';
+import { useListConversations, useDeleteConversation } from '~root/apis';
 import { ConversationListItem } from './ConversationListItem';
 
 type Props = {
@@ -19,6 +28,7 @@ export const ConversationSidebar = ({ activeConversationId, onSelect, onNewChat 
   const [collapsed, setCollapsed] = useState(() => window.innerWidth < MOBILE_BREAKPOINT_PX);
   const { conversations } = useListConversations();
   const deleteConversation = useDeleteConversation();
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
 
   if (collapsed) {
     return (
@@ -36,16 +46,16 @@ export const ConversationSidebar = ({ activeConversationId, onSelect, onNewChat 
   }
 
   return (
-    <div className="flex w-64 shrink-0 flex-col border-r">
+    <div className="flex w-48 xl:w-64 shrink-0 flex-col border-r">
       <div className="flex items-center justify-between gap-1 p-3">
         <Button
           variant="outline"
           size="sm"
           onClick={onNewChat}
-          className="flex-1 justify-start gap-2"
+          className="w-auto justify-start gap-2"
         >
           <Plus className="h-4 w-4" />
-          {t('sidebar.newChat')}
+          <p className="hidden xl:block">{t('sidebar.newChat')}</p>
         </Button>
         <Button
           variant="ghost"
@@ -63,16 +73,40 @@ export const ConversationSidebar = ({ activeConversationId, onSelect, onNewChat 
             conversation={conversation}
             active={conversation.id === activeConversationId}
             onSelect={() => onSelect(conversation.id)}
-            onDelete={() =>
-              deleteConversation.mutate(conversation.id, {
-                onSuccess: () => {
-                  if (conversation.id === activeConversationId) onNewChat();
-                },
-              })
-            }
+            onDelete={() => setPendingDeleteId(conversation.id)}
           />
         ))}
       </div>
+      <AlertDialog
+        open={pendingDeleteId !== null}
+        onOpenChange={(open) => !open && setPendingDeleteId(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('sidebar.deleteConfirmTitle')}</AlertDialogTitle>
+            <AlertDialogDescription>{t('sidebar.deleteConfirmDescription')}</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t('common:buttons.cancel')}</AlertDialogCancel>
+            <AlertDialogAction
+              variant="destructive"
+              onClick={() => {
+                const conversationId = pendingDeleteId;
+                if (conversationId) {
+                  deleteConversation.mutate(conversationId, {
+                    onSuccess: () => {
+                      if (conversationId === activeConversationId) onNewChat();
+                    },
+                  });
+                }
+                setPendingDeleteId(null);
+              }}
+            >
+              {t('sidebar.deleteConfirmAction')}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
