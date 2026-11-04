@@ -13,6 +13,13 @@
     "newChat": "New chat",
     "collapse": "Collapse sidebar",
     "expand": "Expand sidebar",
-    "delete": "Delete conversation"
+    "delete": "Delete conversation",
+    "deleteConfirmTitle": "Delete conversation?",
+    "deleteConfirmDescription": "This will permanently delete this conversation and its messages. This action cannot be undone.",
+    "deleteConfirmAction": "Delete"
+  },
+  "toast": {
+    "deleteSuccess": "Conversation deleted successfully",
+    "deleteError": "Failed to delete conversation"
   }
 }

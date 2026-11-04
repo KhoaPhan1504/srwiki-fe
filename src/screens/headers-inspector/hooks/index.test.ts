@@ -6,7 +6,7 @@ vi.mock('~root/apis/useInspectHeaders', () => ({
   useInspectHeaders: vi.fn(),
 }));
 
-import { useInspectHeaders } from '~root/apis/useInspectHeaders';
+import { useInspectHeaders } from '~root/apis';
 import { ErrorCodes } from '~root/constants';
 import type { HeaderInspectionResponse } from '~root/types';
 import { useHeadersInspectorHooks } from '.';

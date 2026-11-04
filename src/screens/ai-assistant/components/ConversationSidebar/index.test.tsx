@@ -52,7 +52,7 @@ describe('ConversationSidebar', () => {
     expect(screen.getByRole('button', { name: /chat mới/i })).toBeInTheDocument();
   });
 
-  it('returns to new chat when deleting the active conversation', async () => {
+  it('asks for confirmation before deleting and returns to new chat when deleting the active conversation', async () => {
     useListConversationsMock.mockReturnValue({
       conversations: [{ id: 'conv-1', title: 'My chat', createdAt: '', updatedAt: '' }],
       isLoading: false,
@@ -70,9 +70,30 @@ describe('ConversationSidebar', () => {
     );
 
     await user.click(screen.getByRole('button', { name: /xoá cuộc trò chuyện/i }));
+    expect(deleteMutateMock).not.toHaveBeenCalled();
+
+    await user.click(screen.getByRole('button', { name: /^xoá$/i }));
 
     expect(deleteMutateMock).toHaveBeenCalledWith('conv-1', expect.any(Object));
     expect(onNewChat).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not delete when the confirmation dialog is cancelled', async () => {
+    useListConversationsMock.mockReturnValue({
+      conversations: [{ id: 'conv-1', title: 'My chat', createdAt: '', updatedAt: '' }],
+      isLoading: false,
+    });
+    const user = userEvent.setup();
+
+    render(
+      <ConversationSidebar activeConversationId="conv-1" onSelect={vi.fn()} onNewChat={vi.fn()} />,
+    );
+
+    await user.click(screen.getByRole('button', { name: /xoá cuộc trò chuyện/i }));
+    await user.click(screen.getByRole('button', { name: /huỷ/i }));
+
+    expect(deleteMutateMock).not.toHaveBeenCalled();
+    expect(screen.queryByRole('button', { name: /^xoá$/i })).not.toBeInTheDocument();
   });
 
   it('starts collapsed on narrow viewports so the composer keeps its width', () => {
@@ -112,6 +133,7 @@ describe('ConversationSidebar', () => {
     );
 
     await user.click(screen.getByRole('button', { name: /xoá cuộc trò chuyện/i }));
+    await user.click(screen.getByRole('button', { name: /^xoá$/i }));
 
     expect(onNewChat).not.toHaveBeenCalled();
   });

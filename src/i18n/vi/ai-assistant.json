@@ -13,6 +13,13 @@
     "newChat": "Chat mới",
     "collapse": "Thu gọn danh sách chat",
     "expand": "Mở rộng danh sách chat",
-    "delete": "Xoá cuộc trò chuyện"
+    "delete": "Xoá cuộc trò chuyện",
+    "deleteConfirmTitle": "Xoá cuộc trò chuyện?",
+    "deleteConfirmDescription": "Cuộc trò chuyện và toàn bộ tin nhắn sẽ bị xoá vĩnh viễn. Hành động này không thể hoàn tác.",
+    "deleteConfirmAction": "Xoá"
+  },
+  "toast": {
+    "deleteSuccess": "Đã xoá cuộc trò chuyện",
+    "deleteError": "Xoá cuộc trò chuyện thất bại"
   }
 }

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { useInspectHeaders } from '~root/apis/useInspectHeaders';
+import { useInspectHeaders } from '~root/apis';
 import { ErrorCodes } from '~root/constants';
 import type {
   HeaderInspectionError,
