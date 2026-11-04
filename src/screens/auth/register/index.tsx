@@ -19,7 +19,7 @@ export const RegisterPage = () => {
           required
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
-          className="mb-4 w-full rounded border border-slate-300 px-3 py-2"
+          className="mb-4 w-full rounded border border-slate-300 bg-white px-3 py-2 text-slate-900"
         />
         <label htmlFor="email" className="mb-1 block text-sm font-medium text-slate-700">
           {t('register.emailLabel')}
@@ -30,7 +30,7 @@ export const RegisterPage = () => {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="mb-4 w-full rounded border border-slate-300 px-3 py-2"
+          className="mb-4 w-full rounded border border-slate-300 bg-white px-3 py-2 text-slate-900"
         />
         <label htmlFor="password" className="mb-1 block text-sm font-medium text-slate-700">
           {t('register.passwordLabel')}
@@ -42,7 +42,7 @@ export const RegisterPage = () => {
           minLength={8}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="mb-6 w-full rounded border border-slate-300 px-3 py-2"
+          className="mb-6 w-full rounded border border-slate-300 bg-white px-3 py-2 text-slate-900"
         />
         <button
           type="submit"
