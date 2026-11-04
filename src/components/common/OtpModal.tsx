@@ -76,7 +76,7 @@ export const OtpModal = ({ phone, onClose, onVerified }: Props) => {
             onChange={(e) => setCode(e.target.value)}
             maxLength={6}
             required
-            className="mb-2 w-full rounded border border-slate-300 px-3 py-2 tracking-widest"
+            className="mb-2 w-full rounded border border-slate-300 bg-white px-3 py-2 tracking-widest text-slate-900"
           />
           <p className="mb-4 text-xs text-slate-500">
             {t('otp.expiresIn', { time: formatDuration(secondsLeft) })}
